@@ -20,8 +20,8 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-//	@OneToOne(mappedBy= "user")
-//	private Patient patient;
+	@OneToOne(mappedBy= "user")
+	private Patient patient;
 	
 	@OneToOne(mappedBy= "user")
 	private Provider provider;
@@ -39,8 +39,8 @@ public class User {
 	@Column(name= "role")
 	private String role;
 	
-	@Column(name= "create_date")
 	@CreationTimestamp
+	@Column(name= "create_date")
 	private Date createDate;
 	
 	@Column(name= "title")
