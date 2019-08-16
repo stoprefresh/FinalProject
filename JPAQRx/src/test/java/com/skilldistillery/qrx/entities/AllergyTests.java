@@ -1,6 +1,8 @@
 package com.skilldistillery.qrx.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class AllergyTests {
-
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Allergy allergies;
@@ -43,6 +44,13 @@ class AllergyTests {
 	@Test
 	void test() {
 		assertNotNull(allergies);
+	}
+	
+	@Test
+	void test_allergy_field_mappings() {
+		assertNotNull(allergy.getAllergen());
+		assertEquals("Penicillin", allergy.getAllergen());
+		assertEquals("severe hives", allergy.getAllergen());
 	}
 
 }

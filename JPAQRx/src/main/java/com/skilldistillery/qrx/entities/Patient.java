@@ -44,7 +44,6 @@ public class Patient {
 	@Column(name="weight_lbs")
 	private Double weight;
 	
-
 	@OneToOne
 	@JoinColumn(name= "blood_type_id")
 	private BloodType bloodType;
@@ -64,7 +63,6 @@ public class Patient {
 	@OneToMany(mappedBy= "patient")
 	private List<Medication> medicationList;
 	
-
 	public int getId() {
 		return id;
 	}
@@ -128,7 +126,6 @@ public class Patient {
 	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
-
 
 	public BloodType getBloodtype() {
 		return bloodtype;
