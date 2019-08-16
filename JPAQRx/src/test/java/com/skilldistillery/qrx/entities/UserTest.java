@@ -46,7 +46,7 @@ class UserTest {
 	@DisplayName(value = "User Mappings Test")
 	void test_User_mappings() {
 		assertNotNull(user);
-		assertEquals("patient",user.getUsername());
+		assertEquals("jldoe",user.getUsername());
 		assertEquals("test",user.getPassword());
 		assertEquals(true,user.getActive());
 		assertEquals("patient", user.getRole());
