@@ -1,6 +1,6 @@
 package com.skilldistillery.qrx.entities;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,7 +41,7 @@ class PersonalNoteTests {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		assertNotNull(note);
 	}
 
 }
