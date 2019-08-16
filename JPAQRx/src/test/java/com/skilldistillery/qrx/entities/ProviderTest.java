@@ -14,12 +14,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-
+class ProviderTest {
+	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
-
+	private Provider provider;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("qrxpu");
@@ -33,31 +33,30 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
-
+		provider = em.find(Provider.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		provider = null;
 	}
 
 	@Test
-	@DisplayName("User Mappings Test")
-	void test_intital_user_mappings() {
-		assertNotNull(user);
-		assertEquals("dmaunit23", user.getUsername());
-		assertEquals("test", user.getPassword());
-		assertEquals(true, user.getActive());
-		assertEquals("ems", user.getRole());
-		assertEquals("2019-08-14 12:27:52.0", user.getCreateDate().toString());
+	@DisplayName("Provider Mappings Test")
+	void test_intital_provider_mappings() {
+		assertNotNull(provider);
+		assertEquals("Denver Metro Ambulance", provider.getOrganization());
+		assertEquals("Unit 23", provider.getSubunit());
 	}
 	
 	@Test
-	@DisplayName("User to Provider Mappings")
-	void test_intitial_provider_mappings() {
-		assertEquals("Denver Metro Ambulance", user.getProvider().getOrganization());
-		assertEquals("Unit 23", user.getProvider().getSubunit());
+	@DisplayName("Verified User information")
+	void test_assigned_user_information() {
+		assertEquals("dmaunit23", provider.getUser().getUsername());
+		assertEquals("test", provider.getUser().getPassword());
+		assertEquals(true, provider.getUser().getActive());
+		assertEquals("ems", provider.getUser().getRole());
+		assertEquals("2019-08-14 12:27:52.0", provider.getUser().getCreateDate().toString());
 	}
 }
