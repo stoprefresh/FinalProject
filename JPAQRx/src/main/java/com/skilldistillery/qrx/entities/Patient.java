@@ -35,7 +35,7 @@ public class Patient {
 	private Double weight;
 	
 	@JoinColumn(name="blood_type_id")
-	private Bloodtype bloodtype;
+	private BloodType bloodtype;
 
 	public int getId() {
 		return id;
@@ -101,11 +101,11 @@ public class Patient {
 		this.weight = weight;
 	}
 
-	public Bloodtype getBloodtype() {
+	public BloodType getBloodtype() {
 		return bloodtype;
 	}
 
-	public void setBloodtype(Bloodtype bloodtype) {
+	public void setBloodtype(BloodType bloodtype) {
 		this.bloodtype = bloodtype;
 	}
 

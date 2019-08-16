@@ -39,9 +39,14 @@ class BloodTypeTests {
 		blood = null;
 	}
 	
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	void test() {
+//		fail("Not yet implemented");
+//	}
 
+	@Test
+	void test_bloodtype_field_mappings() {
+		assertNotNull(blood.getAbo());
+		assertEquals("AB", blood.getAbo());
+	}
 }

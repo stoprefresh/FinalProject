@@ -1,6 +1,6 @@
 package com.skilldistillery.qrx.entities;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,9 +39,14 @@ class PersonalNoteTests {
 		note = null;
 	}
 
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	void test() {
+//		fail("Not yet implemented");
+//	}
 
+	@Test
+	void test_note_field_mappings() {
+		assertNotNull(note.getTextContent());
+		assertEquals("starting to feel a little dizzy and I keep waking up to use the bathroom a lot", note.getTextContent());
+	}
 }
