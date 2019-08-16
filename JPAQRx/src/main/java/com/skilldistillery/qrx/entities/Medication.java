@@ -1,36 +1,40 @@
 package com.skilldistillery.qrx.entities;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@Entity
 public class Medication {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@ManyToOne
 	@JoinColumn(name="patient_id")
 	private Patient patient;
 	
 	@Column(name="medication_name")
 	private String medName;
 	
+	@ManyToOne
 	@JoinColumn(name="drug_id")
 	private Drug drug;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="start_date")
-    @Temporal(TemporalType.DATE)
 	private Date startDate;
 	
-	@Column(name="start_date")
+	@Column(name="stop_date")
 	private Date discontinuedDate;
 	
 	@Column(name="directions")
@@ -39,8 +43,9 @@ public class Medication {
 	@Column(name="reason_discontinued")
 	private String reasonDiscontinued;
 	
+	@ManyToOne
 	@JoinColumn(name="approved_provider_id")
-	private Provider prescriber;
+	private ApprovedProvider prescriber;
 
 	public int getId() {
 		return id;
@@ -106,11 +111,11 @@ public class Medication {
 		this.reasonDiscontinued = reasonDiscontinued;
 	}
 
-	public Provider getPrescriber() {
+	public ApprovedProvider getApprovedPrescriber() {
 		return prescriber;
 	}
 
-	public void setPrescriber(Provider prescriber) {
+	public void setApprovedPrescriber(ApprovedProvider prescriber) {
 		this.prescriber = prescriber;
 	}
 

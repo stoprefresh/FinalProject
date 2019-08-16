@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,14 +16,21 @@ public class EmergencyContact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="patient_id")
-	private int patientId;
+	
+	@ManyToOne
+	@JoinColumn(name="patient_id")
+	private Patient patient;
+	
 	private String relationship;
+	
 	@Column(name="first_name")
-	private String firstName;
+	private String firstName; 
+	
 	@Column(name="last_name")
 	private String lastName;
+	
 	private String phone;
+	
 	private String email;
 	
 	public EmergencyContact() {
@@ -34,14 +43,6 @@ public class EmergencyContact {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getPatientId() {
-		return patientId;
-	}
-
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
 	}
 
 	public String getRelationship() {
@@ -92,7 +93,6 @@ public class EmergencyContact {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + patientId;
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result + ((relationship == null) ? 0 : relationship.hashCode());
 		return result;
@@ -124,8 +124,6 @@ public class EmergencyContact {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (patientId != other.patientId)
-			return false;
 		if (phone == null) {
 			if (other.phone != null)
 				return false;
@@ -149,7 +147,6 @@ public class EmergencyContact {
 			String email) {
 		super();
 		this.id = id;
-		this.patientId = patientId;
 		this.relationship = relationship;
 		this.firstName = firstName;
 		this.lastName = lastName;

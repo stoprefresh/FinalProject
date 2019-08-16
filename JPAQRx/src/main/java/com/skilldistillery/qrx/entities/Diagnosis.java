@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,15 +16,22 @@ public class Diagnosis {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="patient_id")
-	private int patientId;
+	
+	@ManyToOne
+	@JoinColumn(name= "patient_id")
+	private Patient patient;
+	
 	private String name;
+	
 	@Column(name="medication_id")
 	private int medicationId;
+	
 	@Column(name="date_diagnosed")
 	private String dateDiagnosed;
+	
 	@Column(name="date_resolved")
 	private String dateResolved;
+	
 	@Column(name="icd_10")
 	private String icd10;
 	
@@ -40,17 +49,6 @@ public class Diagnosis {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
-	public int getPatientId() {
-		return patientId;
-	}
-
-
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
-	}
-
 
 	public String getName() {
 		return name;
@@ -112,7 +110,6 @@ public class Diagnosis {
 		result = prime * result + id;
 		result = prime * result + medicationId;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + patientId;
 		return result;
 	}
 
@@ -150,8 +147,6 @@ public class Diagnosis {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (patientId != other.patientId)
-			return false;
 		return true;
 	}
 
@@ -160,7 +155,6 @@ public class Diagnosis {
 			String icd10) {
 		super();
 		this.id = id;
-		this.patientId = patientId;
 		this.name = name;
 		this.medicationId = medicationId;
 		this.dateDiagnosed = dateDiagnosed;

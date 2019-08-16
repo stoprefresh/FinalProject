@@ -7,6 +7,14 @@
 	<persistence-unit name="qrxpu">
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	
+	<class>com.skilldistillery.qrx.entities.ApprovedProvider</class>
+	<class>com.skilldistillery.qrx.entities.BloodType</class>
+	<class>com.skilldistillery.qrx.entities.Diagnosis</class>
+	<class>com.skilldistillery.qrx.entities.EmergencyContact</class>
+	<class>com.skilldistillery.qrx.entities.Medication</class>
+	<class>com.skilldistillery.qrx.entities.Patient</class>
+	<class>com.skilldistillery.qrx.entities.PersonalNote</class>
+	<class>com.skilldistillery.qrx.entities.Provider</class>
 	<class>com.skilldistillery.qrx.entities.User</class>
 	
 		<properties>

@@ -1,6 +1,7 @@
 package com.skilldistillery.qrx.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,6 +42,7 @@ class DiagnosisTests {
 		diagnosis = null;
 	}
 
+	@Test
 	@DisplayName(value = "Diagnosis Mappings Test")
 	void test_Diagnosis_mappings() {
 		assertNotNull(diagnosis);

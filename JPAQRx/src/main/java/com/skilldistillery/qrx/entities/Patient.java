@@ -1,19 +1,29 @@
 package com.skilldistillery.qrx.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+@Entity
 public class Patient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;	
+	
+	@OneToMany(mappedBy= "patient")
+	private List<EmergencyContact> emergencyContacts;
 
+	@OneToOne
+	@JoinColumn(name= "user_id")
 	private User user;
 	
 	@Column(name="qrcode_url")
@@ -34,8 +44,26 @@ public class Patient {
 	@Column(name="weight_lbs")
 	private Double weight;
 	
-	@JoinColumn(name="blood_type_id")
-	private BloodType bloodtype;
+
+	@OneToOne
+	@JoinColumn(name= "blood_type_id")
+	private BloodType bloodType;
+	
+	@OneToMany(mappedBy="patient")
+	private List<Allergy> allergies;
+	
+	@OneToMany(mappedBy="patient")
+	private List<Diagnosis> diagnoses;
+	
+	@OneToMany(mappedBy= "patient")
+	private List<PersonalNote> personalNotes;
+	
+	@OneToMany(mappedBy= "patient")
+	private List<ApprovedProvider> approvedProviders;
+	
+	@OneToMany(mappedBy= "patient")
+	private List<Medication> medicationList;
+	
 
 	public int getId() {
 		return id;
@@ -101,6 +129,7 @@ public class Patient {
 		this.weight = weight;
 	}
 
+
 	public BloodType getBloodtype() {
 		return bloodtype;
 	}
@@ -108,6 +137,7 @@ public class Patient {
 	public void setBloodtype(BloodType bloodtype) {
 		this.bloodtype = bloodtype;
 	}
+
 
 	@Override
 	public String toString() {

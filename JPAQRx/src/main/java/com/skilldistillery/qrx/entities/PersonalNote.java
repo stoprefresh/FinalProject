@@ -7,20 +7,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
+@Table(name= "personal_note")
 public class PersonalNote {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@ManyToOne
+	@JoinColumn(name= "patient_id")
 	private Patient patient;
 	
+	@Column(name= "text_content")
 	private String textContent;
 	
 	@CreationTimestamp
@@ -31,9 +38,9 @@ public class PersonalNote {
 	@Column(name="update_date")
 	private Date updateDate;
 	
-	@Column(name="mediaiton_id")
+	@Column(name="medication_id")
 	private int medicationId;
-
+	
 	public int getId() {
 		return id;
 	}
