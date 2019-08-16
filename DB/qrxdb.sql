@@ -91,18 +91,20 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `drug` ;
 
 CREATE TABLE IF NOT EXISTS `drug` (
-  `PRODUCTNDC` VARCHAR(10) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `PRODUCTID` VARCHAR(10) NULL,
+  `PRODUCTNDC` VARCHAR(500) NULL,
   `PRODUCTTYPENAME` VARCHAR(500) NULL,
   `PROPRIETARYNAME` VARCHAR(500) NULL,
   `PROPRIETARYNAMESUFFIX` VARCHAR(500) NULL,
   `NONPROPRIETARYNAME` VARCHAR(500) NULL,
   `DOSAGEFORMNAME` VARCHAR(500) NULL,
-  `ROUTENAME` VARCHAR(500) NULL,
+  `ROUTENAME` VARCHAR(45) NULL,
   `ACTIVE_NUMERATOR_STRENGTH` VARCHAR(45) NULL,
-  `ACTIVE_INGRED_UNIT` VARCHAR(45) NULL,
-  `PHARM_CLASSES` TEXT NULL,
-  PRIMARY KEY (`PRODUCTNDC`),
-  UNIQUE INDEX `PRODUCTNDC_UNIQUE` (`PRODUCTNDC` ASC))
+  `ACTIVE_INGRED_UNIT` TEXT NULL,
+  `PHARM_CLASSES` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `PRODUCTNDC_UNIQUE` (`PRODUCTID` ASC))
 ENGINE = InnoDB;
 
 
@@ -136,24 +138,24 @@ DROP TABLE IF EXISTS `medication` ;
 
 CREATE TABLE IF NOT EXISTS `medication` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `product_ndc` VARCHAR(10) NOT NULL,
   `patient_id` INT NOT NULL,
+  `drug_id` INT NULL,
   `start_date` DATE NULL,
   `stop_date` DATE NULL,
   `name` VARCHAR(45) NULL,
   `directions` VARCHAR(1000) NULL,
   `reason_discontinued` VARCHAR(45) NULL,
-  INDEX `fk_patient_has_drug_drug1_idx` (`product_ndc` ASC),
   INDEX `fk_patient_has_drug_patient1_idx` (`patient_id` ASC),
   PRIMARY KEY (`id`),
-  CONSTRAINT `fk_patient_has_drug_drug1`
-    FOREIGN KEY (`product_ndc`)
-    REFERENCES `drug` (`PRODUCTNDC`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_medication_drug1_idx` (`drug_id` ASC),
   CONSTRAINT `fk_patient_has_drug_patient1`
     FOREIGN KEY (`patient_id`)
     REFERENCES `patient` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medication_drug1`
+    FOREIGN KEY (`drug_id`)
+    REFERENCES `drug` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -340,25 +342,6 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `drug`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `qrxdb`;
-INSERT INTO `drug` (`PRODUCTNDC`, `PRODUCTTYPENAME`, `PROPRIETARYNAME`, `PROPRIETARYNAMESUFFIX`, `NONPROPRIETARYNAME`, `DOSAGEFORMNAME`, `ROUTENAME`, `ACTIVE_NUMERATOR_STRENGTH`, `ACTIVE_INGRED_UNIT`, `PHARM_CLASSES`) VALUES ('0002-0800', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `drug` (`PRODUCTNDC`, `PRODUCTTYPENAME`, `PROPRIETARYNAME`, `PROPRIETARYNAMESUFFIX`, `NONPROPRIETARYNAME`, `DOSAGEFORMNAME`, `ROUTENAME`, `ACTIVE_NUMERATOR_STRENGTH`, `ACTIVE_INGRED_UNIT`, `PHARM_CLASSES`) VALUES ('0002-1200', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `drug` (`PRODUCTNDC`, `PRODUCTTYPENAME`, `PROPRIETARYNAME`, `PROPRIETARYNAMESUFFIX`, `NONPROPRIETARYNAME`, `DOSAGEFORMNAME`, `ROUTENAME`, `ACTIVE_NUMERATOR_STRENGTH`, `ACTIVE_INGRED_UNIT`, `PHARM_CLASSES`) VALUES ('0002-1407', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `drug` (`PRODUCTNDC`, `PRODUCTTYPENAME`, `PROPRIETARYNAME`, `PROPRIETARYNAMESUFFIX`, `NONPROPRIETARYNAME`, `DOSAGEFORMNAME`, `ROUTENAME`, `ACTIVE_NUMERATOR_STRENGTH`, `ACTIVE_INGRED_UNIT`, `PHARM_CLASSES`) VALUES ('0002-1433', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `drug` (`PRODUCTNDC`, `PRODUCTTYPENAME`, `PROPRIETARYNAME`, `PROPRIETARYNAMESUFFIX`, `NONPROPRIETARYNAME`, `DOSAGEFORMNAME`, `ROUTENAME`, `ACTIVE_NUMERATOR_STRENGTH`, `ACTIVE_INGRED_UNIT`, `PHARM_CLASSES`) VALUES ('0002-1434', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `drug` (`PRODUCTNDC`, `PRODUCTTYPENAME`, `PROPRIETARYNAME`, `PROPRIETARYNAMESUFFIX`, `NONPROPRIETARYNAME`, `DOSAGEFORMNAME`, `ROUTENAME`, `ACTIVE_NUMERATOR_STRENGTH`, `ACTIVE_INGRED_UNIT`, `PHARM_CLASSES`) VALUES ('0002-1436', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `drug` (`PRODUCTNDC`, `PRODUCTTYPENAME`, `PROPRIETARYNAME`, `PROPRIETARYNAMESUFFIX`, `NONPROPRIETARYNAME`, `DOSAGEFORMNAME`, `ROUTENAME`, `ACTIVE_NUMERATOR_STRENGTH`, `ACTIVE_INGRED_UNIT`, `PHARM_CLASSES`) VALUES ('0002-1445', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `drug` (`PRODUCTNDC`, `PRODUCTTYPENAME`, `PROPRIETARYNAME`, `PROPRIETARYNAMESUFFIX`, `NONPROPRIETARYNAME`, `DOSAGEFORMNAME`, `ROUTENAME`, `ACTIVE_NUMERATOR_STRENGTH`, `ACTIVE_INGRED_UNIT`, `PHARM_CLASSES`) VALUES ('0002-2377', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `drug` (`PRODUCTNDC`, `PRODUCTTYPENAME`, `PROPRIETARYNAME`, `PROPRIETARYNAMESUFFIX`, `NONPROPRIETARYNAME`, `DOSAGEFORMNAME`, `ROUTENAME`, `ACTIVE_NUMERATOR_STRENGTH`, `ACTIVE_INGRED_UNIT`, `PHARM_CLASSES`) VALUES ('0002-3004', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `drug` (`PRODUCTNDC`, `PRODUCTTYPENAME`, `PROPRIETARYNAME`, `PROPRIETARYNAMESUFFIX`, `NONPROPRIETARYNAME`, `DOSAGEFORMNAME`, `ROUTENAME`, `ACTIVE_NUMERATOR_STRENGTH`, `ACTIVE_INGRED_UNIT`, `PHARM_CLASSES`) VALUES ('0002-3115', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `provider`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -373,16 +356,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `qrxdb`;
-INSERT INTO `medication` (`id`, `product_ndc`, `patient_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (1, '0002-0800', 1, '2019-08-15', NULL, NULL, 'metformin 500mg bid', NULL);
-INSERT INTO `medication` (`id`, `product_ndc`, `patient_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (2, '0002-1200', 1, '2019-08-15', NULL, NULL, 'Humalog Injection Kwikpen 12U SQ before meals', NULL);
-INSERT INTO `medication` (`id`, `product_ndc`, `patient_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (3, '0002-1407', 1, '2019-08-15', NULL, NULL, 'Lantus 5U SQ qAM', NULL);
-INSERT INTO `medication` (`id`, `product_ndc`, `patient_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (4, '0002-1433', 1, '2019-08-15', NULL, NULL, 'losartan 50mg qd', NULL);
-INSERT INTO `medication` (`id`, `product_ndc`, `patient_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (5, '0002-1434', 1, '2019-08-15', NULL, NULL, 'sertraline 50mg bid', NULL);
-INSERT INTO `medication` (`id`, `product_ndc`, `patient_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (6, '0002-1436', 1, '2019-08-15', NULL, NULL, 'quetiapine 150mg bid', NULL);
-INSERT INTO `medication` (`id`, `product_ndc`, `patient_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (7, '0002-1445', 1, '2019-08-15', NULL, NULL, 'Symbicort 160/4.5 2 puffs PO bid', NULL);
-INSERT INTO `medication` (`id`, `product_ndc`, `patient_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (8, '0002-2377', 1, '2019-08-15', NULL, NULL, 'Proair 2 puffs PO q4-6h prn cough/SOB', NULL);
-INSERT INTO `medication` (`id`, `product_ndc`, `patient_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (9, '0002-3004', 1, '2019-08-15', NULL, NULL, 'montelukast 10mg qhs', NULL);
-INSERT INTO `medication` (`id`, `product_ndc`, `patient_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (10, '0002-3115', 1, '2019-08-15', NULL, NULL, 'zolpidem 5mg PO qhs', NULL);
+INSERT INTO `medication` (`id`, `patient_id`, `drug_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (1, 1, NULL, '2019-08-15', NULL, NULL, 'metformin 500mg bid', NULL);
+INSERT INTO `medication` (`id`, `patient_id`, `drug_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (2, 1, NULL, '2019-08-15', NULL, NULL, 'Humalog Injection Kwikpen 12U SQ before meals', NULL);
+INSERT INTO `medication` (`id`, `patient_id`, `drug_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (3, 1, NULL, '2019-08-15', NULL, NULL, 'Lantus 5U SQ qAM', NULL);
+INSERT INTO `medication` (`id`, `patient_id`, `drug_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (4, 1, NULL, '2019-08-15', NULL, NULL, 'losartan 50mg qd', NULL);
+INSERT INTO `medication` (`id`, `patient_id`, `drug_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (5, 1, NULL, '2019-08-15', NULL, NULL, 'sertraline 50mg bid', NULL);
+INSERT INTO `medication` (`id`, `patient_id`, `drug_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (6, 1, NULL, '2019-08-15', NULL, NULL, 'quetiapine 150mg bid', NULL);
+INSERT INTO `medication` (`id`, `patient_id`, `drug_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (7, 1, NULL, '2019-08-15', NULL, NULL, 'Symbicort 160/4.5 2 puffs PO bid', NULL);
+INSERT INTO `medication` (`id`, `patient_id`, `drug_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (8, 1, NULL, '2019-08-15', NULL, NULL, 'Proair 2 puffs PO q4-6h prn cough/SOB', NULL);
+INSERT INTO `medication` (`id`, `patient_id`, `drug_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (9, 1, NULL, '2019-08-15', NULL, NULL, 'montelukast 10mg qhs', NULL);
+INSERT INTO `medication` (`id`, `patient_id`, `drug_id`, `start_date`, `stop_date`, `name`, `directions`, `reason_discontinued`) VALUES (10, 1, NULL, '2019-08-15', NULL, NULL, 'zolpidem 5mg PO qhs', NULL);
 
 COMMIT;
 
