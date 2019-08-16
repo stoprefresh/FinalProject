@@ -1,23 +1,36 @@
 package com.skilldistillery.qrx.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name= "approved_provider")
 public class ApprovedProvider {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@ManyToOne
+	@JoinColumn(name= "patient_id")
 	private Patient patient;
 	
+	@ManyToOne
+	@JoinColumn(name= "provider_id")
 	private Provider provider;
+	
+	@OneToMany(mappedBy="prescriber")
+	private List<Medication> medications;
 	
 	@Column(name="date_approved")
 	private Date dateApproved;
