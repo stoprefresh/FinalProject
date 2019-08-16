@@ -12,10 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class PersonalNoteTests {
+class PatientTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private PersonalNote note;
+	private Patient patient;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,22 +31,18 @@ class PersonalNoteTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		note = em.find(PersonalNote.class, 1);
+		patient = em.find(Patient.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		note = null;
+		patient = null;
 	}
-
-//	@Test
-//	void test() {
-//		fail("Not yet implemented");
-//	}
 
 	@Test
 	void test() {
-		assertNotNull(note);
+		assertNotNull(patient);
 	}
+
 }

@@ -12,13 +12,12 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class AllergyTests {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Allergy allergy;
+	private Allergy allergies;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,19 +32,18 @@ class AllergyTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		allergy = em.find(Allergy.class, 1);
+		allergies = em.find(Allergy.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		allergy = null;
+		allergies = null;
 	}
 
-	@Disabled
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		assertNotNull(allergies);
 	}
 	
 	@Test
