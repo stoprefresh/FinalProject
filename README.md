@@ -28,6 +28,8 @@ QRx - Patient/Provider Interface. A collaborative proof of concept for streamlin
 | UPDATE | PUT     | /api/drugs/{did}/                      | Update Drug           |
 | DELETE | DELETE  | /api/drugs/{did}/                      | Delete Drug           |
 |--------|---------|----------------------------------------|-----------------------|
+|--------|---------| /api/patients/                         |-----------------------|
+|--------|---------|----------------------------------------|-----------------------|
 | LIST   | GET     | /api/patients/                         | List Patients         |
 | CREATE | POST    | /api/patients/                         | Add Patient           |
 | READ   | GET     | /api/patients/{pid}/                   | Show Patient          |
@@ -42,9 +44,9 @@ QRx - Patient/Provider Interface. A collaborative proof of concept for streamlin
 |--------|---------|----------------------------------------|-----------------------|
 | LIST   | GET     | /api/patients/{pid}/notes              | List Notes            |
 | CREATE | POST    | /api/patients/{pid}/notes              | Add Note              |
-| READ   | GET     | /api/patients/{pid}/note/{nid}         | Show Note             |
-| UPDATE | PUT     | /api/patients/{pid}/noted/{nid}        | Update Note           |
-| DELETE | DELETE  | /api/patients/{pid}/note/{nid}         | Delete Note           |
+| READ   | GET     | /api/patients/{pid}/notes/{nid}        | Show Note             |
+| UPDATE | PUT     | /api/patients/{pid}/notes/{nid}        | Update Note           |
+| DELETE | DELETE  | /api/patients/{pid}/notes/{nid}        | Delete Note           |
 |--------|---------|----------------------------------------|-----------------------|
 | LIST   | GET     | /api/patients/{pid}/allergies/         | List Allergies        |
 | CREATE | POST    | /api/patients/{pid}/allergies/         | Add  Allergy          |
