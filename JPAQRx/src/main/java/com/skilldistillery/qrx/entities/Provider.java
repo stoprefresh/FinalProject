@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name= "provider")
 public class Provider {
@@ -20,6 +22,7 @@ public class Provider {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name= "user_id")
 	private User user;
