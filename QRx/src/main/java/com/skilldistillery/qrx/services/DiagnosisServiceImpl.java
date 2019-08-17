@@ -35,7 +35,6 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 		if (patient.isPresent()) {
 			diagnosis.setPatient(patient.get());
 			diRepo.saveAndFlush(diagnosis);
-//			patient.getDiagnoses().add(diagnosis);
 		}
 		return diagnosis;
 	}
