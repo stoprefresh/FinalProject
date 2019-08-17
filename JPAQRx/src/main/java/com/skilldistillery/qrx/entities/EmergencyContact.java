@@ -154,5 +154,13 @@ public class EmergencyContact {
 		this.email = email;
 	}
 
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
 	
 }

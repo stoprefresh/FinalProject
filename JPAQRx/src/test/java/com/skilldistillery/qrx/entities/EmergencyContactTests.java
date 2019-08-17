@@ -52,7 +52,12 @@ class EmergencyContactTests {
 		assertEquals("303-555-5555",emergencyContact.getPhone());
 		assertEquals("husband",emergencyContact.getRelationship());
 		
-		
+	}
+	
+	@Test
+	@DisplayName(value = "Emergency Contact has Patient")
+	void test_EmergencyContact_has_Patient() {
+		assertEquals("Jane",emergencyContact.getPatient().getUser().getFirstName());
 	}
 
 }

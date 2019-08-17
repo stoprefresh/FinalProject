@@ -43,9 +43,21 @@ class MedicationTests {
 	}
 
 	@Test
-	@DisplayName(value = "Drug Mappings Test")
+	@DisplayName(value = "Medication Mappings Test")
 	void test_Drug_mappings() {
-		assertNotNull(med);
+		assertEquals("one tablet twice per day",med.getDirections());
+		
+	}
+	@Test
+	@DisplayName(value = "Medication has Patient")
+	void test_Medication_has_patient() {
+		assertEquals("Jane",med.getPatient().getUser().getFirstName());
+		
+	}
+	@Test
+	@DisplayName(value = "Medication has Drug")
+	void test_Medication_has_Drug() {
+		assertEquals("",med.getDrug());
 		
 	}
 

@@ -48,9 +48,10 @@ class ApprovedProviderTests {
 	@Test
 	void test_approved_provider_field_mappings() {
 		assertNotNull(ap.getPatient().getId());
-		assertEquals("1", ap.getPatient().getId());
-		assertEquals("",ap.getProvider());
-		assertEquals(1, ap.getDateApproved());
+		assertEquals(1, ap.getPatient().getId());
+		assertEquals("Jane",ap.getPatient().getUser().getFirstName());
+		assertEquals("John",ap.getProvider().getUser().getFirstName());
+//		assertEquals(2019-08-15 01:00:00.0, ap.getDateApproved());
 	}
 	
 }

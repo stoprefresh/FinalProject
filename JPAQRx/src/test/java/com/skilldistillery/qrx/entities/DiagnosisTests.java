@@ -1,4 +1,4 @@
-package com.skilldistillery.qrx.entities;
+	package com.skilldistillery.qrx.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -52,6 +52,7 @@ class DiagnosisTests {
 		assertEquals("metformin 500mg bid",diagnosis.getMedication().getMedName());
 		assertEquals("2005-07-15",diagnosis.getDateDiagnosed());
 	}
+	
 	@Test
 	@DisplayName(value = "Diagnosis Has Patient Test")
 	void test_Diagnosis_has_Patient_mappings() {
