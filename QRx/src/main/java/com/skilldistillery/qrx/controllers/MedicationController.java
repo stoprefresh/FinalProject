@@ -86,17 +86,14 @@ public class MedicationController {
 	}
 
 	@PutMapping("{pid}/medications/{mid}")
-	public Medication replaceMedication(@PathVariable Integer pid, @RequestBody Medication medication, HttpServletRequest req, HttpServletResponse resp) {
-		try {
-			medication = svc.update(pid, medication);
-			resp.setStatus(200);
-			StringBuffer url = req.getRequestURL();
-			String newAddrURL = url.toString();
-			resp.addHeader("URL", newAddrURL);
-		} catch (Exception e) {
-			resp.setStatus(400);
-			medication = null;
-		}
-		return medication;
+	public Medication replaceMedication(@PathVariable Integer pid, @PathVariable Integer mid, @RequestBody Medication medication) {
+		Patient patient = patientSvc.searchById(pid);
+		Medication med = svc.getByPatient_IdAndMedication_Id(pid, mid);
+		if (med != null) {
+			medication.setPatient(patient);
+			medication = svc.update(med.getId(), medication);
+			return medication;
+		} 
+		return null;
 	}
 }

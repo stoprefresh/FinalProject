@@ -15,6 +15,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name= "personal_note")
 public class PersonalNote {
@@ -25,6 +27,7 @@ public class PersonalNote {
 	
 	@ManyToOne
 	@JoinColumn(name= "patient_id")
+	@JsonIgnore
 	private Patient patient;
 	
 	@Column(name= "text_content")

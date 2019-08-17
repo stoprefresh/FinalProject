@@ -35,8 +35,8 @@ public class MedicationServiceImpl implements MedicationService{
 	}
 
 	@Override
-	public Medication update(Integer id, Medication medication) {
-		medication.setId(id);
+	public Medication update(Integer mid, Medication medication) {
+		medication.setId(mid);
 		return repo.saveAndFlush(medication);
 	}
 

@@ -14,6 +14,6 @@ public interface MedicationService {
 
 	Medication create(Medication medication);
 
-	Medication update(Integer pid, Medication medication);
+	Medication update(Integer mid, Medication medication);
 
 }

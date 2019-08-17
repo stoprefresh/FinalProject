@@ -25,7 +25,7 @@ public class AllergyServiceImpl implements AllergyService{
 	}
 	@Override
 	public Allergy show(Integer aid, Integer pid) {
-		return aRepo.findAllByIdAndPatient_Id(aid, pid);
+		return aRepo.findAllergyByIdAndPatient_Id(aid, pid);
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class AllergyServiceImpl implements AllergyService{
 	
 	@Override
 	public Allergy update(Integer pid, Integer aid, Allergy newAllergy) {
-		Allergy allergyToUpdate = aRepo.findAllByIdAndPatient_Id(aid, pid);
+		Allergy allergyToUpdate = aRepo.findAllergyByIdAndPatient_Id(aid, pid);
 		newAllergy.setId(pid);
 		newAllergy.setPatient(allergyToUpdate.getPatient());
 		allergyToUpdate = aRepo.saveAndFlush(newAllergy);
@@ -49,7 +49,7 @@ public class AllergyServiceImpl implements AllergyService{
 	
 	@Override
 	public Boolean destroy(Integer pid, Integer aid) {
-		Allergy allergy = aRepo.findAllByIdAndPatient_Id(aid, pid);
+		Allergy allergy = aRepo.findAllergyByIdAndPatient_Id(aid, pid);
 		Boolean deleted = false;
 		if (allergy != null) {
 				try {

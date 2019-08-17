@@ -22,7 +22,7 @@ import com.skilldistillery.qrx.services.NoteService;
 import com.skilldistillery.qrx.services.PatientService;
 
 @RestController
-@RequestMapping(path = "api/patients/")
+@RequestMapping({"api/patients/", "api/patients"})
 @CrossOrigin({ "*", "http://localhost:4205" })
 public class NoteController {
 	
@@ -33,13 +33,13 @@ public class NoteController {
 	private NoteService svc;
 	
 //	LIST	GET		List Notes by PID
-	@GetMapping(path = "{pid}/notes/")
+	@GetMapping(path = "{pid}/notes")
 	public List<PersonalNote> getNotes(@PathVariable Integer pid) {
 		return svc.getNotes(pid);
 	}
 
 //	READ	GET	 Show PersonalNote by NID
-	@GetMapping(path = "{pid}/notes/{nid}/")
+	@GetMapping(path = "{pid}/notes/{nid}")
 	public PersonalNote getNoteById(@PathVariable Integer pid, @PathVariable Integer nid, HttpServletResponse resp) {
 
 		PersonalNote note = svc.getByPatient_IdAndNote_Id(pid, nid);
@@ -53,7 +53,7 @@ public class NoteController {
 	}
 
 //	DELETE	DELETE	Delete PersonalNote
-	@DeleteMapping("{pid}/notes/{nid}/")
+	@DeleteMapping("{pid}/notes/{nid}")
 	public Boolean deleteNote(@PathVariable Integer pid, @PathVariable Integer nid, HttpServletRequest req, HttpServletResponse resp) {
 		PersonalNote note = svc.getByPatient_IdAndNote_Id(pid, nid);
 		if (note != null) {
@@ -68,7 +68,7 @@ public class NoteController {
 	}
 
 // CREATE   PUT     Add PersonalNote	
-	@PostMapping("{pid}/notes/")
+	@PostMapping("{pid}/notes")
 	public PersonalNote createNote(@PathVariable Integer pid, @RequestBody PersonalNote note, HttpServletRequest req, HttpServletResponse resp) {
 		if (note.getPatient() == null) {
 			Patient patient = patientSvc.searchById(pid);
@@ -90,7 +90,7 @@ public class NoteController {
 	}
 
 //	UPDATE	PUT	{pid}/noted/{nid}	Update PersonalNote
-	@PutMapping("{pid}/notes/{nid}/")
+	@PutMapping("{pid}/notes/{nid}")
 	public PersonalNote replaceNote(@PathVariable Integer pid, @RequestBody PersonalNote note, HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			note = svc.update(pid, note);
