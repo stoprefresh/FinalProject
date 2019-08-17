@@ -47,6 +47,17 @@ class DiagnosisTests {
 	void test_Diagnosis_mappings() {
 		assertNotNull(diagnosis);
 		assertEquals(1,diagnosis.getId());
+		assertEquals("Diabetes Mellutis Type 2 w/o Complication",diagnosis.getName());
+		assertEquals("E11.9",diagnosis.getIcd10());
+		assertEquals("metformin 500mg bid",diagnosis.getMedication().getMedName());
+		assertEquals("2005-07-15",diagnosis.getDateDiagnosed());
+	}
+	@Test
+	@DisplayName(value = "Diagnosis Has Patient Test")
+	void test_Diagnosis_has_Patient_mappings() {
+		assertNotNull(diagnosis.getPatient());
+		assertEquals("Jane",diagnosis.getPatient().getUser().getFirstName());
+		assertEquals("Doe",diagnosis.getPatient().getUser().getLastName());
 	}
 
 }

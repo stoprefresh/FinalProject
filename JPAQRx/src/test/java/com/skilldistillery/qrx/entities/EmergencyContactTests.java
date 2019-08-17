@@ -46,6 +46,12 @@ class EmergencyContactTests {
 	void test_EmergencyContact_mappings() {
 		assertNotNull(emergencyContact);
 		assertEquals(1,emergencyContact.getId());
+		assertEquals("joedoe@doe.com",emergencyContact.getEmail());
+		assertEquals("Joe",emergencyContact.getFirstName());
+		assertEquals("Doe",emergencyContact.getLastName());
+		assertEquals("303-555-5555",emergencyContact.getPhone());
+		assertEquals("husband",emergencyContact.getRelationship());
+		
 		
 	}
 

@@ -49,7 +49,7 @@ public class BloodType {
 		this.abo = abo;
 	}
 
-	public boolean isRh() {
+	public boolean getRh() {
 		return rh;
 	}
 
