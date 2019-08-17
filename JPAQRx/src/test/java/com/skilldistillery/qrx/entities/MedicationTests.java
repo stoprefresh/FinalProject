@@ -57,7 +57,7 @@ class MedicationTests {
 	@Test
 	@DisplayName(value = "Medication has Drug")
 	void test_Medication_has_Drug() {
-		assertEquals("",med.getDrug());
+		assertEquals("", med.getDrug());
 		
 	}
 	

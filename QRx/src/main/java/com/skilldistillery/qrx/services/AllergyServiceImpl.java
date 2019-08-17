@@ -30,10 +30,10 @@ public class AllergyServiceImpl implements AllergyService{
 	
 	@Override
 	public Allergy createAllergy(Allergy allergy, Integer pid) {
-		Patient patient = pRepo.findById(pid);
-		if (patient != null) {
-			allergy.setPatient(patient);
-			aRepo.saveAndFlush(allergy)
+		Optional<Patient> patient = pRepo.findById(pid);
+		if (patient.isPresent()) {
+			allergy.setPatient(patient.get());
+			aRepo.saveAndFlush(allergy);
 		}
 		return allergy;
 	}

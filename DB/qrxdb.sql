@@ -264,6 +264,7 @@ CREATE TABLE IF NOT EXISTS `allergy` (
   `patient_id` INT NOT NULL,
   `allergen` VARCHAR(450) NULL,
   `reaction` TEXT NULL,
+  `active` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_allergy_patient1_idx` (`patient_id` ASC),
   CONSTRAINT `fk_allergy_patient1`
@@ -415,7 +416,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `qrxdb`;
-INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`) VALUES (1, 1, 'Penicillin', 'severe hives');
+INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `active`) VALUES (1, 1, 'Penicillin', 'severe hives', 1);
 
 COMMIT;
 

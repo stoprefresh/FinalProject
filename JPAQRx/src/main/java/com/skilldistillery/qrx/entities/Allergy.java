@@ -25,6 +25,8 @@ public class Allergy {
 	
 	private String reaction;
 	
+	private Boolean active;
+	
 	public Allergy() {
 		super();
 	}
@@ -94,6 +96,14 @@ public class Allergy {
 	@Override
 	public String toString() {
 		return "Allergy [id=" + id + ", allergen=" + allergen + ", reaction=" + reaction + "]";
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 	
 	
