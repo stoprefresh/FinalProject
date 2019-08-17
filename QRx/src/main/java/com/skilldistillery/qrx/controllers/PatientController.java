@@ -22,6 +22,7 @@ import com.skilldistillery.qrx.services.PatientService;
 @RequestMapping("api/patients")
 @CrossOrigin({ "*", "http://localhost:4205" })
 public class PatientController {
+	
 	@Autowired
 	private PatientService svc;
 	

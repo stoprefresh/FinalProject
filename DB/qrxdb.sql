@@ -141,6 +141,7 @@ CREATE TABLE IF NOT EXISTS `approved_provider` (
   `patient_id` INT NOT NULL,
   `provider_id` INT NOT NULL,
   `date_approved` DATE NULL,
+  `active` TINYINT NULL DEFAULT 1,
   INDEX `fk_patient_has_provider_patient2_idx` (`patient_id` ASC),
   INDEX `fk_patient_has_provider_provider2_idx` (`provider_id` ASC),
   PRIMARY KEY (`id`),
@@ -152,6 +153,29 @@ CREATE TABLE IF NOT EXISTS `approved_provider` (
   CONSTRAINT `fk_patient_has_provider_provider2`
     FOREIGN KEY (`provider_id`)
     REFERENCES `provider` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `diagnosis`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `diagnosis` ;
+
+CREATE TABLE IF NOT EXISTS `diagnosis` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `patient_id` INT NOT NULL,
+  `name` VARCHAR(150) NOT NULL,
+  `date_diagnosed` VARCHAR(150) NULL,
+  `date_resolved` VARCHAR(150) NULL,
+  `icd_10` VARCHAR(150) NULL,
+  `active` TINYINT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_patient_has_diagnosis_patient1_idx` (`patient_id` ASC),
+  CONSTRAINT `fk_patient_has_diagnosis_patient1`
+    FOREIGN KEY (`patient_id`)
+    REFERENCES `patient` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -172,10 +196,13 @@ CREATE TABLE IF NOT EXISTS `medication` (
   `directions` TEXT NULL,
   `reason_discontinued` TEXT NULL,
   `approved_provider_id` INT NULL,
+  `diagnosis_id` INT NULL,
+  `active` TINYINT NULL,
   INDEX `fk_patient_has_drug_patient1_idx` (`patient_id` ASC),
   PRIMARY KEY (`id`),
   INDEX `fk_medication_drug1_idx` (`drug_id` ASC),
   INDEX `fk_medication_approved_provider1_idx` (`approved_provider_id` ASC),
+  INDEX `fk_medication_diagnosis1_idx` (`diagnosis_id` ASC),
   CONSTRAINT `fk_patient_has_drug_patient1`
     FOREIGN KEY (`patient_id`)
     REFERENCES `patient` (`id`)
@@ -189,6 +216,11 @@ CREATE TABLE IF NOT EXISTS `medication` (
   CONSTRAINT `fk_medication_approved_provider1`
     FOREIGN KEY (`approved_provider_id`)
     REFERENCES `approved_provider` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medication_diagnosis1`
+    FOREIGN KEY (`diagnosis_id`)
+    REFERENCES `diagnosis` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -232,6 +264,7 @@ CREATE TABLE IF NOT EXISTS `allergy` (
   `patient_id` INT NOT NULL,
   `allergen` VARCHAR(450) NULL,
   `reaction` TEXT NULL,
+  `active` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_allergy_patient1_idx` (`patient_id` ASC),
   CONSTRAINT `fk_allergy_patient1`
@@ -260,35 +293,6 @@ CREATE TABLE IF NOT EXISTS `emergency_contact` (
   CONSTRAINT `fk_EmergencyContact_patient1`
     FOREIGN KEY (`patient_id`)
     REFERENCES `patient` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `diagnosis`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `diagnosis` ;
-
-CREATE TABLE IF NOT EXISTS `diagnosis` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `patient_id` INT NOT NULL,
-  `name` VARCHAR(150) NOT NULL,
-  `medication_id` INT NULL,
-  `date_diagnosed` VARCHAR(150) NULL,
-  `date_resolved` VARCHAR(150) NULL,
-  `icd_10` VARCHAR(150) NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_patient_has_diagnosis_patient1_idx` (`patient_id` ASC),
-  INDEX `fk_patient_has_diagnosis_medication1_idx` (`medication_id` ASC),
-  CONSTRAINT `fk_patient_has_diagnosis_patient1`
-    FOREIGN KEY (`patient_id`)
-    REFERENCES `patient` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_patient_has_diagnosis_medication1`
-    FOREIGN KEY (`medication_id`)
-    REFERENCES `medication` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -361,7 +365,21 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `qrxdb`;
-INSERT INTO `approved_provider` (`id`, `patient_id`, `provider_id`, `date_approved`) VALUES (1, 1, 1, '2019-08-15');
+INSERT INTO `approved_provider` (`id`, `patient_id`, `provider_id`, `date_approved`, `active`) VALUES (1, 1, 1, '2019-08-15', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `diagnosis`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `qrxdb`;
+INSERT INTO `diagnosis` (`id`, `patient_id`, `name`, `date_diagnosed`, `date_resolved`, `icd_10`, `active`) VALUES (1, 1, 'Diabetes Mellutis Type 2 w/o Complication', '2005-07-15', NULL, 'E11.9', 1);
+INSERT INTO `diagnosis` (`id`, `patient_id`, `name`, `date_diagnosed`, `date_resolved`, `icd_10`, `active`) VALUES (2, 1, 'Essential Hypertension', '2015-07-15', NULL, 'I10', 1);
+INSERT INTO `diagnosis` (`id`, `patient_id`, `name`, `date_diagnosed`, `date_resolved`, `icd_10`, `active`) VALUES (3, 1, 'Major Depressive Disorder', '2018-07-08', NULL, 'F33.0', 1);
+INSERT INTO `diagnosis` (`id`, `patient_id`, `name`, `date_diagnosed`, `date_resolved`, `icd_10`, `active`) VALUES (4, 1, 'COPD', '1995-12-24', NULL, 'J44.9', 1);
+INSERT INTO `diagnosis` (`id`, `patient_id`, `name`, `date_diagnosed`, `date_resolved`, `icd_10`, `active`) VALUES (5, 1, 'Insomnia', '2014-09-15', NULL, 'G47.00', 1);
 
 COMMIT;
 
@@ -371,14 +389,14 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `qrxdb`;
-INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`) VALUES (1, 1, 'metformin 500mg bid', NULL, '2019-08-15', NULL, 'one tablet twice per day', NULL, NULL);
-INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`) VALUES (2, 1, 'Humalog Injection Kwikpen 12U SQ before meals', NULL, '2019-08-15', NULL, 'Humalog Injection Kwikpen 12U SQ before meals', NULL, NULL);
-INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`) VALUES (3, 1, 'Lantus 5U SQ qAM', NULL, '2019-08-15', NULL, 'Lantus 5U SQ qAM', NULL, NULL);
-INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`) VALUES (4, 1, 'losartan 50mg qd', NULL, '2019-08-15', NULL, 'losartan 50mg qd', NULL, NULL);
-INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`) VALUES (5, 1, 'sertraline 50mg bid', NULL, '2019-08-15', NULL, 'sertraline 50mg bid', NULL, NULL);
-INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`) VALUES (6, 1, 'quetiapine 150mg bid', NULL, '2019-08-15', NULL, 'quetiapine 150mg bid', NULL, NULL);
-INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`) VALUES (7, 1, 'Proair 2 puffs PO q4-6h prn cough/SOB', NULL, '2019-08-15', NULL, 'quetiapine 150mg bid', NULL, NULL);
-INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`) VALUES (8, 1, 'montelukast 10mg qhs', NULL, '2019-08-15', NULL, 'Proair 2 puffs PO q4-6h prn cough/SOB', NULL, NULL);
+INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`, `diagnosis_id`, `active`) VALUES (1, 1, 'metformin 500mg bid', NULL, '2019-08-15', NULL, 'one tablet twice per day', NULL, NULL, 1, 1);
+INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`, `diagnosis_id`, `active`) VALUES (2, 1, 'Humalog Injection Kwikpen 12U SQ before meals', NULL, '2019-08-15', NULL, 'Humalog Injection Kwikpen 12U SQ before meals', NULL, NULL, 1, 1);
+INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`, `diagnosis_id`, `active`) VALUES (3, 1, 'Lantus 5U SQ qAM', NULL, '2019-08-15', NULL, 'Lantus 5U SQ qAM', NULL, NULL, 2, 1);
+INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`, `diagnosis_id`, `active`) VALUES (4, 1, 'losartan 50mg qd', NULL, '2019-08-15', NULL, 'losartan 50mg qd', NULL, NULL, 2, 1);
+INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`, `diagnosis_id`, `active`) VALUES (5, 1, 'sertraline 50mg bid', NULL, '2019-08-15', NULL, 'sertraline 50mg bid', NULL, NULL, 3, 1);
+INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`, `diagnosis_id`, `active`) VALUES (6, 1, 'quetiapine 150mg bid', NULL, '2019-08-15', NULL, 'quetiapine 150mg bid', NULL, NULL, 3, 1);
+INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`, `diagnosis_id`, `active`) VALUES (7, 1, 'Proair 2 puffs PO q4-6h prn cough/SOB', NULL, '2019-08-15', NULL, 'quetiapine 150mg bid', NULL, NULL, 4, 1);
+INSERT INTO `medication` (`id`, `patient_id`, `medication_name`, `drug_id`, `start_date`, `stop_date`, `directions`, `reason_discontinued`, `approved_provider_id`, `diagnosis_id`, `active`) VALUES (8, 1, 'montelukast 10mg qhs', NULL, '2019-08-15', NULL, 'Proair 2 puffs PO q4-6h prn cough/SOB', NULL, NULL, 4, 1);
 
 COMMIT;
 
@@ -398,7 +416,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `qrxdb`;
-INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`) VALUES (1, 1, 'Penicillin', 'severe hives');
+INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `active`) VALUES (1, 1, 'Penicillin', 'severe hives', 1);
 
 COMMIT;
 
@@ -410,20 +428,6 @@ START TRANSACTION;
 USE `qrxdb`;
 INSERT INTO `emergency_contact` (`id`, `patient_id`, `relationship`, `first_name`, `last_name`, `phone`, `email`) VALUES (1, 1, 'husband', 'Joe', 'Doe', '303-555-5555', 'joedoe@doe.com');
 INSERT INTO `emergency_contact` (`id`, `patient_id`, `relationship`, `first_name`, `last_name`, `phone`, `email`) VALUES (2, 1, 'son', 'Joel', 'Doe', '303-555-5551', 'joeld@doe.com');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `diagnosis`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `qrxdb`;
-INSERT INTO `diagnosis` (`id`, `patient_id`, `name`, `medication_id`, `date_diagnosed`, `date_resolved`, `icd_10`) VALUES (1, 1, 'Diabetes Mellutis Type 2 w/o Complication', 1, '2005-07-15', NULL, 'E11.9');
-INSERT INTO `diagnosis` (`id`, `patient_id`, `name`, `medication_id`, `date_diagnosed`, `date_resolved`, `icd_10`) VALUES (2, 1, 'Essential Hypertension', 2, '2015-07-15', NULL, 'I10');
-INSERT INTO `diagnosis` (`id`, `patient_id`, `name`, `medication_id`, `date_diagnosed`, `date_resolved`, `icd_10`) VALUES (3, 1, 'Major Depressive Disorder', 3, '2018-07-08', NULL, 'F33.0');
-INSERT INTO `diagnosis` (`id`, `patient_id`, `name`, `medication_id`, `date_diagnosed`, `date_resolved`, `icd_10`) VALUES (4, 1, 'COPD', 4, '1995-12-24', NULL, 'J44.9');
-INSERT INTO `diagnosis` (`id`, `patient_id`, `name`, `medication_id`, `date_diagnosed`, `date_resolved`, `icd_10`) VALUES (5, 1, 'Insomnia', 5, '2014-09-15', NULL, 'G47.00');
 
 COMMIT;
 

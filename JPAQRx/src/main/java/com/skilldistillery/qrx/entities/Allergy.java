@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Allergy {
 	
@@ -16,11 +18,14 @@ public class Allergy {
 	
 	@ManyToOne
 	@JoinColumn(name="patient_id")
+	@JsonIgnore
 	private Patient patient;
 	
 	private String allergen;
 	
 	private String reaction;
+	
+	private Boolean active;
 	
 	public Allergy() {
 		super();
@@ -91,6 +96,14 @@ public class Allergy {
 	@Override
 	public String toString() {
 		return "Allergy [id=" + id + ", allergen=" + allergen + ", reaction=" + reaction + "]";
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 	
 	

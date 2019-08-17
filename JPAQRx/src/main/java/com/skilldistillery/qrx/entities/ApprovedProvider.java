@@ -8,11 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name= "approved_provider")
@@ -23,7 +24,8 @@ public class ApprovedProvider {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name= "patient_id")
+	@JoinColumn(name= "patient_id")	
+	@JsonIgnore
 	private Patient patient;
 	
 	@ManyToOne
@@ -31,6 +33,7 @@ public class ApprovedProvider {
 	private Provider provider;
 	
 	@OneToMany(mappedBy="prescriber")
+	@JsonIgnore
 	private List<Medication> medications;
 	
 	@Column(name="date_approved")

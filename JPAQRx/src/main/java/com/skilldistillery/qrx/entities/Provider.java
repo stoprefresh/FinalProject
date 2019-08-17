@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name= "provider")
 public class Provider {
@@ -22,6 +24,7 @@ public class Provider {
 	
 	@OneToOne
 	@JoinColumn(name= "user_id")
+	@JsonIgnore
 	private User user;
 	
 	@Column(name= "organization")
@@ -31,6 +34,7 @@ public class Provider {
 	private String subunit;
 	
 	@OneToMany(mappedBy= "provider")
+	@JsonIgnore
 	private List<ApprovedProvider> patientsApproved;
 
 	public int getId() {
@@ -111,5 +115,13 @@ public class Provider {
 		} else if (!user.equals(other.user))
 			return false;
 		return true;
+	}
+
+	public List<ApprovedProvider> getPatientsApproved() {
+		return patientsApproved;
+	}
+
+	public void setPatientsApproved(List<ApprovedProvider> patientsApproved) {
+		this.patientsApproved = patientsApproved;
 	}
 }

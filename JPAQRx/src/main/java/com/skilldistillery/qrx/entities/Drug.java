@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Drug {
 	
@@ -17,6 +19,7 @@ public class Drug {
 	private int id;
 	
 	@OneToMany(mappedBy= "drug")
+	@JsonIgnore
 	private List<Medication> medications;
 	
 	@Column(name="product_id")

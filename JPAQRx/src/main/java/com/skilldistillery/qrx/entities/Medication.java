@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Medication {
 	
@@ -21,6 +23,7 @@ public class Medication {
 
 	@ManyToOne
 	@JoinColumn(name="patient_id")
+	@JsonIgnore
 	private Patient patient;
 	
 	@Column(name="medication_name")
@@ -46,6 +49,14 @@ public class Medication {
 	@ManyToOne
 	@JoinColumn(name="approved_provider_id")
 	private ApprovedProvider prescriber;
+	
+	@ManyToOne
+	@JoinColumn(name="diagnosis_id")
+	@JsonIgnore
+	private Diagnosis diagnosis;
+	
+	@Column(name="active")
+	private Boolean active;
 
 	public int getId() {
 		return id;
@@ -143,6 +154,30 @@ public class Medication {
 
 	public Medication() {
 		super();
+	}
+
+	public ApprovedProvider getPrescriber() {
+		return prescriber;
+	}
+
+	public void setPrescriber(ApprovedProvider prescriber) {
+		this.prescriber = prescriber;
+	}
+
+	public Diagnosis getDiagnosis() {
+		return diagnosis;
+	}
+
+	public void setDiagnosis(Diagnosis diagnosis) {
+		this.diagnosis = diagnosis;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	

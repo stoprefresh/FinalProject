@@ -15,7 +15,6 @@ public class BloodType {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-
 	private String abo;
 	
 	private boolean rh;

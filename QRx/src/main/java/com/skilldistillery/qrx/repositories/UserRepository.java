@@ -1,5 +1,11 @@
 package com.skilldistillery.qrx.repositories;
 
-public interface UserRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.skilldistillery.qrx.entities.User;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
+
+    User findByUsername(String username);
 
 }
