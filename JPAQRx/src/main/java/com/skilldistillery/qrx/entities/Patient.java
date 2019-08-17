@@ -24,6 +24,7 @@ public class Patient {
 	@OneToMany(mappedBy= "patient")
 	private List<EmergencyContact> emergencyContacts;
 
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name= "user_id")
 	@JsonIgnore
