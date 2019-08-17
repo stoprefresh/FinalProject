@@ -141,6 +141,7 @@ CREATE TABLE IF NOT EXISTS `approved_provider` (
   `patient_id` INT NOT NULL,
   `provider_id` INT NOT NULL,
   `date_approved` DATE NULL,
+  `active` TINYINT NULL DEFAULT 1,
   INDEX `fk_patient_has_provider_patient2_idx` (`patient_id` ASC),
   INDEX `fk_patient_has_provider_provider2_idx` (`provider_id` ASC),
   PRIMARY KEY (`id`),
@@ -363,7 +364,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `qrxdb`;
-INSERT INTO `approved_provider` (`id`, `patient_id`, `provider_id`, `date_approved`) VALUES (1, 1, 1, '2019-08-15');
+INSERT INTO `approved_provider` (`id`, `patient_id`, `provider_id`, `date_approved`, `active`) VALUES (1, 1, 1, '2019-08-15', 1);
 
 COMMIT;
 

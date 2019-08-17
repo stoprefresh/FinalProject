@@ -25,15 +25,15 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 	}
 
 	@Override
-	public Diagnosis show(Integer did, Integer pid) {
-		return diRepo.findAllByIdAndPatient_Id(did, pid);
+	public Diagnosis show(Integer pid, Integer did) {
+		return diRepo.findByIdAndPatient_Id(did, pid);
 	}
 
 	@Override
 	public Diagnosis createDiagnosis(Diagnosis diagnosis, Integer pid) {
-		Patient patient = pRepo.findById(pid);
-		if (patient != null) {
-			diagnosis.setPatient(patient);
+		Optional<Patient> patient = pRepo.findById(pid);
+		if (patient.isPresent()) {
+			diagnosis.setPatient(patient.get());
 			diRepo.saveAndFlush(diagnosis);
 //			patient.getDiagnoses().add(diagnosis);
 		}
@@ -42,7 +42,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 
 	@Override
 	public Diagnosis update(Integer pid, Integer did, Diagnosis newDiagnosis) {
-		Diagnosis diagnosisToUpdate = diRepo.findAllByIdAndPatient_Id(did, pid);
+		Diagnosis diagnosisToUpdate = diRepo.findByIdAndPatient_Id(pid, did);
 		newDiagnosis.setId(pid);
 		newDiagnosis.setPatient(diagnosisToUpdate.getPatient());
 		diagnosisToUpdate = diRepo.saveAndFlush(newDiagnosis);
@@ -51,7 +51,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 
 	@Override
 	public Boolean destroy(Integer pid, Integer did) {
-		Diagnosis diagnosis = diRepo.findAllByIdAndPatient_Id(did, pid);
+		Diagnosis diagnosis = diRepo.findByIdAndPatient_Id(pid, did);
 		Boolean deleted = false;
 		if (diagnosis != null) {
 //				diRepo.delete(diagnosis);

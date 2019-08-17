@@ -25,35 +25,33 @@ public class DiagnosisController {
 	private DiagnosisService diSvc;
 
 //	LIST	GET	/api/patients/{pid}/diagnosis/	List Diagnosis
-	@GetMapping("/{pid}/diagnosis/")
+	@GetMapping("/{pid}/diagnosis")
 	public List<Diagnosis> listDiagnosis(@PathVariable Integer pid) {
 		return diSvc.index(pid);
 	}
 
 //	READ	GET	/api/patients/{pid}/diagnosis/{did}/	Show Diagnosis
-	@GetMapping("/{pid}/diagnosis/{did}/")
-	public Diagnosis show(@PathVariable Integer pid, Integer did) {
-		Diagnosis diagnosis = new Diagnosis();
-		diagnosis = diSvc.show(did, pid);
-		return diagnosis;
+	@GetMapping("/{pid}/diagnosis/{did}")
+	public Diagnosis show(@PathVariable Integer pid, @PathVariable Integer did) {
+		return diSvc.show(pid, did);
 	}
 
 //	CREATE	POST	/api/patients/{pid}/diagnosis/	Add Diagnosis
-	@PostMapping("/{pid}/diagnosis/{did}/")
+	@PostMapping("/{pid}/diagnosis/{did}")
 	public Diagnosis createDiagnosis(@RequestBody Diagnosis diagnosis, @PathVariable Integer pid) {
 		return diSvc.createDiagnosis(diagnosis, pid);
 	}
 
 //	UPDATE	PUT	/api/patients/{pid}/diagnosis/{did}/	Update Diagnosis
-	@PutMapping("/{pid}/diagnosis/{did}/")
+	@PutMapping("/{pid}/diagnosis/{did}")
 	public Diagnosis update(@PathVariable Integer pid, @PathVariable Integer did, @RequestBody Diagnosis diagnosis) {
 		return diSvc.update(pid, did, diagnosis);
 	}
 
 //	DELETE	DELETE	/api/patients/{pid}/diagnosis/{did}/	Delete Diagnosis
-	@DeleteMapping("/{pid}/diagnosis/{did}/")
+	@DeleteMapping("/{pid}/diagnosis/{did}")
 	public Boolean destroy(@PathVariable Integer pid, @PathVariable Integer did) {
-			return diSvc.destroy(pid, did);
-		
+		return diSvc.destroy(pid, did);
+
 	}
 }

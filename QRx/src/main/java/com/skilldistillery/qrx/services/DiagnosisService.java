@@ -8,7 +8,7 @@ public interface DiagnosisService {
 	
 	public List<Diagnosis> index(Integer pid);
 
-	public Diagnosis show(Integer did, Integer pid);
+	public Diagnosis show(Integer pid, Integer did);
 
 	public Diagnosis createDiagnosis(Diagnosis diagnosis, Integer pid);
 
