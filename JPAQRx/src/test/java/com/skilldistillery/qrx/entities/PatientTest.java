@@ -37,7 +37,7 @@ class PatientTest {
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		patient = null;
+		patient = null;	
 	}
 
 	@Test

@@ -51,7 +51,7 @@ public class PatientServiceImpl implements PatientService {
 			patient.setBirthdate(pt.getBirthdate());
 			patient.setDnr(pt.getDnr());
 			patient.setSex(pt.getSex());
-			patient.setBloodtype(pt.getBloodtype());
+			patient.setBloodType(pt.getBloodType());
 			patient.setHeight(pt.getHeight());
 			patient.setWeight(pt.getWeight());
 			patient.setQrcode(pt.getQrcode());
