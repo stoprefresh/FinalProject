@@ -39,11 +39,6 @@ class PersonalNoteTests {
 		note = null;
 	}
 
-//	@Test
-//	void test() {
-//		fail("Not yet implemented");
-//	}
-
 	@Test
 	void test() {
 		assertNotNull(note);

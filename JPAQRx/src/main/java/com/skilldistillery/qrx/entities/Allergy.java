@@ -22,8 +22,6 @@ public class Allergy {
 	
 	private String reaction;
 	
-	
-
 	public Allergy() {
 		super();
 	}

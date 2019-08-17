@@ -39,13 +39,9 @@ class BloodTypeTests {
 		blood = null;
 	}
 	
-//	@Test
-//	void test() {
-//		fail("Not yet implemented");
-//	}
-
 	@Test
-	void test() {
-		assertNotNull(blood);
+	void test_BloodType_mappings() {
+		assertEquals("AB", blood.getAbo());
+		assertEquals(false, blood.getRh());
 	}
 }

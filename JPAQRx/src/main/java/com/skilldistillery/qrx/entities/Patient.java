@@ -128,11 +128,11 @@ public class Patient {
 	}
 
 	public BloodType getBloodtype() {
-		return bloodtype;
+		return bloodType;
 	}
 
 	public void setBloodtype(BloodType bloodtype) {
-		this.bloodtype = bloodtype;
+		this.bloodType = bloodtype;
 	}
 
 

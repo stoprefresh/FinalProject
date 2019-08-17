@@ -45,30 +45,13 @@ class ApprovedProviderTests {
 		assertNotNull(ap);
 	}
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-		emf.close();
-	}
-
-	@BeforeEach
-	void setUp() throws Exception {
-		em = emf.createEntityManager();
-		prescriber = em.find(ApprovedProvider.class, 1);
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-		em.close();
-		prescriber = null;
-	}
-//	@Test
-//	void test() {
-//		fail("Not yet implemented");
-//	}
 	@Test
 	void test_approved_provider_field_mappings() {
-		assertNotNull(prescriber.getPatient().getId());
-		assertEquals("1", prescriber.getPatient().getId());
+		assertNotNull(ap.getPatient().getId());
+		assertEquals(1, ap.getPatient().getId());
+		assertEquals("Jane",ap.getPatient().getUser().getFirstName());
+		assertEquals("John",ap.getProvider().getUser().getFirstName());
+//		assertEquals(2019-08-15 01:00:00.0, ap.getDateApproved());
 	}
 	
 }
