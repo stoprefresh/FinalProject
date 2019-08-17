@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Patient {
 
@@ -24,6 +26,7 @@ public class Patient {
 
 	@OneToOne
 	@JoinColumn(name= "user_id")
+	@JsonIgnore
 	private User user;
 	
 	@Column(name="qrcode_url")
@@ -166,6 +169,62 @@ public class Patient {
 
 	public Patient() {
 		super();
+	}
+
+	public List<EmergencyContact> getEmergencyContacts() {
+		return emergencyContacts;
+	}
+
+	public void setEmergencyContacts(List<EmergencyContact> emergencyContacts) {
+		this.emergencyContacts = emergencyContacts;
+	}
+
+	public BloodType getBloodType() {
+		return bloodType;
+	}
+
+	public void setBloodType(BloodType bloodType) {
+		this.bloodType = bloodType;
+	}
+
+	public List<Allergy> getAllergies() {
+		return allergies;
+	}
+
+	public void setAllergies(List<Allergy> allergies) {
+		this.allergies = allergies;
+	}
+
+	public List<Diagnosis> getDiagnoses() {
+		return diagnoses;
+	}
+
+	public void setDiagnoses(List<Diagnosis> diagnoses) {
+		this.diagnoses = diagnoses;
+	}
+
+	public List<PersonalNote> getPersonalNotes() {
+		return personalNotes;
+	}
+
+	public void setPersonalNotes(List<PersonalNote> personalNotes) {
+		this.personalNotes = personalNotes;
+	}
+
+	public List<ApprovedProvider> getApprovedProviders() {
+		return approvedProviders;
+	}
+
+	public void setApprovedProviders(List<ApprovedProvider> approvedProviders) {
+		this.approvedProviders = approvedProviders;
+	}
+
+	public List<Medication> getMedicationList() {
+		return medicationList;
+	}
+
+	public void setMedicationList(List<Medication> medicationList) {
+		this.medicationList = medicationList;
 	}
 	
 	

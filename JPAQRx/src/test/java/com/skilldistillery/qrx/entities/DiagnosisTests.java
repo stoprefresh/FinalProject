@@ -2,6 +2,7 @@
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,7 +50,6 @@ class DiagnosisTests {
 		assertEquals(1,diagnosis.getId());
 		assertEquals("Diabetes Mellutis Type 2 w/o Complication",diagnosis.getName());
 		assertEquals("E11.9",diagnosis.getIcd10());
-		assertEquals("metformin 500mg bid",diagnosis.getMedication().getMedName());
 		assertEquals("2005-07-15",diagnosis.getDateDiagnosed());
 	}
 	
@@ -59,6 +59,11 @@ class DiagnosisTests {
 		assertNotNull(diagnosis.getPatient());
 		assertEquals("Jane",diagnosis.getPatient().getUser().getFirstName());
 		assertEquals("Doe",diagnosis.getPatient().getUser().getLastName());
+	}
+	@Test
+	@DisplayName(value = "Diagnosis Has Medications Test")
+	void test_Diagnosis_has_Medications_mappings() {
+		assertTrue(diagnosis.getMedications().size() > 0);
 	}
 
 }

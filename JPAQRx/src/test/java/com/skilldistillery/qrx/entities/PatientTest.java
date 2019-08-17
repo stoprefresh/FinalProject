@@ -43,6 +43,7 @@ class PatientTest {
 	@Test
 	void test() {
 		assertNotNull(patient);
+		assertEquals("1960-07-15 00:00:00.0",patient.getBirthdate());
 	}
 
 }

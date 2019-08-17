@@ -112,4 +112,12 @@ public class Provider {
 			return false;
 		return true;
 	}
+
+	public List<ApprovedProvider> getPatientsApproved() {
+		return patientsApproved;
+	}
+
+	public void setPatientsApproved(List<ApprovedProvider> patientsApproved) {
+		this.patientsApproved = patientsApproved;
+	}
 }

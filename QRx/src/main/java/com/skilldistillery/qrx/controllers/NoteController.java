@@ -16,46 +16,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.qrx.entities.Medication;
 import com.skilldistillery.qrx.entities.Patient;
-import com.skilldistillery.qrx.services.MedicationService;
+import com.skilldistillery.qrx.entities.PersonalNote;
+import com.skilldistillery.qrx.services.NoteService;
 import com.skilldistillery.qrx.services.PatientService;
 
 @RestController
-@RequestMapping(path = "api/patients")
+@RequestMapping(path = "api/patients/")
 @CrossOrigin({ "*", "http://localhost:4205" })
-public class MedicationController {
-
+public class NoteController {
+	
 	@Autowired
 	private PatientService patientSvc;
 
 	@Autowired
-	private MedicationService svc;
-
-	@GetMapping(path = "{pid}/medications")
-	public List<Medication> getMedications(@PathVariable Integer pid) {
-		return svc.getMedications(pid);
+	private NoteService svc;
+	
+//	LIST	GET		List Notes by PID
+	@GetMapping(path = "{pid}/notes/")
+	public List<PersonalNote> getNotes(@PathVariable Integer pid) {
+		return svc.getNotes(pid);
 	}
 
-	@GetMapping(path = "{pid}/medications/{mid}")
-	public Medication getMedicationById(@PathVariable Integer pid, @PathVariable Integer mid, HttpServletResponse resp) {
+//	READ	GET	 Show PersonalNote by NID
+	@GetMapping(path = "{pid}/notes/{nid}/")
+	public PersonalNote getNoteById(@PathVariable Integer pid, @PathVariable Integer nid, HttpServletResponse resp) {
 
-		Medication medication = svc.getByPatient_IdAndMedication_Id(pid, mid);
+		PersonalNote note = svc.getByPatient_IdAndNote_Id(pid, nid);
 
-		if (medication == null) {
+		if (note == null) {
 			resp.setStatus(404);
 			return null;
 		}
 
-		return medication;
+		return note;
 	}
 
-	@DeleteMapping("{pid}/medications/{mid}")
-	public Boolean deleteMedication(@PathVariable Integer pid, @PathVariable Integer mid, HttpServletRequest req, HttpServletResponse resp) {
-		Medication medication = svc.getByPatient_IdAndMedication_Id(pid, mid);
-		if (medication != null) {
+//	DELETE	DELETE	Delete PersonalNote
+	@DeleteMapping("{pid}/notes/{nid}/")
+	public Boolean deleteNote(@PathVariable Integer pid, @PathVariable Integer nid, HttpServletRequest req, HttpServletResponse resp) {
+		PersonalNote note = svc.getByPatient_IdAndNote_Id(pid, nid);
+		if (note != null) {
 			try {
-				svc.delete(mid);
+				svc.delete(nid);
 				return true;
 			} catch (Exception e) {
 				resp.setStatus(409);
@@ -64,39 +67,41 @@ public class MedicationController {
 		return false;
 	}
 
-	@PostMapping("{pid}/medications")
-	public Medication createMedication(@PathVariable Integer pid, @RequestBody Medication medication, HttpServletRequest req, HttpServletResponse resp) {
-		if (medication.getPatient() == null) {
+// CREATE   PUT     Add PersonalNote	
+	@PostMapping("{pid}/notes/")
+	public PersonalNote createNote(@PathVariable Integer pid, @RequestBody PersonalNote note, HttpServletRequest req, HttpServletResponse resp) {
+		if (note.getPatient() == null) {
 			Patient patient = patientSvc.findByPatient_Id(pid);
 			try {
-				medication.setPatient(patient);
-				svc.create(medication);
+				note.setPatient(patient);
+				svc.create(pid, note);
 				resp.setStatus(201);
 				StringBuffer url = req.getRequestURL();
 				url.append("/");
-				url.append(medication.getId());
+				url.append(note.getId());
 				String newAddrURL = url.toString();
 				resp.addHeader("Location", newAddrURL);
 			} catch (Exception e) {
 				resp.setStatus(400);
-				medication = null;
+				note = null;
 			}
 		}
-		return medication;
+		return note;
 	}
 
-	@PutMapping("{pid}/medications/{mid}")
-	public Medication replaceMedication(@PathVariable Integer pid, @RequestBody Medication medication, HttpServletRequest req, HttpServletResponse resp) {
+//	UPDATE	PUT	{pid}/noted/{nid}	Update PersonalNote
+	@PutMapping("{pid}/notes/{nid}/")
+	public PersonalNote replaceNote(@PathVariable Integer pid, @RequestBody PersonalNote note, HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			medication = svc.update(pid, medication);
+			note = svc.update(pid, note);
 			resp.setStatus(200);
 			StringBuffer url = req.getRequestURL();
 			String newAddrURL = url.toString();
 			resp.addHeader("URL", newAddrURL);
 		} catch (Exception e) {
 			resp.setStatus(400);
-			medication = null;
+			note = null;
 		}
-		return medication;
+		return note;
 	}
 }
