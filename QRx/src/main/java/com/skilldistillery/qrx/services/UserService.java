@@ -2,8 +2,6 @@ package com.skilldistillery.qrx.services;
 
 import java.util.List;
 
-import com.skilldistillery.qrx.entities.Patient;
-import com.skilldistillery.qrx.entities.Provider;
 import com.skilldistillery.qrx.entities.User;
 
 public interface UserService {

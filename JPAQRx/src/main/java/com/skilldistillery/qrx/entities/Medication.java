@@ -37,6 +37,7 @@ public class Medication {
 	@Column(name="start_date")
 	private Date startDate;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="stop_date")
 	private Date discontinuedDate;
 	

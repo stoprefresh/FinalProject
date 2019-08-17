@@ -3,14 +3,11 @@ package com.skilldistillery.qrx.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.skilldistillery.qrx.entities.Patient;
-import com.skilldistillery.qrx.entities.Provider;
-import com.skilldistillery.qrx.entities.User;
-import com.skilldistillery.qrx.repositories.UserRepository;
-
-import org.hibernate.engine.spi.ManagedEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.skilldistillery.qrx.entities.User;
+import com.skilldistillery.qrx.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {

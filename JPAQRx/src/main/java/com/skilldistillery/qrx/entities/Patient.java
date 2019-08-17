@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,6 +37,7 @@ public class Patient {
 	@Column(name="has_dnr")
 	private Boolean dnr;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="birth_date")
 	private Date birthdate;
 	
@@ -133,15 +136,6 @@ public class Patient {
 	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
-
-	public BloodType getBloodtype() {
-		return bloodType;
-	}
-
-	public void setBloodtype(BloodType bloodtype) {
-		this.bloodType = bloodtype;
-	}
-
 
 	@Override
 	public String toString() {
