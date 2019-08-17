@@ -24,7 +24,6 @@ public class Patient {
 	@OneToMany(mappedBy= "patient")
 	private List<EmergencyContact> emergencyContacts;
 
-	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name= "user_id")
 	@JsonIgnore
@@ -53,18 +52,22 @@ public class Patient {
 	private BloodType bloodType;
 	
 	@OneToMany(mappedBy="patient")
+	@JsonIgnore
 	private List<Allergy> allergies;
 	
 	@OneToMany(mappedBy="patient")
+	@JsonIgnore
 	private List<Diagnosis> diagnoses;
 	
 	@OneToMany(mappedBy= "patient")
+	@JsonIgnore
 	private List<PersonalNote> personalNotes;
 	
 	@OneToMany(mappedBy= "patient")
 	private List<ApprovedProvider> approvedProviders;
 	
 	@OneToMany(mappedBy= "patient")
+	@JsonIgnore
 	private List<Medication> medicationList;
 	
 	public int getId() {

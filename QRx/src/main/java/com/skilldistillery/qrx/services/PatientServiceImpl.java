@@ -1,6 +1,7 @@
 package com.skilldistillery.qrx.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.qrx.entities.Patient;
 import com.skilldistillery.qrx.entities.User;
 import com.skilldistillery.qrx.repositories.PatientRepository;
+import com.skilldistillery.qrx.repositories.UserRepository;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -33,9 +35,9 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public Patient create(int userId, Patient pt) {
-		User user = uRepo.findById(userId);
-		if (user != null) {
-			pt.setUser(user);
+		Optional<User> user = uRepo.findById(userId);
+		if (user.isPresent()) {
+			pt.setUser(user.get());
 			ptRepo.saveAndFlush(pt);
 			// if the above doesn't work, try to save and flush user too
 		}

@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Allergy {
 	
@@ -16,6 +18,7 @@ public class Allergy {
 	
 	@ManyToOne
 	@JoinColumn(name="patient_id")
+	@JsonIgnore
 	private Patient patient;
 	
 	private String allergen;

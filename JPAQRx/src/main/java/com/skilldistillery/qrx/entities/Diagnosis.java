@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "diagnosis")
 public class Diagnosis {
@@ -22,12 +24,14 @@ public class Diagnosis {
 	
 	@ManyToOne
 	@JoinColumn(name= "patient_id")
+	@JsonIgnore
 	private Patient patient;
 	
 	private String name;
 	
 	@OneToMany
 	@JoinColumn(name="diagnosis_id")
+	@JsonIgnore
 	private List<Medication> medications;
 	
 	@Column(name="date_diagnosed")
@@ -35,6 +39,9 @@ public class Diagnosis {
 	
 	@Column(name="date_resolved")
 	private String dateResolved;
+	
+	@Column(name="active")
+	private Boolean active;
 	
 	@Column(name="icd_10")
 	private String icd10;
@@ -125,6 +132,14 @@ public class Diagnosis {
 	public String toString() {
 		return "Diagnosis [id=" + id + ", patient=" + patient + ", name=" + name + ", dateDiagnosed=" + dateDiagnosed
 				+ ", dateResolved=" + dateResolved + ", icd10=" + icd10 + "]";
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 	
 	

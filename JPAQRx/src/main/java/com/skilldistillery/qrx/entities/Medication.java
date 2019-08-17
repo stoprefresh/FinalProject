@@ -52,7 +52,11 @@ public class Medication {
 	
 	@ManyToOne
 	@JoinColumn(name="diagnosis_id")
+	@JsonIgnore
 	private Diagnosis diagnosis;
+	
+	@Column(name="active")
+	private Boolean active;
 
 	public int getId() {
 		return id;
@@ -166,6 +170,14 @@ public class Medication {
 
 	public void setDiagnosis(Diagnosis diagnosis) {
 		this.diagnosis = diagnosis;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	

@@ -71,7 +71,7 @@ public class NoteController {
 	@PostMapping("{pid}/notes/")
 	public PersonalNote createNote(@PathVariable Integer pid, @RequestBody PersonalNote note, HttpServletRequest req, HttpServletResponse resp) {
 		if (note.getPatient() == null) {
-			Patient patient = patientSvc.findByPatient_Id(pid);
+			Patient patient = patientSvc.searchById(pid);
 			try {
 				note.setPatient(patient);
 				svc.create(pid, note);

@@ -67,7 +67,7 @@ public class MedicationController {
 	@PostMapping("{pid}/medications")
 	public Medication createMedication(@PathVariable Integer pid, @RequestBody Medication medication, HttpServletRequest req, HttpServletResponse resp) {
 		if (medication.getPatient() == null) {
-			Patient patient = patientSvc.findByPatient_Id(pid);
+			Patient patient = patientSvc.searchById(pid);
 			try {
 				medication.setPatient(patient);
 				svc.create(medication);
