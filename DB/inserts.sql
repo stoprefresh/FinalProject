@@ -55,7 +55,6 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `qrxdb`;
-INSERT INTO `approved_provider` (`id`, `patient_id`, `provider_id`, `date_approved`, `active`) VALUES (1, 1, 1, '2019-08-15', 1);
 INSERT INTO `approved_provider` (`id`, `patient_id`, `provider_id`, `date_approved`, `active`) VALUES (2, 1, 3, '2018-08-15', 1);
 
 COMMIT;
