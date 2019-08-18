@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -19,9 +21,11 @@ public class User {
 	private int id;
 	
 	@OneToOne(mappedBy= "user")
+	@JsonIgnore
 	private Patient patient;
 	
 	@OneToOne(mappedBy= "user")
+	@JsonIgnore
 	private Provider provider;
 	
 	@Column(name= "username")
