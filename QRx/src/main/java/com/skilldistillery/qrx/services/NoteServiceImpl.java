@@ -45,8 +45,7 @@ public class NoteServiceImpl implements NoteService {
 	}
 
 	@Override
-	public PersonalNote update(Integer nid, PersonalNote note) {
-		note.setId(nid);
+	public PersonalNote update(PersonalNote note) {
 		return repo.saveAndFlush(note);
 	}
 

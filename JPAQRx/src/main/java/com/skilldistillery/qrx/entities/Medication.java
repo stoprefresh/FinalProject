@@ -128,11 +128,11 @@ public class Medication {
 		this.reasonDiscontinued = reasonDiscontinued;
 	}
 
-	public ApprovedProvider getApprovedPrescriber() {
+	public ApprovedProvider getPrescriber() {
 		return prescriber;
 	}
 
-	public void setApprovedPrescriber(ApprovedProvider prescriber) {
+	public void setPrescriber(ApprovedProvider prescriber) {
 		this.prescriber = prescriber;
 	}
 

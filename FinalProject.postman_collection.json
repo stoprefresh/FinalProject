@@ -1,0 +1,898 @@
+{
+	"info": {
+		"_postman_id": "2693a525-23bf-4a47-83d3-ca6a70e4d9bb",
+		"name": "FinalProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"dmaunit2\",\n    \"password\": \"test\",\n    \"active\": true,\n    \"role\": \"ems\",\n    \"createDate\": \"2019-08-14\",\n    \"title\": null,\n    \"firstName\": \"Cecil\",\n    \"middleName\": \"W\",\n    \"lastName\": \"Smith\",\n    \"email\": \"cwsmith@dma.org\",\n    \"phone\": \"303-555-5155\",\n    \"street\": \"123 Java Rd\",\n    \"city\": \"Denver\",\n    \"state\": \"CO\",\n    \"zip\": \"80111\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/users/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"users",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"username\": \"dmaunit23\",\n    \"password\": \"test\",\n    \"active\": true,\n    \"role\": \"ems\",\n    \"createDate\": \"2019-08-14\",\n    \"title\": null,\n    \"firstName\": \"John\",\n    \"middleName\": \"C\",\n    \"lastName\": \"Smith\",\n    \"email\": \"jcsmith@dma.org\",\n    \"phone\": \"303-555-5155\",\n    \"street\": \"123 Java Rd\",\n    \"city\": \"Denver\",\n    \"state\": \"CO\",\n    \"zip\": \"80111\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/users/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"users",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Providers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/providers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"providers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Provider",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organization\":\"Denver Ambulance\",\n    \"subunit\": \"Unit 21\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/providers/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"providers",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Provider By ID ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/providers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"providers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Provider",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"organization\":\"Denver Ambulance\",\n    \"subunit\": \"Unit 21\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/providers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"providers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Patients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Patient",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n    {\n        \"qrcode\": \"/api/qrx/patient/2\",\n        \"dnr\": false,\n        \"birthdate\": \"1988-10-29\",\n        \"sex\": \"Male\",\n        \"height\": 69.5,\n        \"weight\": 155.0,\n        \"bloodType\": {\n            \"id\": 4,\n            \"abo\": \"A\",\n            \"rh\": true\n        }\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/patients/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Patient By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Patient",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n    {\n        \"qrcode\": \"/api/qrx/patient/2\",\n        \"dnr\": false,\n        \"birthdate\": \"1988-10-29\",\n        \"sex\": \"Male\",\n        \"height\": 69.5,\n        \"weight\": 160.0,\n        \"bloodType\": {\n            \"id\": 4,\n            \"abo\": \"A\",\n            \"rh\": true\n        }\n    }"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/patients/2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Drug by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/drugs/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"drugs",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Medications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/medications/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"medications",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Medication to Patient",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"medName\": \"Metformin\",\n    \"drug\": {\n        \"id\": 118004,\n        \"productid\": \"70010-491_3c25fd44-75e2-4cc3-8aeb-d11d957f8b67\",\n        \"productNdc\": \"70010-491\",\n        \"productTypeName\": \"HUMAN PRESCRIPTION DRUG\",\n        \"proprietaryName\": \"Metformin\",\n        \"propNameSuffix\": \"\",\n        \"genericName\": \"Metformin ER 500 mg\",\n        \"dosageForm\": \"TABLET\",\n        \"routeName\": \"ORAL\",\n        \"strength\": \"500\",\n        \"unit\": \"mg/1\",\n        \"pharmClasses\": \"Biguanide [EPC],Biguanides [CS]\",\n        \"imgUrl\": \"\",\n        \"referenceUrl\": \"\\r\"\n    },\n    \"startDate\": \"2019-08-15\",\n    \"discontinuedDate\": null,\n    \"directions\": \"q2d\",\n    \"reasonDiscontinued\": null,\n    \"active\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/patients/2/medications/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"2",
+						"medications",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Medication By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/medications/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"medications",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Medication",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"medName\": \"Metforminsss\",\n    \"drug\": {\n        \"id\": 118004,\n        \"productid\": \"70010-491_3c25fd44-75e2-4cc3-8aeb-d11d957f8b67\",\n        \"productNdc\": \"70010-491\",\n        \"productTypeName\": \"HUMAN PRESCRIPTION DRUG\",\n        \"proprietaryName\": \"Metformin\",\n        \"propNameSuffix\": \"\",\n        \"genericName\": \"Metformin ER 500 mg\",\n        \"dosageForm\": \"TABLET\",\n        \"routeName\": \"ORAL\",\n        \"strength\": \"500\",\n        \"unit\": \"mg/1\",\n        \"pharmClasses\": \"Biguanide [EPC],Biguanides [CS]\",\n        \"imgUrl\": \"\",\n        \"referenceUrl\": \"\\r\"\n    },\n    \"startDate\": \"2019-08-15\",\n    \"discontinuedDate\": null,\n    \"directions\": \"q4d\",\n    \"reasonDiscontinued\": null,\n    \"prescriber\": {\n        \"id\": 2,\n        \"provider\": {\n            \"id\": 3,\n            \"user\": {\n                \"id\": 4,\n                \"username\": \"ksmith1\",\n                \"password\": \"test\",\n                \"active\": true,\n                \"role\": \"physician\",\n                \"createDate\": \"2019-08-14\",\n                \"title\": \"MD\",\n                \"firstName\": \"Kevin\",\n                \"middleName\": \"W\",\n                \"lastName\": \"Smith\",\n                \"email\": \"kws@group.com\",\n                \"phone\": \"303-555-5155\",\n                \"street\": \"4032 Bit drive\",\n                \"city\": \"Denver\",\n                \"state\": \"CO\",\n                \"zip\": \"80111\"\n            },\n            \"organization\": \"SD Internal Medicine Group\",\n            \"subunit\": \"GP\"\n        },\n        \"dateApproved\": \"2018-08-15\"\n    },\n    \"diagnosis\": {\n        \"id\": 1,\n        \"name\": \"Diabetes Mellutis Type 2 w/o Complication\",\n        \"dateDiagnosed\": \"2005-07-15\",\n        \"dateResolved\": null,\n        \"active\": true,\n        \"icd10\": \"E11.9\"\n    },\n    \"active\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/medications/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"medications",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Medication",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/medications/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"medications",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Notes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/2/notes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"2",
+						"notes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Note",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"textContent\": \"starting to feel a little dizzy and I keep waking up to use the bathroom a lot\",\n    \"updateDate\": null\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/patients/2/notes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"2",
+						"notes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Note by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/notes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"notes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Note",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"textContent\": \"starting to feel a little dizzsssy and I keep waking up to use the bathroom a lot\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/notes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"notes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Note",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/2/notes/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"2",
+						"notes",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Allergies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/allergies/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"allergies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Allergy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"allergen\": \"Penicillin\",\n    \"reaction\": \"severe hives\",\n    \"active\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/patients/2/allergies/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"2",
+						"allergies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Allergy by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/allergies/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"allergies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Allergy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"allergen\": \"Penicillin\",\n    \"reaction\": \"seversse hives\",\n    \"active\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/allergies/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"allergies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mark Allergy Inactive",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/allergies/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"allergies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Diagnoses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/diagnosis",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"diagnosis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Diagnosis",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Diabetes Mellutis Type 2 w/o Complication\",\n    \"dateDiagnosed\": \"2005-07-15\",\n    \"dateResolved\": null,\n    \"active\": true,\n    \"icd10\": \"E11.9\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/diagnosis/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"diagnosis",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Diagnosis by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/diagnosis/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"diagnosis",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Diagnosis",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Diabetes Mellutis Type 2 w/o Complication\",\n    \"dateDiagnosed\": \"2005-07-15\",\n    \"dateResolved\": null,\n    \"active\": true,\n    \"icd10\": \"E11.9\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/patients/1/diagnosis/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"1",
+						"diagnosis",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Diagnosis Active False",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/patients/2/diagnosis/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"patients",
+						"2",
+						"diagnosis",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

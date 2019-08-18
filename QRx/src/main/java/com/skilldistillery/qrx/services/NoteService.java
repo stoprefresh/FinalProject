@@ -14,6 +14,6 @@ public interface NoteService {
 
 	PersonalNote create(Integer pid, PersonalNote note);
 
-	PersonalNote update(Integer pid, PersonalNote note);
+	PersonalNote update(PersonalNote note);
 
 }

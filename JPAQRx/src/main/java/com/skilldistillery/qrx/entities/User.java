@@ -31,11 +31,9 @@ public class User {
 	private Provider provider;
 	
 	@Column(name= "username")
-	@JsonIgnore
 	private String username;
 
 	@Column(name= "password")
-	@JsonIgnore
 	private String password;
 	
 	@Column(name= "active")

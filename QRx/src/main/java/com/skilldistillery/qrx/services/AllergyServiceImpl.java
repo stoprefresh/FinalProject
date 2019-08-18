@@ -48,15 +48,15 @@ public class AllergyServiceImpl implements AllergyService{
 	}
 	
 	@Override
-	public Boolean destroy(Integer pid, Integer aid) {
+	public Boolean destroy(Integer aid, Integer pid) {
 		Allergy allergy = aRepo.findAllergyByIdAndPatient_Id(aid, pid);
 		Boolean deleted = false;
 		if (allergy != null) {
 				try {
-					allergy.setActive(false);
+					allergy.setActive(deleted);
+					aRepo.saveAndFlush(allergy);
 					deleted = true;
 				} catch (Exception e) {
-					
 					e.printStackTrace();
 					deleted = null;
 				}

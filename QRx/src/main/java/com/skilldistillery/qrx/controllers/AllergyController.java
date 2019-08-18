@@ -41,7 +41,7 @@ public class AllergyController {
 	}
 
 //	CREATE	POST	/api/patients/{pid}/allergy/	Add Allergy
-	@PostMapping("/{pid}/allergies/{aid}")
+	@PostMapping("/{pid}/allergies")
 	public Allergy createAllergy(@RequestBody Allergy allergy, @PathVariable Integer pid) {
 		return aSvc.createAllergy(allergy, pid);
 	}
@@ -55,7 +55,7 @@ public class AllergyController {
 //	DELETE	DELETE	/api/patients/{pid}/allergy/{aid}/	Delete Allergy
 	@DeleteMapping("/{pid}/allergies/{aid}")
 	public Boolean destroy(@PathVariable Integer pid, @PathVariable Integer aid) {
-		return aSvc.destroy(pid, aid);
+		return aSvc.destroy(aid, pid);
 
 	}
 }

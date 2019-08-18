@@ -22,16 +22,16 @@ import com.skilldistillery.qrx.services.NoteService;
 import com.skilldistillery.qrx.services.PatientService;
 
 @RestController
-@RequestMapping({"api/patients/", "api/patients"})
+@RequestMapping({ "api/patients/", "api/patients" })
 @CrossOrigin({ "*", "http://localhost:4205" })
 public class NoteController {
-	
+
 	@Autowired
 	private PatientService patientSvc;
 
 	@Autowired
 	private NoteService svc;
-	
+
 //	LIST	GET		List Notes by PID
 	@GetMapping(path = "{pid}/notes")
 	public List<PersonalNote> getNotes(@PathVariable Integer pid) {
@@ -54,7 +54,8 @@ public class NoteController {
 
 //	DELETE	DELETE	Delete PersonalNote
 	@DeleteMapping("{pid}/notes/{nid}")
-	public Boolean deleteNote(@PathVariable Integer pid, @PathVariable Integer nid, HttpServletRequest req, HttpServletResponse resp) {
+	public Boolean deleteNote(@PathVariable Integer pid, @PathVariable Integer nid, HttpServletRequest req,
+			HttpServletResponse resp) {
 		PersonalNote note = svc.getByPatient_IdAndNote_Id(pid, nid);
 		if (note != null) {
 			try {
@@ -69,39 +70,19 @@ public class NoteController {
 
 // CREATE   PUT     Add PersonalNote	
 	@PostMapping("{pid}/notes")
-	public PersonalNote createNote(@PathVariable Integer pid, @RequestBody PersonalNote note, HttpServletRequest req, HttpServletResponse resp) {
-		if (note.getPatient() == null) {
-			Patient patient = patientSvc.searchById(pid);
-			try {
-				note.setPatient(patient);
-				svc.create(pid, note);
-				resp.setStatus(201);
-				StringBuffer url = req.getRequestURL();
-				url.append("/");
-				url.append(note.getId());
-				String newAddrURL = url.toString();
-				resp.addHeader("Location", newAddrURL);
-			} catch (Exception e) {
-				resp.setStatus(400);
-				note = null;
-			}
-		}
+	public PersonalNote createNote(@PathVariable Integer pid, @RequestBody PersonalNote note) {
+		Patient patient = patientSvc.searchById(pid);
+		note.setPatient(patient);
+		svc.create(pid, note);
 		return note;
 	}
 
 //	UPDATE	PUT	{pid}/noted/{nid}	Update PersonalNote
 	@PutMapping("{pid}/notes/{nid}")
-	public PersonalNote replaceNote(@PathVariable Integer pid, @RequestBody PersonalNote note, HttpServletRequest req, HttpServletResponse resp) {
-		try {
-			note = svc.update(pid, note);
-			resp.setStatus(200);
-			StringBuffer url = req.getRequestURL();
-			String newAddrURL = url.toString();
-			resp.addHeader("URL", newAddrURL);
-		} catch (Exception e) {
-			resp.setStatus(400);
-			note = null;
-		}
-		return note;
+	public PersonalNote replaceNote(@PathVariable Integer pid,@PathVariable Integer nid, @RequestBody PersonalNote note) {
+		PersonalNote managedNote = svc.getByPatient_IdAndNote_Id(pid, nid);
+		managedNote.setTextContent(note.getTextContent());
+		svc.update(managedNote);
+		return svc.getByPatient_IdAndNote_Id(pid, nid);
 	}
 }

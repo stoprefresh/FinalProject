@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Patient {
 
@@ -58,6 +60,7 @@ public class Patient {
 	private List<Diagnosis> diagnoses;
 	
 	@OneToMany(mappedBy= "patient")
+	@JsonIgnore
 	private List<PersonalNote> personalNotes;
 	
 	@OneToMany(mappedBy= "patient")

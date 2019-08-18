@@ -35,6 +35,7 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public Patient create(int userId, Patient pt) {
+		System.out.println(pt);
 		Optional<User> user = uRepo.findById(userId);
 		if (user.isPresent()) {
 			pt.setUser(user.get());

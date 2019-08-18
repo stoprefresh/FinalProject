@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -34,10 +36,12 @@ public class PersonalNote {
 	
 	@CreationTimestamp
 	@Column(name="create_date")
+	@Temporal(TemporalType.DATE)
 	private Date createDate;
 	
 	@UpdateTimestamp
 	@Column(name="update_date")
+	@Temporal(TemporalType.DATE)
 	private Date updateDate;
 	
 	@ManyToOne

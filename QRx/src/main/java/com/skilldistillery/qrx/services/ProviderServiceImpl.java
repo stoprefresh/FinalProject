@@ -54,7 +54,14 @@ public class ProviderServiceImpl implements ProviderService {
 
 	@Override
 	public Provider updateProvider(Integer pid, Provider updatedProvider) {
-		return null;
+		Optional<Provider> optProv = providerRepo.findById(pid);
+		if (optProv.isPresent()) {
+			Provider managedProvider = optProv.get();
+			managedProvider.setOrganization(updatedProvider.getOrganization());
+			managedProvider.setSubunit(updatedProvider.getSubunit());
+			providerRepo.saveAndFlush(managedProvider);
+		}
+		return providerRepo.findById(pid).get();
 	}
 
 }
