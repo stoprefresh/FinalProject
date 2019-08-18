@@ -5,7 +5,7 @@
 * Cecil Kitch - DBA
 
 ### Summary / Overview
-QRx - Patient/Provider Interface. A collaborative proof of concept for streamlining emergency responder access to patient information. As well as to provide a service as a single, dependable source for patient healthcare providers to access their patients' medication lists.
+QRx - Patient/Provider Interface. A collaborative proof of concept for streamlining emergency medical provider access to patient information. Utilizes restful services to provide a single, dependable source for patient healthcare providers to access their patients' medication lists.
 
 ### REST API Endpoints
 | Action |HTTP Verb| Resource URI                           |     Action            |
@@ -15,7 +15,7 @@ QRx - Patient/Provider Interface. A collaborative proof of concept for streamlin
 | READ   | GET     | /api/users/{uid}/                      | Show User             |
 | UPDATE | PUT     | /api/users/{uid}/                      | Update User           |
 | DELETE | DELETE  | /api/users/{uid}/                      | Delete User           |
-|--------|---------|----------------------------------------|-----------------------| 
+|--------|---------|----------------------------------------|-----------------------|
 | LIST   | GET     | /api/providers/                        | List Providers        |
 | CREATE | POST    | /api/providers/                        | Add Provider          |
 | READ   | GET     | /api/providers/{pid}/                  | Show Provider         |
@@ -71,7 +71,7 @@ QRx - Patient/Provider Interface. A collaborative proof of concept for streamlin
 * HTML5/CSS3/JS
 
 ### Demo Application
-placeholder 
+placeholder
 
 ### Entity Diagram
 ![qrxdbERD](qrxdbERD.png)
