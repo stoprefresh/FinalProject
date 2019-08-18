@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -29,9 +31,11 @@ public class User {
 	private Provider provider;
 	
 	@Column(name= "username")
+	@JsonIgnore
 	private String username;
 
 	@Column(name= "password")
+	@JsonIgnore
 	private String password;
 	
 	@Column(name= "active")
@@ -41,6 +45,7 @@ public class User {
 	private String role;
 	
 	@CreationTimestamp
+	@Temporal(TemporalType.DATE)
 	@Column(name= "create_date")
 	private Date createDate;
 	

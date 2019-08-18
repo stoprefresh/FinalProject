@@ -14,8 +14,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Patient {
 
@@ -28,7 +26,6 @@ public class Patient {
 
 	@OneToOne
 	@JoinColumn(name= "user_id")
-	@JsonIgnore
 	private User user;
 	
 	@Column(name="qrcode_url")

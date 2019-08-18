@@ -55,7 +55,6 @@ public class Medication {
 	
 	@ManyToOne
 	@JoinColumn(name="diagnosis_id")
-	@JsonIgnore
 	private Diagnosis diagnosis;
 	
 	@OneToMany(mappedBy="medication")
