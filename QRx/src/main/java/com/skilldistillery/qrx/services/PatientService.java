@@ -26,4 +26,6 @@ public interface PatientService {
 
 	public Patient findPatientByUsername(String username);
 
+	public Patient index(String name);
+
 }

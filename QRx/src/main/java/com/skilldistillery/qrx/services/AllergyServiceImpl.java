@@ -16,6 +16,7 @@ public class AllergyServiceImpl implements AllergyService{
 
 	@Autowired
 	private AllergyRepository aRepo;
+	
 	@Autowired
 	private PatientRepository pRepo;
 	

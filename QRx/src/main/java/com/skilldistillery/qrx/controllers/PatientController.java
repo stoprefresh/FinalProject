@@ -1,7 +1,8 @@
 package com.skilldistillery.qrx.controllers;
 
-import java.util.List;
+import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,26 +20,30 @@ import com.skilldistillery.qrx.entities.Patient;
 import com.skilldistillery.qrx.services.PatientService;
 
 @RestController
-@RequestMapping("api/patients")
+@RequestMapping({"api/patients/", "api/patients"})
 @CrossOrigin({ "*", "http://localhost:4205" })
 public class PatientController {
 	
 	@Autowired
 	private PatientService svc;
 	
-	@GetMapping() 
-	public List<Patient> getAllPatients(){
-		return svc.listAllPatients();
-	}
+//	@GetMapping() 
+//	public List<Patient> getAllPatients(){
+//		return svc.listAllPatients();
+//	}
 	
-	@GetMapping("{pid}")
-	public Patient getPatientById(@PathVariable int pid) {
-		return svc.searchById(pid);
-	}
-	
+	@GetMapping()
+	public Patient getPatientByUsername(Principal prince) {
+		return svc.findPatientByUsername(prince.getName());	}
+
 	@GetMapping("username/{username}")
 	public Patient getPatientByUsername(@PathVariable String username) {
 		return svc.findPatientByUsername(username);
+	}
+	
+	@GetMapping(path="index/")
+	public Patient patientHome(HttpServletRequest req, HttpServletResponse res, Principal principal) {
+	    return svc.index(principal.getName());
 	}
 	
 	@PostMapping("{userId}") 

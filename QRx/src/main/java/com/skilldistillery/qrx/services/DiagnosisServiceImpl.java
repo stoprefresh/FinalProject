@@ -42,7 +42,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 	@Override
 	public Diagnosis update(Integer pid, Integer did, Diagnosis newDiagnosis) {
 		Diagnosis diagnosisToUpdate = diRepo.findByIdAndPatient_Id(did, pid);
-		newDiagnosis.setId(pid);
+		newDiagnosis.setId(did);
 		newDiagnosis.setPatient(diagnosisToUpdate.getPatient());
 		diagnosisToUpdate = diRepo.saveAndFlush(newDiagnosis);
 		return newDiagnosis;

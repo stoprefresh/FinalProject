@@ -74,5 +74,9 @@ public class PatientServiceImpl implements PatientService {
 		return deleted;
 	}
 
+	@Override
+	public Patient index(String username) {
+		return ptRepo.findByUser_Username(username);
+	}
 
 }

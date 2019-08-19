@@ -1,5 +1,6 @@
 package com.skilldistillery.qrx.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,16 +34,17 @@ public class NoteController {
 	private NoteService svc;
 
 //	LIST	GET		List Notes by PID
-	@GetMapping(path = "{pid}/notes")
-	public List<PersonalNote> getNotes(@PathVariable Integer pid) {
-		return svc.getNotes(pid);
+	@GetMapping(path = "notes")
+	public List<PersonalNote> getNotes(Principal prince) {
+		Patient patient = patientSvc.findPatientByUsername(prince.getName());
+		return svc.getNotes(patient.getId());
 	}
 
 //	READ	GET	 Show PersonalNote by NID
-	@GetMapping(path = "{pid}/notes/{nid}")
-	public PersonalNote getNoteById(@PathVariable Integer pid, @PathVariable Integer nid, HttpServletResponse resp) {
-
-		PersonalNote note = svc.getByPatient_IdAndNote_Id(pid, nid);
+	@GetMapping(path = "notes/{nid}")
+	public PersonalNote getNoteById(@PathVariable Integer nid, HttpServletResponse resp, Principal prince) {
+		Patient patient = patientSvc.findPatientByUsername(prince.getName());
+		PersonalNote note = svc.getByPatient_IdAndNote_Id(patient.getId(), nid);
 
 		if (note == null) {
 			resp.setStatus(404);
@@ -53,10 +55,11 @@ public class NoteController {
 	}
 
 //	DELETE	DELETE	Delete PersonalNote
-	@DeleteMapping("{pid}/notes/{nid}")
-	public Boolean deleteNote(@PathVariable Integer pid, @PathVariable Integer nid, HttpServletRequest req,
-			HttpServletResponse resp) {
-		PersonalNote note = svc.getByPatient_IdAndNote_Id(pid, nid);
+	@DeleteMapping("notes/{nid}")
+	public Boolean deleteNote(@PathVariable Integer nid, HttpServletRequest req,
+			HttpServletResponse resp, Principal prince) {
+		Patient patient = patientSvc.findPatientByUsername(prince.getName());
+		PersonalNote note = svc.getByPatient_IdAndNote_Id(patient.getId(), nid);
 		if (note != null) {
 			try {
 				svc.delete(nid);
@@ -69,20 +72,21 @@ public class NoteController {
 	}
 
 // CREATE   PUT     Add PersonalNote	
-	@PostMapping("{pid}/notes")
-	public PersonalNote createNote(@PathVariable Integer pid, @RequestBody PersonalNote note) {
-		Patient patient = patientSvc.searchById(pid);
+	@PostMapping("notes")
+	public PersonalNote createNote(@RequestBody PersonalNote note, Principal prince) {
+		Patient patient = patientSvc.findPatientByUsername(prince.getName());
 		note.setPatient(patient);
-		svc.create(pid, note);
+		svc.create(patient.getId(), note);
 		return note;
 	}
 
-//	UPDATE	PUT	{pid}/noted/{nid}	Update PersonalNote
-	@PutMapping("{pid}/notes/{nid}")
-	public PersonalNote replaceNote(@PathVariable Integer pid,@PathVariable Integer nid, @RequestBody PersonalNote note) {
-		PersonalNote managedNote = svc.getByPatient_IdAndNote_Id(pid, nid);
+//	UPDATE	PUT	notes/{nid}	Update PersonalNote
+	@PutMapping("notes/{nid}")
+	public PersonalNote replaceNote(@PathVariable Integer nid, @RequestBody PersonalNote note, Principal prince) {
+		Patient patient = patientSvc.findPatientByUsername(prince.getName());
+		PersonalNote managedNote = svc.getByPatient_IdAndNote_Id(patient.getId(), nid);
 		managedNote.setTextContent(note.getTextContent());
 		svc.update(managedNote);
-		return svc.getByPatient_IdAndNote_Id(pid, nid);
+		return svc.getByPatient_IdAndNote_Id(patient.getId(), nid);
 	}
 }
