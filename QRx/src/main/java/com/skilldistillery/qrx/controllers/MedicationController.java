@@ -1,5 +1,6 @@
 package com.skilldistillery.qrx.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ import com.skilldistillery.qrx.services.MedicationService;
 import com.skilldistillery.qrx.services.PatientService;
 
 @RestController
-@RequestMapping(path = "api/patients")
+@RequestMapping({"api/patients/", "api/patients"})
 @CrossOrigin({ "*", "http://localhost:4205" })
 public class MedicationController {
 
@@ -32,15 +33,15 @@ public class MedicationController {
 	@Autowired
 	private MedicationService svc;
 
-	@GetMapping(path = "{pid}/medications")
-	public List<Medication> getMedications(@PathVariable Integer pid) {
-		return svc.getMedications(pid);
+	@GetMapping(path = "medications")
+	public List<Medication> getMedications(HttpServletRequest req, HttpServletResponse res, Principal prince) {
+		return svc.findAllByUsername(prince.getName());
 	}
-
-	@GetMapping(path = "{pid}/medications/{mid}")
-	public Medication getMedicationById(@PathVariable Integer pid, @PathVariable Integer mid, HttpServletResponse resp) {
-
-		Medication medication = svc.getByPatient_IdAndMedication_Id(pid, mid);
+	
+	@GetMapping(path = "medications/{mid}")
+	public Medication getMedicationById(@PathVariable Integer mid, HttpServletResponse resp, Principal prince) {
+		Patient patient = patientSvc.findPatientByUsername(prince.getName());
+		Medication medication = svc.getByPatient_IdAndMedication_Id(patient.getId(), mid);
 
 		if (medication == null) {
 			resp.setStatus(404);
@@ -50,9 +51,10 @@ public class MedicationController {
 		return medication;
 	}
 
-	@DeleteMapping("{pid}/medications/{mid}")
-	public Boolean deleteMedication(@PathVariable Integer pid, @PathVariable Integer mid, HttpServletRequest req, HttpServletResponse resp) {
-		Medication medication = svc.getByPatient_IdAndMedication_Id(pid, mid);
+	@DeleteMapping("medications/{mid}")
+	public Boolean deleteMedication(@PathVariable Integer mid, HttpServletRequest req, HttpServletResponse resp, Principal prince) {
+		Patient patient = patientSvc.findPatientByUsername(prince.getName());
+		Medication medication = svc.getByPatient_IdAndMedication_Id(patient.getId(), mid);
 		if (medication != null) {
 			try {
 				svc.delete(mid);
@@ -64,10 +66,10 @@ public class MedicationController {
 		return false;
 	}
 
-	@PostMapping("{pid}/medications")
-	public Medication createMedication(@PathVariable Integer pid, @RequestBody Medication medication, HttpServletRequest req, HttpServletResponse resp) {
+	@PostMapping("medications")
+	public Medication createMedication(@RequestBody Medication medication, HttpServletRequest req, HttpServletResponse resp, Principal prince) {
 		if (medication.getPatient() == null) {
-			Patient patient = patientSvc.searchById(pid);
+			Patient patient = patientSvc.findPatientByUsername(prince.getName());
 			try {
 				medication.setPatient(patient);
 				svc.create(medication);
@@ -85,10 +87,10 @@ public class MedicationController {
 		return medication;
 	}
 
-	@PutMapping("{pid}/medications/{mid}")
-	public Medication replaceMedication(@PathVariable Integer pid, @PathVariable Integer mid, @RequestBody Medication medication) {
-		Patient patient = patientSvc.searchById(pid);
-		Medication med = svc.getByPatient_IdAndMedication_Id(pid, mid);
+	@PutMapping("medications/{mid}")
+	public Medication replaceMedication(@PathVariable Integer mid, @RequestBody Medication medication, Principal prince) {
+		Patient patient = patientSvc.findPatientByUsername(prince.getName());
+		Medication med = svc.getByPatient_IdAndMedication_Id(patient.getId(), mid);
 		if (med != null) {
 			medication.setPatient(patient);
 			medication = svc.update(med.getId(), medication);

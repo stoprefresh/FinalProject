@@ -20,11 +20,11 @@ public class DrugController {
 	@Autowired
 	private DrugService svc;
 	
-	@GetMapping() //if this doesn't work, use path with empty quotes
-	public List<Drug> getAllDrugs(){
-		return svc.findAllDrugs();
-	}
-	
+//	@GetMapping() //if this doesn't work, use path with empty quotes
+//	public List<Drug> getAllDrugs(){
+//		return svc.findAllDrugs();
+//	}
+
 	@GetMapping("{did}")
 	public Drug getDrugById(@PathVariable int did){
 		return svc.show(did);

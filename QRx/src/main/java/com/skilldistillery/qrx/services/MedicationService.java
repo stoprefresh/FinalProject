@@ -16,4 +16,6 @@ public interface MedicationService {
 
 	Medication update(Integer mid, Medication medication);
 
+	List<Medication> findAllByUsername(String username);
+
 }

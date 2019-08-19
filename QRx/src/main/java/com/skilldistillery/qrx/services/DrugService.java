@@ -21,6 +21,5 @@ public interface DrugService {
     
     public List<Drug> searchByGenericName(String genericName);
 
-    
 
 }
