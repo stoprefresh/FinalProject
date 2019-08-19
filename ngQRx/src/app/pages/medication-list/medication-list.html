@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Medications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="outer-content">
+  <ion-list>
+    <ion-grid fixed>
+      <ion-row class="ion-align-items-stretch">
+        <ion-col size="12" size-md="6" *ngFor="let medication of medications">
+          <ion-card class="medication-card">
+            <ion-card-header>
+              <ion-item detail="false" lines="none" routerLink="/app/tabs/medications/medication-details/{{medication.id}}">
+                <!-- TODO fix drug images url, add default img -->
+                <ion-avatar slot="start">
+                  <!-- <img [src]="medication.drug.imgUrl" alt="Medication profile pic"> -->
+                  <ion-icon name="remove-circle"></ion-icon>
+                </ion-avatar>
+                <h4>{{medication.medName}}</h4>
+              </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list>
+                <!-- <ion-item *ngFor="let session of medication.sessions" routerLink="/app/tabs/medications/session/{{session.id}}">
+                  <h3>{{session.name}}</h3>
+                </ion-item> -->
+                <ion-item routerLink="/app/tabs/medications/medication-details/{{medication.id}}">
+                  <h3>Directions - {{medication.directions}}</h3>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+
+             <ion-row class="ion-no-padding ion-justify-content-center">
+              <ion-col size="4" class="ion-text-left">
+                <ion-button fill="clear" size="small" color="primary" (click)="goTomedicationTwitter(medication)">
+                  <ion-icon name="logo-twitter" slot="start"></ion-icon>
+                  Tweet
+                </ion-button>
+              </ion-col>
+              <ion-col size="4" class="ion-text-center">
+                <ion-button fill="clear" size="small" color="primary" (click)="openmedicationShare(medication)">
+                  <ion-icon name="share-alt" slot="start"></ion-icon>
+                  Share
+                </ion-button>
+              </ion-col>
+              <ion-col size="4" lass="ion-text-right">
+                <ion-button fill="clear" size="small" color="primary" (click)="openContact(medication)">
+                  <ion-icon name="chatboxes" slot="start"></ion-icon>
+                  Contact
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>

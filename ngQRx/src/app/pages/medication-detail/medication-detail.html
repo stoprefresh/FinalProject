@@ -1,0 +1,29 @@
+<ion-header *ngIf="medication">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- TODO Correct reload on back -->
+      <ion-back-button defaultHref="/app/tabs/medications"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{medication.medName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding medication-detail"  *ngIf="medication">
+  <div class="ion-text-center">
+    <!-- <img [src]="medication.drug.imgUrl" [alt]="medication.drug.proprietaryName"> -->
+    <br>
+    <ion-card-subtitle>Medication Name - {{medication.medName}}</ion-card-subtitle>
+    <ion-list></ion-list>
+    <!-- <ion-button fill="clear" size="small" color="twitter">
+      <ion-icon name="logo-twitter" slot="icon-only"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear" size="small" color="github">
+      <ion-icon name="logo-github" slot="icon-only"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear" size="small" color="instagram">
+      <ion-icon name="logo-instagram" slot="icon-only"></ion-icon>
+    </ion-button> -->
+  </div>
+
+  <p>{{medication.directions}}</p>
+</ion-content>
