@@ -17,4 +17,6 @@ public interface ProviderService {
     Boolean removeProvider(Integer pid);
 
     Provider updateProvider(Integer pid, Provider updatedProvider);
+
+	Provider findProviderByUsername(String name);
 }

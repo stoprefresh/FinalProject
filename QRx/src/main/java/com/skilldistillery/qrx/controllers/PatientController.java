@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,16 +51,17 @@ public class PatientController {
 	}
 	
 	@PutMapping("{pid}")
-	public Patient updatePatient(@PathVariable int pid, @RequestBody Patient pt) {
-		return svc.update(pid, pt);
+	public Patient updatePatient(@RequestBody Patient pt, Principal principal) {
+		Patient patient = svc.findPatientByUsername(principal.getName());
+		return svc.update(patient.getId(), pt);
 	}
 	
-	@DeleteMapping("{pid}")
-	public void removePatient(@PathVariable int pid, HttpServletResponse resp) {
-		if (svc.destroy(pid)) {
-			resp.setStatus(204);
-		}
-		else resp.setStatus(404);
-	}
+//	@DeleteMapping("{pid}")
+//	public void removePatient(@PathVariable int pid, HttpServletResponse resp) {
+//		if (svc.destroy(pid)) {
+//			resp.setStatus(204);
+//		}
+//		else resp.setStatus(404);
+//	}
 
 }
