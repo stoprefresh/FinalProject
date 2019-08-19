@@ -1,5 +1,6 @@
 package com.skilldistillery.qrx.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,90 +31,73 @@ import com.skilldistillery.qrx.services.UserService;
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 @RestController
-@CrossOrigin({"*", "http://localhost:4205"})
+@CrossOrigin({ "*", "http://localhost:4205" })
 @RequestMapping("api/users/")
 public class UserController {
 
-    @Autowired
-    private UserService userSvc;
+	@Autowired
+	private UserService userSvc;
 
-    @GetMapping()
-    public List<User> listAllUsers() {
-        return userSvc.findAllUsers();
-    }
-
-//    TODO
-    // @GetMapping("patient/{keyword}")
-    // public List<Patient> searchPatients(
-    //     @PathVariable("keyword") String keyword
-    //     )
-    // {
-    //     return userSvc.searchProvidersByKeyword(keyword);
-    // }
+	@GetMapping("showall")
+	public List<User> listAllUsers(Principal prince) {
+		User user = userSvc.findByUsername(prince.getName());
+		if (user.getRole() == "admin") {
+		return userSvc.findAllUsers();
+		} return null;
+	}
 
 //    TODO
-    // @GetMapping("providers/{keyword}")
-    // public List<Provider> searchProviders(
-    //     @PathVariable("keyword") String keyword)
+	// @GetMapping("patient/{keyword}")
+	// public List<Patient> searchPatients(
+	// @PathVariable("keyword") String keyword
+	// )
+	// {
+	// return userSvc.searchProvidersByKeyword(keyword);
+	// }
 
-    // {
-    //     return userSvc.searchPatientsByKeyword(keyword);
-    // }
+//    TODO
+	// @GetMapping("providers/{keyword}")
+	// public List<Provider> searchProviders(
+	// @PathVariable("keyword") String keyword)
 
-    @GetMapping("{uid}")
-    public User showUserById
-        (
-        @PathVariable("uid") Integer uid
-        ) 
-    {
-        return userSvc.findUserById(uid);
-    }
+	// {
+	// return userSvc.searchPatientsByKeyword(keyword);
+	// }
 
-    @PostMapping()
-    public User addNewUser
-        (
-        @RequestBody User newUser,
-        HttpServletResponse resp, 
-        HttpServletRequest req
-        )
-    {
-        newUser = userSvc.addUser(newUser);
+	@GetMapping()
+	public User showUserByUsername(Principal principal) {
+		User user = userSvc.findByUsername(principal.getName());
+		return userSvc.findUserById(user.getId());
+	}
+
+	@PostMapping()
+	public User addNewUser(@RequestBody User newUser, HttpServletResponse resp, HttpServletRequest req) {
+		newUser = userSvc.addUser(newUser);
 		resp.setStatus(201);
 		StringBuffer sb = req.getRequestURL();
 		sb.append("/");
 		sb.append(newUser.getId());
 		resp.setHeader("Location", sb.toString());
 		return newUser;
-    }
-    
-    @PutMapping("{uid}")
-    public User updateUser
-        (
-        @RequestBody User updatedUser,
-		@PathVariable("uid") Integer uid,
-		HttpServletResponse resp
-        )
-    {
-        return userSvc.updateUser(uid, updatedUser);
-    }
+	}
 
-    @DeleteMapping("{uid}")
-    public Boolean deleteUser
-        (
-        @PathVariable("uid") Integer uid,
-        HttpServletResponse resp
-        )
-    {
-        Boolean removed = userSvc.removeUser(uid);
-		if(removed == null ) {
-			resp.setStatus(404);
-		}
-		else if(removed) {
-			resp.setStatus(204);
-		}
-		else {
-			resp.setStatus(400);
-		}
-		return removed;
-    }
+	@PutMapping("{uid}")
+	public User updateUser(@RequestBody User updatedUser, @PathVariable("uid") Integer uid, HttpServletResponse resp,
+			Principal principal) {
+		User user = userSvc.findByUsername(principal.getName());
+		return userSvc.updateUser(user.getId(), updatedUser);
+	}
+
+//	@DeleteMapping("{uid}")
+//	public Boolean deleteUser(@PathVariable("uid") Integer uid, HttpServletResponse resp) {
+//		Boolean removed = userSvc.removeUser(uid);
+//		if (removed == null) {
+//			resp.setStatus(404);
+//		} else if (removed) {
+//			resp.setStatus(204);
+//		} else {
+//			resp.setStatus(400);
+//		}
+//		return removed;
+//	}
 }

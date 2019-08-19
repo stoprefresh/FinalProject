@@ -64,4 +64,9 @@ public class ProviderServiceImpl implements ProviderService {
 		return providerRepo.findById(pid).get();
 	}
 
+	@Override
+	public Provider findProviderByUsername(String name) {
+		return providerRepo.findByUser_username(name);
+	}
+
 }

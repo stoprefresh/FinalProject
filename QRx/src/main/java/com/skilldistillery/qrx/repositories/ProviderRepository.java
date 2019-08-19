@@ -10,4 +10,6 @@ public interface ProviderRepository extends JpaRepository<Provider, Integer> {
 
     List<Provider> findByOrganization(String keyword);
     
+    Provider findByUser_username(String username);
+    
 }
