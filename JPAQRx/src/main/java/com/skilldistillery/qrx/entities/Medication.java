@@ -1,6 +1,7 @@
 package com.skilldistillery.qrx.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -37,6 +39,7 @@ public class Medication {
 	@Column(name="start_date")
 	private Date startDate;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="stop_date")
 	private Date discontinuedDate;
 	
@@ -52,8 +55,11 @@ public class Medication {
 	
 	@ManyToOne
 	@JoinColumn(name="diagnosis_id")
-	@JsonIgnore
 	private Diagnosis diagnosis;
+	
+	@OneToMany(mappedBy="medication")
+	@JsonIgnore
+	private List<PersonalNote> notes;
 	
 	@Column(name="active")
 	private Boolean active;
@@ -122,11 +128,11 @@ public class Medication {
 		this.reasonDiscontinued = reasonDiscontinued;
 	}
 
-	public ApprovedProvider getApprovedPrescriber() {
+	public ApprovedProvider getPrescriber() {
 		return prescriber;
 	}
 
-	public void setApprovedPrescriber(ApprovedProvider prescriber) {
+	public void setPrescriber(ApprovedProvider prescriber) {
 		this.prescriber = prescriber;
 	}
 
@@ -156,14 +162,6 @@ public class Medication {
 		super();
 	}
 
-	public ApprovedProvider getPrescriber() {
-		return prescriber;
-	}
-
-	public void setPrescriber(ApprovedProvider prescriber) {
-		this.prescriber = prescriber;
-	}
-
 	public Diagnosis getDiagnosis() {
 		return diagnosis;
 	}
@@ -178,6 +176,14 @@ public class Medication {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	public List<PersonalNote> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<PersonalNote> notes) {
+		this.notes = notes;
 	}
 
 	

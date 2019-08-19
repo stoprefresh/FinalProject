@@ -8,8 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -19,9 +23,11 @@ public class User {
 	private int id;
 	
 	@OneToOne(mappedBy= "user")
+	@JsonIgnore
 	private Patient patient;
 	
 	@OneToOne(mappedBy= "user")
+	@JsonIgnore
 	private Provider provider;
 	
 	@Column(name= "username")
@@ -37,6 +43,7 @@ public class User {
 	private String role;
 	
 	@CreationTimestamp
+	@Temporal(TemporalType.DATE)
 	@Column(name= "create_date")
 	private Date createDate;
 	

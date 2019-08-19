@@ -5,7 +5,7 @@
 * Cecil Kitch - DBA
 
 ### Summary / Overview
-QRx - Patient/Provider Interface. A collaborative proof of concept for streamlining emergency responder access to patient information. As well as to provide a service as a single, dependable source for patient healthcare providers to access their patients' medication lists.
+QRx - Patient/Provider Interface. A collaborative proof of concept for streamlining emergency medical provider access to patient information. Utilizes restful services to provide a single, dependable source for patient healthcare providers to access their patients' medication lists.
 
 ### REST API Endpoints
 | Action |HTTP Verb| Resource URI                           |     Action            |
@@ -15,7 +15,7 @@ QRx - Patient/Provider Interface. A collaborative proof of concept for streamlin
 | READ   | GET     | /api/users/{uid}/                      | Show User             |
 | UPDATE | PUT     | /api/users/{uid}/                      | Update User           |
 | DELETE | DELETE  | /api/users/{uid}/                      | Delete User           |
-|--------|---------|----------------------------------------|-----------------------| 
+|--------|---------|----------------------------------------|-----------------------|
 | LIST   | GET     | /api/providers/                        | List Providers        |
 | CREATE | POST    | /api/providers/                        | Add Provider          |
 | READ   | GET     | /api/providers/{pid}/                  | Show Provider         |
@@ -27,6 +27,8 @@ QRx - Patient/Provider Interface. A collaborative proof of concept for streamlin
 | READ   | GET     | /api/drugs/{did}/                      | Show Drug             |
 | UPDATE | PUT     | /api/drugs/{did}/                      | Update Drug           |
 | DELETE | DELETE  | /api/drugs/{did}/                      | Delete Drug           |
+|--------|---------|----------------------------------------|-----------------------|
+|--------|---------| /api/patients/                         |-----------------------|
 |--------|---------|----------------------------------------|-----------------------|
 | LIST   | GET     | /api/patients/                         | List Patients         |
 | CREATE | POST    | /api/patients/                         | Add Patient           |
@@ -42,9 +44,9 @@ QRx - Patient/Provider Interface. A collaborative proof of concept for streamlin
 |--------|---------|----------------------------------------|-----------------------|
 | LIST   | GET     | /api/patients/{pid}/notes              | List Notes            |
 | CREATE | POST    | /api/patients/{pid}/notes              | Add Note              |
-| READ   | GET     | /api/patients/{pid}/note/{nid}         | Show Note             |
-| UPDATE | PUT     | /api/patients/{pid}/noted/{nid}        | Update Note           |
-| DELETE | DELETE  | /api/patients/{pid}/note/{nid}         | Delete Note           |
+| READ   | GET     | /api/patients/{pid}/notes/{nid}        | Show Note             |
+| UPDATE | PUT     | /api/patients/{pid}/notes/{nid}        | Update Note           |
+| DELETE | DELETE  | /api/patients/{pid}/notes/{nid}        | Delete Note           |
 |--------|---------|----------------------------------------|-----------------------|
 | LIST   | GET     | /api/patients/{pid}/allergies/         | List Allergies        |
 | CREATE | POST    | /api/patients/{pid}/allergies/         | Add  Allergy          |
@@ -69,7 +71,7 @@ QRx - Patient/Provider Interface. A collaborative proof of concept for streamlin
 * HTML5/CSS3/JS
 
 ### Demo Application
-placeholder 
+placeholder
 
 ### Entity Diagram
 ![qrxdbERD](qrxdbERD.png)

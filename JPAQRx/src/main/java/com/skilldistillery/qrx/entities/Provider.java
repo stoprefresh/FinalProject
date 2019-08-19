@@ -24,7 +24,6 @@ public class Provider {
 	
 	@OneToOne
 	@JoinColumn(name= "user_id")
-	@JsonIgnore
 	private User user;
 	
 	@Column(name= "organization")

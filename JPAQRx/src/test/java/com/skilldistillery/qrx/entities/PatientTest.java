@@ -37,13 +37,13 @@ class PatientTest {
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		patient = null;
+		patient = null;	
 	}
 
 	@Test
 	void test() {
 		assertNotNull(patient);
-		assertEquals("1960-07-15 00:00:00.0",patient.getBirthdate());
+		assertEquals(63.7 , patient.getHeight());
 	}
 
 }

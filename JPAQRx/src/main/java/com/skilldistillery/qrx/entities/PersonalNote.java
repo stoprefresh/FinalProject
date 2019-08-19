@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,14 +36,17 @@ public class PersonalNote {
 	
 	@CreationTimestamp
 	@Column(name="create_date")
+	@Temporal(TemporalType.DATE)
 	private Date createDate;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@UpdateTimestamp
 	@Column(name="update_date")
+	@Temporal(TemporalType.DATE)
 	private Date updateDate;
 	
-	@Column(name="medication_id")
-	private int medicationId;
+	@ManyToOne
+	@JoinColumn(name="medication_id")
+	private Medication medication;
 	
 	public int getId() {
 		return id;
@@ -84,27 +88,8 @@ public class PersonalNote {
 		this.updateDate = updateDate;
 	}
 
-	public int getMedicationId() {
-		return medicationId;
-	}
-
-	public void setMedicationId(int medicationId) {
-		this.medicationId = medicationId;
-	}
-
 	public PersonalNote() {
 		super();
-	}
-
-	public PersonalNote(int id, Patient patient, String textContent, Date createDate, Date updateDate,
-			int medicationId) {
-		super();
-		this.id = id;
-		this.patient = patient;
-		this.textContent = textContent;
-		this.createDate = createDate;
-		this.updateDate = updateDate;
-		this.medicationId = medicationId;
 	}
 
 	@Override
@@ -133,6 +118,14 @@ public class PersonalNote {
 	public String toString() {
 		return "PersonalNote [id=" + id + ", textContent=" + textContent + ", createDate=" + createDate
 				+ ", updateDate=" + updateDate + "]";
+	}
+
+	public Medication getMedication() {
+		return medication;
+	}
+
+	public void setMedication(Medication medication) {
+		this.medication = medication;
 	}
 	
 	

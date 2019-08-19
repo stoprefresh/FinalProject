@@ -37,7 +37,7 @@ public class DiagnosisController {
 	}
 
 //	CREATE	POST	/api/patients/{pid}/diagnosis/	Add Diagnosis
-	@PostMapping("/{pid}/diagnosis/{did}")
+	@PostMapping("/{pid}/diagnosis")
 	public Diagnosis createDiagnosis(@RequestBody Diagnosis diagnosis, @PathVariable Integer pid) {
 		return diSvc.createDiagnosis(diagnosis, pid);
 	}

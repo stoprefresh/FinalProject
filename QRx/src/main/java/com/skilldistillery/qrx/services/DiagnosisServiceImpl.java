@@ -41,7 +41,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 
 	@Override
 	public Diagnosis update(Integer pid, Integer did, Diagnosis newDiagnosis) {
-		Diagnosis diagnosisToUpdate = diRepo.findByIdAndPatient_Id(pid, did);
+		Diagnosis diagnosisToUpdate = diRepo.findByIdAndPatient_Id(did, pid);
 		newDiagnosis.setId(pid);
 		newDiagnosis.setPatient(diagnosisToUpdate.getPatient());
 		diagnosisToUpdate = diRepo.saveAndFlush(newDiagnosis);
@@ -50,15 +50,15 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 
 	@Override
 	public Boolean destroy(Integer pid, Integer did) {
-		Diagnosis diagnosis = diRepo.findByIdAndPatient_Id(pid, did);
+		Diagnosis diagnosis = diRepo.findByIdAndPatient_Id(did, pid);
 		Boolean deleted = false;
 		if (diagnosis != null) {
 //				diRepo.delete(diagnosis);
 				try {
-					diagnosis.setActive(false);
+					diagnosis.setActive(deleted);
+					diRepo.saveAndFlush(diagnosis);
 					deleted = true;
 				} catch (Exception e) {
-					
 					e.printStackTrace();
 					deleted = null;
 				}

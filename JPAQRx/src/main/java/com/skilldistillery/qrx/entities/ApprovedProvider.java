@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -36,6 +38,7 @@ public class ApprovedProvider {
 	@JsonIgnore
 	private List<Medication> medications;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="date_approved")
 	private Date dateApproved;
 

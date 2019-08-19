@@ -5,11 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.skilldistillery.qrx.services.UserService;
-import com.skilldistillery.qrx.entities.Patient;
-import com.skilldistillery.qrx.entities.Provider;
-import com.skilldistillery.qrx.entities.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +15,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.skilldistillery.qrx.entities.User;
+import com.skilldistillery.qrx.services.UserService;
 
 // API Routes User - 17AUG19
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

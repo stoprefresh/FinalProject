@@ -35,6 +35,7 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public Patient create(int userId, Patient pt) {
+		System.out.println(pt);
 		Optional<User> user = uRepo.findById(userId);
 		if (user.isPresent()) {
 			pt.setUser(user.get());
@@ -51,7 +52,7 @@ public class PatientServiceImpl implements PatientService {
 			patient.setBirthdate(pt.getBirthdate());
 			patient.setDnr(pt.getDnr());
 			patient.setSex(pt.getSex());
-			patient.setBloodtype(pt.getBloodtype());
+			patient.setBloodType(pt.getBloodType());
 			patient.setHeight(pt.getHeight());
 			patient.setWeight(pt.getWeight());
 			patient.setQrcode(pt.getQrcode());
