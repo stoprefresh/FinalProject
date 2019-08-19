@@ -1,7 +1,6 @@
 package com.skilldistillery.qrx.controllers;
 
 import java.security.Principal;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,13 +27,13 @@ public class PatientController {
 	@Autowired
 	private PatientService svc;
 	
-	@GetMapping() 
-	public List<Patient> getAllPatients(){
-		return svc.listAllPatients();
-	}
+//	@GetMapping() 
+//	public List<Patient> getAllPatients(){
+//		return svc.listAllPatients();
+//	}
 	
-	@GetMapping("")
-	public Patient getPatientById(Principal prince) {
+	@GetMapping()
+	public Patient getPatientByUsername(Principal prince) {
 		return svc.findPatientByUsername(prince.getName());	}
 
 	@GetMapping("username/{username}")
