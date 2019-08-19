@@ -42,6 +42,13 @@ QRx - Patient/Provider Interface. A collaborative proof of concept for streamlin
 | UPDATE | PUT     | /api/patients/medications/{mid}/       | Update Medication|
 | DELETE | DELETE  | /api/patients/medications/{mid}/       | Delete Medication|
 |--------|---------|----------------------------------------|------------------|
+| LIST   | GET     | /api/patients/contacts                 | List Contact     |
+| CREATE | POST    | /api/patients/contacts                 | Add Contact      |
+| READ   | GET     | /api/patients/contacts/{cid}           | Show Contact     |
+| UPDATE | PUT     | /api/patients/contacts/{cid}           | Update Contact   |
+| DELETE | DELETE  | /api/patients/contacts/{cid}           | Delete Contact   |
+|--------|---------|----------------------------------------|------------------|
+|--------|---------|----------------------------------------|------------------|
 | LIST   | GET     | /api/patients/notes                    | List Notes       |
 | CREATE | POST    | /api/patients/notes                    | Add Note         |
 | READ   | GET     | /api/patients/notes/{nid}              | Show Note        |
