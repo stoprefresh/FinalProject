@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheckTutorial } from './providers/check-tutorial.service';
+import { CheckTutorial } from './services/check-tutorial.service';
 
 const routes: Routes = [
   {
@@ -32,7 +32,8 @@ const routes: Routes = [
     path: 'tutorial',
     loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
     canLoad: [CheckTutorial]
-  }
+  },
+  { path: 'allergy-detail', loadChildren: './pages/allergy-detail/allergy-detail.module#AllergyDetailPageModule' }
 ];
 
 @NgModule({
