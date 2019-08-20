@@ -15,26 +15,26 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name= "provider")
+@Table(name = "provider")
 public class Provider {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@OneToOne
-	@JoinColumn(name= "user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
-	@Column(name= "organization")
+
+	@Column(name = "organization")
 	private String organization;
-	
-	@Column(name= "subunit")
+
+	@Column(name = "subunit")
 	private String subunit;
-	
-	@OneToMany(mappedBy= "provider")
+
+	@OneToMany(mappedBy = "approvedProviders")
 	@JsonIgnore
-	private List<ApprovedProvider> patientsApproved;
+	private List<Patient> patientsApproved;
 
 	public int getId() {
 		return id;
@@ -116,11 +116,11 @@ public class Provider {
 		return true;
 	}
 
-	public List<ApprovedProvider> getPatientsApproved() {
+	public List<Patient> getPatientsApproved() {
 		return patientsApproved;
 	}
 
-	public void setPatientsApproved(List<ApprovedProvider> patientsApproved) {
+	public void setPatientsApproved(List<Patient> patientsApproved) {
 		this.patientsApproved = patientsApproved;
 	}
 }
