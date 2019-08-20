@@ -6,18 +6,20 @@ import { UserOptions } from '../../interfaces/user-options';
 import { AuthoService } from '../../services/autho.service';
 import { User } from '../../models/user';
 
-
-
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  styleUrls: ['./login.scss'],
+  styleUrls: ['./login.scss']
 })
 export class LoginPage implements OnInit {
   user: User = new User();
   submitted = false;
 
-  constructor(private auth: AuthoService, private router: Router, private userData: UserData) {}
+  constructor(
+    private auth: AuthoService,
+    private router: Router,
+    private userData: UserData
+  ) {}
 
   // Use the authService.login(username, password)
   // method in your login(form) behavior. On success,
@@ -26,7 +28,6 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
-
   onSignup() {
     this.router.navigateByUrl('/signup');
   }
@@ -34,10 +35,12 @@ export class LoginPage implements OnInit {
   login() {
     this.auth.login(this.user.username, this.user.password).subscribe(
       next => {
-        console.log(next);
-        this.userData.login(this.user.username);
+        // console.log(next);
         this.userData.checkHasSeenTutorial();
-        console.log('LoginComponent.login(): user logged in, routing to /patients/index/.');
+        this.userData.login(this.user.username);
+        console.log(
+          'LoginComponent.login(): user logged in, routing to /app/tabs/medications.'
+        );
         this.router.navigateByUrl('/app/tabs/medications');
       },
       error => {
@@ -47,24 +50,23 @@ export class LoginPage implements OnInit {
   }
 }
 
-  // login: UserOptions = { username: '', password: '' };
-  // submitted = false;
+// login: UserOptions = { username: '', password: '' };
+// submitted = false;
 
-  // constructor(
-  //   public userData: UserData,
-  //   public router: Router
-  // ) { }
+// constructor(
+//   public userData: UserData,
+//   public router: Router
+// ) { }
 
-  // onLogin(form: NgForm) {
-  //   this.submitted = true;
+// onLogin(form: NgForm) {
+//   this.submitted = true;
 
-  //   if (form.valid) {
-  //     this.userData.login(this.login.username);
-  //     this.router.navigateByUrl('/app/tabs/schedule');
-  //   }
-  // }
+//   if (form.valid) {
+//     this.userData.login(this.login.username);
+//     this.router.navigateByUrl('/app/tabs/schedule');
+//   }
+// }
 
-  // onSignup() {
-  //   this.router.navigateByUrl('/signup');
-  // }
-
+// onSignup() {
+//   this.router.navigateByUrl('/signup');
+// }
