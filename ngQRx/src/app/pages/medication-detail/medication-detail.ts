@@ -62,4 +62,20 @@ export class MedicationDetailPage implements OnInit {
     );
   }
 
+  deleteMed() {
+    this.medicationService.destroy(this.medication.id).subscribe(
+      good => {
+        console.log('Delete successful');
+        console.log(good);
+        this.router.navigateByUrl('app/tabs/medications');
+      },
+      bad => {
+        console.error(bad);
+
+      },
+      () => {
+      }
+    );
+  }
+
 }
