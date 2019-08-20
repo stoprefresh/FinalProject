@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { CheckTutorial } from './providers/check-tutorial.service';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: '/tutorial',
-  //   pathMatch: 'full'
-  // },
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
   {
     path: 'account',
     loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)
