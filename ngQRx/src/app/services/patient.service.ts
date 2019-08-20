@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Provider } from '../models/provider';
+import { Patient } from '../models/patient';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthoService } from './autho.service';
 import { Router } from '@angular/router';
@@ -11,11 +11,11 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class ProviderService {
+export class PatientService {
   // private baseUrl = 'http://localhost:8090/';
-  private url = environment.baseUrl + 'api/patients/providers';
+  private url = environment.baseUrl + 'api/patients/patients';
 
-  editProvider = null;
+  editPatient = null;
 
   constructor(
     private datePipe: DatePipe,
@@ -39,7 +39,7 @@ export class ProviderService {
     }
   }
 
-  show(id: any): Observable<Provider> {
+  show(id: any): Observable<Patient> {
     const credentials = this.auth.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -48,10 +48,10 @@ export class ProviderService {
       })
     };
     if (this.auth.checkLogin()) {
-      return this.http.get<Provider>(`${this.url}/${id}`, httpOptions).pipe(
+      return this.http.get<Patient>(`${this.url}/${id}`, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
-          return throwError('ProviderService.index(): error retrieving');
+          return throwError('PatientService.index(): error retrieving');
         })
       );
     } else {
@@ -69,12 +69,12 @@ export class ProviderService {
     };
     if (this.auth.checkLogin()) {
       return this.http
-        .get<Provider[]>(this.url + '?sorted=true', httpOptions)
+        .get<Patient[]>(this.url + '?sorted=true', httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log(err);
             return throwError(
-              'ProviderService.index(): error retrieving list'
+              'PatientService.index(): error retrieving list'
             );
           })
         );
@@ -83,7 +83,7 @@ export class ProviderService {
     }
   }
 
-  create(provider: Provider) {
+  create(patient: Patient) {
     const credentials = this.auth.getCredentials();
     if (this.auth.checkLogin()) {
       const httpOptions = {
@@ -93,11 +93,11 @@ export class ProviderService {
           'X-Requested-With': 'XMLHttpRequest'
         })
       };
-      return this.http.post<Provider>(this.url, provider, httpOptions).pipe(
+      return this.http.post<Patient>(this.url, patient, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError(
-            'ProviderService.create(): error creating provider'
+            'PatientService.create(): error creating patient'
           );
         })
       );
@@ -106,7 +106,7 @@ export class ProviderService {
     }
   }
 
-  update(provider: Provider) {
+  update(patient: Patient) {
     const credentials = this.auth.getCredentials();
     if (this.auth.checkLogin()) {
       const httpOptions = {
@@ -117,8 +117,8 @@ export class ProviderService {
         })
       };
       return this.http.put<any>(
-        this.url + '/' + provider.id,
-        provider,
+        this.url + '/' + patient.id,
+        patient,
         httpOptions
       );
     } else {
