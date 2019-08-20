@@ -24,6 +24,78 @@
       <ion-icon name="logo-instagram" slot="icon-only"></ion-icon>
     </ion-button> -->
   </div>
-
   <p>{{medication.directions}}</p>
+
+
+
+
+
+
+  <div *ngIf="editMedication">
+      <form>
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+          <ion-item>
+            <ion-label position="stacked">Medication Name <ion-text color="danger">*</ion-text></ion-label>
+            <!-- <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input> -->
+            <ion-input  required type="text" name='medName' placeholder='eg. Aspirin' [(ngModel)]="editMedication.medName"></ion-input>
+          </ion-item>
+          <!-- TODO: add drug to medication
+            <ion-item>
+              <ion-label position="stacked">Drug <ion-text color="danger">*</ion-text></ion-label>
+              <ion-input required type="text" oninput="handleLastNameValue(event)"></ion-input>
+            </ion-item> -->
+            <ion-item>
+              <ion-label position="stacked">Directions</ion-label>
+              <ion-input  required type="text" name='directions' placeholder='eg. Take one tablet by mouth daily' [(ngModel)]="editMedication.directions"></ion-input>
+              <ion-textarea></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Start Date</ion-label>
+              <ion-datetime value="1980-02-19" name='startDate' placeholder="Select Date" [(ngModel)]="editMedication.startDate"></ion-datetime>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Medication Active</ion-label>
+              <ion-checkbox color="dark" checked slot="start" name='active' [(ngModel)]="editMedication.active"></ion-checkbox>
+            <ion-textarea></ion-textarea>
+          </ion-item>
+          <!-- TODO: make these models! -->
+          <!-- <ion-item>
+            <ion-label position="stacked">Associated Diagnosis</ion-label>
+            <ion-textarea></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Prescriber</ion-label>
+            <ion-textarea></ion-textarea>
+          </ion-item> -->
+        </ion-list>
+
+        <div class="ion-padding">
+          <ion-button (click)='saveEdit()' expand="block" type="submit" class="ion-no-margin">Save Medication</ion-button>
+        </div>
+      </form>
+    </div>
+
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="create"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side='start'>
+            <ion-fab-button (click)="setEditMedication()">
+              <ion-icon name="sync"></ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+        <ion-fab-list side='end'>
+            <ion-fab-button (click)="deleteMed()">
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+
+      </ion-fab>
+    <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button (click)="setEditMedication()">
+          <ion-icon name="create"></ion-icon>
+        </ion-fab-button>
+      </ion-fab> -->
 </ion-content>
