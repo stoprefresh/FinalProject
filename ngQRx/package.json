@@ -1,8 +1,8 @@
 {
-  "name": "ionic-conference-app",
+  "name": "qrx-app",
   "version": "0.0.0",
-  "description": "Ionic Conference App",
-  "author": "Ionic Team <hi@ionicframework.com>",
+  "description": "QRx App",
+  "author": "Team Windy Day Dreamer",
   "license": "Apache-2.0",
   "scripts": {
     "ng": "ng",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionic-team/ionic-conference-app.git"
+    "url": ""
   },
   "private": true,
   "dependencies": {
@@ -32,6 +32,7 @@
     "@ionic-native/status-bar": "5.0.0-beta.15",
     "@ionic/angular": "^4.7.0",
     "@ionic/storage": "^2.1.3",
+    "cordova": "^9.0.0",
     "cordova-android": "8.0.0",
     "cordova-ios": "^5.0.1",
     "cordova-plugin-camera": "^4.1.0",
@@ -86,7 +87,9 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
       "cordova-plugin-statusbar": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-camera": {

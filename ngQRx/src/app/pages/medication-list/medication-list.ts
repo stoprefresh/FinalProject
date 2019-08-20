@@ -59,7 +59,7 @@ export class MedicationListPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.confData.getmedications().subscribe((medications: Medication[]) => {
+    this.medicationService.index().subscribe((medications: Medication[]) => {
       this.medications = medications;
     });
   }

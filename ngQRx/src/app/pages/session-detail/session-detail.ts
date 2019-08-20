@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { ConferenceData } from '../../providers/conference-data';
 import { ActivatedRoute } from '@angular/router';
-import { UserData } from '../../providers/user-data';
+import { UserData } from '../../services/user-data';
 
 @Component({
   selector: 'page-session-detail',
@@ -56,6 +56,6 @@ export class SessionDetailPage {
     });
   }
   ionViewDidEnter() {
-    this.defaultHref = `/app/tabs/schedule`;
+    this.defaultHref = `/login`;
   }
 }
