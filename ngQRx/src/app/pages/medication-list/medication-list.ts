@@ -17,10 +17,9 @@ export class MedicationListPage implements OnInit {
 
   // Fields
   medications: Medication[] = [];
-  selected: Medication = null;
-  editMedication: Medication = null;
   newMedication: Medication = new Medication();
   showInactive = false;
+  viewMedForm = false;
 
   // Constructors
   constructor(
@@ -58,53 +57,34 @@ export class MedicationListPage implements OnInit {
     );
   }
 
+  showMedForm() {
+    this.viewMedForm = true;
+  }
+
   ionViewDidEnter() {
     this.medicationService.index().subscribe((medications: Medication[]) => {
       this.medications = medications;
     });
   }
 
-  goTomedicationTwitter(medication: Medication) {
-    this.inAppBrowser.create(
-      `https://twitter.com/`,
-      '_blank'
+  addMed() {
+    this.medicationService.create(this.newMedication).subscribe(
+      good => {
+        console.log(good);
+        this.viewMedForm = false;
+        this.newMedication = new Medication();
+      },
+      bad => {
+        console.error(bad);
+      },
+      () => {
+        // this.newMedication = new Medication();
+        this.reload();
+      }
     );
   }
 
-  async openmedicationShare(medication: Medication) {
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Share ' + medication.medName,
-      buttons: [
-        {
-          text: 'Copy Link',
-          handler: () => {
-            console.log(
-              'Copy link clicked on https://twitter.com/'
-              // + medication.twitter
-            );
-            if (
-              (window as any)['cordova'] &&
-              (window as any)['cordova'].plugins.clipboard
-            ) {
-              (window as any)['cordova'].plugins.clipboard.copy(
-                'https://twitter.com/'
-                // + medication.twitter
-              );
-            }
-          }
-        },
-        {
-          text: 'Share via ...'
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        }
-      ]
-    });
 
-    await actionSheet.present();
-  }
 
   async openContact(medication: any) {
     const mode = 'ios'; // this.config.get('mode');
