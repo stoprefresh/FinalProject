@@ -1,42 +1,4 @@
 import { EmergencyContact } from './emergency-contact';
-<<<<<<< HEAD
-import { User } from './user';
-
-
-export class Patient {
-    //Fields
-    id: number;
-	contacts: EmergencyContact[];
-    user: User;
-    qrcode: String;
-	dnr: Boolean;
-	birthdate: Date;
-	sex: String;
-	height: number;
-    weight: number;
-    
-    //Constructor
-    constructor(id?: number,
-        contacts?: EmergencyContact[],
-        user?: User,
-        qrcode?: String,
-        dnr?: Boolean,
-        bithdate?: number,
-        sex?: String,
-        height?: number,
-        weight?: number
-        ){
-            this.id = id;
-            this.contacts = contacts;
-            this.user = user;
-            this.qrcode = qrcode;
-            this.dnr = dnr;
-            this.birthdate = this.birthdate;
-            this.sex = sex;
-            this.height = height;
-            this.weight = weight;
-        }
-=======
 import { Allergy } from './allergy';
 import { BloodType } from './blood-type';
 import { Diagnosis } from './diagnosis';
@@ -93,5 +55,4 @@ export class Patient {
       this.approvedProviders = approvedProviders;
       this.medList = medList;
     }
->>>>>>> 9c6c3c58caa1a91c348b55d37ef2544acbf436ef
 }
