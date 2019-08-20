@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
-import { MapPage } from './map';
-import { MapPageRoutingModule } from './map-routing.module';
+import { AllergyListPage } from './allergy-list';
+import { AllergyListPageRoutingModule } from './allergy-list-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
-    MapPageRoutingModule
+    AllergyListPageRoutingModule
   ],
   declarations: [
-    MapPage,
+    AllergyListPage,
   ]
 })
-export class MapModule { }
+export class AllergyListModule { }

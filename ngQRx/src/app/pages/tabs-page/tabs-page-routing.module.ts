@@ -1,3 +1,4 @@
+import { ContactsListPage } from './../contacts-list/contacts-list';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs-page';
@@ -23,6 +24,19 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'contacts',
+        children: [
+          {
+            path: '',
+            component: ContactsListPage,
+          },
+          {
+            path: 'session/:sessionId',
+            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
+          }
+        ]
+      },
+      {
         path: 'medications',
         children: [
           {
@@ -40,20 +54,20 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'map',
+        path: 'allergies',
         children: [
           {
             path: '',
-            loadChildren: () => import('../map/map.module').then(m => m.MapModule)
+            loadChildren: () => import('../allergy-list/allergy-list.module').then(m => m.AllergyListModule)
           }
         ]
       },
       {
-        path: 'about',
+        path: 'notes',
         children: [
           {
             path: '',
-            loadChildren: () => import('../about/about.module').then(m => m.AboutModule)
+            loadChildren: () => import('../note-list/note-list.module').then(m => m.NoteListModule)
           }
         ]
       },

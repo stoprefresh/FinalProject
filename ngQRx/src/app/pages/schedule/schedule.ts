@@ -4,7 +4,7 @@ import { AlertController, IonList, LoadingController, ModalController, ToastCont
 
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { ConferenceData } from '../../providers/conference-data';
-import { UserData } from '../../providers/user-data';
+import { UserData } from '../../services/user-data';
 
 @Component({
   selector: 'page-schedule',

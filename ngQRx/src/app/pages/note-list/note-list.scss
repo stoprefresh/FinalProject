@@ -1,4 +1,4 @@
-.about-header {
+.note-list-header {
   background-color: var(--ion-color-dark);
   padding: 16px;
   width: 100%;
@@ -6,19 +6,19 @@
   text-align: center;
 }
 
-.about-header img {
+.note-list-header img {
   max-height: 100%;
 }
 
-.about-info p {
+.note-list-info p {
   color: var(--ion-color-dark);
   text-align: left;
 }
 
-.about-info ion-icon {
+.note-list-info ion-icon {
   margin-inline-end: 32px;
 }
 
-.ios .about-info {
+.ios .note-list-info {
   text-align: center;
 }

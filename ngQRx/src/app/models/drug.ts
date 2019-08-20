@@ -14,7 +14,7 @@ export class Drug {
   imgUrl: string;
   referenceUrl: string;
 
-  construct(
+  constructor(
     id?: number,
     productid?: string,
     productNdc?: string,
