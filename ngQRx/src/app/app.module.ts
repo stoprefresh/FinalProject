@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { MedicationService } from './services/medication.service';
 import { AuthoService } from './services/autho.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,7 +25,8 @@ import { DatePipe } from '@angular/common';
     IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
-    })
+    }),
+    FormsModule
   ],
   declarations: [
     AppComponent

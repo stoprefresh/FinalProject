@@ -12,6 +12,7 @@ import { MedicationService } from '../../services/medication.service';
 export class MedicationDetailPage implements OnInit {
   // Fields
   medication: Medication = null;
+  editMedication: Medication = null;
 
   // Constructors
   constructor(
@@ -39,17 +40,42 @@ export class MedicationDetailPage implements OnInit {
         this.router.navigateByUrl('**');
       }
     );
-
-    // this.dataProvider.load().subscribe((data: any) => {
-    //   const medicationId = this.route.snapshot.paramMap.get('medicationId');
-    //   if (data && data.medications) {
-    //     for (const medication of data.medications) {
-    //       if (medication && medication.id === medicationId) {
-    //         this.medication = medication;
-    //         break;
-    //       }
-    //     }
-    //   }
-    // });
   }
+
+  setEditMedication() {
+    this.editMedication = Object.assign({}, this.medication);
+  }
+
+  saveEdit() {
+    console.log(this.editMedication);
+    this.medicationService.update(this.editMedication).subscribe(
+      good => {
+        console.log(good);
+        this.medication = this.editMedication;
+      },
+      bad => {
+        console.error(bad);
+      },
+      () => {
+        this.editMedication = null;
+      }
+    );
+  }
+
+  deleteMed() {
+    this.medicationService.destroy(this.medication.id).subscribe(
+      good => {
+        console.log('Delete successful');
+        console.log(good);
+        this.router.navigateByUrl('app/tabs/medications');
+      },
+      bad => {
+        console.error(bad);
+
+      },
+      () => {
+      }
+    );
+  }
+
 }

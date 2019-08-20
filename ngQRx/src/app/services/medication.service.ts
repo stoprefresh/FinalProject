@@ -33,7 +33,7 @@ export class MedicationService {
       })
     };
     if (this.auth.checkLogin()) {
-      return this.http.delete<any>(this.url, httpOptions);
+      return this.http.delete<any>(`${this.url}/${id}`, httpOptions);
     } else {
       this.router.navigateByUrl('/login');
     }
