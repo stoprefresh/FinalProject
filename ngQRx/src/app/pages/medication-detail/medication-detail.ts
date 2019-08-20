@@ -10,7 +10,6 @@ import { MedicationService } from '../../services/medication.service';
   styleUrls: ['./medication-detail.scss']
 })
 export class MedicationDetailPage implements OnInit {
-
   // Fields
   medication: Medication = null;
 
@@ -22,14 +21,8 @@ export class MedicationDetailPage implements OnInit {
     private medicationService: MedicationService
   ) {}
 
-
   // Methods
-  ngOnInit(): void {
-
-
-
-  }
-
+  ngOnInit(): void {}
 
   ionViewWillEnter() {
     const medicationId = this.route.snapshot.paramMap.get('medicationId');
@@ -58,6 +51,5 @@ export class MedicationDetailPage implements OnInit {
     //     }
     //   }
     // });
-
   }
 }
