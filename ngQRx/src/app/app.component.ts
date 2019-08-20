@@ -1,3 +1,4 @@
+import { AuthoService } from './services/autho.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
@@ -9,7 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { Storage } from '@ionic/storage';
 
-import { UserData } from './providers/user-data';
+import { UserData } from './services/user-data';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +21,8 @@ import { UserData } from './providers/user-data';
 export class AppComponent implements OnInit {
   appPages = [
     {
-      title: 'Schedule',
-      url: '/app/tabs/schedule',
+      title: 'Emergency Contacts',
+      url: '/app/tabs/contacts',
       icon: 'calendar'
     },
     {
@@ -30,13 +31,13 @@ export class AppComponent implements OnInit {
       icon: 'contacts'
     },
     {
-      title: 'Map',
-      url: '/app/tabs/map',
+      title: 'Allergies',
+      url: '/app/tabs/allergies',
       icon: 'map'
     },
     {
-      title: 'About',
-      url: '/app/tabs/about',
+      title: 'Notes',
+      url: '/app/tabs/notes',
       icon: 'information-circle'
     }
   ];
@@ -53,6 +54,7 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
+    private authService: AuthoService
   ) {
     this.initializeApp();
   }
@@ -112,9 +114,12 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
+    console.log('inappcomponentlogout)');
+    this.authService.logout();
     this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/schedule');
+      return this.router.navigateByUrl('/login');
     });
+
   }
 
   openTutorial() {

@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserData } from '../../providers/user-data';
+import { UserData } from '../../services/user-data';
 import { UserOptions } from '../../interfaces/user-options';
 import { AuthoService } from '../../services/autho.service';
 import { User } from '../../models/user';
@@ -35,8 +35,10 @@ export class LoginPage implements OnInit {
     this.auth.login(this.user.username, this.user.password).subscribe(
       next => {
         console.log(next);
+        this.userData.login(this.user.username);
+        this.userData.checkHasSeenTutorial();
         console.log('LoginComponent.login(): user logged in, routing to /patients/index/.');
-        this.router.navigateByUrl('/app');
+        this.router.navigateByUrl('/app/tabs/medications');
       },
       error => {
         console.error('LoginComponent.login(): error logging in.');

@@ -2,14 +2,14 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
 import { PopoverController } from '@ionic/angular';
 
-import { PopoverPage } from '../about-popover/about-popover';
+import { PopoverPage } from '../note-popover/note-popover';
 
 @Component({
-  selector: 'page-about',
-  templateUrl: 'about.html',
-  styleUrls: ['./about.scss'],
+  selector: 'page-note-list',
+  templateUrl: 'note-list.html',
+  styleUrls: ['./note-list.scss'],
 })
-export class AboutPage {
+export class NoteListPage {
   conferenceDate = '2047-05-17';
 
   constructor(public popoverCtrl: PopoverController) { }

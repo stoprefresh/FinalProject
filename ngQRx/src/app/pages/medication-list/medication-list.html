@@ -10,7 +10,7 @@
 <ion-content class="outer-content">
   <ion-list>
     <ion-grid fixed>
-      <ion-row class="ion-align-items-stretch">
+      <ion-row class="ion-align-items-stretch" *ngIf="medications">
         <ion-col size="12" size-md="6" *ngFor="let medication of medications">
           <ion-card class="medication-card">
             <ion-card-header>
