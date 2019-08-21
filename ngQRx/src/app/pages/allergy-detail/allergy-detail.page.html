@@ -1,9 +1,86 @@
-<ion-header>
+<ion-header *ngIf="allergy">
   <ion-toolbar>
-    <ion-title>allergyDetail</ion-title>
+    <ion-buttons slot="start">
+      <!-- TODO Correct reload on back -->
+      <ion-back-button defaultHref="/app/tabs/allergies"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{allergy.medName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding allergy-detail"  *ngIf="allergy">
+  <div class="ion-text-center">
+    <!-- <img [src]="allergy.drug.imgUrl" [alt]="allergy.drug.proprietaryName"> -->
+    <br>
+    <ion-card-subtitle>Allergen - {{allergy.allergen}}</ion-card-subtitle>
+    <ion-list></ion-list>
+    <br>
+    <ion-card-subtitle>Reaction - {{allergy.reaction}}</ion-card-subtitle>
+    <ion-list></ion-list>
+    <br>
+    <ion-card-subtitle>Active - {{allergy.active}}</ion-card-subtitle>
+    <ion-list></ion-list>
+  </div>
+  <p>{{allergy.directions}}</p>
 
+
+  <div *ngIf="editAllergy">
+      <form>
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+          <ion-item>
+            <ion-label position="stacked">Allergy Name <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input  required type="text" name='allergen' placeholder='eg. Benadryl' [(ngModel)]="editAllergy.allergen"></ion-input>
+          </ion-item>
+          <!-- TODO: add drug to allergy
+            
+            <!-- <ion-item>
+              <ion-label position="stacked">Directions</ion-label>
+              <ion-input  required type="text" name='directions' placeholder='eg. Take one tablet by mouth daily' [(ngModel)]="editAllergy.directions"></ion-input>
+              <ion-textarea></ion-textarea>
+            </ion-item> -->
+            
+            <ion-item>
+              <ion-label position="stacked">Reaction <ion-text color="danger">*</ion-text></ion-label>
+              <ion-input  required type="text" name='reaction' placeholder='eg. Hives' [(ngModel)]="editAllergy.reaction"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Allergy Active</ion-label>
+              <ion-checkbox color="dark" checked slot="start" name='active' [(ngModel)]="editAllergy.active"></ion-checkbox>
+            <ion-textarea></ion-textarea>
+          </ion-item>
+          <!-- TODO: make these models! -->
+          <!-- <ion-item>
+            <ion-label position="stacked">Associated Diagnosis</ion-label>
+            <ion-textarea></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Prescriber</ion-label>
+            <ion-textarea></ion-textarea>
+          </ion-item> -->
+        </ion-list>
+
+        <div class="ion-padding">
+          <ion-button (click)='saveEdit()' expand="block" type="submit" class="ion-no-margin">Save Allergy</ion-button>
+        </div>
+      </form>
+    </div>
+
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="create"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side='start'>
+            <ion-fab-button (click)="setEditAllergy()">
+              <ion-icon name="sync"></ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+        <ion-fab-list side='end'>
+            <ion-fab-button (click)="deleteAllergy()">
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+
+      </ion-fab>
+    
 </ion-content>

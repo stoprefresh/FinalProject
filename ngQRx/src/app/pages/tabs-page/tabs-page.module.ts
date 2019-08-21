@@ -1,3 +1,4 @@
+import { AllergyDetailModule } from './../allergy-detail/allergy-detail.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -24,7 +25,8 @@ import { ContactsListModule } from './../contacts-list/contacts-list.module';
     MedicationDetailModule,
     MedicationListModule,
     TabsPageRoutingModule,
-    ContactsListModule
+    ContactsListModule,
+    AllergyDetailModule
   ],
   declarations: [
     TabsPage,
