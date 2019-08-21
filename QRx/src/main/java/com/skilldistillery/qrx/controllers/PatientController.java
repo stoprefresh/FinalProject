@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.qrx.entities.Patient;
+import com.skilldistillery.qrx.entities.User;
 import com.skilldistillery.qrx.services.PatientService;
+import com.skilldistillery.qrx.services.UserService;
 
 @RestController
 @RequestMapping({"api/patients/", "api/patients"})
@@ -25,6 +27,9 @@ public class PatientController {
 	
 	@Autowired
 	private PatientService svc;
+	
+	@Autowired
+	private UserService userSvc;
 	
 //	@GetMapping() 
 //	public List<Patient> getAllPatients(){
@@ -36,8 +41,11 @@ public class PatientController {
 		return svc.findPatientByUsername(prince.getName());	}
 
 	@GetMapping("username/{username}")
-	public Patient getPatientByUsername(@PathVariable String username) {
+	public Patient getPatientByUsername(@PathVariable String username, Principal principal) {
+		User user = userSvc.findByUsername(principal.getName());
+		if (user.getRole() == "ems" ) {
 		return svc.findPatientByUsername(username);
+		} return null;
 	}
 	
 	@GetMapping(path="index/")
@@ -45,9 +53,11 @@ public class PatientController {
 	    return svc.index(principal.getName());
 	}
 	
-	@PostMapping("{userId}") 
-	public Patient addPatient(@PathVariable int userId, @RequestBody Patient pt) {
-		return svc.create(userId, pt);
+	@PostMapping("") 
+	public Patient addPatient(@RequestBody Patient pt, Principal principal) {
+		User user = userSvc.findByUsername(principal.getName());
+		System.out.println(pt);
+		return svc.create(user.getId(), pt);
 	}
 	
 	@PutMapping("{pid}")

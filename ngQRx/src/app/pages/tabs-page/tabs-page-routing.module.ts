@@ -11,19 +11,6 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'schedule',
-        children: [
-          {
-            path: '',
-            component: SchedulePage,
-          },
-          {
-            path: 'session/:sessionId',
-            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
-          }
-        ]
-      },
-      {
         path: 'contacts',
         children: [
           {
