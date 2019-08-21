@@ -26,6 +26,7 @@ export class LoginPage implements OnInit {
   }
 
   login() {
+    console.log(this.user);
     this.auth.login(this.user.username, this.user.password).subscribe(
       next => {
         // console.log(next);
@@ -37,6 +38,7 @@ export class LoginPage implements OnInit {
         this.router.navigateByUrl('/app/tabs/medications');
       },
       error => {
+        console.error(error);
         console.error('LoginComponent.login(): error logging in.');
       }
     );

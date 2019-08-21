@@ -84,13 +84,6 @@ export class UserService {
   // }
 
   create(user: User) {
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${this.auth.generateBasicAuthCredentials(user.username, user.password)}`,
-          'X-Requested-With': 'XMLHttpRequest'
-        })
-      };
       return this.http.post<User>(environment.baseUrl + 'register', user).pipe(
         catchError((err: any) => {
           console.log(err);

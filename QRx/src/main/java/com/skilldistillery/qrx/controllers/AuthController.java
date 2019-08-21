@@ -15,7 +15,7 @@ import com.skilldistillery.qrx.entities.User;
 import com.skilldistillery.qrx.services.AuthService;
 
 @RestController
-@CrossOrigin({ "*", "http://localhost:4205" })
+@CrossOrigin({ "**", "*" })
 public class AuthController {
 	
 	@Autowired
