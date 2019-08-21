@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -9,7 +10,8 @@ import { AllergyListPageRoutingModule } from './allergy-list-routing.module';
   imports: [
     CommonModule,
     IonicModule,
-    AllergyListPageRoutingModule
+    AllergyListPageRoutingModule,
+    FormsModule
   ],
   declarations: [
     AllergyListPage,
