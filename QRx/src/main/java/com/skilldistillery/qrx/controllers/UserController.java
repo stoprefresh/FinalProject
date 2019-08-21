@@ -31,8 +31,8 @@ import com.skilldistillery.qrx.services.UserService;
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 @RestController
+@RequestMapping({"api/users/", "api/users"})
 @CrossOrigin({ "*", "http://localhost:4205" })
-@RequestMapping("api/users/")
 public class UserController {
 
 	@Autowired
@@ -70,7 +70,7 @@ public class UserController {
 		return userSvc.findUserById(user.getId());
 	}
 
-	@PostMapping()
+	@PostMapping("new")
 	public User addNewUser(@RequestBody User newUser, HttpServletResponse resp, HttpServletRequest req) {
 		newUser = userSvc.addUser(newUser);
 		resp.setStatus(201);

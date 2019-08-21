@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Provider } from '../models/provider';
+import { User } from '../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthoService } from './autho.service';
 import { Router } from '@angular/router';
@@ -11,11 +11,11 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class ProviderService {
+export class UserService {
   // private baseUrl = 'http://localhost:8090/';
-  private url = environment.baseUrl + 'api/providers/';
+  private url = environment.baseUrl + 'api/users';
 
-  editProvider = null;
+  editUser = null;
 
   constructor(
     private datePipe: DatePipe,
@@ -39,7 +39,7 @@ export class ProviderService {
     }
   }
 
-  show(id: any): Observable<Provider> {
+  index(): Observable<User> {
     const credentials = this.auth.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -48,10 +48,10 @@ export class ProviderService {
       })
     };
     if (this.auth.checkLogin()) {
-      return this.http.get<Provider>(`${this.url}/${id}`, httpOptions).pipe(
+      return this.http.get<User>(`${this.url}/`, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
-          return throwError('ProviderService.index(): error retrieving');
+          return throwError('UserService.index(): error retrieving');
         })
       );
     } else {
@@ -59,31 +59,48 @@ export class ProviderService {
     }
   }
 
-  index() {
-    const credentials = this.auth.getCredentials();
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: `Basic ${credentials}`,
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    };
-    if (this.auth.checkLogin()) {
-      return this.http
-        .get<Provider[]>(this.url + '?sorted=true', httpOptions)
-        .pipe(
-          catchError((err: any) => {
-            console.log(err);
-            return throwError(
-              'ProviderService.index(): error retrieving list'
-            );
-          })
-        );
-    } else {
-      this.router.navigateByUrl('/login');
-    }
+  // index() {
+  //   const credentials = this.auth.getCredentials();
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       Authorization: `Basic ${credentials}`,
+  //       'X-Requested-With': 'XMLHttpRequest'
+  //     })
+  //   };
+  //   if (this.auth.checkLogin()) {
+  //     return this.http
+  //       .get<User[]>(this.url + '?sorted=true', httpOptions)
+  //       .pipe(
+  //         catchError((err: any) => {
+  //           console.log(err);
+  //           return throwError(
+  //             'UserService.index(): error retrieving list'
+  //           );
+  //         })
+  //       );
+  //   } else {
+  //     this.router.navigateByUrl('/login');
+  //   }
+  // }
+
+  create(user: User) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Basic ${this.auth.generateBasicAuthCredentials(user.username, user.password)}`,
+          'X-Requested-With': 'XMLHttpRequest'
+        })
+      };
+      return this.http.post<User>(environment.baseUrl + 'register', user).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('UserService.create(): error creating user');
+        })
+      );
   }
 
-  create(provider: Provider) {
+  update(user: User) {
+    console.log(user);
     const credentials = this.auth.getCredentials();
     if (this.auth.checkLogin()) {
       const httpOptions = {
@@ -93,34 +110,7 @@ export class ProviderService {
           'X-Requested-With': 'XMLHttpRequest'
         })
       };
-      return this.http.post<Provider>(this.url, provider, httpOptions).pipe(
-        catchError((err: any) => {
-          console.log(err);
-          return throwError(
-            'ProviderService.create(): error creating provider'
-          );
-        })
-      );
-    } else {
-      this.router.navigateByUrl('/login');
-    }
-  }
-
-  update(provider: Provider) {
-    const credentials = this.auth.getCredentials();
-    if (this.auth.checkLogin()) {
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${credentials}`,
-          'X-Requested-With': 'XMLHttpRequest'
-        })
-      };
-      return this.http.put<any>(
-        this.url + '/' + provider.id,
-        provider,
-        httpOptions
-      );
+      return this.http.put<any>(this.url + '/' + user.id, user, httpOptions);
     } else {
       this.router.navigateByUrl('/login');
     }

@@ -1,10 +1,10 @@
+import { UserService } from './../../services/user.service';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { UserData } from '../../services/user-data';
-
-import { UserOptions } from '../../interfaces/user-options';
+import { User } from '../../models/user';
+import { AuthoService } from '../../services/autho.service';
 
 
 
@@ -14,20 +14,43 @@ import { UserOptions } from '../../interfaces/user-options';
   styleUrls: ['./signup.scss'],
 })
 export class SignupPage {
-  signup: UserOptions = { username: '', password: '' };
+  user: User = new User();
   submitted = false;
 
   constructor(
     public router: Router,
-    public userData: UserData
+    public userData: UserData,
+    private auth: AuthoService,
+    private userSvc: UserService
   ) {}
 
-  onSignup(form: NgForm) {
-    this.submitted = true;
-
-    if (form.valid) {
-      this.userData.signup(this.signup.username);
-      this.router.navigateByUrl('/app/tabs/schedule');
-    }
+  addUser() {
+    this.userSvc.create(this.user).subscribe(
+      good => {
+        console.log(good);
+        console.log('SignupComponent.addUser(): IN GOOD.');
+        this.submitted = true;
+        this.auth.login(this.user.username, this.user.password).subscribe(
+          next => {
+            this.userData.checkHasSeenTutorial();
+            this.userData.login(this.user.username);
+            console.log(
+              'SignupComponent.addUser(): user logged in, routing to /account'
+            );
+            this.router.navigateByUrl('/account');
+          },
+          error => {
+            console.error('SignupComponent.addUser(): error creating user.');
+          }
+        );
+      },
+      bad => {
+        console.error('SignupComponent.addUser(): error creating user.');
+        console.error(bad);
+      },
+      () => {
+      }
+    );
   }
+
 }

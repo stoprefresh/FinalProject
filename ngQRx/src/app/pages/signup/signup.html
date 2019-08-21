@@ -17,7 +17,7 @@
     <ion-list lines="none">
       <ion-item>
         <ion-label position="stacked" color="primary">Username</ion-label>
-        <ion-input [(ngModel)]="signup.username" name="username" type="text" #username="ngModel" required>
+        <ion-input [(ngModel)]="user.username" name="username" type="text" #username="ngModel" required>
         </ion-input>
       </ion-item>
       <ion-text color="danger">
@@ -28,7 +28,7 @@
 
       <ion-item>
         <ion-label position="stacked" color="primary">Password</ion-label>
-        <ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" required>
+        <ion-input [(ngModel)]="user.password" name="password" type="password" #password="ngModel" required>
         </ion-input>
       </ion-item>
       <ion-text color="danger">
@@ -36,10 +36,32 @@
           Password is required
         </p>
       </ion-text>
+      <ion-item>
+          <ion-label position="stacked">First Name <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required type="text" name="firstName" [(ngModel)]="user.firstName"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Last Name <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required type="text" name="lastName" [(ngModel)]="user.lastName"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Address</ion-label>
+          <ion-input type="text" name="street" [(ngModel)]="user.street"></ion-input>
+          <ion-input type="text" name="city" [(ngModel)]="user.city"></ion-input>
+          <ion-input type="text" name="state" [(ngModel)]="user.state"></ion-input>
+          <ion-input type="text" name="zip" [(ngModel)]="user.zip"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Phone <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required type="text" name="phone" [(ngModel)]="user.phone"></ion-input>
+        </ion-item>
     </ion-list>
 
     <div class="ion-padding">
-      <ion-button (click)="onSignup(signupForm)" type="submit" expand="block">Create</ion-button>
+      <ion-button (click)="addUser()" type="submit" expand="block">Create</ion-button>
     </div>
   </form>
 

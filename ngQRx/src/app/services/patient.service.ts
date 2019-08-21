@@ -13,7 +13,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class PatientService {
   // private baseUrl = 'http://localhost:8090/';
-  private url = environment.baseUrl + 'api/patients/patients';
+  private url = environment.baseUrl + 'api/patients/';
 
   editPatient = null;
 
@@ -23,7 +23,7 @@ export class PatientService {
     private auth: AuthoService,
     private router: Router
   ) {}
-  estroy(id: string | number) {
+  destroy(id: string | number) {
     console.log(id);
     const credentials = this.auth.getCredentials();
     const httpOptions = {
