@@ -68,6 +68,7 @@ export class NoteDetailPage implements OnInit {
       good => {
         console.log(good);
         this.note = this.editNote;
+        window.location.reload();
       },
       bad => {
         console.error(bad);
