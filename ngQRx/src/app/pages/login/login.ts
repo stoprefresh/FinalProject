@@ -1,8 +1,6 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserData } from '../../services/user-data';
-import { UserOptions } from '../../interfaces/user-options';
 import { AuthoService } from '../../services/autho.service';
 import { User } from '../../models/user';
 
@@ -21,11 +19,6 @@ export class LoginPage implements OnInit {
     private userData: UserData
   ) {}
 
-  // Use the authService.login(username, password)
-  // method in your login(form) behavior. On success,
-  // use the router.navigateByUrl method to redirect to
-  // your patient dashboard component.
-
   ngOnInit() {}
 
   onSignup() {
@@ -33,6 +26,7 @@ export class LoginPage implements OnInit {
   }
 
   login() {
+    console.log(this.user);
     this.auth.login(this.user.username, this.user.password).subscribe(
       next => {
         // console.log(next);
@@ -44,6 +38,7 @@ export class LoginPage implements OnInit {
         this.router.navigateByUrl('/app/tabs/medications');
       },
       error => {
+        console.error(error);
         console.error('LoginComponent.login(): error logging in.');
       }
     );

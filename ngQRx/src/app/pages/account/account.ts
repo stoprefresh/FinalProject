@@ -1,5 +1,7 @@
-import { AuthoService } from './../../services/autho.service';
 import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
+import { UserService } from './../../services/user.service';
+import { User } from './../../models/user';
+import { AuthoService } from './../../services/autho.service';
 import { Router } from '@angular/router';
 
 import { AlertController } from '@ionic/angular';
@@ -13,55 +15,53 @@ import { UserData } from '../../services/user-data';
   styleUrls: ['./account.scss'],
 })
 export class AccountPage implements AfterViewInit {
-  username: string;
+  user: User;
 
   constructor(
     public alertCtrl: AlertController,
     public router: Router,
     public userData: UserData,
-    private authSvc: AuthoService
+    private userSvc: UserService,
+    private authSvc: AuthoService,
   ) { }
 
   ngAfterViewInit() {
-    this.getUsername();
+    this.getUser();
   }
 
   updatePicture() {
     console.log('Clicked to update picture');
   }
 
-  // Present an alert with the current username populated
-  // clicking OK will update the username and display it
-  // clicking Cancel will close the alert and do nothing
-  async changeUsername() {
-    const alert = await this.alertCtrl.create({
-      header: 'Change Username',
-      buttons: [
-        'Cancel',
-        {
-          text: 'Ok',
-          handler: (data: any) => {
-            this.userData.setUsername(data.username);
-            this.getUsername();
-          }
-        }
-      ],
-      inputs: [
-        {
-          type: 'text',
-          name: 'username',
-          value: this.username,
-          placeholder: 'username'
-        }
-      ]
-    });
-    await alert.present();
+  updateUser() {
+    console.log(this.user);
+    this.userSvc.update(this.user).subscribe(
+      good => {
+        this.user = good;
+      },
+      bad => {
+        console.error(bad);
+      },
+      () => {
+      }
+    );
   }
-
-  getUsername() {
-    this.userData.getUsername().then((username) => {
-      this.username = username;
-    });
+  getUser() {
+    this.userSvc.index().subscribe(
+      good => {
+        if (good) {
+          this.user = good;
+        } else {
+          // TODO fix route for error
+          this.router.navigateByUrl('**');
+        }
+      },
+      bad => {
+        console.error(bad);
+      },
+      // TODO possible implementation for finally
+      () => {}
+    );
   }
 
   changePassword() {

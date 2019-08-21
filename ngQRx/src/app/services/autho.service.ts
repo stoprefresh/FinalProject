@@ -21,9 +21,10 @@ export class AuthoService {
       headers: new HttpHeaders({
         Authorization: `Basic ${credentials}`,
         'X-Requested-With': 'XMLHttpRequest',
-        'Access-Control-Allow-Origin': '*'
+        // 'Access-Control-Allow-Origin': '*'
       })
     };
+    console.log(credentials);
     // create request to authenticate credentials
     return this.http
       .get(this.baseUrl + 'authenticate', httpOptions)
