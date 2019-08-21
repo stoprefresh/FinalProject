@@ -12,6 +12,8 @@ import { SessionDetailModule } from '../session-detail/session-detail.module';
 import { MedicationDetailModule } from '../medication-detail/medication-detail.module';
 import { MedicationListModule } from '../medication-list/medication-list.module';
 import { ContactsListModule } from './../contacts-list/contacts-list.module';
+import { NoteDetailPage } from '../note-detail/note-detail.page';
+import { NoteDetailPageModule } from '../note-detail/note-detail.module';
 
 @NgModule({
   imports: [
@@ -24,7 +26,8 @@ import { ContactsListModule } from './../contacts-list/contacts-list.module';
     MedicationDetailModule,
     MedicationListModule,
     TabsPageRoutingModule,
-    ContactsListModule
+    ContactsListModule,
+    NoteDetailPageModule
   ],
   declarations: [
     TabsPage,

@@ -1,0 +1,69 @@
+<ion-header *ngIf="note">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <!-- TODO Correct reload on back -->
+        <ion-back-button defaultHref="/app/tabs/notes"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Created on {{note.createDate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding note-detail"  *ngIf="note">
+    <div class="ion-text-center">
+      <br>
+      <ion-card-subtitle>Note: {{note.textContent}}</ion-card-subtitle>
+      <br>
+      <ion-card-subtitle>Associated Medication: {{note.medication.medName}}</ion-card-subtitle>
+      <br>
+      <ion-card-subtitle>Date Updated - {{note.updateDate}}</ion-card-subtitle>
+      <ion-list></ion-list>
+    </div>
+
+    <div *ngIf="editNote">
+        <form>
+          <ion-list lines="full" class="ion-no-margin ion-no-padding">
+            <ion-item>
+              <ion-label position="stacked">Note Text <ion-text color="danger">*</ion-text></ion-label>
+              <!-- <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input> -->
+              <ion-input  required type="text" name='textContent' placeholder='Sample <ion-text color="danger">*</ion-text>' [(ngModel)]="editNote.textContent"></ion-input>
+            </ion-item>
+
+            <!-- TODO:  NOT PERSISTING EDIT -->
+            <ion-item>
+              <ion-label position="stacked">Associated Medication</ion-label>
+              <ion-select placeholder="Select One" [(ngModel)]="editNote.medication" name='medication'>
+                  <ion-select-option  *ngFor="let medication of meds" [value]="medication">{{medication.medName}}</ion-select-option>
+                </ion-select>
+              <ion-textarea></ion-textarea>
+            </ion-item>
+
+          </ion-list>
+
+          <div class="ion-padding">
+            <ion-button (click)='saveEdit()' expand="block" type="submit" class="ion-no-margin">Save Note</ion-button>
+          </div>
+        </form>
+      </div>
+
+      <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+          <ion-fab-button>
+            <ion-icon name="create"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-list side='start'>
+              <ion-fab-button (click)="setEditNote()">
+                <ion-icon name="sync"></ion-icon>
+              </ion-fab-button>
+          </ion-fab-list>
+          <ion-fab-list side='end'>
+              <ion-fab-button (click)="deleteMed()">
+                <ion-icon name="close-circle"></ion-icon>
+              </ion-fab-button>
+          </ion-fab-list>
+
+        </ion-fab>
+      <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+          <ion-fab-button (click)="setEditNote()">
+            <ion-icon name="create"></ion-icon>
+          </ion-fab-button>
+        </ion-fab> -->
+  </ion-content>

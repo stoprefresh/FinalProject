@@ -33,7 +33,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
     canLoad: [CheckTutorial]
   },
-  { path: 'allergy-detail', loadChildren: './pages/allergy-detail/allergy-detail.module#AllergyDetailPageModule' }
+  { path: 'allergy-detail', loadChildren: './pages/allergy-detail/allergy-detail.module#AllergyDetailPageModule' },
+  { path: 'note-detail', loadChildren: './pages/note-detail/note-detail.module#NoteDetailPageModule' }
 ];
 
 @NgModule({

@@ -1,50 +1,95 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Notes</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="presentPopover($event)">
-        <ion-icon slot="icon-only" name="more"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Notes</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content>
-  <p>Notes works</p>
-</ion-content>
+  <ion-content class="outer-content">
+    <ion-list *ngIf="!viewNoteForm">
+      <ion-grid fixed>
+        <ion-row class="ion-align-items-stretch" *ngIf="notes">
+          <ion-col size="12" size-md="6" *ngFor="let note of notes">
+            <ion-card class="note-card">
+              <ion-card-header>
+                <ion-item
+                  detail="false"
+                  lines="none"
+                  routerLink="/app/tabs/notes/note-details/{{
+                    note.id
+                  }}"
+                >
+                  <!-- TODO fix drug images url, add default img -->
+                  <ion-avatar slot="start">
+                    <!-- <img [src]="medication.drug.imgUrl" alt="Medication profile pic"> -->
+                    <ion-icon name="remove-circle"></ion-icon>
+                  </ion-avatar>
+                  <h4>{{ note.textContent }}</h4>
+                </ion-item>
+              </ion-card-header>
 
-<!-- <div class="notes-header">
-  <img src="assets/img/ionic-logo-white.svg" alt="ionic logo">
-</div>
-<div class="notes-info">
-  <h4 class="ion-padding-start">Ionic Conference</h4>
+              <ion-card-content>
+                <ion-list>
 
-  <ion-list lines="none">
-    <ion-item>
-      <ion-icon name="calendar" slot="start"></ion-icon>
-      <ion-label position="stacked">Date</ion-label>
-      <ion-datetime displayFormat="MMM DD, YYYY" max="2056" [(ngModel)]="conferenceDate"></ion-datetime>
-    </ion-item>
+                  <ion-item
+                    routerLink="/app/tabs/notes/note-details/{{
+                      note.id
+                    }}"
+                  >
+                    <h3>Date Created: {{ note.createDate }}</h3>
+                    <h3>Date Updated: {{ note.updateDate }}</h3>
+                  </ion-item>
+                </ion-list>
+              </ion-card-content>
 
-    <ion-item>
-      <ion-icon name="pin" slot="start"></ion-icon>
-      <ion-label position="stacked">Location</ion-label>
-      <ion-select>
-        <ion-select-option value="madison" selected>Madison, WI</ion-select-option>
-        <ion-select-option value="austin">Austin, TX</ion-select-option>
-        <ion-select-option value="chicago">Chicago, IL</ion-select-option>
-        <ion-select-option value="seattle">Seattle, WA</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
 
-  <p class="ion-padding-start ion-padding-end">
-    The Ionic Conference is a one-day conference featuring talks from the Ionic team. It is focused on Ionic applications being
-    built with Ionic 2. This includes migrating apps from Ionic 1 to Ionic 2, Angular concepts, Webpack, Sass, and many
-    other technologies used in Ionic 2. Tickets are completely sold out, and we’re expecting more than 1000 developers
-    – making this the largest Ionic conference ever!
-  </p>
-</div> -->
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <div *ngIf="viewNoteForm">
+    <form>
+      <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item>
+          <ion-label position="stacked">Note Text <ion-text color="danger">*</ion-text></ion-label>
+          <!-- <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input> -->
+          <ion-input  required type="text" name='textContent' placeholder='eg. Feeling dizzy...' [(ngModel)]="newNote.textContent"></ion-input>
+        </ion-item>
+
+          <!-- <ion-item>
+            <ion-label position="stacked">Date Created</ion-label>
+            <ion-input  value="1980-02-19" name='createDate' [(ngModel)]="newNote.createDate"></ion-input>
+            <ion-textarea></ion-textarea>
+          </ion-item> -->
+
+          <ion-item>
+            <ion-label position="stacked">Date Updated</ion-label>
+            <ion-datetime value="1980-02-19" name='updateDate' [(ngModel)]="newNote.updateDate"></ion-datetime>
+          </ion-item>
+
+        <ion-item>
+            <ion-label>Associated Medication</ion-label>
+            <ion-select placeholder="Select One" [(ngModel)]="newNote.medication" name='medication'>
+              <ion-select-option  *ngFor="let med of meds" [value]="med">{{med.medName}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+      </ion-list>
+
+      <div class="ion-padding">
+        <ion-button (click)='addNote()' expand="block" type="submit" class="ion-no-margin">Save</ion-button>
+        <br>
+        <ion-button (click)='this.viewNoteForm = false' expand="block" type="submit" class="ion-no-margin">Cancel</ion-button>
+      </div>
+    </form>
+  </div>
+    <!-- fab placed to the (vertical) center and end -->
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="showNoteForm()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
