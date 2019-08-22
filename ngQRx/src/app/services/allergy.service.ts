@@ -17,7 +17,7 @@ export class AllergyService {
 
   editAllerby = null;
 
-  //Constructor
+  // Constructor
   constructor(
     private datePipe: DatePipe,
     private http: HttpClient,

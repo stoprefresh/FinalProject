@@ -86,7 +86,8 @@ public class NoteController {
 		Patient patient = patientSvc.findPatientByUsername(prince.getName());
 		PersonalNote managedNote = svc.getByPatient_IdAndNote_Id(patient.getId(), nid);
 		managedNote.setTextContent(note.getTextContent());
-		svc.update(managedNote);
-		return svc.getByPatient_IdAndNote_Id(patient.getId(), nid);
+		managedNote.setMedication(note.getMedication());
+		return svc.update(managedNote);
+//		return svc.getByPatient_IdAndNote_Id(patient.getId(), nid); // this is requerying DB when don't need to
 	}
 }

@@ -1,20 +1,22 @@
 import { AuthoService } from './autho.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.prod';
+
 import { DatePipe } from '@angular/common';
 
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
-import { Medication } from '../models/medication';
 import { Note } from '../models/note';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable(
+  // {
+  //   providedIn: 'root'
+  // }
+)
 export class NoteService {
-private url = environment.baseUrl + 'api/patients/notes';
+private url = environment.baseUrl + 'api/patients/notes/';
 editNote = null;
 
   constructor(
@@ -34,7 +36,7 @@ editNote = null;
       })
     };
     if (this.auth.checkLogin()) {
-      return this.http.get<Note>(`${this.url}/${id}`, httpOptions).pipe(
+      return this.http.get<Note>(`${this.url}${id}`, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('NoteService.show(): error retrieving');
@@ -55,7 +57,7 @@ editNote = null;
       })
     };
     if (this.auth.checkLogin()) {
-      return this.http.get<Note[]>(this.url + '?sorted=true', httpOptions).pipe(
+      return this.http.get<Note[]>(this.url, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('NoteService.index(): error retrieving list');
@@ -76,7 +78,7 @@ editNote = null;
       })
     };
     if (this.auth.checkLogin()) {
-      return this.http.delete<Note>(`${this.url}/${id}`, httpOptions);
+      return this.http.delete<Note>(`${this.url}${id}`, httpOptions);
     } else {
       this.router.navigateByUrl('/login');
     }
@@ -113,7 +115,7 @@ editNote = null;
           'X-Requested-With': 'XMLHttpRequest'
         })
       };
-      return this.http.put<Note>(this.url + '/' + note.id, note, httpOptions);
+      return this.http.put<any>(this.url + note.id, note, httpOptions);
     } else {
       this.router.navigateByUrl('/login');
     }

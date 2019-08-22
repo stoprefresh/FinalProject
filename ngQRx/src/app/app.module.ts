@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { DatePipe } from '@angular/common';
+import { NoteService } from './services/note.service';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { DatePipe } from '@angular/common';
     StatusBar,
     AuthoService,
     MedicationService,
-    DatePipe
+    DatePipe,
+    NoteService
   ],
   bootstrap: [AppComponent]
 })
