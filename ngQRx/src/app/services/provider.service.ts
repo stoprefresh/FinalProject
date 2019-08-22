@@ -69,7 +69,7 @@ export class ProviderService {
     };
     if (this.auth.checkLogin()) {
       return this.http
-        .get<Provider[]>(this.url + '?sorted=true', httpOptions)
+        .get<Provider[]>(this.url, httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log(err);

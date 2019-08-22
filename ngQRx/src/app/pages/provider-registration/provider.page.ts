@@ -10,7 +10,6 @@ import { Provider } from '../../models/provider';
 })
 export class ProviderPage implements OnInit {
   provider = new Provider();
-  submitted = false;
 
   constructor(private providerSvc: ProviderService,
     private router: Router) { }
@@ -21,9 +20,6 @@ export class ProviderPage implements OnInit {
   addProvider() {
     this.providerSvc.create(this.provider).subscribe(
       good => {
-        console.log(good);
-        console.log('ProviderRegister.addProvider(): IN GOOD.');
-        this.submitted = true;
         this.router.navigateByUrl('/account');
       },
       bad => {

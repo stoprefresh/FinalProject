@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SchedulePage } from '../schedule/schedule';
 import { ContactsListPage } from './../contacts-list/contacts-list';
 import { TabsPage } from './tabs-page';
 
@@ -16,10 +15,6 @@ const routes: Routes = [
           {
             path: '',
             component: ContactsListPage,
-          },
-          {
-            path: 'session/:sessionId',
-            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
           }
         ]
       },

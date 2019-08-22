@@ -26,7 +26,6 @@ export class AllergyService {
   ) {}
 
     destroy(id: string | number) {
-      console.log(id);
       const credentials = this.auth.getCredentials();
       const httpOptions = {
         headers: new HttpHeaders({

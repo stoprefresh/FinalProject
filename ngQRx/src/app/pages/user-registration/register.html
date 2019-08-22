@@ -9,9 +9,8 @@
 
 <ion-content>
   <!-- <div class="register-logo">
-    <img src="assets/img/appicon.svg" alt="Ionic Logo">
+    <img src="assets/img/appicon.svg" alt="QRx Logo">
   </div> -->
-
   <form #registerForm="ngForm" novalidate>
     <ion-list lines="none">
       <ion-item>
@@ -25,6 +24,11 @@
         >
         </ion-input>
       </ion-item>
+      <!-- <ion-text color="danger">
+        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
+          Username is required
+        </p>
+      </ion-text> -->
 
       <ion-item>
         <ion-label position="stacked" color="primary">Password</ion-label>
@@ -37,6 +41,11 @@
         >
         </ion-input>
       </ion-item>
+      <!--  <ion-text color="danger">
+        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+          Password is required
+        </p>
+      </ion-text> -->
       <ion-item>
         <ion-label position="stacked"
           >First Name <ion-text color="danger">*</ion-text></ion-label

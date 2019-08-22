@@ -10,7 +10,7 @@
 <ion-content>
 
   <!-- <div class="register-logo">
-    <img src="assets/img/appicon.svg" alt="Ionic Logo">
+    <img src="assets/img/appicon.svg" alt="QRx Logo">
   </div> -->
 
   <form #registerForm="ngForm" name="patient" novalidate>
@@ -20,6 +20,13 @@
         <ion-input [(ngModel)]="patient.birthdate" name="birthdate" type="date" required>
         </ion-input>
       </ion-item>
+      <!-- <ion-item>
+          <ion-label>Sex</ion-label>
+          <ion-select name="sex" >
+            <ion-select-option value="male" [(ngModel)]="patient.sex" >Male</ion-select-option>
+            <ion-select-option value="female" [(ngModel)]="patient.sex" >Female</ion-select-option>
+          </ion-select>
+        </ion-item> -->
     </ion-list>
 
     <div class="ion-padding">

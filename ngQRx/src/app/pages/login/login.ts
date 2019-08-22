@@ -26,13 +26,10 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    console.log(this.user);
+    // console.log(this.user);
     this.auth.login(this.user.username, this.user.password).subscribe(
       next => {
         this.userData.login(this.user.username);
-        console.log(
-          'LoginComponent.login(): user logged in, routing to /app/tabs/medications.'
-        );
         this.router.navigateByUrl('/app/tabs/medications');
       },
       error => {

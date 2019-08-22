@@ -23,7 +23,6 @@ export class MedicationListPage implements OnInit {
   // Constructors
   constructor(
     public actionSheetCtrl: ActionSheetController,
-    public confData: ConferenceData,
     public inAppBrowser: InAppBrowser,
     public router: Router,
     private medicationService: MedicationService,
@@ -69,7 +68,7 @@ export class MedicationListPage implements OnInit {
   addMed() {
     this.medicationService.create(this.newMedication).subscribe(
       good => {
-        console.log(good);
+        // console.log(good);
         this.viewMedForm = false;
         this.newMedication = new Medication();
       },

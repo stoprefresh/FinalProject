@@ -21,20 +21,12 @@
                   allergy.id
                 }}"
               >
-                <!-- TODO fix drug images url, add default img -->
-                <ion-avatar slot="start">
-                  <!-- <img [src]="allergy.drug.imgUrl" alt="Allergy profile pic"> -->
-                  <ion-icon name="remove-circle"></ion-icon>
-                </ion-avatar>
                 <h4>Allergen - {{ allergy.allergen }}</h4>
               </ion-item>
             </ion-card-header>
 
             <ion-card-content>
               <ion-list>
-                <!-- <ion-item *ngFor="let session of allergy.sessions" routerLink="/app/tabs/allergies/session/{{session.id}}">
-                  <h3>{{session.name}}</h3>
-                </ion-item> -->
                 <ion-item
                   routerLink="/app/tabs/allergies/allergy-detail/{{
                     allergy.id
@@ -45,27 +37,6 @@
                 </ion-item>
               </ion-list>
             </ion-card-content>
-
-            <!-- <ion-row class="ion-no-padding ion-justify-content-center">
-              <ion-col size="4" class="ion-text-left">
-                <ion-button fill="clear" size="small" color="primary" (click)="goToallergyTwitter(allergy)">
-                  <ion-icon name="logo-twitter" slot="start"></ion-icon>
-                  Tweet
-                </ion-button>
-              </ion-col>
-              <ion-col size="4" class="ion-text-center">
-                <ion-button fill="clear" size="small" color="primary" (click)="openallergyShare(allergy)">
-                  <ion-icon name="share-alt" slot="start"></ion-icon>
-                  Share
-                </ion-button>
-              </ion-col>
-              <ion-col size="4" lass="ion-text-right">
-                <ion-button fill="clear" size="small" color="primary" (click)="openContact(allergy)">
-                  <ion-icon name="chatboxes" slot="start"></ion-icon>
-                  Contact
-                </ion-button>
-              </ion-col>
-            </ion-row> -->
           </ion-card>
         </ion-col>
       </ion-row>
@@ -84,49 +55,17 @@
       </ion-item>
       <ion-item>
           <ion-label position="stacked">Allergy Active</ion-label>
-          <ion-checkbox color="dark" checked slot="start" name='active' [(ngModel)]="editAllergy.active"></ion-checkbox>
+          <ion-checkbox color="dark" checked slot="start" name='active' [(ngModel)]="newAllergy.active"></ion-checkbox>
         <ion-textarea></ion-textarea>
       </ion-item>
-      <!-- TODO: add drug to allergy
-        <ion-item>
-          <ion-label position="stacked">Drug <ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required type="text" oninput="handleLastNameValue(event)"></ion-input>
-        </ion-item> -->
-        <!-- <ion-item>
-          <ion-label position="stacked">Directions</ion-label>
-          <ion-input  required type="text" name='directions' placeholder='eg. Take one tablet by mouth daily' [(ngModel)]="newAllergy.directions"></ion-input>
-          <ion-textarea></ion-textarea>
-        </ion-item> -->
-
-        <!-- <ion-item>
-          <ion-label position="stacked">Start Date</ion-label>
-          <ion-datetime value="1980-02-19" name='startDate' placeholder="Select Date" [(ngModel)]="newAllergy.startDate"></ion-datetime>
-        </ion-item> -->
-
-        <!-- <ion-item>
-          <ion-label position="stacked">Allergy Active</ion-label>
-          <ion-checkbox color="dark" checked slot="start" [(ngModel)]="newAllergy.active"></ion-checkbox>
-        <ion-textarea></ion-textarea>
-      </ion-item> -->
-      <!-- TODO: make these models! -->
-      <!-- <ion-item>
-        <ion-label position="stacked">Associated Diagnosis</ion-label>
-        <ion-textarea></ion-textarea>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Prescriber</ion-label>
-        <ion-textarea></ion-textarea>
-      </ion-item> -->
     </ion-list>
-
     <div class="ion-padding">
-      <ion-button (click)='addAllergy()' expand="block" type="submit" class="ion-no-margin">Save</ion-button>
+      <ion-button (click)='addAllergy(); this.viewAllergyForm = false' expand="block" type="submit" class="ion-no-margin">Save</ion-button>
       <br>
       <ion-button (click)='this.viewAllergyForm = false' expand="block" type="submit" class="ion-no-margin">Cancel</ion-button>
     </div>
   </form>
 </div>
-  <!-- fab placed to the (vertical) center and end -->
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="showAllergyForm()">
       <ion-icon name="add"></ion-icon>

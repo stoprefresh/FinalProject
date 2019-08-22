@@ -25,13 +25,11 @@ export class RegisterPage {
   addUser() {
     this.userSvc.create(this.user).subscribe(
       good => {
-        console.log(good);
-        console.log('RegisterComponent.addUser(): IN GOOD.');
         this.auth.login(this.user.username, this.user.password).subscribe(
           next => {
             this.userData.login(this.user.username);
             console.log(
-              'RegisterComponent.addUser(): user logged in, routing to /account'
+              'RegisterComponent.addUser(): user logged in'
             );
             if (this.provider) {
               this.router.navigateByUrl('/provider-registration');

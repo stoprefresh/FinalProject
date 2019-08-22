@@ -12,7 +12,6 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PatientService {
-  // private baseUrl = 'http://localhost:8090/';
   private url = environment.baseUrl + 'api/patients/';
 
   editPatient = null;
@@ -69,7 +68,7 @@ export class PatientService {
     };
     if (this.auth.checkLogin()) {
       return this.http
-        .get<Patient[]>(this.url + '?sorted=true', httpOptions)
+        .get<Patient[]>(this.url, httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log(err);

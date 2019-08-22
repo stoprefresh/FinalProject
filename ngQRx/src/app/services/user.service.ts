@@ -59,30 +59,6 @@ export class UserService {
     }
   }
 
-  // index() {
-  //   const credentials = this.auth.getCredentials();
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       Authorization: `Basic ${credentials}`,
-  //       'X-Requested-With': 'XMLHttpRequest'
-  //     })
-  //   };
-  //   if (this.auth.checkLogin()) {
-  //     return this.http
-  //       .get<User[]>(this.url + '?sorted=true', httpOptions)
-  //       .pipe(
-  //         catchError((err: any) => {
-  //           console.log(err);
-  //           return throwError(
-  //             'UserService.index(): error retrieving list'
-  //           );
-  //         })
-  //       );
-  //   } else {
-  //     this.router.navigateByUrl('/login');
-  //   }
-  // }
-
   create(user: User) {
       return this.http.post<User>(environment.baseUrl + 'register', user).pipe(
         catchError((err: any) => {
@@ -93,7 +69,6 @@ export class UserService {
   }
 
   update(user: User) {
-    console.log(user);
     const credentials = this.auth.getCredentials();
     if (this.auth.checkLogin()) {
       const httpOptions = {
