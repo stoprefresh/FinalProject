@@ -10,7 +10,6 @@ import { Storage } from '@ionic/storage';
 export class UserData {
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
-  HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
 
   constructor(
     public events: Events,
@@ -39,10 +38,10 @@ export class UserData {
     });
   }
 
-  signup(username: string): Promise<any> {
+  register(username: string): Promise<any> {
     return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
       this.setUsername(username);
-      return this.events.publish('user:signup');
+      return this.events.publish('user:register');
     });
   }
 
@@ -70,9 +69,4 @@ export class UserData {
     });
   }
 
-  checkHasSeenTutorial(): Promise<string> {
-    return this.storage.get(this.HAS_SEEN_TUTORIAL).then((value) => {
-      return value;
-    });
-  }
 }
