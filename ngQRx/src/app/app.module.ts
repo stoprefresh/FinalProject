@@ -23,6 +23,10 @@ import { DatePipe } from '@angular/common';
 import { NoteService } from './services/note.service';
 import { DiagnosisService } from './services/diagnosis.service';
 
+import { Camera } from '@ionic-native/camera/ngx';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { QRScanner } from '@ionic-native/qr-scanner/ngx';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -51,6 +55,9 @@ import { DiagnosisService } from './services/diagnosis.service';
     DiagnosisService,
     UserService,
     PatientService,
+    Camera,
+    QRScanner,
+    BarcodeScanner,
     ProviderService
   ],
   bootstrap: [AppComponent]
