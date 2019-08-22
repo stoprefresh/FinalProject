@@ -29,7 +29,6 @@ export class LoginPage implements OnInit {
     console.log(this.user);
     this.auth.login(this.user.username, this.user.password).subscribe(
       next => {
-        // console.log(next);
         this.userData.login(this.user.username);
         console.log(
           'LoginComponent.login(): user logged in, routing to /app/tabs/medications.'

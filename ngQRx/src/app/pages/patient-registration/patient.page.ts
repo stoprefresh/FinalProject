@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class PatientPage implements OnInit {
 
   patient = new Patient();
-  submitted = false;
 
   constructor(private patientSvc: PatientService,
     private router: Router) { }
@@ -24,7 +23,6 @@ export class PatientPage implements OnInit {
       good => {
         console.log(good);
         console.log('PatientRegister.addPatient(): IN GOOD.');
-        this.submitted = true;
         this.router.navigateByUrl('/app/tabs/medications');
       },
       bad => {

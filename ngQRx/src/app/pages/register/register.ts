@@ -13,7 +13,7 @@ import { AuthoService } from '../../services/autho.service';
 })
 export class RegisterPage {
   user: User = new User();
-  submitted = false;
+  provider = false;
 
   constructor(
     public router: Router,
@@ -27,14 +27,17 @@ export class RegisterPage {
       good => {
         console.log(good);
         console.log('RegisterComponent.addUser(): IN GOOD.');
-        this.submitted = true;
         this.auth.login(this.user.username, this.user.password).subscribe(
           next => {
             this.userData.login(this.user.username);
             console.log(
               'RegisterComponent.addUser(): user logged in, routing to /account'
             );
-            this.router.navigateByUrl('/account');
+            if (this.provider) {
+              this.router.navigateByUrl('/provider-registration');
+            } else {
+              this.router.navigateByUrl('/patient-registration');
+            }
           },
           error => {
             console.error('RegisterComponent.addUser(): error creating user.');
