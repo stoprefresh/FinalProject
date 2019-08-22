@@ -32,7 +32,6 @@ export class SignupPage {
         this.submitted = true;
         this.auth.login(this.user.username, this.user.password).subscribe(
           next => {
-            this.userData.checkHasSeenTutorial();
             this.userData.login(this.user.username);
             console.log(
               'SignupComponent.addUser(): user logged in, routing to /account'
