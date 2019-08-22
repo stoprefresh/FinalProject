@@ -9,7 +9,7 @@ import { User } from './user';
 
 export class Patient {
   id: number;
-  EmergencyContacts: EmergencyContact [];
+  emergencyContacts: EmergencyContact [];
   user: User;
   qrcode: string;
   dnr: boolean;
@@ -40,7 +40,7 @@ export class Patient {
               approvedProviders?: ApprovedProvider [],
               medList?: Medication []) {
       this.id = id;
-      this.EmergencyContacts = contacts;
+      this.emergencyContacts = contacts;
       this.user = user;
       this.qrcode = qrcode;
       this.dnr = dnr;

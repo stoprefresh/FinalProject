@@ -12,7 +12,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PatientService {
-  private url = environment.baseUrl + 'api/patients/';
+  private url = environment.baseUrl + 'api/patients';
 
   editPatient = null;
 
@@ -119,6 +119,26 @@ export class PatientService {
         this.url + '/' + patient.id,
         patient,
         httpOptions
+      );
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+  }
+
+  findByUserName(username: any): Observable<Patient> {
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    if (this.auth.checkLogin()) {
+      return this.http.get<Patient>(`${this.url}/username/${username}`, httpOptions).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('PatientService.index(): error retrieving');
+        })
       );
     } else {
       this.router.navigateByUrl('/login');

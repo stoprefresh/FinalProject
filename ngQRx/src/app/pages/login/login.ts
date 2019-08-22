@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserData } from '../../services/user-data';
@@ -16,7 +17,8 @@ export class LoginPage implements OnInit {
   constructor(
     private auth: AuthoService,
     private router: Router,
-    private userData: UserData
+    private userData: UserData,
+    private userService: UserService
   ) {}
 
   ngOnInit() {}
@@ -30,11 +32,23 @@ export class LoginPage implements OnInit {
     this.auth.login(this.user.username, this.user.password).subscribe(
       next => {
         this.userData.login(this.user.username);
-        this.router.navigateByUrl('/app/tabs/medications');
       },
       error => {
         console.error(error);
         console.error('LoginComponent.login(): error logging in.');
+      },
+      () => {
+        this.userService.index().subscribe(
+          good => {
+            this.user = good;
+            if (this.user.role === 'ems') {
+              this.router.navigateByUrl('/emt-view');
+            } else { this.router.navigateByUrl('/app/tabs/medications'); }
+          },
+          error => {
+            console.error(error);
+            console.error('LoginComponent.login(): error logging in.');
+          });
       }
     );
   }
