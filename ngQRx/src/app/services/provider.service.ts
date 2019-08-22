@@ -68,8 +68,10 @@ export class ProviderService {
       })
     };
     if (this.auth.checkLogin()) {
+      console.log('In the provider service, past login check');
+      
       return this.http
-        .get<Provider[]>(this.url, httpOptions)
+        .get<Provider[]>(this.url + 'showall', httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log(err);

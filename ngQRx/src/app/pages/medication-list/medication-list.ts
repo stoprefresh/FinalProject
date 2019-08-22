@@ -1,11 +1,13 @@
-import { MedicationService } from './../../services/medication.service';
-import { DiagnosisService } from './../../services/diagnosis.service';
+import { ProviderService } from './../../services/provider.service';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
-import { Medication } from '../../models/medication';
 import { Diagnosis } from '../../models/diagnosis';
+import { Medication } from '../../models/medication';
+import { DiagnosisService } from './../../services/diagnosis.service';
+import { MedicationService } from './../../services/medication.service';
+import { Provider } from '../../models/provider';
 
 @Component({
   selector: 'page-medication-list',
@@ -20,6 +22,7 @@ export class MedicationListPage implements OnInit {
   showInactive = false;
   viewMedForm = false;
   diagnosisList: Diagnosis[];
+  prescriberList: Provider[];
 
   // Constructors
   constructor(
@@ -27,7 +30,9 @@ export class MedicationListPage implements OnInit {
     public inAppBrowser: InAppBrowser,
     public router: Router,
     private medicationService: MedicationService,
-    private diagnosisService: DiagnosisService
+    private diagnosisService: DiagnosisService,
+    private providerService: ProviderService
+    
   ) {}
 
   // Methods
@@ -64,6 +69,13 @@ export class MedicationListPage implements OnInit {
     this.diagnosisService.index().subscribe((diagnosisList: Diagnosis[]) => {
       this.diagnosisList = diagnosisList;
     });
+    // console.error(this.diagnosisList.length);
+    
+    this.providerService.index().subscribe((providers: Provider[]) => {
+      this.prescriberList = providers;
+    });
+    // console.error(this.prescriberList.length);
+    
   }
 
   addMed() {
