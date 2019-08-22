@@ -3,12 +3,73 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Contacts</ion-title>
+    <ion-title>Emergency Contacts</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <p>Contacts Works</p>
-</ion-content>
+<ion-content class="outer-content">
+  <ion-list *ngIf="!viewContactForm">
+    <ion-grid fixed>
+      <ion-row class="ion-align-items-stretch" *ngIf="contacts">
+        <ion-col size="12" size-md="6" *ngFor="let contact of contacts">
+          <ion-card class="contact-card">
+            <ion-card-header>
+              <ion-item
+                detail="false"
+                lines="none"
+                routerLink="/app/tabs/contacts/contacts-detail/{{
+                  contact.id
+                }}"
+              >
+                <h4>{{ contact.relationship }}</h4>
+              </ion-item>
+            </ion-card-header>
 
-<!-- <div #mapCanvas class="map-canvas"></div> -->
+            <ion-card-content>
+              <ion-list>
+                <ion-item
+                  routerLink="/app/tabs/contacts/contacts-detail/{{
+                    contact.id
+                  }}"
+                >
+                  <h3>{{ contact.firstName }} {{ contact.lastName }}</h3>
+                  <h3>{{ contact.email }} Ph: {{ contact.phone }}</h3>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+  <div *ngIf="viewNewContactForm">
+  <form>
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Email <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input  required type="text" name='email' placeholder='' [(ngModel)]="newEmergencyContact.email"></ion-input>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label position="stacked">Reaction <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input  required type="text" name='reaction' placeholder='eg. red itchy eyes' [(ngModel)]="newEmergencyContact.firstName"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label position="stacked">Contact Active</ion-label>
+          <ion-checkbox color="dark" checked slot="start" name='active' [(ngModel)]="newEmergencyContact.lastName"></ion-checkbox>
+        <ion-textarea></ion-textarea>
+      </ion-item> -->
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button (click)='addContact()' expand="block" type="submit" class="ion-no-margin">Save</ion-button>
+      <br>
+      <ion-button (click)='this.viewContactForm = false' expand="block" type="submit" class="ion-no-margin">Cancel</ion-button>
+    </div>
+  </form>
+</div>
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="showContactForm()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

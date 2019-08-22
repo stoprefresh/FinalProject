@@ -21,8 +21,6 @@ export class PatientPage implements OnInit {
   addPatient() {
     this.patientSvc.create(this.patient).subscribe(
       good => {
-        console.log(good);
-        console.log('PatientRegister.addPatient(): IN GOOD.');
         this.router.navigateByUrl('/app/tabs/medications');
       },
       bad => {

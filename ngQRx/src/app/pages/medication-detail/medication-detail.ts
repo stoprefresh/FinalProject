@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConferenceData } from '../../providers/conference-data';
 import { Medication } from '../../models/medication';
 import { MedicationService } from '../../services/medication.service';
 
@@ -16,7 +15,6 @@ export class MedicationDetailPage implements OnInit {
 
   // Constructors
   constructor(
-    private dataProvider: ConferenceData,
     private router: Router,
     private route: ActivatedRoute,
     private medicationService: MedicationService
@@ -27,15 +25,11 @@ export class MedicationDetailPage implements OnInit {
 
   ionViewWillEnter() {
     const medicationId = this.route.snapshot.paramMap.get('medicationId');
-    console.log(`ID is ${medicationId}   ********************`);
     this.medicationService.show(medicationId).subscribe(
       good => {
-        console.log('Life is Good');
-        console.log(good);
         this.medication = good;
       },
       bad => {
-        console.log('Life is Bad');
         console.error(bad);
         this.router.navigateByUrl('**');
       }
@@ -47,10 +41,8 @@ export class MedicationDetailPage implements OnInit {
   }
 
   saveEdit() {
-    console.log(this.editMedication);
     this.medicationService.update(this.editMedication).subscribe(
       good => {
-        console.log(good);
         this.medication = this.editMedication;
       },
       bad => {
@@ -65,13 +57,10 @@ export class MedicationDetailPage implements OnInit {
   deleteMed() {
     this.medicationService.destroy(this.medication.id).subscribe(
       good => {
-        console.log('Delete successful');
-        console.log(good);
         this.router.navigateByUrl('app/tabs/medications');
       },
       bad => {
         console.error(bad);
-
       },
       () => {
       }

@@ -32,91 +32,123 @@
 
             <ion-card-content>
               <ion-list>
-                <!-- <ion-item *ngFor="let session of medication.sessions" routerLink="/app/tabs/medications/session/{{session.id}}">
-                  <h3>{{session.name}}</h3>
-                </ion-item> -->
                 <ion-item
                   routerLink="/app/tabs/medications/medication-details/{{
                     medication.id
                   }}"
                 >
-                  <h3>Directions - {{ medication.directions }}</h3>
+                  <h3>Directions: {{ medication.directions }}</h3>
+                  <br />
+                </ion-item>
+                <ion-item
+                  routerLink="/app/tabs/medications/medication-details/{{
+                    medication.id
+                  }}"
+                >
+                  <h3>Associated Diagnosis: {{ medication.diagnosis.name }}</h3>
                 </ion-item>
               </ion-list>
             </ion-card-content>
-
-            <!-- <ion-row class="ion-no-padding ion-justify-content-center">
-              <ion-col size="4" class="ion-text-left">
-                <ion-button fill="clear" size="small" color="primary" (click)="goTomedicationTwitter(medication)">
-                  <ion-icon name="logo-twitter" slot="start"></ion-icon>
-                  Tweet
-                </ion-button>
-              </ion-col>
-              <ion-col size="4" class="ion-text-center">
-                <ion-button fill="clear" size="small" color="primary" (click)="openmedicationShare(medication)">
-                  <ion-icon name="share-alt" slot="start"></ion-icon>
-                  Share
-                </ion-button>
-              </ion-col>
-              <ion-col size="4" lass="ion-text-right">
-                <ion-button fill="clear" size="small" color="primary" (click)="openContact(medication)">
-                  <ion-icon name="chatboxes" slot="start"></ion-icon>
-                  Contact
-                </ion-button>
-              </ion-col>
-            </ion-row> -->
           </ion-card>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-list>
   <div *ngIf="viewMedForm">
-  <form>
-    <ion-list lines="full" class="ion-no-margin ion-no-padding">
-      <ion-item>
-        <ion-label position="stacked">Medication Name <ion-text color="danger">*</ion-text></ion-label>
-        <!-- <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input> -->
-        <ion-input  required type="text" name='medName' placeholder='eg. Aspirin' [(ngModel)]="newMedication.medName"></ion-input>
-      </ion-item>
-      <!-- TODO: add drug to medication
+    <form>
+      <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item>
+          <ion-label position="stacked"
+            >Medication Name <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input
+            required
+            type="text"
+            name="medName"
+            placeholder="eg. Aspirin"
+            [(ngModel)]="newMedication.medName"
+          ></ion-input>
+        </ion-item>
+        <!-- TODO: add drug to medication
         <ion-item>
           <ion-label position="stacked">Drug <ion-text color="danger">*</ion-text></ion-label>
           <ion-input required type="text" oninput="handleLastNameValue(event)"></ion-input>
         </ion-item> -->
         <ion-item>
           <ion-label position="stacked">Directions</ion-label>
-          <ion-input  required type="text" name='directions' placeholder='eg. Take one tablet by mouth daily' [(ngModel)]="newMedication.directions"></ion-input>
+          <ion-input
+            required
+            type="text"
+            name="directions"
+            placeholder="eg. Take one tablet by mouth daily"
+            [(ngModel)]="newMedication.directions"
+          ></ion-input>
           <ion-textarea></ion-textarea>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Start Date</ion-label>
-          <ion-datetime value="1980-02-19" name='startDate' placeholder="Select Date" [(ngModel)]="newMedication.startDate"></ion-datetime>
+          <ion-datetime
+            value="1980-02-19"
+            name="startDate"
+            placeholder="Select Date"
+            [(ngModel)]="newMedication.startDate"
+          ></ion-datetime>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Medication Active</ion-label>
-          <ion-checkbox color="dark" checked slot="start" [(ngModel)]="newMedication.active"></ion-checkbox>
-        <ion-textarea></ion-textarea>
-      </ion-item>
-      <!-- TODO: make these models! -->
-      <!-- <ion-item>
-        <ion-label position="stacked">Associated Diagnosis</ion-label>
-        <ion-textarea></ion-textarea>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Prescriber</ion-label>
-        <ion-textarea></ion-textarea>
-      </ion-item> -->
-    </ion-list>
+          <ion-checkbox
+            color="dark"
+            name="active"
+            checked
+            slot="start"
+            [(ngModel)]="newMedication.active"
+          ></ion-checkbox>
+          <ion-textarea></ion-textarea>
+        </ion-item>
 
-    <div class="ion-padding">
-      <ion-button (click)='addMed()' expand="block" type="submit" class="ion-no-margin">Save</ion-button>
-      <br>
-      <ion-button (click)='this.viewMedForm = false' expand="block" type="submit" class="ion-no-margin">Cancel</ion-button>
-    </div>
-  </form>
-</div>
+        <ion-item>
+          <ion-label position="stacked">Associated Diagnosis</ion-label>
+          <ion-select
+            placeholder="Select One"
+            [(ngModel)]="newMedication.diagnosis"
+            name="diagnosis"
+          >
+            <ion-select-option
+              *ngFor="let diagnosis of diagnosisList"
+              [value]="diagnosis"
+              >{{ diagnosis.name }}</ion-select-option
+            >
+          </ion-select>
+          <ion-textarea></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Prescriber</ion-label>
+          <ion-textarea></ion-textarea>
+        </ion-item>
+      </ion-list>
+
+      <div class="ion-padding">
+        <ion-button
+          (click)="addMed()"
+          expand="block"
+          type="submit"
+          class="ion-no-margin"
+          >Save</ion-button
+        >
+        <br />
+        <ion-button
+          (click)="this.viewMedForm = false"
+          expand="block"
+          type="submit"
+          class="ion-no-margin"
+          >Cancel</ion-button
+        >
+      </div>
+    </form>
+  </div>
   <!-- fab placed to the (vertical) center and end -->
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="showMedForm()">

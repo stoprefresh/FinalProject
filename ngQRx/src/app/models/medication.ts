@@ -1,4 +1,6 @@
+import { ApprovedProvider } from './approved-provider';
 import { Drug } from './drug';
+import { Diagnosis } from './diagnosis';
 
 export class Medication {
   id: number;
@@ -9,6 +11,8 @@ export class Medication {
   directions: string;
   reasonDiscontinued: string;
   active: boolean;
+  diagnosis: Diagnosis;
+  prescriber: ApprovedProvider;
 
   constructor(
     id?: number,
@@ -19,7 +23,9 @@ export class Medication {
     startDate?: Date,
     discontinuedDate?: Date,
     reasonDiscontinued?: string,
-    active?: boolean
+    active?: boolean,
+    diagnosis?: Diagnosis,
+    prescriber?: ApprovedProvider
   ) {
     this.id = id;
     this.medName = medName;
@@ -28,5 +34,7 @@ export class Medication {
     this.discontinuedDate = discontinuedDate;
     this.reasonDiscontinued = reasonDiscontinued;
     this.active = active;
+    this.diagnosis = diagnosis;
+    this.prescriber = prescriber;
   }
 }

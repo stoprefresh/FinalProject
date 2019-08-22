@@ -24,11 +24,9 @@
           <ion-list lines="full" class="ion-no-margin ion-no-padding">
             <ion-item>
               <ion-label position="stacked">Note Text <ion-text color="danger">*</ion-text></ion-label>
-              <!-- <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input> -->
               <ion-input  required type="text" name='textContent' placeholder='Sample <ion-text color="danger">*</ion-text>' [(ngModel)]="editNote.textContent"></ion-input>
             </ion-item>
 
-            <!-- TODO:  NOT PERSISTING EDIT -->
             <ion-item>
               <ion-label position="stacked">Associated Medication</ion-label>
               <ion-select placeholder="Select One" [(ngModel)]="editNote.medication" name='medication'>

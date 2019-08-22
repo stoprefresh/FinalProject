@@ -17,8 +17,8 @@ import { PopoverController } from '@ionic/angular';
       <ion-item button (click)="close('https://github.com/ionic-team/ionic')">
         <ion-label>GitHub Repo</ion-label>
       </ion-item>
-      <ion-item button (click)="support()">
-        <ion-label>Support</ion-label>
+      <ion-item button (click)="link()">
+        <ion-label>Link</ion-label>
       </ion-item>
     </ion-list>
   `
@@ -26,8 +26,8 @@ import { PopoverController } from '@ionic/angular';
 export class PopoverPage {
   constructor(public popoverCtrl: PopoverController) {}
 
-  support() {
-    // this.app.getRootNavs()[0].push('/support');
+  link() {
+    // this.app.getRootNavs()[0].push('/route');
     this.popoverCtrl.dismiss();
   }
 

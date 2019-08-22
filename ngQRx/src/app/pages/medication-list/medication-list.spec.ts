@@ -5,9 +5,6 @@ import { ActionSheetController } from '@ionic/angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { MedicationListPage } from './medication-list';
-import { ConferenceData } from '../../providers/conference-data';
-
-const confDataSub = {};
 
 describe('MedicationListPage', () => {
   let fixture, app;
@@ -24,8 +21,7 @@ describe('MedicationListPage', () => {
       providers: [
         { provide: ActionSheetController, useValue: actionSheetSpy },
         { provide: InAppBrowser, useValue: iabSpy },
-        { provide: Router, useValue: routerSpy },
-        { provide: ConferenceData, useValue: confDataSub }
+        { provide: Router, useValue: routerSpy }
       ]
     }).compileComponents();
   }));

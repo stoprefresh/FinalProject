@@ -1,3 +1,8 @@
+import { ProviderService } from './services/provider.service';
+import { PatientService } from './services/patient.service';
+import { UserService } from './services/user.service';
+import { ContactService } from './services/contact.service';
+import { AllergyService } from './services/allergy.service';
 import { FormsModule } from '@angular/forms';
 import { MedicationService } from './services/medication.service';
 import { AuthoService } from './services/autho.service';
@@ -16,6 +21,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { DatePipe } from '@angular/common';
 import { NoteService } from './services/note.service';
+import { DiagnosisService } from './services/diagnosis.service';
 
 @NgModule({
   imports: [
@@ -39,7 +45,13 @@ import { NoteService } from './services/note.service';
     AuthoService,
     MedicationService,
     DatePipe,
-    NoteService
+    NoteService,
+    AllergyService,
+    ContactService,
+    DiagnosisService,
+    UserService,
+    PatientService,
+    ProviderService
   ],
   bootstrap: [AppComponent]
 })

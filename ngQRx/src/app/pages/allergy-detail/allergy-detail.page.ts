@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConferenceData } from '../../providers/conference-data';
 import { Allergy } from '../../models/allergy';
 import { AllergyService } from '../../services/allergy.service';
 
@@ -16,7 +15,6 @@ export class AllergyDetailPage implements OnInit {
 
   // Constructors
   constructor(
-    private dataProvider: ConferenceData,
     private router: Router,
     private route: ActivatedRoute,
     private allergyService: AllergyService
@@ -27,11 +25,11 @@ export class AllergyDetailPage implements OnInit {
 
   ionViewWillEnter() {
     const allergyId = this.route.snapshot.paramMap.get('allergyId');
-    console.log(`ID is ${allergyId}   ********************`);
+    // console.log(`ID is ${allergyId}   ********************`);
     this.allergyService.show(allergyId).subscribe(
       good => {
-        console.log('Life is Good');
-        console.log(good);
+        // console.log('Life is Good');
+        // console.log(good);
         this.allergy = good;
       },
       bad => {
@@ -50,7 +48,7 @@ export class AllergyDetailPage implements OnInit {
     console.log(this.editAllergy);
     this.allergyService.update(this.editAllergy).subscribe(
       good => {
-        console.log(good);
+        // console.log(good);
         this.allergy = this.editAllergy;
       },
       bad => {
@@ -65,13 +63,12 @@ export class AllergyDetailPage implements OnInit {
   deleteAllergy() {
     this.allergyService.destroy(this.allergy.id).subscribe(
       good => {
-        console.log('Delete successful');
-        console.log(good);
+        // console.log('Delete successful');
+        // console.log(good);
         this.router.navigateByUrl('app/tabs/allergies');
       },
       bad => {
         console.error(bad);
-
       },
       () => {
       }

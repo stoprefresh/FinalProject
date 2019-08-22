@@ -24,7 +24,6 @@ export class AuthoService {
         // 'Access-Control-Allow-Origin': '*'
       })
     };
-    console.log(credentials);
     // create request to authenticate credentials
     return this.http
       .get(this.baseUrl + 'authenticate', httpOptions)

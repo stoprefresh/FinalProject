@@ -1,18 +1,17 @@
 import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
-import { UserService } from './../../services/user.service';
-import { User } from './../../models/user';
-import { AuthoService } from './../../services/autho.service';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user';
+import { AuthoService } from '../../services/autho.service';
 import { Router } from '@angular/router';
 
 import { AlertController } from '@ionic/angular';
 
 import { UserData } from '../../services/user-data';
 
-
 @Component({
   selector: 'page-account',
   templateUrl: 'account.html',
-  styleUrls: ['./account.scss'],
+  styleUrls: ['./account.scss']
 })
 export class AccountPage implements AfterViewInit {
   user: User;
@@ -22,19 +21,17 @@ export class AccountPage implements AfterViewInit {
     public router: Router,
     public userData: UserData,
     private userSvc: UserService,
-    private authSvc: AuthoService,
-  ) { }
+    private authSvc: AuthoService
+  ) {}
 
   ngAfterViewInit() {
     this.getUser();
   }
 
-  updatePicture() {
-    console.log('Clicked to update picture');
+  ionViewDidEnter() {
+    this.getUser();
   }
-
   updateUser() {
-    console.log(this.user);
     this.userSvc.update(this.user).subscribe(
       good => {
         this.user = good;
@@ -42,8 +39,7 @@ export class AccountPage implements AfterViewInit {
       bad => {
         console.error(bad);
       },
-      () => {
-      }
+      () => {}
     );
   }
   getUser() {
@@ -64,18 +60,11 @@ export class AccountPage implements AfterViewInit {
     );
   }
 
-  changePassword() {
-    console.log('Clicked to change password');
-  }
+  changePassword() {}
 
   logout() {
-    console.log('inlogout');
     this.userData.logout();
     this.authSvc.logout();
     this.router.navigateByUrl('/login');
-  }
-
-  support() {
-    this.router.navigateByUrl('/support');
   }
 }

@@ -1,12 +1,11 @@
 import { MedicationService } from './../../services/medication.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { DiagnosisService } from './../../services/diagnosis.service';
+import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { ConferenceData } from '../../providers/conference-data';
+import { Component, OnInit } from '@angular/core';
 import { Medication } from '../../models/medication';
-import { AuthoService } from '../../services/autho.service';
-import { HttpClient } from '@angular/common/http';
+import { Diagnosis } from '../../models/diagnosis';
 
 @Component({
   selector: 'page-medication-list',
@@ -20,22 +19,19 @@ export class MedicationListPage implements OnInit {
   newMedication: Medication = new Medication();
   showInactive = false;
   viewMedForm = false;
+  diagnosisList: Diagnosis[];
 
   // Constructors
   constructor(
     public actionSheetCtrl: ActionSheetController,
-    public confData: ConferenceData,
     public inAppBrowser: InAppBrowser,
     public router: Router,
     private medicationService: MedicationService,
-    private currentRoute: ActivatedRoute,
-    private http: HttpClient,
-    private auth: AuthoService
+    private diagnosisService: DiagnosisService
   ) {}
 
   // Methods
   ngOnInit(): void {
-
     this.reload();
   }
 
@@ -65,12 +61,15 @@ export class MedicationListPage implements OnInit {
     this.medicationService.index().subscribe((medications: Medication[]) => {
       this.medications = medications;
     });
+    this.diagnosisService.index().subscribe((diagnosisList: Diagnosis[]) => {
+      this.diagnosisList = diagnosisList;
+    });
   }
 
   addMed() {
     this.medicationService.create(this.newMedication).subscribe(
       good => {
-        console.log(good);
+        // console.log(good);
         this.viewMedForm = false;
         this.newMedication = new Medication();
       },

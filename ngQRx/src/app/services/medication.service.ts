@@ -24,7 +24,6 @@ export class MedicationService {
   ) {}
 
   destroy(id: string | number) {
-    console.log(id);
     const credentials = this.auth.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -68,7 +67,7 @@ export class MedicationService {
       })
     };
     if (this.auth.checkLogin()) {
-      return this.http.get<Medication[]>(this.url + '?sorted=true', httpOptions).pipe(
+      return this.http.get<Medication[]>(this.url, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('MedicationService.index(): error retrieving list');
