@@ -25,7 +25,15 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
   },
   { path: 'provider-registration', loadChildren: './pages/provider-registration/provider.module#ProviderPageModule' },
-  { path: 'patient-registration', loadChildren: './pages/patient-registration/patient.module#PatientPageModule' }
+  { path: 'patient-registration', loadChildren: './pages/patient-registration/patient.module#PatientPageModule' },
+  {
+    path: 'tutorial',
+    loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
+    canLoad: [CheckTutorial]
+  },
+  { path: 'allergy-detail', loadChildren: './pages/allergy-detail/allergy-detail.module#AllergyDetailPageModule' },
+  { path: 'note-detail', loadChildren: './pages/note-detail/note-detail.module#NoteDetailPageModule' }
+
 ];
 
 @NgModule({
