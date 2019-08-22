@@ -21,6 +21,11 @@ import { UserData } from './services/user-data';
 export class AppComponent implements OnInit {
   appPages = [
     {
+      title: 'EMT Emergency View',
+      url: '/emt-view',
+      icon: 'medkit'
+    },
+    {
       title: 'Emergency Contacts',
       url: '/app/tabs/contacts',
       icon: 'calendar'

@@ -124,4 +124,5 @@ export class PatientService {
       this.router.navigateByUrl('/login');
     }
   }
+
 }

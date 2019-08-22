@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title *ngIf="!currentPatient">Scan for Patient Details</ion-title>
+    <ion-title *ngIf="currentPatient">{{currentPatient.user.firstName}}'s Emergency Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content *ngIf="currentPatient" fullscreen>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>DNR Status</ion-card-subtitle>
+        <ion-card-title>{{currentPatient.dnr}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-subtitle>Blood Type</ion-card-subtitle>
+        <ion-card-title>{{currentPatient.bloodType}}</ion-card-title>
+      </ion-card-content>
+      <ion-card-content>
+          <ion-card-subtitle>Sex</ion-card-subtitle>
+          <ion-card-title>{{currentPatient.sex}}</ion-card-title>
+      </ion-card-content>
+      <ion-card-content>
+          <ion-card-subtitle>Emergency Contacts</ion-card-subtitle>
+        <ion-row class="ion-align-items-stretch">
+          <ion-col size="12" size-md="6" *ngFor="let emergencyContact of currentPatient.EmergencyContacts">
+              <ion-card class="medication-card">
+                  <ion-card-title>{{emergencyContact.phone}}</ion-card-title>
+                  <ion-card-title>{{emergencyContact.lastName}}, {{emergencyContact.firstName}}</ion-card-title>
+                  <ion-card-title>{{emergencyContact.relationship}}</ion-card-title>
+              </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+
+    <ion-fab vertical="top" horizontal="center" slot="fixed" *ngIf="!manualIdEntry">
+      <ion-fab-button >
+        <ion-icon name="code"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="start">
+        <ion-fab-button color="danger" (click)='manualIdEntry = true'><ion-icon name="body"></ion-icon></ion-fab-button>
+      </ion-fab-list>
+      <ion-fab-list side="end">
+        <ion-fab-button color="danger" (click)="scanCode()"><ion-icon name="barcode"></ion-icon></ion-fab-button>
+      </ion-fab-list>
+  </ion-fab>
+
+  <div *ngIf="manualIdEntry" >
+    <form>
+      <ion-item>
+          <ion-label position="stacked">Enter Patient UserName</ion-label>
+          <ion-input  required type="text"></ion-input>
+        </ion-item>
+        <ion-row>
+            <ion-col>
+              <ion-button expand="block">Find Patient</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button (click)='manualIdEntry = false' color="light" expand="block">Cancel</ion-button>
+            </ion-col>
+          </ion-row>
+      </form>
+  </div>
+
+</ion-content>
