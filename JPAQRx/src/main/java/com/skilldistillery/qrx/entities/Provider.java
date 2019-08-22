@@ -68,13 +68,6 @@ public class Provider {
 		this.subunit = subunit;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Provider [id=").append(id).append(", user=").append(user).append(", organization=")
-				.append(organization).append(", subunit=").append(subunit).append("]");
-		return builder.toString();
-	}
 
 	@Override
 	public int hashCode() {

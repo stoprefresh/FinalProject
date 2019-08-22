@@ -20,7 +20,7 @@ export class ProviderPage implements OnInit {
   addProvider() {
     this.providerSvc.create(this.provider).subscribe(
       good => {
-        this.router.navigateByUrl('/account');
+        this.router.navigateByUrl('/patient-registration');
       },
       bad => {
         console.error('ProviderRegister.addProvider(): error creating user.');
