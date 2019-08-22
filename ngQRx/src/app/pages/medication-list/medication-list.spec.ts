@@ -5,7 +5,6 @@ import { ActionSheetController } from '@ionic/angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { MedicationListPage } from './medication-list';
-import { ConferenceData } from '../../providers/conference-data';
 
 const confDataSub = {};
 

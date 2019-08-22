@@ -6,7 +6,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { Allergy } from './../../models/allergy';
 import { Component } from '@angular/core';
-import { ConferenceData } from '../../providers/conference-data';
 
 @Component({
   selector: 'page-allergy-list',

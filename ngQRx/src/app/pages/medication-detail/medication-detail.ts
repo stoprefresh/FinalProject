@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConferenceData } from '../../providers/conference-data';
 import { Medication } from '../../models/medication';
 import { MedicationService } from '../../services/medication.service';
 

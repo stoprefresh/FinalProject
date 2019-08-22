@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { ConferenceData } from '../../providers/conference-data';
 import { Platform, ActionSheetController } from '@ionic/angular';
 
 @Component({
@@ -18,7 +17,7 @@ export class ContactsListPage {
   // Fields
   contacts: EmergencyContact[] = [];
   newContact: EmergencyContact = new EmergencyContact();
-  
+
   viewContactForm = false;
 
   // Constructors

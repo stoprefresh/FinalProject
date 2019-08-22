@@ -3,7 +3,6 @@ import { Medication } from './../../models/medication';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Note } from '../../models/note';
-import { ConferenceData } from '../../providers/conference-data';
 import { NoteService } from '../../services/note.service';
 
 @Component({

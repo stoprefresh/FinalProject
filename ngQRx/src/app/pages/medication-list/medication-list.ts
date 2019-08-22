@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { ConferenceData } from '../../providers/conference-data';
 import { Medication } from '../../models/medication';
 import { AuthoService } from '../../services/autho.service';
 import { HttpClient } from '@angular/common/http';
