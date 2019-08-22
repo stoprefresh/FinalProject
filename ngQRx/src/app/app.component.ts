@@ -104,7 +104,7 @@ export class AppComponent implements OnInit {
       this.updateLoggedInStatus(true);
     });
 
-    this.events.subscribe('user:signup', () => {
+    this.events.subscribe('user:register', () => {
       this.updateLoggedInStatus(true);
     });
 
@@ -122,9 +122,4 @@ export class AppComponent implements OnInit {
 
   }
 
-  openTutorial() {
-    this.menu.enable(false);
-    this.storage.set('ion_did_tutorial', false);
-    this.router.navigateByUrl('/tutorial');
-  }
 }
