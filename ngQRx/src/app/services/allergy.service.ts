@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { AuthoService } from './autho.service';
 import { DatePipe } from '@angular/common';
@@ -13,7 +13,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class AllergyService {
 
-  private url = environment.baseUrl + 'api/patients/allergy';
+  private url = environment.baseUrl + 'api/patients/allergies';
 
   editAllerby = null;
 
@@ -70,7 +70,7 @@ export class AllergyService {
         })
       };
       if (this.auth.checkLogin()) {
-        return this.http.get<Allergy[]>(this.url + '?sorted=true', httpOptions).pipe(
+        return this.http.get<Allergy[]>(this.url + '/', httpOptions).pipe(
           catchError((err: any) => {
             console.log(err);
             return throwError('AllergyService.index(): error retrieving list');

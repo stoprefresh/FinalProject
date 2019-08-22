@@ -1,72 +1,115 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { AuthoService } from './../../services/autho.service';
+import { HttpClient } from '@angular/common/http';
+import { AllergyService } from './../../services/allergy.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ActionSheetController } from '@ionic/angular';
+import { Allergy } from './../../models/allergy';
+import { Component } from '@angular/core';
 import { ConferenceData } from '../../providers/conference-data';
-import { Platform } from '@ionic/angular';
 
 @Component({
-  selector: 'allergy-list-page-map',
+  selector: 'page-allergy-list',
   templateUrl: 'allergy-list.html',
   styleUrls: ['./allergy-list.scss']
 })
 export class AllergyListPage {
-//   @ViewChild('mapCanvas', { static: true }) mapElement: ElementRef;
 
-//   constructor(public confData: ConferenceData, public platform: Platform) {}
+  // Fields
+  allergies: Allergy[] = [];
+  newAllergy: Allergy = new Allergy();
+  showInactive = false;
+  viewAllergyForm = false;
 
-//   async ngAfterViewInit() {
-//     const googleMaps = await getGoogleMaps(
-//       'AIzaSyB8pf6ZdFQj5qw7rc_HSGrhUwQKfIe9ICw'
-//     );
-//     this.confData.getMap().subscribe((mapData: any) => {
-//       const mapEle = this.mapElement.nativeElement;
+  // Constructors
+  constructor(
+    public actionSheetCtrl: ActionSheetController,
+    public confData: ConferenceData,
+    public inAppBrowser: InAppBrowser,
+    public router: Router,
+    private allergyService: AllergyService,
+    private currentRoute: ActivatedRoute,
+    private http: HttpClient,
+    private auth: AuthoService
+  ) { }
 
-//       const map = new googleMaps.Map(mapEle, {
-//         center: mapData.find((d: any) => d.center),
-//         zoom: 16
-//       });
+  // Methods
+  ngOnInit(): void {
 
-//       mapData.forEach((markerData: any) => {
-//         const infoWindow = new googleMaps.InfoWindow({
-//           content: `<h5>${markerData.name}</h5>`
-//         });
+    this.reload();
+  }
 
-//         const marker = new googleMaps.Marker({
-//           position: markerData,
-//           map,
-//           title: markerData.name
-//         });
+  reload() {
+    this.allergyService.index().subscribe(
+      good => {
+        if (good) {
+          this.allergies = good;
+        } else {
+          // TODO fix route for error
+          this.router.navigateByUrl('**');
+        }
+      },
+      bad => {
+        console.error(bad);
+      },
+      // TODO possible implementation for finally
+      () => { }
+    );
+  }
 
-//         marker.addListener('click', () => {
-//           infoWindow.open(map, marker);
-//         });
-//       });
+  showAllergyForm() {
+    this.viewAllergyForm = true;
+  }
 
-//       googleMaps.event.addListenerOnce(map, 'idle', () => {
-//         mapEle.classList.add('show-map');
-//       });
-//     });
-//   }
-// }
+  ionViewDidEnter() {
+    this.allergyService.index().subscribe((allergies: Allergy[]) => {
+      this.allergies = allergies;
+    });
+  }
 
-// function getGoogleMaps(apiKey: string): Promise<any> {
-//   const win = window as any;
-//   const googleModule = win.google;
-//   if (googleModule && googleModule.maps) {
-//     return Promise.resolve(googleModule.maps);
-//   }
+  addAllergy() {
+    this.allergyService.create(this.newAllergy).subscribe(
+      good => {
+        console.log(good);
+        this.viewAllergyForm = true;
+        this.newAllergy = new Allergy();
+      },
+      bad => {
+        console.error(bad);
+      },
+      () => {
+        // this.newAllergy = new Allergy();
+        this.reload();
+      }
+    );
+  }
 
-//   return new Promise((resolve, reject) => {
-//     const script = document.createElement('script');
-//     script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.31`;
-//     script.async = true;
-//     script.defer = true;
-//     document.body.appendChild(script);
-//     script.onload = () => {
-//       const googleModule2 = win.google;
-//       if (googleModule2 && googleModule2.maps) {
-//         resolve(googleModule2.maps);
-//       } else {
-//         reject('google maps not available');
-//       }
-//     };
-//   });
+
+
+  async openContact(allergy: any) {
+    const mode = 'ios'; // this.config.get('mode');
+
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Contact ' + allergy.name,
+      buttons: [
+        {
+          text: `Email ( ${allergy.email} )`,
+          icon: mode !== 'ios' ? 'mail' : null,
+          handler: () => {
+            window.open('mailto:' + allergy.email);
+          }
+        },
+        {
+          text: `Call ( ${allergy.phone} )`,
+          icon: mode !== 'ios' ? 'call' : null,
+          handler: () => {
+            window.open('tel:' + allergy.phone);
+          }
+        }
+      ]
+    });
+
+    await actionSheet.present();
+  }
+
 }

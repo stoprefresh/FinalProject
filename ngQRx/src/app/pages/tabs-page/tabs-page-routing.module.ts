@@ -1,8 +1,8 @@
-import { ContactsListPage } from './../contacts-list/contacts-list';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TabsPage } from './tabs-page';
 import { SchedulePage } from '../schedule/schedule';
+import { ContactsListPage } from './../contacts-list/contacts-list';
+import { TabsPage } from './tabs-page';
 
 
 const routes: Routes = [
@@ -10,19 +10,6 @@ const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
-      {
-        path: 'schedule',
-        children: [
-          {
-            path: '',
-            component: SchedulePage,
-          },
-          {
-            path: 'session/:sessionId',
-            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
-          }
-        ]
-      },
       {
         path: 'contacts',
         children: [
@@ -44,10 +31,6 @@ const routes: Routes = [
             loadChildren: () => import('../medication-list/medication-list.module').then(m => m.MedicationListModule)
           },
           {
-            path: 'session/:sessionId',
-            loadChildren: () => import('../session-detail/session-detail.module').then(m => m.SessionDetailModule)
-          },
-          {
             path: 'medication-details/:medicationId',
             loadChildren: () => import('../medication-detail/medication-detail.module').then(m => m.MedicationDetailModule)
           }
@@ -59,6 +42,11 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../allergy-list/allergy-list.module').then(m => m.AllergyListModule)
+          }
+          ,
+          {
+            path: 'allergy-detail/:allergyId',
+            loadChildren: () => import('../allergy-detail/allergy-detail.module').then(m => m.AllergyDetailModule)
           }
         ]
       },
@@ -75,11 +63,6 @@ const routes: Routes = [
           }
         ]
       },
-      {
-        path: '',
-        redirectTo: '/app/tabs/schedule',
-        pathMatch: 'full'
-      }
     ]
   }
 ];
