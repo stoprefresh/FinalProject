@@ -28,7 +28,7 @@ import { NoteDetailPageModule } from '../note-detail/note-detail.module';
     MedicationListModule,
     TabsPageRoutingModule,
     ContactsListModule,
-    NoteDetailPageModule
+    NoteDetailPageModule,
     AllergyDetailModule
   ],
   declarations: [
