@@ -21,8 +21,8 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
-  onSignup() {
-    this.router.navigateByUrl('/signup');
+  onRegister() {
+    this.router.navigateByUrl('/register');
   }
 
   login() {
@@ -43,24 +43,3 @@ export class LoginPage implements OnInit {
     );
   }
 }
-
-// login: UserOptions = { username: '', password: '' };
-// submitted = false;
-
-// constructor(
-//   public userData: UserData,
-//   public router: Router
-// ) { }
-
-// onLogin(form: NgForm) {
-//   this.submitted = true;
-
-//   if (form.valid) {
-//     this.userData.login(this.login.username);
-//     this.router.navigateByUrl('/app/tabs/schedule');
-//   }
-// }
-
-// onSignup() {
-//   this.router.navigateByUrl('/signup');
-// }

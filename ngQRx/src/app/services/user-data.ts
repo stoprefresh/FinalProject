@@ -38,10 +38,10 @@ export class UserData {
     });
   }
 
-  signup(username: string): Promise<any> {
+  register(username: string): Promise<any> {
     return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
       this.setUsername(username);
-      return this.events.publish('user:signup');
+      return this.events.publish('user:register');
     });
   }
 

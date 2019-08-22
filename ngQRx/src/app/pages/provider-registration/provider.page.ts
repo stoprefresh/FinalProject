@@ -22,12 +22,12 @@ export class ProviderPage implements OnInit {
     this.providerSvc.create(this.provider).subscribe(
       good => {
         console.log(good);
-        console.log('PatientSignup.addPatient(): IN GOOD.');
+        console.log('ProviderRegister.addProvider(): IN GOOD.');
         this.submitted = true;
         this.router.navigateByUrl('/account');
       },
       bad => {
-        console.error('PatientSignup.addPatient(): error creating user.');
+        console.error('ProviderRegister.addProvider(): error creating user.');
         console.error(bad);
       },
       () => {

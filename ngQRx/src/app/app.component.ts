@@ -104,7 +104,7 @@ export class AppComponent implements OnInit {
       this.updateLoggedInStatus(true);
     });
 
-    this.events.subscribe('user:signup', () => {
+    this.events.subscribe('user:register', () => {
       this.updateLoggedInStatus(true);
     });
 
