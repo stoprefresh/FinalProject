@@ -14,7 +14,7 @@
 
           <ion-item>
               <ion-label position="stacked" color="primary">Biological Sex</ion-label>
-                <ion-select name="sex" [(ngModel)]="patient.sex" placeholder={{patient.sex}}>
+                <ion-select name="sex" [(ngModel)]="patient.sex" [placeholder]="patient.sex">
                   <ion-select-option value="male" >Male</ion-select-option>
                   <ion-select-option value="female" >Female</ion-select-option>
                 </ion-select>
@@ -30,9 +30,10 @@
             <ion-input  required type="number" name='weight' [(ngModel)]="patient.weight"></ion-input>
           </ion-item>
 
+
           <ion-item>
             <ion-label position="stacked">Blood Type</ion-label>
-            <ion-select placeholder="Select One" [(ngModel)]="patient.bloodType" name="diagnosis">
+            <ion-select [placeholder]="patient.bloodType.rh ? patient.bloodType.abo + '+' : patient.bloodType.abo + '-'" [(ngModel)]="patient.bloodType" name="bloodType">
               <ion-select-option *ngFor="let bloodType of bloodTypes" [value]="bloodType">{{ bloodType.abo}}{{(bloodType.rh) ? '+' : '-'}}</ion-select-option></ion-select>
           </ion-item>
 

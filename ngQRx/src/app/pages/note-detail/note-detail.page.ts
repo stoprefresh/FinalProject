@@ -29,7 +29,6 @@ export class NoteDetailPage implements OnInit {
 
   ionViewWillEnter() {
     const noteId = this.route.snapshot.paramMap.get('noteId');
-    console.log(`ID is ${noteId}   ********************`);
     this.noteService.show(noteId).subscribe(
       good => {
         console.log('Life is Good');
@@ -61,12 +60,11 @@ export class NoteDetailPage implements OnInit {
   }
 
   saveEdit() {
-    console.log(this.editNote);
     this.noteService.update(this.editNote).subscribe(
       good => {
-        console.log(good);
         this.note = this.editNote;
-        window.location.reload();
+        this.ionViewWillEnter();
+        // window.location.reload();
       },
       bad => {
         console.error(bad);

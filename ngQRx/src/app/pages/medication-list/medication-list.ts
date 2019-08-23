@@ -94,32 +94,4 @@ export class MedicationListPage implements OnInit {
       }
     );
   }
-
-
-
-  async openContact(medication: any) {
-    const mode = 'ios'; // this.config.get('mode');
-
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Contact ' + medication.name,
-      buttons: [
-        {
-          text: `Email ( ${medication.email} )`,
-          icon: mode !== 'ios' ? 'mail' : null,
-          handler: () => {
-            window.open('mailto:' + medication.email);
-          }
-        },
-        {
-          text: `Call ( ${medication.phone} )`,
-          icon: mode !== 'ios' ? 'call' : null,
-          handler: () => {
-            window.open('tel:' + medication.phone);
-          }
-        }
-      ]
-    });
-
-    await actionSheet.present();
-  }
 }
