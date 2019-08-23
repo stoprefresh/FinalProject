@@ -69,12 +69,5 @@ public class PatientController {
 		return svc.update(patient.getId(), pt);
 	}
 	
-//	@DeleteMapping("{pid}")
-//	public void removePatient(@PathVariable int pid, HttpServletResponse resp) {
-//		if (svc.destroy(pid)) {
-//			resp.setStatus(204);
-//		}
-//		else resp.setStatus(404);
-//	}
 
 }
