@@ -42,7 +42,7 @@ public class AllergyServiceImpl implements AllergyService{
 	@Override
 	public Allergy update(Integer pid, Integer aid, Allergy newAllergy) {
 		Allergy allergyToUpdate = aRepo.findAllergyByIdAndPatient_Id(aid, pid);
-		newAllergy.setId(pid);
+		newAllergy.setId(aid);
 		newAllergy.setPatient(allergyToUpdate.getPatient());
 		allergyToUpdate = aRepo.saveAndFlush(newAllergy);
 		return newAllergy;
