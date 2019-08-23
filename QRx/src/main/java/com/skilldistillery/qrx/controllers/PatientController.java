@@ -55,7 +55,7 @@ public class PatientController {
 	    return svc.index(principal.getName());
 	}
 	
-	@PostMapping("") 
+	@PostMapping() 
 	public Patient addPatient(@RequestBody Patient pt, Principal principal) {
 		User user = userSvc.findByUsername(principal.getName());
 		System.out.println(user);

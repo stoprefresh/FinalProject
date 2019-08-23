@@ -68,12 +68,12 @@ export class PatientService {
     };
     if (this.auth.checkLogin()) {
       return this.http
-        .get<Patient[]>(this.url, httpOptions)
+        .get<Patient>(this.url, httpOptions)
         .pipe(
           catchError((err: any) => {
             console.log(err);
             return throwError(
-              'PatientService.index(): error retrieving list'
+              'PatientService.index(): error retrieving patient'
             );
           })
         );
