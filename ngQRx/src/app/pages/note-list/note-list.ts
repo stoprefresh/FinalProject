@@ -14,6 +14,7 @@ import { Patient } from '../../models/patient';
   styleUrls: ['./note-list.scss'],
 })
 export class NoteListPage implements OnInit {
+
   // FIELDS
   notes: Note[] = [];
   newNote: Note = new Note();

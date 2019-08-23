@@ -1,4 +1,8 @@
+import { User } from './../../models/user';
+import { UserData } from './../../services/user-data';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,46 +13,44 @@ import { Component, OnInit } from '@angular/core';
 export class QrCodePage implements OnInit {
 
   // Fields
-  encodeData: any;
-  scannedData: {};
-  elementType: 'url' | 'canvas' | 'img' = 'url';
-  value: 'Techiediaries';
-
+  user: User = null;
+  userQR: String = null;
 
   // Constructor
-  constructor() {
+  constructor(
+    public router: Router,
+    public userSvc: UserService
+  ) {
    }
 
 
   // Methods
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.getUser();
 
   }
 
-  // scanCode() {
-  //   this.barcodeScanner
-  //     .scan()
-  //     .then(barcodeData => {
-  //       alert('Barcode data ' + JSON.stringify(barcodeData));
-  //       this.scannedData = barcodeData;
-  //     })
-  //     .catch(err => {
-  //       console.log('Error', err);
-  //     });
-  // }
+  getQR() {
+    this.userQR = `https://api.qrserver.com/v1/create-qr-code/?data=${this.user.username}&amp;size=300x300`;
+  }
 
-  // encodedText() {
-  //   this.barcodeScanner
-  //     .encode(this.barcodeScanner.Encode.TEXT_TYPE, this.encodeData)
-  //     .then(
-  //       encodedData => {
-  //         console.log(encodedData);
-  //         this.encodeData = encodedData;
-  //       },
-  //       err => {
-  //         console.log('Error occured : ' + err);
-  //       }
-  //     );
-  // }
+  getUser() {
+    this.userSvc.index().subscribe(
+      good => {
+        if (good) {
+          this.user = good;
+          console.log(this.user.username);
+        }
+      },
+      bad => {
+        console.error(bad);
+      },
+      // TODO possible implementation for finally
+      () => {}
+    );
+  }
 
 }
