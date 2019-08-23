@@ -115,6 +115,5 @@ export class AllergyService {
       } else {
         this.router.navigateByUrl('/login');
       }
-
   }
 }

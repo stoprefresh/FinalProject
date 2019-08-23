@@ -10,11 +10,16 @@ import { Storage } from '@ionic/storage';
 export class UserData {
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
+  userRole = ' ';
 
   constructor(
     public events: Events,
     public storage: Storage
   ) { }
+
+  setUserRole(role: string) {
+    this.userRole = role;
+  }
 
   hasFavorite(sessionName: string): boolean {
     return (this._favorites.indexOf(sessionName) > -1);

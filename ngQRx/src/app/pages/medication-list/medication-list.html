@@ -32,19 +32,11 @@
 
             <ion-card-content>
               <ion-list>
-                <ion-item
-                  routerLink="/app/tabs/medications/medication-details/{{
-                    medication.id
-                  }}"
-                >
+                <ion-item routerLink="/app/tabs/medications/medication-details/{{medication.id}}">
                   <h3>Directions: {{ medication.directions }}</h3>
                   <br />
                 </ion-item>
-                <ion-item
-                  routerLink="/app/tabs/medications/medication-details/{{
-                    medication.id
-                  }}"
-                >
+                <ion-item routerLink="/app/tabs/medications/medication-details/{{medication.id}}">
                   <h3>Associated Diagnosis: {{ medication.diagnosis.name }}</h3>
                 </ion-item>
               </ion-list>
