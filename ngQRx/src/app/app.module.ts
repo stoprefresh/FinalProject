@@ -27,6 +27,8 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 
+
+
 @NgModule({
   imports: [
     BrowserModule,

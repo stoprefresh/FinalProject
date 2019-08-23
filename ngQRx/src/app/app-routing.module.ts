@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'provider-registration', loadChildren: './pages/provider-registration/provider.module#ProviderPageModule' },
   { path: 'patient-registration', loadChildren: './pages/patient-registration/patient.module#PatientPageModule' },
   { path: 'emt-view', loadChildren: './pages/emt-view/emt-view.module#EmtViewPageModule' },
+  { path: 'qr-code', loadChildren: './pages/qr-code/qr-code.module#QrCodePageModule' },
   { path: 'health-info', loadChildren: './pages/health-info/health-info.module#HealthInfoPageModule' }
 ];
 
