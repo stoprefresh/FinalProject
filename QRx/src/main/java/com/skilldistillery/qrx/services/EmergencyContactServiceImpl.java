@@ -40,23 +40,26 @@ public class EmergencyContactServiceImpl implements EmergencyContactService{
 	}
 
 	@Override
-	public EmergencyContact update(Integer pid, Integer did, EmergencyContact contact) {
-		EmergencyContact managed = ecRepo.findByIdAndPatient_Id(did, pid);
-		contact.setId(did);
+	public EmergencyContact update(Integer pid, Integer cid, EmergencyContact contact) {
+		EmergencyContact managed = ecRepo.findByIdAndPatient_Id(cid, pid);
+		contact.setId(cid);
 		contact.setPatient(managed.getPatient());
-		managed = ecRepo.saveAndFlush(managed);
+		managed = ecRepo.saveAndFlush(contact);
 		return managed;
 	}
 
 	@Override
-	public Boolean destroy(Integer pid, Integer did) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean destroy(Integer pid, Integer cid) {
+		EmergencyContact managed = ecRepo.findByIdAndPatient_Id(cid, pid);
+		if (managed != null) {
+			ecRepo.deleteById(cid);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public EmergencyContact findById(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

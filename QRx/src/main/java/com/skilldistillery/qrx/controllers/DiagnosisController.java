@@ -30,35 +30,30 @@ public class DiagnosisController {
 	@Autowired
 	private PatientService patientSvc;
 
-//	LIST	GET	/api/patients/diagnosis/	List Diagnosis
 	@GetMapping("diagnosis")
 	public List<Diagnosis> listDiagnosis(Principal principal) {
 		Patient patient = patientSvc.findPatientByUsername(principal.getName());
 		return diSvc.index(patient.getId());
 	}
 
-//	READ	GET	/api/patients/diagnosis/{did}/	Show Diagnosis
 	@GetMapping("diagnosis/{did}")
 	public Diagnosis show(@PathVariable Integer did, Principal principal) {
 		Patient patient = patientSvc.findPatientByUsername(principal.getName());
 		return diSvc.show(patient.getId(), did);
 	}
 
-//	CREATE	POST	/api/patients/diagnosis/	Add Diagnosis
 	@PostMapping("diagnosis")
 	public Diagnosis createDiagnosis(@RequestBody Diagnosis diagnosis, Principal principal) {
 		Patient patient = patientSvc.findPatientByUsername(principal.getName());
 		return diSvc.createDiagnosis(diagnosis, patient.getId());
 	}
 
-//	UPDATE	PUT	/api/patients/diagnosis/{did}/	Update Diagnosis
 	@PutMapping("diagnosis/{did}")
 	public Diagnosis update(@PathVariable Integer did, @RequestBody Diagnosis diagnosis, Principal principal) {
 		Patient patient = patientSvc.findPatientByUsername(principal.getName());
 		return diSvc.update(patient.getId(), did, diagnosis);
 	}
 
-//	DELETE	DELETE	/api/patients/diagnosis/{did}/	Delete Diagnosis
 	@DeleteMapping("diagnosis/{did}")
 	public Boolean destroy(@PathVariable Integer did, Principal principal) {
 		Patient patient = patientSvc.findPatientByUsername(principal.getName());

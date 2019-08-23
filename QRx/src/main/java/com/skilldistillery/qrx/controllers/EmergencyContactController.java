@@ -30,39 +30,30 @@ public class EmergencyContactController {
 	@Autowired
 	private PatientService patientSvc;
 
-//	LIST	GET	/api/patients/contacts/	List EmergencyContact
 	@GetMapping("contacts")
 	public List<EmergencyContact> listDiagnosis(Principal principal) {
 		Patient patient = patientSvc.findPatientByUsername(principal.getName());
 		return ecSvc.index(patient.getId());
 	}
-
-//	READ	GET	/api/patients/contacts/{did}/	Show EmergencyContact
-	@GetMapping("contacts/{did}")
-	public EmergencyContact show(@PathVariable Integer did, Principal principal) {
+	@GetMapping("contacts/{cid}")
+	public EmergencyContact show(@PathVariable Integer cid, Principal principal) {
 		Patient patient = patientSvc.findPatientByUsername(principal.getName());
-		return ecSvc.show(patient.getId(), did);
+		return ecSvc.show(patient.getId(), cid);
 	}
-
-//	CREATE	POST	/api/patients/contacts/	Add EmergencyContact
 	@PostMapping("contacts")
 	public EmergencyContact createContact(@RequestBody EmergencyContact contacts, Principal principal) {
 		Patient patient = patientSvc.findPatientByUsername(principal.getName());
 		return ecSvc.createContact(contacts, patient.getId());
 	}
-
-//	UPDATE	PUT	/api/patients/contacts/{did}/	Update EmergencyContact
-	@PutMapping("contacts/{did}")
-	public EmergencyContact update(@PathVariable Integer did, @RequestBody EmergencyContact contacts, Principal principal) {
+	@PutMapping("contacts/{cid}")
+	public EmergencyContact update(@PathVariable Integer cid, @RequestBody EmergencyContact contacts, Principal principal) {
 		Patient patient = patientSvc.findPatientByUsername(principal.getName());
-		return ecSvc.update(patient.getId(), did, contacts);
+		return ecSvc.update(patient.getId(), cid, contacts);
 	}
-
-//	DELETE	DELETE	/api/patients/contacts/{did}/	Delete EmergencyContact
-	@DeleteMapping("contacts/{did}")
-	public Boolean destroy(@PathVariable Integer did, Principal principal) {
+	@DeleteMapping("contacts/{cid}")
+	public Boolean destroy(@PathVariable Integer cid, Principal principal) {
 		Patient patient = patientSvc.findPatientByUsername(principal.getName());
-		return ecSvc.destroy(patient.getId(), did);
+		return ecSvc.destroy(patient.getId(), cid);
 
 	}
 }

@@ -17,7 +17,7 @@ public interface EmergencyContactService {
 
 	public EmergencyContact update(Integer pid, Integer did, EmergencyContact contact);
 
-	public Boolean destroy(Integer pid, Integer did);
+	public Boolean destroy(Integer pid, Integer cid);
 
 	public EmergencyContact findById(Integer id);
 }

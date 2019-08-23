@@ -15,8 +15,6 @@ export class AllergyService {
 
   private url = environment.baseUrl + 'api/patients/allergies';
 
-  editAllerby = null;
-
   // Constructor
   constructor(
     private datePipe: DatePipe,
