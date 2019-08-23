@@ -1,3 +1,4 @@
+import { ApprovedProvider } from './../models/approved-provider';
 import { Injectable } from '@angular/core';
 import { Medication } from '../models/medication';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -110,6 +111,25 @@ export class MedicationService {
         })
       };
       return this.http.put<any>(this.url + '/' + medication.id, medication, httpOptions);
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+  }
+  getMyProviders() {
+    const credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    if (this.auth.checkLogin()) {
+      return this.http.get<ApprovedProvider[]>(environment.baseUrl + 'api/patients/medications', httpOptions).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('ApprovedProviderService.index(): error retrieving list');
+        })
+      );
     } else {
       this.router.navigateByUrl('/login');
     }
