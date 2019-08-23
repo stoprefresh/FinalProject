@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactService } from './../../services/contact.service';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
 import { EmergencyContact } from './../../models/emergency-contact';
+import { ContactService } from './../../services/contact.service';
 
 @Component({
   selector: 'contacts-list-page-map',
@@ -11,7 +11,6 @@ import { EmergencyContact } from './../../models/emergency-contact';
   styleUrls: ['./contacts-list.scss']
 })
 export class ContactsListPage implements OnInit {
-
   // Fields
   contacts: EmergencyContact[] = [];
   newEmergencyContact: EmergencyContact = new EmergencyContact();
@@ -22,13 +21,11 @@ export class ContactsListPage implements OnInit {
     public actionSheetCtrl: ActionSheetController,
     public inAppBrowser: InAppBrowser,
     public router: Router,
-    private contactService: ContactService,
-  ) { }
+    private contactService: ContactService
+  ) {}
 
   // Methods
-  ngOnInit(): void {
-    this.reload();
-  }
+  ngOnInit(): void {}
 
   reload() {
     this.contactService.index().subscribe(
@@ -42,7 +39,7 @@ export class ContactsListPage implements OnInit {
       bad => {
         console.error(bad);
       },
-      () => { }
+      () => {}
     );
   }
 
@@ -51,9 +48,18 @@ export class ContactsListPage implements OnInit {
   }
 
   ionViewDidEnter() {
+    this.reload();
+  }
+
+  // ionViewWillEnter() {
+  //   this.reload();
+  // }
+
+  ionViewWillEnter() {
     this.contactService.index().subscribe((contacts: EmergencyContact[]) => {
       this.contacts = contacts;
     });
+    // console.error(this.diagnosisList.length);
 
   }
 
@@ -67,9 +73,8 @@ export class ContactsListPage implements OnInit {
       },
       () => {
         this.viewNewContactForm = false;
-        this.reload();
+        this.ionViewWillEnter();
       }
     );
   }
-
 }

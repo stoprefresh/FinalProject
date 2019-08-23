@@ -8,8 +8,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding allergy-detail"  *ngIf="allergy">
-  <div class="ion-text-center">
+<ion-content class="ion-padding allergy-detail">
+  <div class="ion-text-center" *ngIf="allergy && !editAllergy">
     <!-- <img [src]="allergy.drug.imgUrl" [alt]="allergy.drug.proprietaryName"> -->
     <br>
     <ion-card-subtitle>Allergen - {{allergy.allergen}}</ion-card-subtitle>
@@ -21,8 +21,6 @@
     <ion-card-subtitle>Active - {{allergy.active}}</ion-card-subtitle>
     <ion-list></ion-list>
   </div>
-  <p>{{allergy.reaction}}</p>
-
 
   <div *ngIf="editAllergy">
       <form>
@@ -44,12 +42,17 @@
               <ion-checkbox color="dark" checked slot="start" name='active' [(ngModel)]="editAllergy.active"></ion-checkbox>
             <ion-textarea></ion-textarea>
           </ion-item>
-          
+
         </ion-list>
 
-        <div class="ion-padding">
-          <ion-button (click)='saveEdit()' expand="block" type="submit" class="ion-no-margin">Save Allergy</ion-button>
-        </div>
+        <ion-row>
+          <ion-col>
+            <ion-button (click)="saveEdit()" expand="block" type="submit" class="ion-no-margin">Save</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="this.editAllergy = null" expand="block" type="submit" color="light" expand="block">Cancel</ion-button>
+          </ion-col>
+        </ion-row>
       </form>
     </div>
 

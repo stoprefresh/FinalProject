@@ -45,6 +45,7 @@ export class EditContactPage implements OnInit {
     this.contactService.update(this.editEmergencyContact).subscribe(
       good => {
         this.contact = this.editEmergencyContact;
+        this.ionViewWillEnter();
       },
       bad => {
         console.error(bad);
@@ -59,6 +60,7 @@ export class EditContactPage implements OnInit {
     this.contactService.destroy(this.contact.id).subscribe(
       good => {
         this.router.navigateByUrl('app/tabs/contacts');
+        this.ionViewWillEnter();
       },
       bad => {
         console.error(bad);

@@ -1,3 +1,5 @@
+import { DiagnosisService } from './../../services/diagnosis.service';
+import { Diagnosis } from './../../models/diagnosis';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Medication } from '../../models/medication';
@@ -12,12 +14,15 @@ export class MedicationDetailPage implements OnInit {
   // Fields
   medication: Medication = null;
   editMedication: Medication = null;
+  prescriberList: string[] = [ 'Kevin Smith MD' ];
+  diagnosisList: Diagnosis[];
 
   // Constructors
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private medicationService: MedicationService
+    private medicationService: MedicationService,
+    private dxSvc: DiagnosisService
   ) {}
 
   // Methods
@@ -28,6 +33,15 @@ export class MedicationDetailPage implements OnInit {
     this.medicationService.show(medicationId).subscribe(
       good => {
         this.medication = good;
+      },
+      bad => {
+        console.error(bad);
+        this.router.navigateByUrl('**');
+      }
+    );
+    this.dxSvc.index().subscribe(
+      good => {
+        this.diagnosisList = good;
       },
       bad => {
         console.error(bad);

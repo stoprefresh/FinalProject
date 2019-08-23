@@ -8,28 +8,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding medication-detail"  *ngIf="medication">
-  <div class="ion-text-center">
+<ion-content class="ion-padding medication-detail" >
+  <div class="ion-text-center"  *ngIf="medication && !editMedication">
     <!-- <img [src]="medication.drug.imgUrl" [alt]="medication.drug.proprietaryName"> -->
     <br>
-    <ion-card-subtitle>Medication Name - {{medication.medName}}</ion-card-subtitle>
-    <ion-list></ion-list>
-    <!-- <ion-button fill="clear" size="small" color="twitter">
-      <ion-icon name="logo-twitter" slot="icon-only"></ion-icon>
-    </ion-button>
-    <ion-button fill="clear" size="small" color="github">
-      <ion-icon name="logo-github" slot="icon-only"></ion-icon>
-    </ion-button>
-    <ion-button fill="clear" size="small" color="instagram">
-      <ion-icon name="logo-instagram" slot="icon-only"></ion-icon>
-    </ion-button> -->
+    <h4>Directions: {{medication.directions}}</h4>
+    <h4>Active: {{medication.active}}</h4>
+    <h4 *ngIf="medication.diagnosis.name">Diagnosis: {{medication.diagnosis.name}}</h4>
+    <h4 *ngIf="medication.prescriber">Prescribed By: {{medication.prescriber.provider.user.firstName}} {{medication.prescriber.provider.user.lastName}} {{medication.prescriber.provider.user.title}}</h4>
+    <h4 *ngIf="medication.reasonDiscontinued">Reason Discontinued: {{medication.reasonDiscontinued}}</h4>
   </div>
-  <p>{{medication.directions}}</p>
-
-
-
-
-
 
   <div *ngIf="editMedication">
       <form>
@@ -59,19 +47,37 @@
               <ion-checkbox color="dark" checked slot="start" name='active' [(ngModel)]="editMedication.active"></ion-checkbox>
             <ion-textarea></ion-textarea>
           </ion-item>
-          <!-- TODO: make these models! -->
-          <!-- <ion-item>
+
+          <ion-item>
             <ion-label position="stacked">Associated Diagnosis</ion-label>
-            <ion-textarea></ion-textarea>
+            <ion-select [placeholder]="medication.diagnosis.name" [(ngModel)]="editMedication.diagnosis" name="diagnosis">
+              <ion-select-option *ngFor="let diagnosis of diagnosisList" [value]="diagnosis">{{ diagnosis.name }}</ion-select-option>
+            </ion-select>
           </ion-item>
+
           <ion-item>
             <ion-label position="stacked">Prescriber</ion-label>
-            <ion-textarea></ion-textarea>
-          </ion-item> -->
+            <ion-select
+              placeholder="Kevin Smith MD"
+            >
+              <ion-select-option
+                *ngFor="let prescriber of prescriberList"
+                >{{prescriber}}</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+
         </ion-list>
 
         <div class="ion-padding">
-          <ion-button (click)='saveEdit()' expand="block" type="submit" class="ion-no-margin">Save Medication</ion-button>
+          <ion-row>
+              <ion-col>
+                <ion-button (click)="saveEdit()" expand="block" type="submit" class="ion-no-margin">Save</ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button (click)="this.editMedication = null" expand="block" type="submit" class="ion-no-margin" color="light" expand="block">Cancel</ion-button>
+              </ion-col>
+            </ion-row>
         </div>
       </form>
     </div>

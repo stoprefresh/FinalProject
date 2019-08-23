@@ -87,22 +87,31 @@
               ></ion-input>
             </ion-item>
           </ion-list>
+          <div class="ion-padding">
+            <ion-row>
+              <ion-col>
+                <ion-button
+                  (click)="saveEdit(); editEmergencyContact = null"
+                  expand="block"
+                  type="submit"
+                  class="ion-no-margin"
+                  >Save</ion-button
+                >
+              </ion-col>
+              <ion-col>
+                <ion-button
+                  (click)="editEmergencyContact = null"
+                  expand="block"
+                  type="submit"
+                  color="light"
+                  class="ion-no-margin"
+                  expand="block"
+                  >Cancel</ion-button
+                >
+              </ion-col>
+            </ion-row>
+          </div>
         </form>
-        <ion-button
-          (click)="saveEdit()"
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Save</ion-button
-        >
-        <br />
-        <ion-button
-          (click)="this.editEmergencyContact = null"
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Cancel</ion-button
-        >
   </div>
 
   <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="!editEmergencyContact">

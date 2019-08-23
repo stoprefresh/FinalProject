@@ -12,25 +12,24 @@
     <ion-grid fixed>
       <ion-row class="ion-align-items-stretch" *ngIf="contacts">
         <ion-col size="12" size-md="6" *ngFor="let contact of contacts">
-          <ion-card class="contact-card">
+          <ion-card
+            class="contact-card"
+            routerLink="/contacts-detail/{{ contact.id }}"
+          >
             <ion-card-header>
-              <ion-item
-                detail="false"
-                lines="none"
-                routerLink="/contacts-detail/{{ contact.id }}"
-              >
+              <ion-item detail="false" lines="none">
                 <h4>{{ contact.firstName }} {{ contact.lastName }}</h4>
               </ion-item>
             </ion-card-header>
             <ion-card-content>
               <ion-list>
-                <ion-item routerLink="/contacts-detail/{{ contact.id }}">
+                <ion-item>
                   <h3>Relationship: {{ contact.relationship }}<br /></h3>
                   <br /> </ion-item
-                ><ion-item routerLink="/contacts-detail/{{ contact.id }}">
+                ><ion-item>
                   <h3>Email: {{ contact.email }}</h3>
                   <br /> </ion-item
-                ><ion-item routerLink="/contacts-detail/{{ contact.id }}">
+                ><ion-item>
                   <label>Phone: </label>
                   <h3>{{ contact.phone }}</h3>
                   <br />
@@ -42,6 +41,7 @@
       </ion-row>
     </ion-grid>
   </ion-list>
+
   <div *ngIf="viewNewContactForm">
     <form>
       <ion-list lines="full" class="ion-no-margin ion-no-padding">
@@ -106,25 +106,29 @@
           ></ion-input>
         </ion-item>
       </ion-list>
-
       <div class="ion-padding">
-        <ion-button
-          (click)="addContact()"
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Save</ion-button
-        >
-        <br />
-        <ion-button
-          (click)="
-            this.viewNewContactForm = false; this.newEmergencyContact = null
-          "
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Cancel</ion-button
-        >
+        <ion-row>
+          <ion-col>
+            <ion-button
+              (click)="addContact()"
+              expand="block"
+              type="submit"
+              class="ion-no-margin"
+              >Save</ion-button
+            >
+          </ion-col>
+          <ion-col>
+            <ion-button
+              (click)="this.viewNewContactForm = false; this.newEmergencyContact = null"
+              expand="block"
+              type="submit"
+              color="light"
+              class="ion-no-margin"
+              expand="block"
+              >Cancel</ion-button
+            >
+          </ion-col>
+        </ion-row>
       </div>
     </form>
   </div>

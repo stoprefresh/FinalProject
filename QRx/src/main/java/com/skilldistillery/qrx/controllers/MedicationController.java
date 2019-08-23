@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.qrx.entities.ApprovedProvider;
 import com.skilldistillery.qrx.entities.Medication;
 import com.skilldistillery.qrx.entities.Patient;
 import com.skilldistillery.qrx.services.MedicationService;
 import com.skilldistillery.qrx.services.PatientService;
+import com.skilldistillery.qrx.services.ProviderService;
 
 @RestController
 @RequestMapping({"api/patients/", "api/patients"})
@@ -34,6 +36,9 @@ public class MedicationController {
 
 	@Autowired
 	private PatientService patientSvc;
+	
+	@Autowired
+	private ProviderService providerSvc;
 
 	@Autowired
 	private MedicationService svc;
@@ -75,6 +80,7 @@ public class MedicationController {
 	public Medication createMedication(@RequestBody Medication medication, HttpServletRequest req, HttpServletResponse resp, Principal prince) {
 		if (medication.getPatient() == null) {
 			Patient patient = patientSvc.findPatientByUsername(prince.getName());
+			ApprovedProvider ap = patient.getApprovedProviders().get(0);
 			if (medication.getStartDate() == null) {
 				DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 				Calendar calObj = Calendar.getInstance();
@@ -90,6 +96,7 @@ public class MedicationController {
 			}
 			try {
 				medication.setPatient(patient);
+				medication.setPrescriber(ap);
 				svc.create(medication);
 				resp.setStatus(201);
 				StringBuffer url = req.getRequestURL();
@@ -107,6 +114,7 @@ public class MedicationController {
 
 	@PutMapping("medications/{mid}")
 	public Medication replaceMedication(@PathVariable Integer mid, @RequestBody Medication medication, Principal prince) {
+		System.err.println(medication.getDiagnosis());
 		Patient patient = patientSvc.findPatientByUsername(prince.getName());
 		Medication med = svc.getByPatient_IdAndMedication_Id(patient.getId(), mid);
 		if (med != null) {

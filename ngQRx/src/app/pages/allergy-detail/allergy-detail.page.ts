@@ -41,14 +41,15 @@ export class AllergyDetailPage implements OnInit {
 
   setEditAllergy() {
     this.editAllergy = Object.assign({}, this.allergy);
+    console.log(this.editAllergy);
+    console.log(this.allergy);
   }
 
   saveEdit() {
-    console.log(this.editAllergy);
     this.allergyService.update(this.editAllergy).subscribe(
       good => {
         this.allergy = good;
-        console.log(good)
+        this.ionViewWillEnter();
       },
       bad => {
         console.error(bad);

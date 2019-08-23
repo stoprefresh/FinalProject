@@ -7,7 +7,7 @@ import { Diagnosis } from '../../models/diagnosis';
 import { Medication } from '../../models/medication';
 import { DiagnosisService } from './../../services/diagnosis.service';
 import { MedicationService } from './../../services/medication.service';
-import { Provider } from '../../models/provider';
+import { ApprovedProvider } from '../../models/approved-provider';
 
 @Component({
   selector: 'page-medication-list',
@@ -22,7 +22,7 @@ export class MedicationListPage implements OnInit {
   showInactive = false;
   viewMedForm = false;
   diagnosisList: Diagnosis[];
-  prescriberList: Provider[];
+  prescriberList: string[] = [ 'Kevin Smith MD' ];
 
   // Constructors
   constructor(
@@ -71,11 +71,6 @@ export class MedicationListPage implements OnInit {
     });
     // console.error(this.diagnosisList.length);
 
-    this.providerService.index().subscribe((providers: Provider[]) => {
-      this.prescriberList = providers;
-    });
-    // console.error(this.prescriberList.length);
-
   }
 
   addMed() {
@@ -93,33 +88,5 @@ export class MedicationListPage implements OnInit {
         this.reload();
       }
     );
-  }
-
-
-
-  async openContact(medication: any) {
-    const mode = 'ios'; // this.config.get('mode');
-
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Contact ' + medication.name,
-      buttons: [
-        {
-          text: `Email ( ${medication.email} )`,
-          icon: mode !== 'ios' ? 'mail' : null,
-          handler: () => {
-            window.open('mailto:' + medication.email);
-          }
-        },
-        {
-          text: `Call ( ${medication.phone} )`,
-          icon: mode !== 'ios' ? 'call' : null,
-          handler: () => {
-            window.open('tel:' + medication.phone);
-          }
-        }
-      ]
-    });
-
-    await actionSheet.present();
   }
 }

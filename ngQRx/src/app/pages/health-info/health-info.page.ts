@@ -46,7 +46,8 @@ export class HealthInfoPage implements OnInit {
   editPatientInfo() {
     this.ptSvc.update(this.patient).subscribe(
       good => {
-        this.patient = this.patient;
+        this.router.navigateByUrl('/health-info');
+        this.ionViewWillEnter();
       },
       bad => {
         console.error(bad);

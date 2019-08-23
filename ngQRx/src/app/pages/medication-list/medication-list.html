@@ -80,7 +80,6 @@
             placeholder="eg. Take one tablet by mouth daily"
             [(ngModel)]="newMedication.directions"
           ></ion-input>
-          <ion-textarea></ion-textarea>
         </ion-item>
 
         <ion-item>
@@ -102,7 +101,6 @@
             slot="start"
             [(ngModel)]="newMedication.active"
           ></ion-checkbox>
-          <ion-textarea></ion-textarea>
         </ion-item>
 
         <ion-item>
@@ -118,23 +116,18 @@
               >{{ diagnosis.name }}</ion-select-option
             >
           </ion-select>
-          <ion-textarea></ion-textarea>
         </ion-item>
 
         <ion-item>
             <ion-label position="stacked">Prescriber</ion-label>
             <ion-select
               placeholder="Select One"
-              [(ngModel)]="newMedication.prescriber"
-              name="prescriber"
             >
               <ion-select-option
                 *ngFor="let prescriber of prescriberList"
-                [value]="prescriber"
-                >{{ prescriber.user.firstName }}</ion-select-option
+                >{{prescriber}}</ion-select-option
               >
             </ion-select>
-            <ion-textarea></ion-textarea>
           </ion-item>
       </ion-list>
 
@@ -144,7 +137,7 @@
               <ion-button (click)="addMed()" expand="block" type="submit" class="ion-no-margin">Save</ion-button>
             </ion-col>
             <ion-col>
-              <ion-button (click)="this.viewMedForm = false" expand="block" type="submit" color="light" expand="block">Cancel</ion-button>
+              <ion-button (click)="this.viewMedForm = false" expand="block" type="submit" class="ion-no-margin" color="light" expand="block">Cancel</ion-button>
             </ion-col>
           </ion-row>
       </div>
