@@ -1,3 +1,4 @@
+import { QrGeneratorService } from './services/qr-generator.service';
 import { ProviderService } from './services/provider.service';
 import { PatientService } from './services/patient.service';
 import { UserService } from './services/user.service';
@@ -60,7 +61,8 @@ import { QRScanner } from '@ionic-native/qr-scanner/ngx';
     Camera,
     QRScanner,
     BarcodeScanner,
-    ProviderService
+    ProviderService,
+    QrGeneratorService
   ],
   bootstrap: [AppComponent]
 })
