@@ -1,6 +1,11 @@
 package com.skilldistillery.qrx.controllers;
 
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,6 +75,19 @@ public class MedicationController {
 	public Medication createMedication(@RequestBody Medication medication, HttpServletRequest req, HttpServletResponse resp, Principal prince) {
 		if (medication.getPatient() == null) {
 			Patient patient = patientSvc.findPatientByUsername(prince.getName());
+			if (medication.getStartDate() == null) {
+				DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+				Calendar calObj = Calendar.getInstance();
+				try {
+					Date startDate = df.parse(df.format(calObj.getTime()));
+					calObj.setTime(startDate);
+					calObj.add(Calendar.HOUR_OF_DAY, 1);
+					medication.setStartDate(calObj.getTime());
+					System.err.println(medication.getStartDate());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
 			try {
 				medication.setPatient(patient);
 				svc.create(medication);
