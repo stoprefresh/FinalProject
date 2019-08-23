@@ -21,7 +21,7 @@
     <ion-card-subtitle>Active - {{allergy.active}}</ion-card-subtitle>
     <ion-list></ion-list>
   </div>
-  <p>{{allergy.directions}}</p>
+  <p>{{allergy.reaction}}</p>
 
 
   <div *ngIf="editAllergy">
@@ -32,13 +32,13 @@
             <ion-input  required type="text" name='allergen' placeholder='eg. Benadryl' [(ngModel)]="editAllergy.allergen"></ion-input>
           </ion-item>
           <!-- TODO: add drug to allergy
-            
+
             <!-- <ion-item>
               <ion-label position="stacked">Directions</ion-label>
               <ion-input  required type="text" name='directions' placeholder='eg. Take one tablet by mouth daily' [(ngModel)]="editAllergy.directions"></ion-input>
               <ion-textarea></ion-textarea>
             </ion-item> -->
-            
+
             <ion-item>
               <ion-label position="stacked">Reaction <ion-text color="danger">*</ion-text></ion-label>
               <ion-input  required type="text" name='reaction' placeholder='eg. Hives' [(ngModel)]="editAllergy.reaction"></ion-input>
@@ -82,5 +82,5 @@
         </ion-fab-list>
 
       </ion-fab>
-    
+
 </ion-content>

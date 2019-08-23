@@ -23,6 +23,10 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
+  ionViewDidEnter() {
+    this.user = new User();
+  }
+
   onRegister() {
     this.router.navigateByUrl('/register');
   }
@@ -41,8 +45,11 @@ export class LoginPage implements OnInit {
         this.userService.index().subscribe(
           good => {
             this.user = good;
+            this.userData.setUserRole(this.user.role);
             if (this.user.role === 'ems') {
+
               this.router.navigateByUrl('/emt-view');
+
             } else { this.router.navigateByUrl('/app/tabs/medications'); }
           },
           error => {
