@@ -25,7 +25,6 @@ export class AllergyDetailPage implements OnInit {
 
   ionViewWillEnter() {
     const allergyId = this.route.snapshot.paramMap.get('allergyId');
-    // console.log(`ID is ${allergyId}   ********************`);
     this.allergyService.show(allergyId).subscribe(
       good => {
         // console.log('Life is Good');
@@ -48,8 +47,8 @@ export class AllergyDetailPage implements OnInit {
     console.log(this.editAllergy);
     this.allergyService.update(this.editAllergy).subscribe(
       good => {
-        // console.log(good);
-        this.allergy = this.editAllergy;
+        this.allergy = good;
+        console.log(good)
       },
       bad => {
         console.error(bad);

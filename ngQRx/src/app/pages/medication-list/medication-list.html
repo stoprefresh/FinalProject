@@ -40,7 +40,8 @@
                   <h3>Directions: {{ medication.directions }}</h3>
                   <br />
                 </ion-item>
-                <ion-item
+
+                <ion-item *ngIf="medication.diagnosis"
                   routerLink="/app/tabs/medications/medication-details/{{
                     medication.id
                   }}"
@@ -125,32 +126,36 @@
         </ion-item>
 
         <ion-item>
-          <ion-label position="stacked">Prescriber</ion-label>
-          <ion-textarea></ion-textarea>
-        </ion-item>
+            <ion-label position="stacked">Prescriber</ion-label>
+            <ion-select
+              placeholder="Select One"
+              [(ngModel)]="newMedication.prescriber"
+              name="prescriber"
+            >
+              <ion-select-option
+                *ngFor="let prescriber of prescriberList"
+                [value]="prescriber"
+                >{{ prescriber.user.firstName }}</ion-select-option
+              >
+            </ion-select>
+            <ion-textarea></ion-textarea>
+          </ion-item>
       </ion-list>
 
       <div class="ion-padding">
-        <ion-button
-          (click)="addMed()"
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Save</ion-button
-        >
-        <br />
-        <ion-button
-          (click)="this.viewMedForm = false"
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Cancel</ion-button
-        >
+        <ion-row>
+            <ion-col>
+              <ion-button (click)="addMed()" expand="block" type="submit" class="ion-no-margin">Save</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button (click)="this.viewMedForm = false" expand="block" type="submit" color="light" expand="block">Cancel</ion-button>
+            </ion-col>
+          </ion-row>
       </div>
     </form>
   </div>
   <!-- fab placed to the (vertical) center and end -->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="!viewMedForm">
     <ion-fab-button (click)="showMedForm()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
