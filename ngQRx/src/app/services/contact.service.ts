@@ -99,6 +99,7 @@ export class ContactService {
   }
 
   update(contact: EmergencyContact) {
+    console.log(contact);
     const credentials = this.auth.getCredentials();
     if (this.auth.checkLogin()) {
       const httpOptions = {

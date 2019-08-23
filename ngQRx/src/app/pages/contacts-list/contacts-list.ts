@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ContactService } from './../../services/contact.service';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -10,7 +10,7 @@ import { EmergencyContact } from './../../models/emergency-contact';
   templateUrl: 'contacts-list.html',
   styleUrls: ['./contacts-list.scss']
 })
-export class ContactsListPage {
+export class ContactsListPage implements OnInit {
 
   // Fields
   contacts: EmergencyContact[] = [];
@@ -26,6 +26,9 @@ export class ContactsListPage {
   ) { }
 
   // Methods
+  ngOnInit(): void {
+    this.reload();
+  }
 
   reload() {
     this.contactService.index().subscribe(
@@ -33,14 +36,12 @@ export class ContactsListPage {
         if (good) {
           this.contacts = good;
         } else {
-          // TODO fix route for error
           this.router.navigateByUrl('**');
         }
       },
       bad => {
         console.error(bad);
       },
-      // TODO possible implementation for finally
       () => { }
     );
   }
@@ -53,19 +54,19 @@ export class ContactsListPage {
     this.contactService.index().subscribe((contacts: EmergencyContact[]) => {
       this.contacts = contacts;
     });
+
   }
 
   addContact() {
     this.contactService.create(this.newEmergencyContact).subscribe(
       good => {
-        // console.log(good);
-        this.viewNewContactForm = false;
-        this.newEmergencyContact = new EmergencyContact();
+        this.newEmergencyContact = null;
       },
       bad => {
         console.error(bad);
       },
       () => {
+        this.viewNewContactForm = false;
         this.reload();
       }
     );
