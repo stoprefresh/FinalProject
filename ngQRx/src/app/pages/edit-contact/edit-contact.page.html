@@ -1,9 +1,128 @@
-<ion-header>
+<ion-header *ngIf="contact">
   <ion-toolbar>
-    <ion-title>editContact</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/contacts"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ contact.firstName }} {{ contact.lastName }}</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content class="ion-padding note-detail" *ngIf="contact">
+  <div class="ion-text-center">
+    <br />
+    <ion-card-subtitle
+      >Emergency Contact: {{ contact.firstName }}
+      {{ contact.lastName }}</ion-card-subtitle
+    >
+    <br />
+    <ion-card-subtitle>Phone: {{ contact.phone }}</ion-card-subtitle>
+    <ion-card-subtitle>Email: {{ contact.email }}</ion-card-subtitle>
+    <br />
+    <ion-card-subtitle
+      >Relationship:{{ contact.relationship }}</ion-card-subtitle
+    >
+    <ion-list></ion-list>
+  </div>
 
-<ion-content>
+  <div *ngIf="editEmergencyContact">
+    <form>
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+            <ion-item>
+              <ion-label position="stacked"
+                >First Name <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-input
+                required
+                type="text"
+                name="firstName"
+                placeholder=""
+                [(ngModel)]="editEmergencyContact.firstName"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked"
+                >Last Name <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-input
+                required
+                type="text"
+                name="lastName"
+                placeholder=""
+                [(ngModel)]="editEmergencyContact.lastName"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked"
+                >Phone <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-input
+                required
+                type="text"
+                name="phone"
+                placeholder=""
+                [(ngModel)]="editEmergencyContact.phone"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked"
+                >Email <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-input
+                required
+                type="text"
+                name="email"
+                placeholder=""
+                [(ngModel)]="editEmergencyContact.email"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked"
+                >Relationship <ion-text color="danger">*</ion-text></ion-label
+              >
+              <ion-input
+                required
+                type="text"
+                name="relationship"
+                placeholder=""
+                [(ngModel)]="editEmergencyContact.relationship"
+              ></ion-input>
+            </ion-item>
+          </ion-list>
+        </form>
+        <ion-button
+          (click)="saveEdit()"
+          expand="block"
+          type="submit"
+          class="ion-no-margin"
+          >Save</ion-button
+        >
+        <br />
+        <ion-button
+          (click)="this.editEmergencyContact = null"
+          expand="block"
+          type="submit"
+          class="ion-no-margin"
+          >Cancel</ion-button
+        >
+  </div>
 
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="!editEmergencyContact">
+    <ion-fab-button>
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button (click)="setEditEmergencyContact()">
+        <ion-icon name="sync"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="end">
+      <ion-fab-button (click)="deleteEmergencyContact()">
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button (click)="setEditNote()">
+          <ion-icon name="create"></ion-icon>
+        </ion-fab-button>
+      </ion-fab> -->
 </ion-content>

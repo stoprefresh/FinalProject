@@ -23,6 +23,7 @@ const routes: Routes = [
     path: 'app',
     loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
   },
+  { path: 'contacts-detail/:contactId', loadChildren: './pages/edit-contact/edit-contact.module#EditContactPageModule' },
   { path: 'provider-registration', loadChildren: './pages/provider-registration/provider.module#ProviderPageModule' },
   { path: 'patient-registration', loadChildren: './pages/patient-registration/patient.module#PatientPageModule' },
   { path: 'emt-view', loadChildren: './pages/emt-view/emt-view.module#EmtViewPageModule' }

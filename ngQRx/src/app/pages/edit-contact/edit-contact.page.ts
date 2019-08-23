@@ -1,6 +1,6 @@
+import { EmergencyContact } from './../../models/emergency-contact';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmergencyContact } from '../../models/emergency-contact';
 import { ContactService } from '../../services/contact.service';
 
 @Component({
@@ -11,46 +11,40 @@ import { ContactService } from '../../services/contact.service';
 
 export class EditContactPage implements OnInit {
   // Fields
-  allergy: EmergencyContact = null;
-  editcontact: EmergencyContact = null;
+  contact: EmergencyContact = null;
+  editEmergencyContact: EmergencyContact = null;
 
   // Constructors
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private allergyService: ContactService
+    private contactService: ContactService
   ) {}
 
   // Methods
   ngOnInit(): void {}
 
   ionViewWillEnter() {
-    const allergyId = this.route.snapshot.paramMap.get('allergyId');
-    // console.log(`ID is ${allergyId}   ********************`);
-    this.allergyService.show(allergyId).subscribe(
+    const contactId = this.route.snapshot.paramMap.get('contactId');
+    this.contactService.show(contactId).subscribe(
       good => {
-        // console.log('Life is Good');
-        // console.log(good);
-        this.allergy = good;
+        this.contact = good;
       },
       bad => {
         console.log('Life is Bad');
-        console.error(bad);
         this.router.navigateByUrl('**');
       }
     );
   }
 
   setEditEmergencyContact() {
-    this.editEmergencyContact = Object.assign({}, this.allergy);
+    this.editEmergencyContact = Object.assign({}, this.contact);
   }
 
   saveEdit() {
-    console.log(this.editEmergencyContact);
-    this.allergyService.update(this.editEmergencyContact).subscribe(
+    this.contactService.update(this.editEmergencyContact).subscribe(
       good => {
-        // console.log(good);
-        this.allergy = this.editEmergencyContact;
+        this.contact = this.editEmergencyContact;
       },
       bad => {
         console.error(bad);
@@ -62,11 +56,9 @@ export class EditContactPage implements OnInit {
   }
 
   deleteEmergencyContact() {
-    this.allergyService.destroy(this.allergy.id).subscribe(
+    this.contactService.destroy(this.contact.id).subscribe(
       good => {
-        // console.log('Delete successful');
-        // console.log(good);
-        this.router.navigateByUrl('app/tabs/allergies');
+        this.router.navigateByUrl('app/tabs/contacts');
       },
       bad => {
         console.error(bad);
