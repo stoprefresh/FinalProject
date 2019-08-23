@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Personal Health Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form *ngIf="patient">
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label position="stacked" color="primary">Date of Birth</ion-label>
+            <ion-input [(ngModel)]="patient.birthdate" name="birthdate" type="date" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label position="stacked" color="primary">Biological Sex</ion-label>
+                <ion-select name="sex" [(ngModel)]="patient.sex" >
+                  <ion-select-option value="male" >Male</ion-select-option>
+                  <ion-select-option value="female" >Female</ion-select-option>
+                </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Height (inches)</ion-label>
+            <ion-input  required type="number" name='height' [(ngModel)]="patient.height"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Weight (pounds)</ion-label>
+            <ion-input  required type="number" name='weight' [(ngModel)]="patient.weight"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Blood Type</ion-label>
+            <ion-select placeholder="Select One" [(ngModel)]="patient.bloodType" name="diagnosis">
+              <ion-select-option *ngFor="let bloodType of bloodTypes" [value]="bloodType">{{ bloodType.abo}}{{(bloodType.rh) ? '+' : '-'}}</ion-select-option></ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">DNR? (check box if you have one)</ion-label>
+            <ion-checkbox color="dark" checked slot="start" name='active' [(ngModel)]="patient.dnr"></ion-checkbox>
+          </ion-item>
+
+        </ion-list>
+
+        <div class="ion-padding">
+          <ion-button (click)="editPatientInfo()" type="submit" expand="block">Save Changes</ion-button>
+        </div>
+      </form>
+</ion-content>

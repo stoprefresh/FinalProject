@@ -32,7 +32,7 @@ export class MedicationListPage implements OnInit {
     private medicationService: MedicationService,
     private diagnosisService: DiagnosisService,
     private providerService: ProviderService
-    
+
   ) {}
 
   // Methods
@@ -70,18 +70,18 @@ export class MedicationListPage implements OnInit {
       this.diagnosisList = diagnosisList;
     });
     // console.error(this.diagnosisList.length);
-    
+
     this.providerService.index().subscribe((providers: Provider[]) => {
       this.prescriberList = providers;
     });
     // console.error(this.prescriberList.length);
-    
+
   }
 
   addMed() {
     this.medicationService.create(this.newMedication).subscribe(
       good => {
-        // console.log(good);
+        console.log(good);
         this.viewMedForm = false;
         this.newMedication = new Medication();
       },

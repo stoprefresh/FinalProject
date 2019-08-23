@@ -26,7 +26,8 @@ const routes: Routes = [
   { path: 'contacts-detail/:contactId', loadChildren: './pages/edit-contact/edit-contact.module#EditContactPageModule' },
   { path: 'provider-registration', loadChildren: './pages/provider-registration/provider.module#ProviderPageModule' },
   { path: 'patient-registration', loadChildren: './pages/patient-registration/patient.module#PatientPageModule' },
-  { path: 'emt-view', loadChildren: './pages/emt-view/emt-view.module#EmtViewPageModule' }
+  { path: 'emt-view', loadChildren: './pages/emt-view/emt-view.module#EmtViewPageModule' },
+  { path: 'health-info', loadChildren: './pages/health-info/health-info.module#HealthInfoPageModule' }
 ];
 
 @NgModule({
