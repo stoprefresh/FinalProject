@@ -31,13 +31,8 @@
             <ion-label position="stacked">Allergy Name <ion-text color="danger">*</ion-text></ion-label>
             <ion-input  required type="text" name='allergen' placeholder='eg. Benadryl' [(ngModel)]="editAllergy.allergen"></ion-input>
           </ion-item>
-          <!-- TODO: add drug to allergy
+          <!-- TODO: add drug to allergy -->
 
-            <!-- <ion-item>
-              <ion-label position="stacked">Directions</ion-label>
-              <ion-input  required type="text" name='directions' placeholder='eg. Take one tablet by mouth daily' [(ngModel)]="editAllergy.directions"></ion-input>
-              <ion-textarea></ion-textarea>
-            </ion-item> -->
 
             <ion-item>
               <ion-label position="stacked">Reaction <ion-text color="danger">*</ion-text></ion-label>
@@ -49,15 +44,7 @@
               <ion-checkbox color="dark" checked slot="start" name='active' [(ngModel)]="editAllergy.active"></ion-checkbox>
             <ion-textarea></ion-textarea>
           </ion-item>
-          <!-- TODO: make these models! -->
-          <!-- <ion-item>
-            <ion-label position="stacked">Associated Diagnosis</ion-label>
-            <ion-textarea></ion-textarea>
-          </ion-item>
-          <ion-item>
-            <ion-label position="stacked">Prescriber</ion-label>
-            <ion-textarea></ion-textarea>
-          </ion-item> -->
+          
         </ion-list>
 
         <div class="ion-padding">

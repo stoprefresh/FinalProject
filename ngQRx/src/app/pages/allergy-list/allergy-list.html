@@ -33,6 +33,12 @@
                   }}"
                 >
                   <h3>Reaction - {{ allergy.reaction }}</h3>
+                </ion-item>
+                <ion-item
+                  routerLink="/app/tabs/allergies/allergy-detail/{{
+                    allergy.id
+                  }}"
+                >
                   <h3>Active - {{ allergy.active }}</h3>
                 </ion-item>
               </ion-list>
@@ -49,6 +55,7 @@
         <ion-label position="stacked">Allergen Name <ion-text color="danger">*</ion-text></ion-label>
         <ion-input  required type="text" name='allergen' placeholder='eg. cat dander' [(ngModel)]="newAllergy.allergen"></ion-input>
       </ion-item>
+      <br>
       <ion-item>
         <ion-label position="stacked">Reaction <ion-text color="danger">*</ion-text></ion-label>
         <ion-input  required type="text" name='reaction' placeholder='eg. red itchy eyes' [(ngModel)]="newAllergy.reaction"></ion-input>
