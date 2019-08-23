@@ -112,6 +112,13 @@ public class ApprovedProvider {
 	public String toString() {
 		return "ApprovedPrescriber [id=" + id + ", dateApproved=" + dateApproved + "]";
 	}
+
+	public ApprovedProvider(int id, Patient patient, Provider provider) {
+		super();
+		this.id = id;
+		this.patient = patient;
+		this.provider = provider;
+	}
 	
 
 }

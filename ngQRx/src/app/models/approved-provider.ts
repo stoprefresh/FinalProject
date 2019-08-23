@@ -1,7 +1,6 @@
 import { Patient } from './patient';
-import { Provider } from '@angular/core';
 import { Medication } from './medication';
-import { Identifiers } from '@angular/compiler';
+import { Provider } from './provider';
 
 export class ApprovedProvider {
   // TODO
