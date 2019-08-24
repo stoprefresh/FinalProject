@@ -32,7 +32,6 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    // console.log(this.user);
     this.auth.login(this.user.username, this.user.password).subscribe(
       next => {
         this.userData.login(this.user.username);

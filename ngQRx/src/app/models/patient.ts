@@ -22,7 +22,7 @@ export class Patient {
   diagnoses: Diagnosis [];
   personalNotes: Note [];
   approvedProviders: ApprovedProvider [];
-  medList: Medication [];
+  medicationList: Medication [];
 
   constructor(id?: number,
               contacts?: EmergencyContact [],
@@ -38,7 +38,7 @@ export class Patient {
               diagnoses?: Diagnosis [],
               notes?: Note [],
               approvedProviders?: ApprovedProvider [],
-              medList?: Medication []) {
+              medicationList?: Medication []) {
       this.id = id;
       this.emergencyContacts = contacts;
       this.user = user;
@@ -53,6 +53,6 @@ export class Patient {
       this.diagnoses = diagnoses;
       this.personalNotes = notes;
       this.approvedProviders = approvedProviders;
-      this.medList = medList;
+      this.medicationList = medicationList;
     }
 }

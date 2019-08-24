@@ -11,15 +11,12 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Patient } from '../../models/patient';
 import { ActivatedRoute } from '@angular/router';
 
-
-
 @Component({
   selector: 'emt-view',
   templateUrl: './emt-view.page.html',
-  styleUrls: ['./emt-view.page.scss'],
+  styleUrls: ['./emt-view.page.scss']
 })
 export class EmtViewPage implements OnInit {
-
   // Fields
   currentImage: any;
   encodeData: any;
@@ -30,44 +27,42 @@ export class EmtViewPage implements OnInit {
   username: String = null;
 
   // Contructors
- constructor(
-   private qrScanner: QRScanner,
-   private route: ActivatedRoute,
+  constructor(
+    private qrScanner: QRScanner,
+    private route: ActivatedRoute,
     // private camera: Camera,
     private barcodeScanner: BarcodeScanner,
     private patientService: PatientService,
     private emergencyContactService: ContactService
-   ) { }
+  ) {}
 
- // Methods
- ngOnInit() {
- }
+  // Methods
+  ngOnInit() {}
 
- findPatient(username: any) {
-   console.log(username);
+  findPatient(username: any) {
+    console.log(username);
     this.patientService.findByUserName(username).subscribe(
       good => {
         this.currentPatient = good;
         username = null;
         console.log(this.currentPatient.emergencyContacts);
+        console.log(this.currentPatient.medicationList);
       },
       bad => {
         console.error(bad);
       }
     );
- }
+  }
 
- scanCode() {
-   this.barcodeScanner
-     .scan()
-     .then(barcodeData => {
-       alert('Barcode data ' + JSON.stringify(barcodeData));
-       this.scannedData = barcodeData;
-     })
-     .catch(err => {
-       console.log('Error', err);
-     });
- }
-
-
+  scanCode() {
+    this.barcodeScanner
+      .scan()
+      .then(barcodeData => {
+        alert('Barcode data ' + JSON.stringify(barcodeData));
+        this.scannedData = barcodeData;
+      })
+      .catch(err => {
+        console.log('Error', err);
+      });
+  }
 }
