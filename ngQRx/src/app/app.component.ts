@@ -30,27 +30,27 @@ export class AppComponent implements OnInit {
     {
       title: 'Emergency Contacts',
       url: '/app/tabs/contacts',
-      icon: 'calendar'
+      icon: 'contacts'
     },
     {
       title: 'Medications',
       url: '/app/tabs/medications',
-      icon: 'contacts'
+      icon: 'medical'
     },
     {
       title: 'Allergies',
       url: '/app/tabs/allergies',
-      icon: 'map'
+      icon: 'warning'
     },
     {
       title: 'Notes',
       url: '/app/tabs/notes',
-      icon: 'information-circle'
+      icon: 'clipboard'
     },
     {
       title: 'Health Information',
       url: '/health-info',
-      icon: 'information-circle'
+      icon: 'medkit'
     }
   ];
   loggedIn = false;
