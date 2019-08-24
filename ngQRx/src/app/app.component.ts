@@ -25,8 +25,6 @@ export class AppComponent implements OnInit {
 
   // Fields
   user: User;
-  isEMS = false;
-
 
   appPages = [
     {
@@ -105,7 +103,6 @@ export class AppComponent implements OnInit {
 
   isUserEMS() {
     if (this.userData.userRole === 'ems') {
-        this.isEMS = true;
         return true;
     }
     return false;
@@ -150,7 +147,6 @@ export class AppComponent implements OnInit {
       return this.router.navigateByUrl('/login');
     });
     this.user = null;
-    this.isEMS = false;
   }
 
 }

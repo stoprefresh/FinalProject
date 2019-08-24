@@ -1,7 +1,6 @@
 <ion-app>
   <ion-split-pane>
-
-    <ion-menu>
+    <ion-menu >
       <ion-header>
         <ion-toolbar>
           <ion-title>QRx</ion-title>
@@ -23,22 +22,17 @@
             </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle autoHide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item [routerLink]="p.url" routerLinkActive="active" routerDirection="root">
+          <ion-menu-toggle autoHide="false" *ngFor="let p of appPages; let i = index" >
+            <ion-item [routerLink]="p.url" routerLinkActive="active" routerDirection="root" *ngIf='!isUserEMS()'>
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <ion-menu-toggle autoHide="false" *ngIf='!isUserEMS()'>
-            <ion-item routerLink="/qr-code" routerDirection="root">
-              <ion-icon slot="start" name="barcode"></ion-icon>
-              <ion-label>
-                  Your QRx
-              </ion-label>
-            </ion-item>
-          </ion-menu-toggle>
+
+
+
         </ion-list>
 
         <ion-list *ngIf="loggedIn">
@@ -46,11 +40,20 @@
             Account
           </ion-list-header>
 
+          <ion-menu-toggle autoHide="false" *ngIf='!isUserEMS()'>
+              <ion-item routerLink="/qr-code" routerDirection="root">
+                <ion-icon slot="start" name="barcode"></ion-icon>
+                <ion-label>
+                MyQRx
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+
           <ion-menu-toggle autoHide="false">
             <ion-item routerLink="/account" routerDirection="root">
               <ion-icon slot="start" name="person"></ion-icon>
               <ion-label>
-                Account
+                Account Details
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -96,5 +99,4 @@
     <ion-router-outlet main></ion-router-outlet>
 
   </ion-split-pane>
-
 </ion-app>
