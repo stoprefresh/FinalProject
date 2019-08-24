@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
@@ -10,17 +10,15 @@ import { MedicationService } from './../../services/medication.service';
 @Component({
   selector: 'page-medication-list',
   templateUrl: 'medication-list.html',
-  styleUrls: ['./medication-list.scss'],
+  styleUrls: ['./medication-list.scss']
 })
 export class MedicationListPage implements OnInit {
-
   // Fields
   medications: Medication[] = [];
   newMedication: Medication = new Medication();
-  showInactive = false;
   viewMedForm = false;
   diagnosisList: Diagnosis[];
-  prescriberList: string[] = [ 'Kevin Smith MD' ];
+  prescriberList: string[] = ['Kevin Smith MD'];
 
   // Constructors
   constructor(
@@ -28,8 +26,7 @@ export class MedicationListPage implements OnInit {
     public inAppBrowser: InAppBrowser,
     public router: Router,
     private medicationService: MedicationService,
-    private diagnosisService: DiagnosisService,
-
+    private diagnosisService: DiagnosisService
   ) {}
 
   // Methods
@@ -40,7 +37,7 @@ export class MedicationListPage implements OnInit {
   reload() {
     this.medicationService.index().subscribe(
       good => {
-          this.medications = good;
+        this.medications = good;
       },
       bad => {
         console.error(bad);

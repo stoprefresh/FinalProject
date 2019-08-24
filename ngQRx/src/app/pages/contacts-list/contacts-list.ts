@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
-import { ActionSheetController } from "@ionic/angular";
-import { EmergencyContact } from "./../../models/emergency-contact";
-import { ContactService } from "./../../services/contact.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ActionSheetController } from '@ionic/angular';
+import { EmergencyContact } from './../../models/emergency-contact';
+import { ContactService } from './../../services/contact.service';
 
 @Component({
-  selector: "contacts-list-page-map",
-  templateUrl: "contacts-list.html",
-  styleUrls: ["./contacts-list.scss"]
+  selector: 'contacts-list-page-map',
+  templateUrl: 'contacts-list.html',
+  styleUrls: ['./contacts-list.scss']
 })
 export class ContactsListPage implements OnInit {
   // Fields
@@ -53,14 +53,14 @@ export class ContactsListPage implements OnInit {
   addContact() {
     this.contactService.create(this.newEmergencyContact).subscribe(
       good => {
+        this.viewNewContactForm = false;
         this.newEmergencyContact = null;
       },
       bad => {
         console.error(bad);
       },
       () => {
-        this.viewNewContactForm = false;
-        this.ionViewDidEnter();
+        this.reload();
       }
     );
   }

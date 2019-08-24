@@ -25,96 +25,101 @@
 
   <div *ngIf="editEmergencyContact">
     <form>
-        <ion-list lines="full" class="ion-no-margin ion-no-padding">
-            <ion-item>
-              <ion-label position="stacked"
-                >First Name <ion-text color="danger">*</ion-text></ion-label
-              >
-              <ion-input
-                required
-                type="text"
-                name="firstName"
-                placeholder=""
-                [(ngModel)]="editEmergencyContact.firstName"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="stacked"
-                >Last Name <ion-text color="danger">*</ion-text></ion-label
-              >
-              <ion-input
-                required
-                type="text"
-                name="lastName"
-                placeholder=""
-                [(ngModel)]="editEmergencyContact.lastName"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="stacked"
-                >Phone <ion-text color="danger">*</ion-text></ion-label
-              >
-              <ion-input
-                required
-                type="text"
-                name="phone"
-                placeholder=""
-                [(ngModel)]="editEmergencyContact.phone"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="stacked"
-                >Email <ion-text color="danger">*</ion-text></ion-label
-              >
-              <ion-input
-                required
-                type="text"
-                name="email"
-                placeholder=""
-                [(ngModel)]="editEmergencyContact.email"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="stacked"
-                >Relationship <ion-text color="danger">*</ion-text></ion-label
-              >
-              <ion-input
-                required
-                type="text"
-                name="relationship"
-                placeholder=""
-                [(ngModel)]="editEmergencyContact.relationship"
-              ></ion-input>
-            </ion-item>
-          </ion-list>
-          <div class="ion-padding">
-            <ion-row>
-              <ion-col>
-                <ion-button
-                  (click)="saveEdit(); editEmergencyContact = null"
-                  expand="block"
-                  type="submit"
-                  class="ion-no-margin"
-                  >Save</ion-button
-                >
-              </ion-col>
-              <ion-col>
-                <ion-button
-                  (click)="editEmergencyContact = null"
-                  expand="block"
-                  type="submit"
-                  color="light"
-                  class="ion-no-margin"
-                  expand="block"
-                  >Cancel</ion-button
-                >
-              </ion-col>
-            </ion-row>
-          </div>
-        </form>
+      <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item>
+          <ion-label position="stacked"
+            >First Name <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input
+            required
+            type="text"
+            name="firstName"
+            placeholder=""
+            [(ngModel)]="editEmergencyContact.firstName"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked"
+            >Last Name <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input
+            required
+            type="text"
+            name="lastName"
+            placeholder=""
+            [(ngModel)]="editEmergencyContact.lastName"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked"
+            >Phone <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input
+            required
+            type="text"
+            name="phone"
+            placeholder=""
+            [(ngModel)]="editEmergencyContact.phone"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked"
+            >Email <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input
+            required
+            type="text"
+            name="email"
+            placeholder=""
+            [(ngModel)]="editEmergencyContact.email"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked"
+            >Relationship <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input
+            required
+            type="text"
+            name="relationship"
+            placeholder=""
+            [(ngModel)]="editEmergencyContact.relationship"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+      <div class="ion-padding">
+        <ion-row>
+          <ion-col>
+            <ion-button
+              (click)="saveEdit(); editEmergencyContact = null"
+              expand="block"
+              type="submit"
+              class="ion-no-margin"
+              >Save</ion-button
+            >
+          </ion-col>
+          <ion-col>
+            <ion-button
+              (click)="editEmergencyContact = null"
+              expand="block"
+              type="submit"
+              color="light"
+              class="ion-no-margin"
+              expand="block"
+              >Cancel</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </div>
+    </form>
   </div>
 
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="!editEmergencyContact">
+  <ion-fab
+    vertical="bottom"
+    horizontal="center"
+    slot="fixed"
+    *ngIf="!editEmergencyContact"
+  >
     <ion-fab-button>
       <ion-icon name="create"></ion-icon>
     </ion-fab-button>

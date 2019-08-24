@@ -14,7 +14,11 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: ContactsListPage,
+            loadChildren: () => import('../contacts-list/contacts-list.module').then(m => m.ContactsListModule)
+          },
+          {
+            path: 'contacts-detail/:contactId',
+            loadChildren: () => import('../edit-contact/edit-contact.module').then(m => m.EditContactPageModule)
           }
         ]
       },

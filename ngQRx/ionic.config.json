@@ -1,4 +1,7 @@
 {
   "name": "ionic-qrx-app",
-  "type": "angular"
+  "type": "angular",
+  "integrations": {
+    "capacitor": {}
+  }
 }

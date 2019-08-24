@@ -33,15 +33,12 @@
               <ion-label position="stacked">Reaction <ion-text color="danger">*</ion-text></ion-label>
               <ion-input  required type="text" name='reaction' placeholder='eg. Hives' [(ngModel)]="editAllergy.reaction"></ion-input>
             </ion-item>
-
             <ion-item>
               <ion-label position="stacked">Allergy Active</ion-label>
               <ion-checkbox color="dark" checked slot="start" name='active' [(ngModel)]="editAllergy.active"></ion-checkbox>
             <ion-textarea></ion-textarea>
           </ion-item>
-
         </ion-list>
-
         <ion-row>
           <ion-col>
             <ion-button (click)="saveEdit()" expand="block" type="submit" class="ion-no-margin">Save</ion-button>
@@ -52,7 +49,6 @@
         </ion-row>
       </form>
     </div>
-
     <ion-fab vertical="bottom" horizontal="center" slot="fixed">
         <ion-fab-button>
           <ion-icon name="create"></ion-icon>
@@ -67,7 +63,5 @@
               <ion-icon name="close-circle"></ion-icon>
             </ion-fab-button>
         </ion-fab-list>
-
       </ion-fab>
-
 </ion-content>

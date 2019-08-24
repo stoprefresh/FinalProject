@@ -14,8 +14,6 @@ export class ContactService {
 
   private url = environment.baseUrl + 'api/patients/contacts';
 
-  editContact = null;
-
   constructor(
     private http: HttpClient,
     private auth: AuthoService,
