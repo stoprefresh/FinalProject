@@ -9,30 +9,65 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    loadChildren: () => import('./pages/edit-user/account.module').then(m => m.AccountModule)
+    loadChildren: () =>
+      import('./pages/edit-user/account.module').then(m => m.AccountModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
+    loadChildren: () =>
+      import('./pages/login/login.module').then(m => m.LoginModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./pages/user-registration/register.module').then(m => m.RegisterModule)
+    loadChildren: () =>
+      import('./pages/user-registration/register.module').then(
+        m => m.RegisterModule
+      )
   },
   {
     path: 'app',
-    loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
+    loadChildren: () =>
+      import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule)
   },
-  // { path: 'contacts-detail/:contactId', loadChildren: './pages/edit-contact/edit-contact.module#EditContactPageModule' },
-  { path: 'provider-registration', loadChildren: './pages/provider-registration/provider.module#ProviderPageModule' },
-  { path: 'patient-registration', loadChildren: './pages/patient-registration/patient.module#PatientPageModule' },
-  { path: 'emt-view', loadChildren: './pages/emt-view/emt-view.module#EmtViewPageModule' },
-  { path: 'qr-code', loadChildren: './pages/qr-code/qr-code.module#QrCodePageModule' },
-  { path: 'health-info', loadChildren: './pages/health-info/health-info.module#HealthInfoPageModule' }
+  {
+    path: 'provider-registration',
+    loadChildren: () =>
+      import('./pages/provider-registration/provider.module').then(
+        m => m.ProviderPageModule
+      )
+  },
+  {
+    path: 'patient-registration',
+    loadChildren: () =>
+      import('./pages/patient-registration/patient.module').then(
+        m => m.PatientPageModule
+      )
+  },
+  {
+    path: 'emt-view',
+    loadChildren: () =>
+      import('./pages/emt-view/emt-view.module').then(
+        m => m.EmtViewPageModule
+      )
+  },
+  {
+    path: 'qr-code',
+    loadChildren: () =>
+      import('./pages/qr-code/qr-code.module').then(
+        m => m.QrCodePageModule
+      )
+  },
+  {
+    path: 'health-info',
+    loadChildren: () =>
+      import(
+        './pages/health-info/health-info.module'
+      ).then(m => m.HealthInfoPageModule)
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

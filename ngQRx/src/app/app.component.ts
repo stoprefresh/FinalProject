@@ -41,9 +41,9 @@ export class AppComponent implements OnInit {
       icon: 'clipboard'
     },
     {
-      title: 'Health Information',
+      title: 'Biometrics',
       url: '/health-info',
-      icon: 'medkit'
+      icon: 'finger-print'
     }
   ];
 
@@ -67,11 +67,33 @@ export class AppComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }
     this.isUserEMS();
-    console.log('test');
+    this.isUserAdmin();
+    this.isUserPhysician();
   }
 
   isUserEMS() {
     if (this.userData.userRole === 'ems') {
+      return true;
+    }
+    return false;
+  }
+
+  isUserAdmin() {
+    if (this.userData.userRole === 'admin') {
+      return true;
+    }
+    return false;
+  }
+
+  isUserPhysician() {
+    if (this.userData.userRole === 'physician') {
+      return true;
+    }
+    return false;
+  }
+
+  isUserPatient() {
+    if (this.userData.userRole === 'patient') {
       return true;
     }
     return false;
