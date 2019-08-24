@@ -78,21 +78,27 @@
         </ion-item>
       </ion-list>
       <div class="ion-padding">
-        <ion-button
-          (click)="addAllergy(); this.viewAllergyForm = false"
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Save</ion-button
-        >
-        <br />
-        <ion-button
-          (click)="this.viewAllergyForm = false"
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Cancel</ion-button
-        >
+        <ion-row>
+          <ion-col>
+            <ion-button
+              (click)="addAllergy(); this.viewAllergyForm = false"
+              expand="block"
+              type="submit"
+              class="ion-no-margin"
+              >Save</ion-button
+            >
+          </ion-col>
+          <ion-col>
+            <ion-button
+              (click)="this.viewAllergyForm = false"
+              expand="block"
+              color="light"
+              class="ion-no-margin"
+              expand="block"
+              >Cancel</ion-button
+            >
+          </ion-col>
+        </ion-row>
       </div>
     </form>
   </div>
