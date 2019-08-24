@@ -12,19 +12,18 @@
     <ion-grid fixed>
       <ion-row class="ion-align-items-stretch" *ngIf="medications">
         <ion-col size="12" size-md="6" *ngFor="let medication of medications">
-          <ion-card class="medication-card">
+          <ion-card class="medication-card" routerLink="/app/tabs/medications/medication-details/{{
+            medication.id
+          }}">
             <ion-card-header>
               <ion-item
                 detail="false"
                 lines="none"
-                routerLink="/app/tabs/medications/medication-details/{{
-                  medication.id
-                }}"
               >
                 <!-- TODO fix drug images url, add default img -->
-                <ion-avatar slot="start">
-                  <!-- <img [src]="medication.drug.imgUrl" alt="Medication profile pic"> -->
-                  <ion-icon name="remove-circle"></ion-icon>
+                <ion-avatar slot="start"  *ngIf="medication.drug.imgUrl">
+                  <img [src]="medication.drug.imgUrl" alt="Medication profile pic">
+                  <!-- <ion-icon name="remove-circle"></ion-icon> -->
                 </ion-avatar>
                 <h4>{{ medication.medName }}</h4>
               </ion-item>
@@ -32,16 +31,12 @@
 
             <ion-card-content>
               <ion-list>
-                <ion-item routerLink="/app/tabs/medications/medication-details/{{medication.id}}">
+                <ion-item  *ngIf="medication.directions">
                   <h3>Directions: {{ medication.directions }}</h3>
                   <br />
                 </ion-item>
 
-                <ion-item *ngIf="medication.diagnosis"
-                  routerLink="/app/tabs/medications/medication-details/{{
-                    medication.id
-                  }}"
-                >
+                <ion-item *ngIf="medication.diagnosis">
                   <h3>Associated Diagnosis: {{ medication.diagnosis.name }}</h3>
                 </ion-item>
               </ion-list>

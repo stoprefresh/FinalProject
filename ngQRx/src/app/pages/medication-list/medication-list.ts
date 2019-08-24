@@ -34,6 +34,9 @@ export class MedicationListPage implements OnInit {
 
   // Methods
   ngOnInit(): void {
+  }
+
+  ionViewDidLoad(): void {
     this.reload();
   }
 
@@ -59,7 +62,6 @@ export class MedicationListPage implements OnInit {
     this.diagnosisService.index().subscribe((diagnosisList: Diagnosis[]) => {
       this.diagnosisList = diagnosisList;
     });
-
     this.approvedProviderService.index().subscribe((prescriberList: ApprovedProvider[]) => {
       this.prescriberList = prescriberList;
     });

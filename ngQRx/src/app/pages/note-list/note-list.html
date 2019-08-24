@@ -54,7 +54,7 @@
           <!-- <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input> -->
           <ion-input
             required
-            type="text"
+            type="textarea"
             name="textContent"
             placeholder="eg. Feeling dizzy..."
             [(ngModel)]="newNote.textContent"
@@ -67,14 +67,14 @@
             <ion-textarea></ion-textarea>
           </ion-item> -->
 
-        <ion-item>
+        <!-- <ion-item>
           <ion-label position="stacked">Date Updated</ion-label>
           <ion-datetime
             value="1980-02-19"
             name="updateDate"
             [(ngModel)]="newNote.updateDate"
           ></ion-datetime>
-        </ion-item>
+        </ion-item> -->
 
         <ion-item>
           <ion-label>Associated Medication</ion-label>
@@ -89,23 +89,15 @@
           </ion-select>
         </ion-item>
       </ion-list>
-
       <div class="ion-padding">
-        <ion-button
-          (click)="addNote()"
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Save</ion-button
-        >
-        <br />
-        <ion-button
-          (click)="this.viewNoteForm = false"
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Cancel</ion-button
-        >
+        <ion-row>
+            <ion-col>
+              <ion-button (click)="addNote()" expand="block" type="submit" class="ion-no-margin">Save</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button (click)="this.viewNoteForm = false" expand="block" type="submit" class="ion-no-margin" color="light" expand="block">Cancel</ion-button>
+            </ion-col>
+          </ion-row>
       </div>
     </form>
   </div>
