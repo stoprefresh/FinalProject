@@ -31,18 +31,11 @@ export class AllergyListPage {
   reload() {
     this.allergyService.index().subscribe(
       good => {
-        if (good) {
           this.allergies = good;
-        } else {
-          // TODO fix route for error
-          this.router.navigateByUrl('**');
-        }
       },
       bad => {
         console.error(bad);
-      },
-      // TODO possible implementation for finally
-      () => { }
+      }
     );
   }
 

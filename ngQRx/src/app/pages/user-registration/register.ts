@@ -1,6 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserData } from '../../services/user-data';
 import { User } from '../../models/user';
@@ -27,10 +26,7 @@ export class RegisterPage {
       good => {
         this.auth.login(this.user.username, this.user.password).subscribe(
           next => {
-            this.userData.login(this.user.username);
-            console.log(
-              'RegisterComponent.addUser(): user logged in'
-            );
+            this.userData.setLoggedIn();
             if (this.provider) {
               this.router.navigateByUrl('/provider-registration');
             } else {

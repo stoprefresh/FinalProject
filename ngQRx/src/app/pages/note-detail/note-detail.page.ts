@@ -31,24 +31,17 @@ export class NoteDetailPage implements OnInit {
     const noteId = this.route.snapshot.paramMap.get('noteId');
     this.noteService.show(noteId).subscribe(
       good => {
-        console.log('Life is Good');
-        console.log(good);
         this.note = good;
       },
       bad => {
-        console.log('Life is Bad');
-        console.error(bad);
         this.router.navigateByUrl('**');
       }
     );
     this.medSvc.index().subscribe(
       good => {
-        console.log('Life is Good');
-        console.log(good);
         this.meds = good;
       },
       bad => {
-        console.log('Life is Bad');
         console.error(bad);
         this.router.navigateByUrl('**');
       }
@@ -64,7 +57,6 @@ export class NoteDetailPage implements OnInit {
       good => {
         this.note = this.editNote;
         this.ionViewWillEnter();
-        // window.location.reload();
       },
       bad => {
         console.error(bad);
@@ -78,13 +70,10 @@ export class NoteDetailPage implements OnInit {
   deleteMed() {
     this.noteService.destroy(this.note.id).subscribe(
       good => {
-        console.log('Delete successful');
-        console.log(good);
         this.router.navigateByUrl('app/tabs/notes');
       },
       bad => {
         console.error(bad);
-
       },
       () => {
       }

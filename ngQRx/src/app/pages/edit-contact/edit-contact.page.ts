@@ -31,7 +31,6 @@ export class EditContactPage implements OnInit {
         this.contact = good;
       },
       bad => {
-        console.log('Life is Bad');
         this.router.navigateByUrl('**');
       }
     );

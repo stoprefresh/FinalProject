@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { ActionSheetController } from '@ionic/angular';
-import { EmergencyContact } from './../../models/emergency-contact';
-import { ContactService } from './../../services/contact.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
+import { ActionSheetController } from "@ionic/angular";
+import { EmergencyContact } from "./../../models/emergency-contact";
+import { ContactService } from "./../../services/contact.service";
 
 @Component({
-  selector: 'contacts-list-page-map',
-  templateUrl: 'contacts-list.html',
-  styleUrls: ['./contacts-list.scss']
+  selector: "contacts-list-page-map",
+  templateUrl: "contacts-list.html",
+  styleUrls: ["./contacts-list.scss"]
 })
 export class ContactsListPage implements OnInit {
   // Fields
@@ -25,21 +25,18 @@ export class ContactsListPage implements OnInit {
   ) {}
 
   // Methods
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.reload();
+  }
 
   reload() {
     this.contactService.index().subscribe(
       good => {
-        if (good) {
-          this.contacts = good;
-        } else {
-          this.router.navigateByUrl('**');
-        }
+        this.contacts = good;
       },
       bad => {
         console.error(bad);
-      },
-      () => {}
+      }
     );
   }
 
@@ -48,19 +45,9 @@ export class ContactsListPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.reload();
-  }
-
-  // ionViewWillEnter() {
-  //   this.reload();
-  // }
-
-  ionViewWillEnter() {
     this.contactService.index().subscribe((contacts: EmergencyContact[]) => {
       this.contacts = contacts;
     });
-    // console.error(this.diagnosisList.length);
-
   }
 
   addContact() {
@@ -73,7 +60,7 @@ export class ContactsListPage implements OnInit {
       },
       () => {
         this.viewNewContactForm = false;
-        this.ionViewWillEnter();
+        this.ionViewDidEnter();
       }
     );
   }

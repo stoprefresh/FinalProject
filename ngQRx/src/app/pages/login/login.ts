@@ -21,7 +21,8 @@ export class LoginPage implements OnInit {
     private userService: UserService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(
+  ) {}
 
   ionViewDidEnter() {
     this.user = new User();
@@ -34,7 +35,7 @@ export class LoginPage implements OnInit {
   login() {
     this.auth.login(this.user.username, this.user.password).subscribe(
       next => {
-        this.userData.login(this.user.username);
+        this.userData.setLoggedIn();
       },
       error => {
         console.error(error);

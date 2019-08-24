@@ -1,4 +1,3 @@
-import { ProviderService } from './../../services/provider.service';
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -7,7 +6,6 @@ import { Diagnosis } from '../../models/diagnosis';
 import { Medication } from '../../models/medication';
 import { DiagnosisService } from './../../services/diagnosis.service';
 import { MedicationService } from './../../services/medication.service';
-import { ApprovedProvider } from '../../models/approved-provider';
 
 @Component({
   selector: 'page-medication-list',
@@ -31,7 +29,6 @@ export class MedicationListPage implements OnInit {
     public router: Router,
     private medicationService: MedicationService,
     private diagnosisService: DiagnosisService,
-    private providerService: ProviderService
 
   ) {}
 
@@ -43,18 +40,11 @@ export class MedicationListPage implements OnInit {
   reload() {
     this.medicationService.index().subscribe(
       good => {
-        if (good) {
           this.medications = good;
-        } else {
-          // TODO fix route for error
-          this.router.navigateByUrl('**');
-        }
       },
       bad => {
         console.error(bad);
-      },
-      // TODO possible implementation for finally
-      () => {}
+      }
     );
   }
 
@@ -69,14 +59,11 @@ export class MedicationListPage implements OnInit {
     this.diagnosisService.index().subscribe((diagnosisList: Diagnosis[]) => {
       this.diagnosisList = diagnosisList;
     });
-    // console.error(this.diagnosisList.length);
-
   }
 
   addMed() {
     this.medicationService.create(this.newMedication).subscribe(
       good => {
-        console.log(good);
         this.viewMedForm = false;
         this.newMedication = new Medication();
       },
@@ -84,7 +71,6 @@ export class MedicationListPage implements OnInit {
         console.error(bad);
       },
       () => {
-        // this.newMedication = new Medication();
         this.reload();
       }
     );

@@ -27,13 +27,9 @@ export class AllergyDetailPage implements OnInit {
     const allergyId = this.route.snapshot.paramMap.get('allergyId');
     this.allergyService.show(allergyId).subscribe(
       good => {
-        // console.log('Life is Good');
-        // console.log(good);
         this.allergy = good;
       },
       bad => {
-        console.log('Life is Bad');
-        console.error(bad);
         this.router.navigateByUrl('**');
       }
     );
@@ -41,8 +37,6 @@ export class AllergyDetailPage implements OnInit {
 
   setEditAllergy() {
     this.editAllergy = Object.assign({}, this.allergy);
-    console.log(this.editAllergy);
-    console.log(this.allergy);
   }
 
   saveEdit() {
@@ -63,8 +57,6 @@ export class AllergyDetailPage implements OnInit {
   deleteAllergy() {
     this.allergyService.destroy(this.allergy.id).subscribe(
       good => {
-        // console.log('Delete successful');
-        // console.log(good);
         this.router.navigateByUrl('app/tabs/allergies');
       },
       bad => {

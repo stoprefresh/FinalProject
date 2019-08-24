@@ -4,9 +4,6 @@ import { SwUpdate } from '@angular/service-worker';
 import { TestBed, async } from '@angular/core/testing';
 
 import { Events, MenuController, Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { UserData } from './services/user-data';
 
@@ -15,8 +12,6 @@ describe('AppComponent', () => {
     menuSpy,
     routerSpy,
     userDataSpy,
-    statusBarSpy,
-    splashScreenSpy,
     swUpdateSpy,
     platformReadySpy,
     platformSpy,
@@ -28,23 +23,18 @@ describe('AppComponent', () => {
     menuSpy = jasmine.createSpyObj('MenuController', ['toggle', 'enable']);
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
     userDataSpy = jasmine.createSpyObj('UserData', ['isLoggedIn', 'logout']);
-    statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
-    splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
     swUpdateSpy = jasmine.createSpyObj('SwUpdate', ['available', 'activateUpdate']);
     platformReadySpy = Promise.resolve();
     platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy });
 
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [IonicStorageModule.forRoot()],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         { provide: Events, useValue: eventsSpy },
         { provide: MenuController, useValue: menuSpy },
         { provide: Router, useValue: routerSpy },
         { provide: UserData, useValue: userDataSpy },
-        { provide: StatusBar, useValue: statusBarSpy },
-        { provide: SplashScreen, useValue: splashScreenSpy },
         { provide: SwUpdate, useValue: swUpdateSpy },
         { provide: Platform, useValue: platformSpy }
       ]
@@ -62,7 +52,5 @@ describe('AppComponent', () => {
   it('should initialize the app', async () => {
     expect(platformSpy.ready).toHaveBeenCalled();
     await platformReadySpy;
-    expect(statusBarSpy.styleDefault).toHaveBeenCalled();
-    expect(splashScreenSpy.hide).toHaveBeenCalled();
   });
 });

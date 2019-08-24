@@ -8,7 +8,7 @@
       </ion-header>
       <ion-content>
 
-        <ion-list *ngIf="loggedIn">
+        <ion-list *ngIf="checkLoginStatus()">
           <ion-list-header>
             Navigate
           </ion-list-header>
@@ -35,7 +35,7 @@
 
         </ion-list>
 
-        <ion-list *ngIf="loggedIn">
+        <ion-list *ngIf="checkLoginStatus()">
           <ion-list-header>
             Account
           </ion-list-header>
@@ -69,7 +69,7 @@
 
         </ion-list>
 
-        <ion-list *ngIf="!loggedIn">
+        <ion-list *ngIf="!checkLoginStatus()">
           <ion-list-header>
             Account
           </ion-list-header>

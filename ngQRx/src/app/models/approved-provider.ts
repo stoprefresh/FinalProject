@@ -3,7 +3,6 @@ import { Medication } from './medication';
 import { Provider } from './provider';
 
 export class ApprovedProvider {
-  // TODO
 
   id: number;
   patient: Patient;

@@ -1,17 +1,11 @@
-import { AccountModule } from './pages/edit-user/account.module';
+import { ContactsListPageRoutingModule } from './pages/contacts-list/contacts-list-routing.module';
 import { User } from './models/user';
-import { UserService } from './services/user.service';
 import { AuthoService } from './services/autho.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 
-import { Events, MenuController, Platform, ToastController } from '@ionic/angular';
-
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-
-import { Storage } from '@ionic/storage';
+import { Events, Platform, ToastController } from '@ionic/angular';
 
 import { UserData } from './services/user-data';
 
@@ -22,7 +16,6 @@ import { UserData } from './services/user-data';
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-
   // Fields
   user: User;
 
@@ -53,100 +46,47 @@ export class AppComponent implements OnInit {
       icon: 'medkit'
     }
   ];
-  loggedIn = false;
 
   // Contructors
   constructor(
     private events: Events,
-    private menu: MenuController,
     private platform: Platform,
     private router: Router,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private storage: Storage,
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
-    private authService: AuthoService,
-    private userSvc: UserService
-
+    private authService: AuthoService
   ) {
     this.initializeApp();
   }
 
-
   // Methods
   async ngOnInit() {
     this.checkLoginStatus();
-    this.listenForLoginEvents();
-
+    if (!this.checkLoginStatus()) {
+      this.router.navigateByUrl('/login');
+    }
     this.isUserEMS();
-
-
-    this.swUpdate.available.subscribe(async res => {
-      const toast = await this.toastCtrl.create({
-        message: 'Update available!',
-        showCloseButton: true,
-        position: 'bottom',
-        closeButtonText: `Reload`
-      });
-
-      await toast.present();
-
-      toast
-        .onDidDismiss()
-        .then(() => this.swUpdate.activateUpdate())
-        .then(() => window.location.reload());
-    });
+    console.log('test');
   }
-
 
   isUserEMS() {
     if (this.userData.userRole === 'ems') {
-        return true;
+      return true;
     }
     return false;
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+    this.platform.ready().then(() => {});
   }
 
   checkLoginStatus() {
-    return this.userData.isLoggedIn().then(loggedIn => {
-      return this.updateLoggedInStatus(loggedIn);
-    });
-  }
-
-  updateLoggedInStatus(loggedIn: boolean) {
-    setTimeout(() => {
-      this.loggedIn = loggedIn;
-    }, 300);
-  }
-
-  listenForLoginEvents() {
-    this.events.subscribe('user:login', () => {
-      this.updateLoggedInStatus(true);
-    });
-
-    this.events.subscribe('user:register', () => {
-      this.updateLoggedInStatus(true);
-    });
-
-    this.events.subscribe('user:logout', () => {
-      this.updateLoggedInStatus(false);
-    });
+    return this.userData.isLoggedIn();
   }
 
   logout() {
     this.authService.logout();
-    this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/login');
-    });
-    this.user = null;
+    window.location.reload();
   }
-
 }
