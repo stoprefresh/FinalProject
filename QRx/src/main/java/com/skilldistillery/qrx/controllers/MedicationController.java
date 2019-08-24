@@ -27,7 +27,6 @@ import com.skilldistillery.qrx.entities.Medication;
 import com.skilldistillery.qrx.entities.Patient;
 import com.skilldistillery.qrx.services.MedicationService;
 import com.skilldistillery.qrx.services.PatientService;
-import com.skilldistillery.qrx.services.ProviderService;
 
 @RestController
 @RequestMapping({"api/patients/", "api/patients"})
@@ -37,9 +36,6 @@ public class MedicationController {
 	@Autowired
 	private PatientService patientSvc;
 	
-	@Autowired
-	private ProviderService providerSvc;
-
 	@Autowired
 	private MedicationService svc;
 
