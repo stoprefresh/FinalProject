@@ -1,4 +1,3 @@
-import { ContactsListPageRoutingModule } from './pages/contacts-list/contacts-list-routing.module';
 import { User } from './models/user';
 import { AuthoService } from './services/autho.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
@@ -21,9 +20,9 @@ export class AppComponent implements OnInit {
 
   appPages = [
     {
-      title: 'Emergency Contacts',
-      url: '/app/tabs/contacts',
-      icon: 'contacts'
+      title: 'Messages',
+      url: '/messages',
+      icon: 'mail'
     },
     {
       title: 'Medications',
@@ -41,7 +40,17 @@ export class AppComponent implements OnInit {
       icon: 'clipboard'
     },
     {
-      title: 'Biometrics',
+      title: 'Providers',
+      url: '/provider-list',
+      icon: 'medkit'
+    },
+    {
+      title: 'Emergency Contacts',
+      url: '/app/tabs/contacts',
+      icon: 'contacts'
+    },
+    {
+      title: 'Physical Profile',
       url: '/health-info',
       icon: 'finger-print'
     }

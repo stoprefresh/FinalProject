@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ApprovedProvider } from './../../models/approved-provider';
+import { OnInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
@@ -6,6 +7,7 @@ import { Diagnosis } from '../../models/diagnosis';
 import { Medication } from '../../models/medication';
 import { DiagnosisService } from './../../services/diagnosis.service';
 import { MedicationService } from './../../services/medication.service';
+import { ApprovedProviderService } from './../../services/ap.service';
 
 @Component({
   selector: 'page-medication-list',
@@ -18,7 +20,7 @@ export class MedicationListPage implements OnInit {
   newMedication: Medication = new Medication();
   viewMedForm = false;
   diagnosisList: Diagnosis[];
-  prescriberList: string[] = ['Kevin Smith MD'];
+  prescriberList: ApprovedProvider[] = [];
 
   // Constructors
   constructor(
@@ -26,7 +28,8 @@ export class MedicationListPage implements OnInit {
     public inAppBrowser: InAppBrowser,
     public router: Router,
     private medicationService: MedicationService,
-    private diagnosisService: DiagnosisService
+    private diagnosisService: DiagnosisService,
+    private approvedProviderService: ApprovedProviderService
   ) {}
 
   // Methods
@@ -55,6 +58,10 @@ export class MedicationListPage implements OnInit {
     });
     this.diagnosisService.index().subscribe((diagnosisList: Diagnosis[]) => {
       this.diagnosisList = diagnosisList;
+    });
+
+    this.approvedProviderService.index().subscribe((prescriberList: ApprovedProvider[]) => {
+      this.prescriberList = prescriberList;
     });
   }
 

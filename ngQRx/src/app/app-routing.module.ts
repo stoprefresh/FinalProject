@@ -63,7 +63,12 @@ const routes: Routes = [
       import(
         './pages/health-info/health-info.module'
       ).then(m => m.HealthInfoPageModule)
-  }
+  },
+  { path: 'patient-list', loadChildren: './pages/patient-list/patient-list.module#PatientListPageModule' },
+  { path: 'patient-detail', loadChildren: './pages/patient-detail/patient-detail.module#PatientDetailPageModule' },
+  { path: 'provider-list', loadChildren: './pages/provider-list/provider-list.module#ProviderListPageModule' },
+  { path: 'provider-detail', loadChildren: './pages/provider-detail/provider-detail.module#ProviderDetailPageModule' },
+  { path: 'messages', loadChildren: './pages/messages/messages.module#MessagesPageModule' },
 ];
 
 @NgModule({
