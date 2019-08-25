@@ -68,7 +68,7 @@ const routes: Routes = [
   { path: 'patient-detail', loadChildren: './pages/patient-detail/patient-detail.module#PatientDetailPageModule' },
   { path: 'provider-list', loadChildren: './pages/provider-list/provider-list.module#ProviderListPageModule' },
   { path: 'provider-detail', loadChildren: './pages/provider-detail/provider-detail.module#ProviderDetailPageModule' },
-  { path: 'messages', loadChildren: './pages/messages/messages.module#MessagesPageModule' },
+  { path: 'rxnav', loadChildren: './pages/rxnav/rxnav.module#RxnavPageModule' },
 ];
 
 @NgModule({

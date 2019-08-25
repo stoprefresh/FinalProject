@@ -46,6 +46,9 @@ export class LoginPage implements OnInit {
           good => {
             this.user = good;
             this.userData.setUserRole(this.user.role);
+            if (!this.user.role) {
+              this.router.navigateByUrl('/patient-registration');
+             }
             if (this.user.role === 'ems') {
 
               this.router.navigateByUrl('/emt-view');

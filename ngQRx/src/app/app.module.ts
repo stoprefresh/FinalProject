@@ -1,3 +1,5 @@
+import { DrugService } from './services/drug.service';
+import { AutoCompleteComponent } from './components/auto-complete/auto-complete.component';
 import { QrGeneratorService } from './services/qr-generator.service';
 import { ProviderService } from './services/provider.service';
 import { PatientService } from './services/patient.service';
@@ -20,11 +22,15 @@ import { DatePipe } from '@angular/common';
 import { NoteService } from './services/note.service';
 import { DiagnosisService } from './services/diagnosis.service';
 import { UserData } from './services/user-data';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
+
 
 @NgModule({
   imports: [
     BrowserModule,
+    AutoCompleteModule,
     AppRoutingModule,
+    AutoCompleteModule,
     HttpClientModule,
     IonicModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -33,7 +39,8 @@ import { UserData } from './services/user-data';
     FormsModule
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    AutoCompleteComponent
   ],
   providers: [
     InAppBrowser,
@@ -48,7 +55,8 @@ import { UserData } from './services/user-data';
     UserService,
     PatientService,
     ProviderService,
-    QrGeneratorService
+    QrGeneratorService,
+    DrugService,
   ],
   bootstrap: [AppComponent]
 })

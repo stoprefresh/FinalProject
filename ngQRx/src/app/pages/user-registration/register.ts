@@ -13,6 +13,19 @@ import { AuthoService } from '../../services/autho.service';
 export class RegisterPage {
   user: User = new User();
   provider = false;
+  providerRole = ' ';
+  providerTitle = ' ';
+  titleList: string[] = [ 'Medical Assistant', 'Nursing Assistant', 'Home Health Aide',
+                          'Licensed Practical Nurse', 'Physician', 'Registered Nurse',
+                          'Pharmacy Technician', 'Diagnostic Medical Sonographer', 'Clinical Laboratory Technician',
+                          'Dental Assistant', 'Emergency Medical Technician', 'Radiologic Technologist', 'Physical Therapist',
+                          'Dental Hygienist', 'Health Information Technician', 'Clinical Laboratory Technologist', 'Occupational Therapy Aide',
+                          'Speech-Language Pathologist', 'Respiratory Therapist', 'Family Practitioner', 'Dentist', 'Nurse Practitioner',
+                          'Occupational Therapist', 'Phlebotomist', 'Surgical Technologist', 'Physician Assistant', 'Psychiatric Aide',
+                          'Medical Transcriptionist', 'Physical Therapy Assistant', 'Dispensing Optician', 'Dietician', 'Cardiovascular Technologist',
+                          'Medical Equipment Preparer', 'Surgeon', 'Nurse Anesthetist', 'Pediatrician', 'Anesthesiologist',
+                          'Magnetic Resonance Imaging Technologist', 'Optometrist', 'Psychiatrist', 'Obstetrician'];
+  roleList: string[] = ['EMS', 'Physician', 'Pharmacist', 'Direct Care'];
 
   constructor(
     public router: Router,
@@ -26,11 +39,10 @@ export class RegisterPage {
       good => {
         this.auth.login(this.user.username, this.user.password).subscribe(
           next => {
-            this.userData.setLoggedIn();
             if (this.provider) {
+              this.userData.setLoggedIn();
               this.router.navigateByUrl('/provider-registration');
             } else {
-              this.router.navigateByUrl('/patient-registration');
             }
           },
           error => {
@@ -41,8 +53,7 @@ export class RegisterPage {
       bad => {
         console.error('RegisterComponent.addUser(): error creating user.');
         console.error(bad);
-      },
-      () => {}
+      }
     );
   }
 }

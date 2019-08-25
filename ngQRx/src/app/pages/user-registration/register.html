@@ -8,10 +8,19 @@
 </ion-header>
 
 <ion-content>
-  <!-- <div class="register-logo">
-    <img src="assets/img/appicon.svg" alt="QRx Logo">
-  </div> -->
-  <form #registerForm="ngForm" novalidate>
+  <div class="register-logo">
+    <img src="assets/img/appicon.svg" alt="QRx Logo" />
+  </div>
+  <ion-item>
+      <ion-label position="stacked" color="primary">Disclaimer:</ion-label>
+    <p>
+      This product uses publicly available data from the U.S. National Library
+      of Medicine (NLM), National Institutes of Health, Department of Health and
+      Human Services; NLM is not responsible for the product and does not
+      endorse or recommend this or any other product.
+    </p>
+  </ion-item>
+  <form #registerForm="ngForm" name="newUser" novalidate>
     <ion-list lines="none">
       <ion-item>
         <ion-label position="stacked" color="primary">Username</ion-label>
@@ -80,7 +89,8 @@
         <ion-input type="text" name="city" [(ngModel)]="user.city"></ion-input>
         <ion-input
           type="text"
-          name="state" placeholder='eg. CO'
+          name="state"
+          placeholder="eg. CO"
           [(ngModel)]="user.state"
         ></ion-input>
         <ion-input type="text" name="zip" [(ngModel)]="user.zip"></ion-input>
@@ -98,7 +108,7 @@
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position=""
+        <ion-label position="stacked"
           >Account for professional use as a medical provider?
           <ion-text color="danger">*</ion-text></ion-label
         >
@@ -109,6 +119,35 @@
           [(ngModel)]="provider"
         ></ion-toggle>
       </ion-item>
+
+      <div *ngIf="provider">
+        <ion-item>
+          <ion-label position="stacked">Clinical Title</ion-label>
+          <ion-select
+            placeholder="Select One"
+            [(ngModel)]="providerTitle"
+            name="title"
+          >
+            <ion-select-option
+              *ngFor="let title of titleList"
+              [value]="title"
+              >{{ title }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Provider Role</ion-label>
+          <ion-select
+            placeholder="Select One"
+            [(ngModel)]="providerRole"
+            name="role"
+          >
+            <ion-select-option *ngFor="let role of roleList" [value]="role">{{
+              role
+            }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
     </ion-list>
     <div class="ion-padding">
       <ion-button (click)="addUser()" type="submit" expand="block"

@@ -76,7 +76,6 @@ public class MedicationController {
 	public Medication createMedication(@RequestBody Medication medication, HttpServletRequest req, HttpServletResponse resp, Principal prince) {
 		if (medication.getPatient() == null) {
 			Patient patient = patientSvc.findPatientByUsername(prince.getName());
-			ApprovedProvider ap = patient.getApprovedProviders().get(0);
 			if (medication.getStartDate() == null) {
 				DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 				Calendar calObj = Calendar.getInstance();
@@ -92,7 +91,6 @@ public class MedicationController {
 			}
 			try {
 				medication.setPatient(patient);
-				medication.setPrescriber(ap);
 				svc.create(medication);
 				resp.setStatus(201);
 				StringBuffer url = req.getRequestURL();

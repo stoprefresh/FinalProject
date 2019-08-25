@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MessagesPage } from './messages.page';
+import { AutoCompleteComponent } from './auto-complete.component';
 
-describe('MessagesPage', () => {
-  let component: MessagesPage;
-  let fixture: ComponentFixture<MessagesPage>;
+describe('AutoCompleteComponent', () => {
+  let component: AutoCompleteComponent;
+  let fixture: ComponentFixture<AutoCompleteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessagesPage ],
+      declarations: [ AutoCompleteComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MessagesPage);
+    fixture = TestBed.createComponent(AutoCompleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

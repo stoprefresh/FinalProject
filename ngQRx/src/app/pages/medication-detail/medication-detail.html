@@ -13,7 +13,7 @@
     <br>
     <h4>Directions: {{medication.directions}}</h4>
     <h4>Active: {{medication.active}}</h4>
-    <h4 *ngIf="medication.diagnosis.name">Diagnosis: {{medication.diagnosis.name}}</h4>
+    <h4 *ngIf="medication.diagnosis">Diagnosis: {{medication.diagnosis.name}}</h4>
     <h4 *ngIf="medication.prescriber">Prescribed By: {{medication.prescriber.provider.user.firstName}} {{medication.prescriber.provider.user.lastName}} {{medication.prescriber.provider.user.title}}</h4>
     <h4 *ngIf="medication.reasonDiscontinued">Reason Discontinued: {{medication.reasonDiscontinued}}</h4>
   </div>
@@ -49,20 +49,21 @@
 
           <ion-item>
             <ion-label position="stacked">Associated Diagnosis</ion-label>
-            <ion-select [placeholder]="medication.diagnosis.name" [(ngModel)]="editMedication.diagnosis" name="diagnosis">
+            <ion-select *ngIf="medication.diagnosis" [placeholder]="medication.diagnosis.name" [(ngModel)]="editMedication.diagnosis" name="diagnosis">
               <ion-select-option *ngFor="let diagnosis of diagnosisList" [value]="diagnosis">{{ diagnosis.name }}</ion-select-option>
+            </ion-select>
+            <ion-select *ngIf="!medication.diagnosis" [(ngModel)]="editMedication.diagnosis" name="diagnosis" placeholder="Associate a Diagnosis">
+                <ion-select-option *ngFor="let diagnosis of diagnosisList" [value]="diagnosis">{{ diagnosis.name }}</ion-select-option>
             </ion-select>
           </ion-item>
 
           <ion-item>
             <ion-label position="stacked">Prescriber</ion-label>
-            <ion-select
-              placeholder="Kevin Smith MD"
-            >
-              <ion-select-option
-                *ngFor="let prescriber of prescriberList"
-                >{{prescriber}}</ion-select-option
-              >
+            <ion-select *ngIf="medication.prescriber" [placeholder]="medication.prescriber.provider.user.firstName + ' ' + medication.prescriber.provider.user.lastName + ' ' + medication.prescriber.provider.user.title" [(ngModel)]="editMedication.prescriber" name="prescriber">
+              <ion-select-option *ngFor="let prescriber of prescriberList" >{{prescriber.provider.user.firstName}} {{prescriber.provider.user.lastName}} {{prescriber.provider.user.title}}</ion-select-option >
+            </ion-select>
+            <ion-select *ngIf="!medication.prescriber"  placeholder="Associate an Approved Provider" [(ngModel)]="editMedication.prescriber" name="prescriber" >
+              <ion-select-option  *ngFor="let prescriber of prescriberList" >{{prescriber.provider.user.firstName}} {{prescriber.provider.user.lastName}} {{prescriber.provider.user.title}}</ion-select-option  >
             </ion-select>
           </ion-item>
 

@@ -20,9 +20,9 @@ export class AppComponent implements OnInit {
 
   appPages = [
     {
-      title: 'Messages',
-      url: '/messages',
-      icon: 'mail'
+      title: 'Drug Search',
+      url: '/rxnav',
+      icon: 'beaker'
     },
     {
       title: 'Medications',
@@ -81,28 +81,28 @@ export class AppComponent implements OnInit {
   }
 
   isUserEMS() {
-    if (this.userData.userRole === 'ems') {
+    if (this.userData.userRole === 'EMS') {
       return true;
     }
     return false;
   }
 
   isUserAdmin() {
-    if (this.userData.userRole === 'admin') {
+    if (this.userData.userRole === 'Admin') {
       return true;
     }
     return false;
   }
 
   isUserPhysician() {
-    if (this.userData.userRole === 'physician') {
+    if (this.userData.userRole === 'Physician') {
       return true;
     }
     return false;
   }
 
   isUserPatient() {
-    if (this.userData.userRole === 'patient') {
+    if (this.userData.userRole === 'User') {
       return true;
     }
     return false;
