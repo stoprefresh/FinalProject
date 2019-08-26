@@ -40,8 +40,8 @@
 
         <ion-item>
           <ion-label position="stacked">Associated Medication</ion-label>
+          <!-- [placeholder]="note.medication.medName" -->
           <ion-select
-            [placeholder]="note.medication.medName"
             [(ngModel)]="editNote.medication"
             name="medication"
           >

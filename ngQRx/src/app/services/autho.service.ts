@@ -2,6 +2,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 // import { Environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Observable, throwError } from 'rxjs';
 })
 
 export class AuthoService {
-  private baseUrl = 'http://localhost:8090/';
+  private baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 

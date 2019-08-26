@@ -59,9 +59,7 @@ export class NoteListPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.noteSvc.index().subscribe((notes: Note[]) => {
-      this.notes = notes;
-    });
+    this.reload();
   }
 
   addNote() {
