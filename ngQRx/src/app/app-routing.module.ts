@@ -69,6 +69,7 @@ const routes: Routes = [
   { path: 'provider-list', loadChildren: './pages/provider-list/provider-list.module#ProviderListPageModule' },
   { path: 'provider-detail', loadChildren: './pages/provider-detail/provider-detail.module#ProviderDetailPageModule' },
   { path: 'rxnav', loadChildren: './pages/rxnav/rxnav.module#RxnavPageModule' },
+  { path: 'admin-dashboard', loadChildren: './pages/admin-dashboard/admin-dashboard.module#AdminDashboardPageModule' },
 ];
 
 @NgModule({

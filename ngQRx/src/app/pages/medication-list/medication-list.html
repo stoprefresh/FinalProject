@@ -83,8 +83,8 @@
                   <ion-card-content  class="last"> {{ medication.diagnosis.name }}</ion-card-content>
                 </ion-item>
                 <ion-item>
-                    <ion-card-subtitle slot="start" *ngIf="!medication.discontinuedDate">Start Date: {{medication.startDate | date : 'shortDate' }}<br></ion-card-subtitle>
-                    <ion-card-subtitle *ngIf="medication.discontinuedDate">Date Discontinued: {{medication.discontinuedDate | date : 'shortDate' }}<br></ion-card-subtitle>
+                    <ion-card-subtitle slot="start" *ngIf="!medication.discontinuedDate">Start Date: {{medication.startDate | date : 'mediumDate' }}<br></ion-card-subtitle>
+                    <ion-card-subtitle *ngIf="medication.discontinuedDate">Date Discontinued: {{medication.discontinuedDate | date : 'mediumDate' }}<br></ion-card-subtitle>
                     <ion-button fill="outline" slot="end" routerLink="/app/tabs/medications/medication-details/{{ medication.id }}">Details</ion-button>
                   </ion-item>
               </ion-card>
@@ -203,7 +203,7 @@
 </div>
   <ion-fab
     vertical="bottom"
-    horizontal="center"
+    horizontal="end"
     slot="fixed"
     *ngIf="!viewMedForm"
   >

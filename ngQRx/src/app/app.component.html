@@ -9,7 +9,15 @@
       <ion-content>
 
         <ion-list *ngIf="checkLoginStatus()">
-
+          <ion-item class="noborder" *ngIf="user">
+            <ion-avatar slot="start" *ngIf="!user.image">
+                <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="Picture" />
+              </ion-avatar>
+            <ion-avatar slot="start" *ngIf="user.image">
+              <img src="{{user.image}}" alt="Picture" />
+            </ion-avatar>
+            <ion-text>{{ user.firstName }} {{ user.lastName }}</ion-text>
+          </ion-item>
           <ion-list-header>
             Navigate
           </ion-list-header>

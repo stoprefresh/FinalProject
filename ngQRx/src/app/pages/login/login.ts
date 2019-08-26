@@ -21,8 +21,7 @@ export class LoginPage implements OnInit {
     private userService: UserService
   ) {}
 
-  ngOnInit(
-  ) {}
+  ngOnInit() {}
 
   ionViewDidEnter() {
     this.user = new User();
@@ -45,20 +44,29 @@ export class LoginPage implements OnInit {
         this.userService.index().subscribe(
           good => {
             this.user = good;
-            this.userData.setUserRole(this.user.role);
+            this.userData.setUser(good);
+            this.userData.setUserRole(this.userData.user.role);
             if (!this.user.role) {
               this.router.navigateByUrl('/patient-registration');
-             }
-            if (this.user.role === 'ems') {
-
+            }
+            if (this.user.role.toLowerCase() === 'ems') {
               this.router.navigateByUrl('/emt-view');
-
-            } else { this.router.navigateByUrl('/app/tabs/medications'); }
+            }
+            if (this.user.role.toLowerCase() === 'user') {
+              this.router.navigateByUrl('/app/tabs/medications');
+            }
+            if (this.user.role.toLowerCase() === 'physician') {
+              this.router.navigateByUrl('/patient-list');
+            }
+            if (this.user.role.toLowerCase() === 'admin') {
+              this.router.navigateByUrl('/admin-dashboard');
+            }
           },
           error => {
             console.error(error);
             console.error('LoginComponent.login(): error logging in.');
-          });
+          }
+        );
       }
     );
   }

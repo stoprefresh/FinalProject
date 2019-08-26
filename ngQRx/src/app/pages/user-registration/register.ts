@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { UserData } from '../../services/user-data';
 import { User } from '../../models/user';
 import { AuthoService } from '../../services/autho.service';
+import { UserData } from '../../services/user-data';
+import { UserService } from '../../services/user.service';
+import { Provider } from '../../models/provider';
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'page-register',
@@ -13,9 +15,9 @@ import { AuthoService } from '../../services/autho.service';
 export class RegisterPage {
   user: User = new User();
   provider = false;
-  providerRole = ' ';
   providerTitle = ' ';
-  titleList: string[] = [ 'Medical Assistant', 'Nursing Assistant', 'Home Health Aide',
+  submitted = false;
+  titleList: string[] = [ 'MD', 'DO', 'RN', 'EMT', 'LPN', 'CMA', 'Medical Assistant', 'Nursing Assistant', 'Home Health Aide',
                           'Licensed Practical Nurse', 'Physician', 'Registered Nurse',
                           'Pharmacy Technician', 'Diagnostic Medical Sonographer', 'Clinical Laboratory Technician',
                           'Dental Assistant', 'Emergency Medical Technician', 'Radiologic Technologist', 'Physical Therapist',
@@ -26,34 +28,47 @@ export class RegisterPage {
                           'Medical Equipment Preparer', 'Surgeon', 'Nurse Anesthetist', 'Pediatrician', 'Anesthesiologist',
                           'Magnetic Resonance Imaging Technologist', 'Optometrist', 'Psychiatrist', 'Obstetrician'];
   roleList: string[] = ['EMS', 'Physician', 'Pharmacist', 'Direct Care'];
+  newProvider = new Provider();
+  organizationList: string[] = ['Denver Metro Ambulance', 'SD Internal Medicine Group', 'Other'];
 
   constructor(
     public router: Router,
     public userData: UserData,
     private auth: AuthoService,
-    private userSvc: UserService
+    private userSvc: UserService,
+    private providerService: ProviderService
   ) {}
 
   addUser() {
+    this.submitted = true;
     this.userSvc.create(this.user).subscribe(
       good => {
-        this.auth.login(this.user.username, this.user.password).subscribe(
-          next => {
-            if (this.provider) {
-              this.userData.setLoggedIn();
-              this.router.navigateByUrl('/provider-registration');
-            } else {
-            }
           },
-          error => {
-            console.error('RegisterComponent.addUser(): error creating user.');
-          }
-        );
-      },
       bad => {
-        console.error('RegisterComponent.addUser(): error creating user.');
-        console.error(bad);
-      }
-    );
-  }
+            console.error('RegisterComponent.addUser(): error creating user.');
+            console.error(bad);
+          },
+      () => {
+            this.auth.login(this.user.username, this.user.password).subscribe(
+              next => {
+                this.userData.setLoggedIn();
+              },
+              bad => {
+                  console.error('error logging in');
+              },
+             () => {
+      });
+    if (this.provider) {
+        this.providerService.create(this.newProvider).subscribe(
+          good => {
+            this.router.navigateByUrl('/patient-list');
+          },
+          bad => {
+            console.error('ProviderRegister.addProvider(): error creating user.');
+            console.error(bad);
+          });
+        this.router.navigateByUrl('/patient-list');
+    }
+});
+}
 }

@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
       <ion-back-button defaultHref="/app/tabs/notes"></ion-back-button>
     </ion-buttons>
-    <ion-title>Created on {{ note.createDate }}</ion-title>
+    <ion-title>Created on {{ note.createDate | date : 'short' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 

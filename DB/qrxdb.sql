@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `city` VARCHAR(450) NULL,
   `state` CHAR(2) NULL,
   `zip` CHAR(5) NULL,
+  `image` VARCHAR(5000) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB;

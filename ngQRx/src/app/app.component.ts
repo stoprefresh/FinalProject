@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { User } from './models/user';
 import { AuthoService } from './services/autho.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
@@ -64,7 +65,8 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
-    private authService: AuthoService
+    private authService: AuthoService,
+    private userService: UserService
   ) {
     this.initializeApp();
   }
@@ -113,11 +115,19 @@ export class AppComponent implements OnInit {
   }
 
   checkLoginStatus() {
-    return this.userData.isLoggedIn();
+    if (!this.user) {
+      this.getUser();
+    }
+  return this.userData.isLoggedIn();
   }
 
   logout() {
     this.authService.logout();
     window.location.reload();
+    this.user = null;
+  }
+
+  getUser() {
+    this.user = this.userData.getUser();
   }
 }

@@ -13,7 +13,10 @@ import { Router } from '@angular/router';
 })
 export class RxnavPage implements OnInit {
   drugs: Drug[] = [];
-
+  matches: Drug[] = [];
+  keyword = '';
+  strength = '';
+  loadingMatches = false;
   constructor(
     private drugSvc: DrugService,
     public actionSheetCtrl: ActionSheetController,
@@ -24,14 +27,17 @@ export class RxnavPage implements OnInit {
   ngOnInit() {
   }
 
-  search(keyword: string, strength?: string) {
-    this.drugSvc.getResults(keyword, strength).subscribe(
+  getResults() {
+    this.matches = [];
+    this.loadingMatches = true;
+    this.drugSvc.getResults(this.keyword).subscribe(
       good => {
-        this.drugs = good;
-        console.log(this.drugs);
+        this.matches = good;
+        this.loadingMatches = false;
       },
-      bad => {
-        console.error(bad);
+      err => {
+        this.loadingMatches = false;
+        console.log('err: ', err);
       }
     );
   }

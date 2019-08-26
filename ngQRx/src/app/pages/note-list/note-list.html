@@ -11,7 +11,10 @@
   <div *ngIf="!viewNoteForm">
     <ion-grid fixed *ngIf="notes">
       <ion-row class="ion-align-items-stretch" *ngFor="let note of notes">
-          <ion-card class="note-card">
+            <ion-card class="note-card">
+            <ion-item class="noborder">
+            <ion-card-subtitle slot="start">Created: {{note.createDate | date : 'short' }}<br></ion-card-subtitle>
+            </ion-item>
             <ion-item *ngIf="note.textContent" >
               <ion-label position="stacked">Note: </ion-label>
               <ion-card-content>{{ note.textContent }}</ion-card-content>
@@ -21,8 +24,7 @@
               <ion-card-content>{{ note.medication.medName }}</ion-card-content>
             </ion-item>
             <ion-item>
-              <ion-card-subtitle slot="start">Created: {{note.createDate | date : 'medium' }}<br></ion-card-subtitle>
-              <ion-card-subtitle >Last Updated: {{note.updateDate | date : 'medium' }}<br></ion-card-subtitle>
+              <ion-card-subtitle >Last Updated: {{note.updateDate | date : 'short' }}<br></ion-card-subtitle>
               <ion-button fill="outline" slot="end" routerLink="/app/tabs/notes/note-details/{{ note.id }}">Details</ion-button>
             </ion-item>
           </ion-card>

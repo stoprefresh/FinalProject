@@ -49,3 +49,7 @@
 ion-item:last-child {
   --inner-border-width: 0;
 }
+
+.noborder {
+  --inner-border-width: 0;
+}
