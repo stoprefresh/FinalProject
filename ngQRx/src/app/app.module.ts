@@ -1,5 +1,4 @@
 import { DrugService } from './services/drug.service';
-import { AutoCompleteComponent } from './components/auto-complete/auto-complete.component';
 import { QrGeneratorService } from './services/qr-generator.service';
 import { ProviderService } from './services/provider.service';
 import { PatientService } from './services/patient.service';
@@ -37,7 +36,6 @@ import { UserData } from './services/user-data';
   ],
   declarations: [
     AppComponent,
-    AutoCompleteComponent
   ],
   providers: [
     InAppBrowser,

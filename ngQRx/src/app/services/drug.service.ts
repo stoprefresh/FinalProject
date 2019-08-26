@@ -40,7 +40,7 @@ export class DrugService {
     }
   }
 
-  getResults(keyword: string, strength?: string): Observable<Drug[]> {
+  getResults(keyword: string): Observable<Drug[]> {
     const credentials = this.auth.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -50,32 +50,32 @@ export class DrugService {
     };
     let observable: Observable<any>;
     if (this.auth.checkLogin()) {
-      return this.http.get<Drug[]>(this.url + '/' + keyword + '/' + strength, httpOptions).pipe(
-        catchError((err: any) => {
-          console.log(err);
-          return throwError('DrugService.index(): error retrieving list');
-        })
-      );
-    } else {
-      this.router.navigateByUrl('/login');
-    }
-    if (this.drugsList.length === 0) {
-      observable = this.http.get<Drug[]>(this.url + '/', httpOptions).pipe(
-        catchError((err: any) => {
-          console.log(err);
-          return throwError('DrugService.index(): error retrieving list');
-        })
-      );
-    } else {
-      observable = of(this.drugsList);
-    }
+        return this.http
+          .get<Drug[]>(this.url + '/' + keyword, httpOptions)
+          .pipe(
+            catchError((err: any) => {
+              console.log(err);
+              return throwError('DrugService.index(): error retrieving list');
+            })
+          );
+      }
+      if (this.drugsList.length === 0) {
+        observable = this.http.get<Drug[]>(this.url + '/', httpOptions).pipe(
+          catchError((err: any) => {
+            console.log(err);
+            return throwError('DrugService.index(): error retrieving list');
+          })
+        );
+      } else {
+        observable = of(this.drugsList);
+      }
 
-    return observable.pipe(
-      map(result => {
-        return result.filter(item => {
-          return item.name.toLowerCase().startsWith(keyword.toLowerCase());
-        });
-      })
-    );
+      return observable.pipe(
+        map(result => {
+          return result.filter(item => {
+            return item.name.toLowerCase().startsWith(keyword.toLowerCase());
+          });
+        })
+      );
+    }
   }
-}
