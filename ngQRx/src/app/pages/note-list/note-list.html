@@ -8,89 +8,75 @@
 </ion-header>
 <ion-content class="outer-content">
 <div id = "wrapper">
-  <ion-list *ngIf="!viewNoteForm">
-    <ion-grid fixed>
-      <ion-row class="ion-align-items-stretch" *ngIf="notes">
-        <ion-col size="12" size-md="6" *ngFor="let note of notes">
-          <ion-card
-            class="note-card"
-            routerLink="/app/tabs/notes/note-details/{{ note.id }}"
-          >
-            <ion-card-header>
-              <ion-item detail="false" lines="none">
-                <!-- TODO fix drug images url, add default img -->
-                <h4>{{ note.textContent }}</h4>
-              </ion-item>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-list>
-                <ion-item>
-                  <h3 *ngIf="note.medication">
-                    Associated Medication: {{ note.medication.medName }}
-                  </h3>
-                  <br
-                /></ion-item>
-                <ion-item>
-                  <h3>Date Created: {{ note.createDate }}</h3>
-                  <br
-                /></ion-item>
-                <ion-item>
-                  <h3>Last Update: {{ note.updateDate }}</h3>
-                </ion-item>
-              </ion-list>
-            </ion-card-content>
+  <div *ngIf="!viewNoteForm">
+    <ion-grid fixed *ngIf="notes">
+      <ion-row class="ion-align-items-stretch" *ngFor="let note of notes">
+          <ion-card class="note-card">
+            <ion-item *ngIf="note.textContent" >
+              <ion-label position="stacked">Note: </ion-label>
+              <ion-card-content>{{ note.textContent }}</ion-card-content>
+            </ion-item>
+            <ion-item *ngIf="note.medication">
+              <ion-label position="stacked">Associated Medication: </ion-label>
+              <ion-card-content>{{ note.medication.medName }}</ion-card-content>
+            </ion-item>
+            <ion-item>
+              <ion-card-subtitle slot="start">Created: {{note.createDate | date : 'medium' }}<br></ion-card-subtitle>
+              <ion-card-subtitle >Last Updated: {{note.updateDate | date : 'medium' }}<br></ion-card-subtitle>
+              <ion-button fill="outline" slot="end" routerLink="/app/tabs/notes/note-details/{{ note.id }}">Details</ion-button>
+            </ion-item>
           </ion-card>
-        </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-list>
-  <div *ngIf="viewNoteForm">
-    <form>
-      <ion-list lines="full" class="ion-no-margin ion-no-padding">
-        <ion-item>
-          <ion-label position="stacked"
-            >Note Text <ion-text color="danger">*</ion-text></ion-label
-          >
-          <!-- <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input> -->
-          <ion-input
-            required
-            type="textarea"
-            name="textContent"
-            placeholder="eg. Feeling dizzy..."
-            [(ngModel)]="newNote.textContent"
-          ></ion-input>
-        </ion-item>
+  </div>
 
-        <!-- <ion-item>
-            <ion-label position="stacked">Date Created</ion-label>
-            <ion-input  value="1980-02-19" name='createDate' [(ngModel)]="newNote.createDate"></ion-input>
-            <ion-textarea></ion-textarea>
+  <div *ngIf="viewNoteForm">
+      <form>
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+          <ion-item>
+            <ion-label position="stacked"
+              >Note Text <ion-text color="danger">*</ion-text></ion-label
+            >
+            <!-- <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input> -->
+            <ion-input
+              required
+              type="textarea"
+              name="textContent"
+              placeholder="eg. Feeling dizzy..."
+              [(ngModel)]="newNote.textContent"
+            ></ion-input>
+          </ion-item>
+
+          <!-- <ion-item>
+              <ion-label position="stacked">Date Created</ion-label>
+              <ion-input  value="1980-02-19" name='createDate' [(ngModel)]="newNote.createDate"></ion-input>
+              <ion-textarea></ion-textarea>
+            </ion-item> -->
+
+          <!-- <ion-item>
+            <ion-label position="stacked">Date Updated</ion-label>
+            <ion-datetime
+              value="1980-02-19"
+              name="updateDate"
+              [(ngModel)]="newNote.updateDate"
+            ></ion-datetime>
           </ion-item> -->
 
-        <!-- <ion-item>
-          <ion-label position="stacked">Date Updated</ion-label>
-          <ion-datetime
-            value="1980-02-19"
-            name="updateDate"
-            [(ngModel)]="newNote.updateDate"
-          ></ion-datetime>
-        </ion-item> -->
-
-        <ion-item>
-          <ion-label>Associated Medication</ion-label>
-          <ion-select
-            placeholder="Select One"
-            [(ngModel)]="newNote.medication"
-            name="medication"
-          >
-            <ion-select-option *ngFor="let med of meds" [value]="med">{{
-              med.medName
-            }}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
-      <div class="ion-padding">
-        <ion-row>
+          <ion-item>
+            <ion-label>Associated Medication</ion-label>
+            <ion-select
+              placeholder="Select One"
+              [(ngModel)]="newNote.medication"
+              name="medication"
+            >
+              <ion-select-option *ngFor="let med of meds" [value]="med">{{
+                med.medName
+              }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <div class="ion-padding">
+          <ion-row>
             <ion-col>
               <ion-button (click)="addNote()" expand="block" type="submit" class="ion-no-margin">Save</ion-button>
             </ion-col>
@@ -98,14 +84,14 @@
               <ion-button (click)="this.viewNoteForm = false" expand="block" type="submit" class="ion-no-margin" color="light" expand="block">Cancel</ion-button>
             </ion-col>
           </ion-row>
-      </div>
-    </form>
+        </div>
+      </form>
+    </div>
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="showNoteForm()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
   </div>
-</div>
-  <!-- fab placed to the (vertical) center and end -->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="showNoteForm()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>

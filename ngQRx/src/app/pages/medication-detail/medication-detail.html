@@ -43,6 +43,11 @@
             </ion-item>
 
             <ion-item>
+              <ion-label position="stacked">Discontinue Date</ion-label>
+              <ion-datetime value="1980-02-19" name='discontinuedDate' placeholder="Select Date" [(ngModel)]="editMedication.discontinuedDate"></ion-datetime>
+            </ion-item>
+
+            <ion-item>
               <ion-label position="stacked">Medication Active</ion-label>
               <ion-checkbox color="dark" checked slot="start" name='active' [(ngModel)]="editMedication.active"></ion-checkbox>
             <ion-textarea></ion-textarea>

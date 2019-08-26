@@ -20,7 +20,7 @@
                         </span>
                     </ion-avatar>
                     <ion-card-title>{{ medication.medName }}</ion-card-title>
-                    <ion-button slot="end" fill="outline" routerLink="/app/tabs/medications/medication-details/{{ medication.id }}">Details</ion-button>
+                    <!-- <ion-button slot="end" fill="outline" routerLink="/app/tabs/medications/medication-details/{{ medication.id }}">Details</ion-button> -->
                 </ion-item>
                 <ion-item *ngIf="medication.drug">
                     <ion-avatar slot="start" *ngIf="!medication.drug.imgUrl">
@@ -41,8 +41,7 @@
                         </span>
                       </ion-avatar>
                       <ion-card-title>{{ medication.drug.proprietaryName }} {{ medication.drug.propNameSuffix }} {{ medication.drug.strength }}{{ medication.drug.unit }}</ion-card-title>
-                      <ion-button fill="outline" slot="end" routerLink="/app/tabs/medications/medication-details/{{ medication.id }}">Details</ion-button>
-
+                      <!-- <ion-button fill="outline" slot="end" routerLink="/app/tabs/medications/medication-details/{{ medication.id }}">Details</ion-button> -->
                     </ion-item>
                     <!-- <ion-item *ngIf="medication.drug !== null && medication.drug.productTypeName === 'HUMAN PRESCRIPTION DRUG'">
                      <ion-icon name="warning" slot="start"></ion-icon>
@@ -83,20 +82,12 @@
                   <ion-label  class="last" position="stacked">Taking for:</ion-label>
                   <ion-card-content  class="last"> {{ medication.diagnosis.name }}</ion-card-content>
                 </ion-item>
+                <ion-item>
+                    <ion-card-subtitle slot="start" *ngIf="!medication.discontinuedDate">Start Date: {{medication.startDate | date : 'shortDate' }}<br></ion-card-subtitle>
+                    <ion-card-subtitle *ngIf="medication.discontinuedDate">Date Discontinued: {{medication.discontinuedDate | date : 'shortDate' }}<br></ion-card-subtitle>
+                    <ion-button fill="outline" slot="end" routerLink="/app/tabs/medications/medication-details/{{ medication.id }}">Details</ion-button>
+                  </ion-item>
               </ion-card>
-          <!--
-                  <ion-card-subtitle class="ion-text-left" *ngIf="medication.drug.productTypeName">{{medication.drug.productTypeName}}</ion-card-subtitle>
-                  <ion-item >
-
-                  <ion-item *ngIf="medication.drug">
-                  <ion-label position="stacked"><strong>Associated Drug:</strong></ion-label>
-                  <ion-item>{{ medication.drug.genericName }}</ion-item>
-                  <ion-item>{{ medication.drug.dosageForm }}</ion-item>
-                  <ion-item>Route: {{ medication.drug.routeName }}</ion-item>
-                  <ion-item>Strength/Unit: {{ medication.drug.strength }} {{ medication.drug.unit }}</ion-item>
-                  <ion-item>Type: {{ medication.drug.productTypeName }}</ion-item>
-                  <ion-item>Pharm Classes: {{ medication.drug.pharmClasses }}</ion-item>
-         -->
         </ion-col>
       </ion-row>
     </ion-grid>

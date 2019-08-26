@@ -36,12 +36,12 @@ public class PersonalNote {
 	
 	@CreationTimestamp
 	@Column(name="create_date")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date createDate;
 	
 	@UpdateTimestamp
 	@Column(name="update_date")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date updateDate;
 	
 	@ManyToOne
