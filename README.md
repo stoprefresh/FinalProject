@@ -78,7 +78,7 @@ QRx - Patient/Provider Interface. A collaborative proof of concept for streamlin
 * HTML5/CSS3/JS
 
 ### Demo Application
-placeholder
+http://3.130.50.134:8080/QRx/#/login
 
 ### Entity Diagram
 ![qrxdbERD](qrxdbERD.png)
