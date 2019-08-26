@@ -40,6 +40,8 @@ export class MedicationListPage implements OnInit {
     this.reload();
   }
 
+
+
   reload() {
     this.medicationService.index().subscribe(
       good => {
