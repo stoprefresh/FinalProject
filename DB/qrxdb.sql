@@ -140,8 +140,9 @@ DROP TABLE IF EXISTS `approved_provider` ;
 CREATE TABLE IF NOT EXISTS `approved_provider` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `patient_id` INT NOT NULL,
-  `provider_id` INT NOT NULL,
+  `provider_id` INT NULL,
   `date_approved` DATE NULL,
+  `name` VARCHAR(1000) NULL,
   `active` TINYINT NULL DEFAULT 1,
   INDEX `fk_patient_has_provider_patient2_idx` (`patient_id` ASC),
   INDEX `fk_patient_has_provider_provider2_idx` (`provider_id` ASC),
@@ -265,6 +266,7 @@ CREATE TABLE IF NOT EXISTS `allergy` (
   `patient_id` INT NOT NULL,
   `allergen` VARCHAR(450) NULL,
   `reaction` TEXT NULL,
+  `severity` INT NULL,
   `active` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_allergy_patient1_idx` (`patient_id` ASC),

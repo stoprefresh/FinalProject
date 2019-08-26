@@ -10,4 +10,6 @@ public interface ApprovedProviderService {
 
 	List<ApprovedProvider> findPatientsByProvider_Id(int pid);
 
+	ApprovedProvider create(ApprovedProvider provider);
+
 }

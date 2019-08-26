@@ -25,6 +25,8 @@ public class Allergy {
 	
 	private String reaction;
 	
+	private Integer severity;
+	
 	private Boolean active;
 	
 	public Allergy() {
@@ -104,6 +106,14 @@ public class Allergy {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	public Integer getSeverity() {
+		return severity;
+	}
+
+	public void setSeverity(Integer severity) {
+		this.severity = severity;
 	}
 	
 	

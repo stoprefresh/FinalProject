@@ -88,6 +88,19 @@ public class MedicationController {
 					e.printStackTrace();
 				}
 			}
+			if (medication.getDiscontinuedDate() != null) {
+				DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+				Calendar calObj = Calendar.getInstance();
+				try {
+					Date startDate = df.parse(df.format(calObj.getTime()));
+					calObj.setTime(startDate);
+					calObj.add(Calendar.HOUR_OF_DAY, 1);
+					medication.setDiscontinuedDate(calObj.getTime());
+					System.err.println(medication.getStartDate());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
 			try {
 				medication.setPatient(patient);
 				svc.create(medication);
@@ -108,6 +121,32 @@ public class MedicationController {
 	@PutMapping("medications/{mid}")
 	public Medication replaceMedication(@PathVariable Integer mid, @RequestBody Medication medication, Principal prince) {
 		Medication med = svc.getByPatient_IdAndMedication_Id(patientSvc.findPatientByUsername(prince.getName()).getId(), mid);
+		if (medication.getStartDate() != null) {
+			DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+			Calendar calObj = Calendar.getInstance();
+			try {
+				Date startDate = df.parse(df.format(calObj.getTime()));
+				calObj.setTime(startDate);
+				calObj.add(Calendar.HOUR_OF_DAY, 1);
+				medication.setStartDate(calObj.getTime());
+				System.err.println(medication.getStartDate());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		if (medication.getDiscontinuedDate() != null) {
+			DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+			Calendar calObj = Calendar.getInstance();
+			try {
+				Date startDate = df.parse(df.format(calObj.getTime()));
+				calObj.setTime(startDate);
+				calObj.add(Calendar.HOUR_OF_DAY, 1);
+				medication.setDiscontinuedDate(calObj.getTime());
+				System.err.println(medication.getStartDate());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 		if (med != null) {
 			medication.setPatient(med.getPatient());
 			medication = svc.update(med.getId(), medication);

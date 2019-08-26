@@ -24,4 +24,9 @@ public class ApprovedProviderServiceImpl implements ApprovedProviderService {
 		return providerRepo.findPatientsByProvider_Id(pid);
 	}
 
+	@Override
+	public ApprovedProvider create(ApprovedProvider provider) {
+		return providerRepo.saveAndFlush(provider);
+	}
+
 }
