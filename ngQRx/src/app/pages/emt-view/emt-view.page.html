@@ -19,7 +19,7 @@
       </ion-card-header>
       <ion-card-content>
         <ion-card-subtitle>Blood Type</ion-card-subtitle>
-        <ion-card-title>{{ currentPatient.bloodType.abo }}</ion-card-title>
+        <ion-card-title>{{ currentPatient.bloodType.abo }}{{(currentPatient.bloodType.rh) ? '+' : '-'}}</ion-card-title>
       </ion-card-content>
       <ion-card-content>
         <ion-card-subtitle>Sex</ion-card-subtitle>
@@ -27,11 +27,24 @@
       </ion-card-content>
 
       <ion-card-content>
+        <ion-card-subtitle>Allergies</ion-card-subtitle>
+        <ion-row class="ion-align-items-stretch">
+          <ion-col
+            size-md="4"
+            *ngFor="let allergy of currentPatient.allergies"
+          >
+            <ion-card-title>{{ allergy.allergen }}</ion-card-title>
+            <ion-card-subtitle *ngIf="allergy.reaction">Reaction: {{ allergy.reaction }}</ion-card-subtitle>
+            <ion-card-subtitle *ngIf="allergy.severity">Severity: {{ allergy.severity }} </ion-card-subtitle>
+
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+      <ion-card-content>
         <ion-card-subtitle>Medications</ion-card-subtitle>
         <ion-row class="ion-align-items-stretch">
           <ion-col
-            size="12"
-            size-md="6"
+            size-md="4"
             *ngFor="let med of currentPatient.medicationList"
           >
             <ion-card-title>{{ med.medName }}</ion-card-title>
@@ -41,23 +54,17 @@
         </ion-row>
       </ion-card-content>
 
-
-
-
       <ion-card-content>
         <ion-card-subtitle>Emergency Contacts</ion-card-subtitle>
         <ion-row class="ion-align-items-stretch">
           <ion-col
-            size="12"
-            size-md="6"
+            size-md="4"
             *ngFor="let emergencyContact of currentPatient.emergencyContacts"
           >
-            <ion-card-title>{{ emergencyContact.phone }}</ion-card-title>
-            <ion-card-title
-              >{{ emergencyContact.lastName }},
-              {{ emergencyContact.firstName }}</ion-card-title
-            >
-            <ion-card-title>{{ emergencyContact.relationship }}</ion-card-title>
+            <ion-card-title>{{ emergencyContact.firstName }} {{ emergencyContact.lastName }}</ion-card-title>
+            <ion-card-subtitle>Phone: {{ emergencyContact.phone }}</ion-card-subtitle>
+            <ion-card-subtitle>Email: {{ emergencyContact.email }}</ion-card-subtitle>
+            <ion-card-subtitle>Relationship: {{ emergencyContact.relationship }}</ion-card-subtitle>
           </ion-col>
         </ion-row>
       </ion-card-content>
