@@ -33,8 +33,6 @@ export class HealthInfoPage implements OnInit {
     this.ptSvc.index().subscribe(
       good => {
         this.patient = good;
-        console.log('good: ' + good);
-        console.log('patient: ' + this.patient);
       },
       bad => {
         console.error(bad);

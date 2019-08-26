@@ -42,6 +42,8 @@ public class ApprovedProvider {
 	@Column(name="date_approved")
 	private Date dateApproved;
 
+	private String name;
+
 	public int getId() {
 		return id;
 	}
@@ -118,6 +120,22 @@ public class ApprovedProvider {
 		this.id = id;
 		this.patient = patient;
 		this.provider = provider;
+	}
+
+	public List<Medication> getMedications() {
+		return medications;
+	}
+
+	public void setMedications(List<Medication> medications) {
+		this.medications = medications;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 

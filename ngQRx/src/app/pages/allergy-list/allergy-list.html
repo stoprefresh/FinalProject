@@ -4,35 +4,34 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Allergies</ion-title>
+    <!-- <ion-buttons slot="end">
+        <ion-button (click)="reload()">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="outer-content">
+    <div id = "wrapper">
   <ion-list *ngIf="!viewAllergyForm">
     <ion-grid fixed>
       <ion-row class="ion-align-items-stretch" *ngIf="allergies">
-        <ion-col size="12" size-md="6" *ngFor="let allergy of allergies">
-          <ion-card
-            class="allergy-card"
-            routerLink="/app/tabs/allergies/allergy-detail/{{ allergy.id }}"
-          >
-            <ion-card-header>
-              <ion-item detail="false" lines="none">
-                <h4>Allergen - {{ allergy.allergen }}</h4>
+        <ion-col size-md="6" *ngFor="let allergy of allergies">
+          <ion-card class="allergy-card">
+             <ion-item *ngIf="allergy.severity !== null">
+                <ion-icon *ngIf="allergy.severity >= 5" name="warning" slot="start" color="danger"></ion-icon>
+                <ion-icon *ngIf="allergy.severity === 4" name="warning" slot="start" color="danger"></ion-icon>
+                <ion-icon *ngIf="allergy.severity === 3" name="warning" slot="start" color="warning"></ion-icon>
+                <ion-icon *ngIf="allergy.severity === 2" name="warning" slot="start" color="warning"></ion-icon>
+                <ion-icon *ngIf="allergy.severity === 1" name="warning" slot="start" color="light"></ion-icon>
+                <ion-card-title>{{ allergy.allergen }}</ion-card-title>
               </ion-item>
-            </ion-card-header>
-
-            <ion-card-content>
-              <ion-list>
-                <ion-item>
-                  <h3>Reaction - {{ allergy.reaction }}</h3>
-                </ion-item>
-                <ion-item>
-                  <h3>Active - {{ allergy.active }}</h3>
-                </ion-item>
-              </ion-list>
-            </ion-card-content>
-          </ion-card>
+              <ion-item>
+              <ion-label *ngIf="allergy.reaction !== null">Reaction: </ion-label>
+              <ion-card-content *ngIf="allergy.reaction !== null"> {{ allergy.reaction }} </ion-card-content>
+              <ion-button fill="outline" slot="end" routerLink="/app/tabs/allergies/allergy-detail/{{ allergy.id }}">Update</ion-button>
+              </ion-item>
+            </ion-card>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -78,23 +77,30 @@
         </ion-item>
       </ion-list>
       <div class="ion-padding">
-        <ion-button
-          (click)="addAllergy(); this.viewAllergyForm = false"
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Save</ion-button
-        >
-        <br />
-        <ion-button
-          (click)="this.viewAllergyForm = false"
-          expand="block"
-          type="submit"
-          class="ion-no-margin"
-          >Cancel</ion-button
-        >
+        <ion-row>
+          <ion-col>
+            <ion-button
+              (click)="addAllergy(); this.viewAllergyForm = false"
+              expand="block"
+              type="submit"
+              class="ion-no-margin"
+              >Save</ion-button
+            >
+          </ion-col>
+          <ion-col>
+            <ion-button
+              (click)="this.viewAllergyForm = false"
+              expand="block"
+              color="light"
+              class="ion-no-margin"
+              expand="block"
+              >Cancel</ion-button
+            >
+          </ion-col>
+        </ion-row>
       </div>
     </form>
+  </div>
   </div>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="showAllergyForm()">

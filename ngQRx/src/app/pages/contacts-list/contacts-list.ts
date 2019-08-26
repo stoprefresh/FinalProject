@@ -25,21 +25,18 @@ export class ContactsListPage implements OnInit {
   ) {}
 
   // Methods
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.reload();
+  }
 
   reload() {
     this.contactService.index().subscribe(
       good => {
-        if (good) {
-          this.contacts = good;
-        } else {
-          this.router.navigateByUrl('**');
-        }
+        this.contacts = good;
       },
       bad => {
         console.error(bad);
-      },
-      () => {}
+      }
     );
   }
 
@@ -48,32 +45,22 @@ export class ContactsListPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.reload();
-  }
-
-  // ionViewWillEnter() {
-  //   this.reload();
-  // }
-
-  ionViewWillEnter() {
     this.contactService.index().subscribe((contacts: EmergencyContact[]) => {
       this.contacts = contacts;
     });
-    // console.error(this.diagnosisList.length);
-
   }
 
   addContact() {
     this.contactService.create(this.newEmergencyContact).subscribe(
       good => {
+        this.viewNewContactForm = false;
         this.newEmergencyContact = null;
       },
       bad => {
         console.error(bad);
       },
       () => {
-        this.viewNewContactForm = false;
-        this.ionViewWillEnter();
+        this.reload();
       }
     );
   }

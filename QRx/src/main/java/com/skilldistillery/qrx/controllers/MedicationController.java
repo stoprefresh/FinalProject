@@ -22,12 +22,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.qrx.entities.ApprovedProvider;
 import com.skilldistillery.qrx.entities.Medication;
 import com.skilldistillery.qrx.entities.Patient;
 import com.skilldistillery.qrx.services.MedicationService;
 import com.skilldistillery.qrx.services.PatientService;
-import com.skilldistillery.qrx.services.ProviderService;
 
 @RestController
 @RequestMapping({"api/patients/", "api/patients"})
@@ -37,9 +35,6 @@ public class MedicationController {
 	@Autowired
 	private PatientService patientSvc;
 	
-	@Autowired
-	private ProviderService providerSvc;
-
 	@Autowired
 	private MedicationService svc;
 
@@ -80,7 +75,6 @@ public class MedicationController {
 	public Medication createMedication(@RequestBody Medication medication, HttpServletRequest req, HttpServletResponse resp, Principal prince) {
 		if (medication.getPatient() == null) {
 			Patient patient = patientSvc.findPatientByUsername(prince.getName());
-			ApprovedProvider ap = patient.getApprovedProviders().get(0);
 			if (medication.getStartDate() == null) {
 				DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 				Calendar calObj = Calendar.getInstance();
@@ -94,9 +88,21 @@ public class MedicationController {
 					e.printStackTrace();
 				}
 			}
+			if (medication.getDiscontinuedDate() != null) {
+				DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+				Calendar calObj = Calendar.getInstance();
+				try {
+					Date startDate = df.parse(df.format(calObj.getTime()));
+					calObj.setTime(startDate);
+					calObj.add(Calendar.HOUR_OF_DAY, 1);
+					medication.setDiscontinuedDate(calObj.getTime());
+					System.err.println(medication.getStartDate());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
 			try {
 				medication.setPatient(patient);
-				medication.setPrescriber(ap);
 				svc.create(medication);
 				resp.setStatus(201);
 				StringBuffer url = req.getRequestURL();
@@ -114,11 +120,35 @@ public class MedicationController {
 
 	@PutMapping("medications/{mid}")
 	public Medication replaceMedication(@PathVariable Integer mid, @RequestBody Medication medication, Principal prince) {
-		System.err.println(medication.getDiagnosis());
-		Patient patient = patientSvc.findPatientByUsername(prince.getName());
-		Medication med = svc.getByPatient_IdAndMedication_Id(patient.getId(), mid);
+		Medication med = svc.getByPatient_IdAndMedication_Id(patientSvc.findPatientByUsername(prince.getName()).getId(), mid);
+		if (medication.getStartDate() != null) {
+			DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+			Calendar calObj = Calendar.getInstance();
+			try {
+				Date startDate = df.parse(df.format(calObj.getTime()));
+				calObj.setTime(startDate);
+				calObj.add(Calendar.HOUR_OF_DAY, 1);
+				medication.setStartDate(calObj.getTime());
+				System.err.println(medication.getStartDate());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		if (medication.getDiscontinuedDate() != null) {
+			DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+			Calendar calObj = Calendar.getInstance();
+			try {
+				Date startDate = df.parse(df.format(calObj.getTime()));
+				calObj.setTime(startDate);
+				calObj.add(Calendar.HOUR_OF_DAY, 1);
+				medication.setDiscontinuedDate(calObj.getTime());
+				System.err.println(medication.getStartDate());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 		if (med != null) {
-			medication.setPatient(patient);
+			medication.setPatient(med.getPatient());
 			medication = svc.update(med.getId(), medication);
 			return medication;
 		} 

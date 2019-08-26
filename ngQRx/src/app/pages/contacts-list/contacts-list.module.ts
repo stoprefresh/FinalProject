@@ -13,8 +13,6 @@ import { ContactsListPageRoutingModule } from './contacts-list-routing.module';
     ContactsListPageRoutingModule,
     FormsModule
   ],
-  declarations: [
-    ContactsListPage,
-  ]
+  declarations: [ContactsListPage]
 })
 export class ContactsListModule { }

@@ -14,8 +14,6 @@ export class ContactService {
 
   private url = environment.baseUrl + 'api/patients/contacts';
 
-  editContact = null;
-
   constructor(
     private http: HttpClient,
     private auth: AuthoService,
@@ -99,7 +97,6 @@ export class ContactService {
   }
 
   update(contact: EmergencyContact) {
-    console.log(contact);
     const credentials = this.auth.getCredentials();
     if (this.auth.checkLogin()) {
       const httpOptions = {

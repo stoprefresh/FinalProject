@@ -1,7 +1,7 @@
 {
-  "name": "ionic-conference-app",
+  "name": "ionic-qrx-app",
   "type": "angular",
   "integrations": {
-    "cordova": {}
+    "capacitor": {}
   }
 }

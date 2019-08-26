@@ -38,32 +38,21 @@ export class AccountPage implements AfterViewInit {
       },
       bad => {
         console.error(bad);
-      },
-      () => {}
+      }
     );
   }
   getUser() {
     this.userSvc.index().subscribe(
       good => {
-        if (good) {
           this.user = good;
-        } else {
-          // TODO fix route for error
-          this.router.navigateByUrl('**');
-        }
       },
       bad => {
         console.error(bad);
-      },
-      // TODO possible implementation for finally
-      () => {}
+      }
     );
   }
 
-  changePassword() {}
-
   logout() {
-    this.userData.logout();
     this.authSvc.logout();
     this.router.navigateByUrl('/login');
   }

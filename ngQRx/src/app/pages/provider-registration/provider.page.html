@@ -16,12 +16,21 @@
   <form #reigsterForm="ngForm" novalidate>
     <ion-list lines="none">
       <ion-item>
-        <ion-label position="stacked" color="primary">Organization</ion-label>
-        <ion-input [(ngModel)]="provider.organization" name="organization" type="text" required>
-        </ion-input>
+        <ion-label position="stacked">Organization</ion-label>
+        <ion-select
+          placeholder="Select One"
+          [(ngModel)]="provider.organization"
+          name="organization"
+        >
+          <ion-select-option
+            *ngFor="let organization of organizationList"
+            [value]="organization"
+            >{{ organization }}</ion-select-option
+          >
+        </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked" color="primary">Subunit</ion-label>
+        <ion-label position="stacked" color="primary">Department/Subunit</ion-label>
         <ion-input [(ngModel)]="provider.subunit" name="organization" type="text" required>
         </ion-input>
       </ion-item>

@@ -6,16 +6,14 @@ import { Provider } from '../../models/provider';
 @Component({
   selector: 'provider',
   templateUrl: './provider.page.html',
-  styleUrls: ['./provider.page.scss'],
+  styleUrls: ['./provider.page.scss']
 })
 export class ProviderPage implements OnInit {
   provider = new Provider();
+  organizationList: string[] = ['Denver Metro Ambulance', 'SD Internal Medicine Group', 'Other'];
+  constructor(private providerSvc: ProviderService, private router: Router) {}
 
-  constructor(private providerSvc: ProviderService,
-    private router: Router) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   addProvider() {
     this.providerSvc.create(this.provider).subscribe(
@@ -26,9 +24,7 @@ export class ProviderPage implements OnInit {
         console.error('ProviderRegister.addProvider(): error creating user.');
         console.error(bad);
       },
-      () => {
-      }
+      () => {}
     );
   }
-
 }

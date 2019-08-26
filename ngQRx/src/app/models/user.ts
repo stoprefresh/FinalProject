@@ -1,19 +1,4 @@
 export class User {
-  // "username": "dmaunit2",
-  // "password": "test",
-  // "active": true,
-  // "role": "ems",
-  // "createDate": "2019-08-14",
-  // "title": null,
-  // "firstName": "Cecil",x
-  // "middleName": "W",
-  // "lastName": "Smith",
-  // "email": "cwsmith@dma.org",
-  // "phone": "303-555-5155",
-  // "street": "123 Java Rd",
-  // "city": "Denver",
-  // "state": "CO",
-  // "zip": "80111"
 
   id: number;
   username: string;
@@ -30,6 +15,7 @@ export class User {
   city: string;
   state: string;
   zip: string;
+  image: string;
 
   constructor(
     id?: number,
@@ -46,7 +32,8 @@ export class User {
     street?: string,
     city?: string,
     state?: string,
-    zip?: string
+    zip?: string,
+    image?: string
   ) {
     (this.id = id),
       (this.username = username),
@@ -62,7 +49,8 @@ export class User {
       (this.phone = phone),
       (this.street = street),
       (this.state = state),
-      (this.zip = zip)
+      (this.zip = zip),
+      (this.image = image)
       ;
   }
 }

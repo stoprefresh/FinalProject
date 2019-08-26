@@ -1,14 +1,23 @@
 <ion-app>
   <ion-split-pane>
-    <ion-menu >
+    <ion-menu>
       <ion-header>
         <ion-toolbar>
-          <ion-title>QRx</ion-title>
+          <ion-title>[QRx]</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
 
-        <ion-list *ngIf="loggedIn">
+        <ion-list *ngIf="checkLoginStatus()">
+          <ion-item class="noborder" *ngIf="user">
+            <ion-avatar slot="start" *ngIf="!user.image">
+                <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="Picture" />
+              </ion-avatar>
+            <ion-avatar slot="start" *ngIf="user.image">
+              <img src="{{user.image}}" alt="Picture" />
+            </ion-avatar>
+            <ion-text>{{ user.firstName }} {{ user.lastName }}</ion-text>
+          </ion-item>
           <ion-list-header>
             Navigate
           </ion-list-header>
@@ -17,13 +26,31 @@
             <ion-item routerLink="/emt-view" routerDirection="root">
               <ion-icon slot="start" name="medkit"></ion-icon>
               <ion-label>
-                  EMT Emergency View
+                  EMS Dashboard
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false" *ngIf='isUserPhysician()'>
+            <ion-item routerLink="/patient-list" routerDirection="root">
+              <ion-icon slot="start" name="contacts"></ion-icon>
+              <ion-label>
+                  My Patients
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false" *ngIf='isUserAdmin()'>
+            <ion-item routerLink="/emt-view" routerDirection="root">
+              <ion-icon slot="start" name="settings"></ion-icon>
+              <ion-label>
+                  Admin Dashboard
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
 
           <ion-menu-toggle autoHide="false" *ngFor="let p of appPages; let i = index" >
-            <ion-item [routerLink]="p.url" routerLinkActive="active" routerDirection="root" *ngIf='!isUserEMS()'>
+            <ion-item [routerLink]="p.url" routerLinkActive="active" routerDirection="root" *ngIf='isUserPatient()'>
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}
@@ -31,29 +58,27 @@
             </ion-item>
           </ion-menu-toggle>
 
-
-
         </ion-list>
 
-        <ion-list *ngIf="loggedIn">
+        <ion-list *ngIf="checkLoginStatus()">
           <ion-list-header>
             Account
           </ion-list-header>
 
-          <ion-menu-toggle autoHide="false" *ngIf='!isUserEMS()'>
-              <ion-item routerLink="/qr-code" routerDirection="root">
-                <ion-icon slot="start" name="barcode"></ion-icon>
-                <ion-label>
+          <ion-menu-toggle autoHide="false">
+            <ion-item routerLink="/qr-code" routerDirection="root" *ngIf="isUserPatient()">
+              <ion-icon slot="start" name="barcode"></ion-icon>
+              <ion-label>
                 MyQRx
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
 
           <ion-menu-toggle autoHide="false">
             <ion-item routerLink="/account" routerDirection="root">
-              <ion-icon slot="start" name="person"></ion-icon>
+              <ion-icon slot="start" name="settings"></ion-icon>
               <ion-label>
-                Account Details
+                Settings
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -69,8 +94,8 @@
 
         </ion-list>
 
-        <ion-list *ngIf="!loggedIn">
-          <ion-list-header>
+        <ion-list *ngIf="!checkLoginStatus()">
+          <ion-list-header *ngIf="isUserPatient()">
             Account
           </ion-list-header>
 

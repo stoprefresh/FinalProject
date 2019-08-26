@@ -36,6 +36,9 @@ public class User {
 	@Column(name= "password")
 	private String password;
 	
+	@Column(name= "image")
+	private String image;
+	
 	@Column(name= "active")
 	private Boolean active;
 	
@@ -326,5 +329,13 @@ public class User {
 		} else if (!zip.equals(other.zip))
 			return false;
 		return true;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 }

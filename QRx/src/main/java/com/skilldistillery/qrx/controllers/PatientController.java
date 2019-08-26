@@ -43,7 +43,7 @@ public class PatientController {
 	@GetMapping("username/{username}")
 	public Patient getPatientByUsername(@PathVariable String username, Principal principal) {
 		User user = userSvc.findByUsername(principal.getName());
-		if (user.getRole().equals("ems") ) {
+		if (user.getRole().toLowerCase().equals("ems") ) {
 			System.out.println(svc.findPatientByUsername(username).toString());
 		return svc.findPatientByUsername(username);
 		} 

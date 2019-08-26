@@ -23,7 +23,6 @@ export class PatientService {
     private router: Router
   ) {}
   destroy(id: string | number) {
-    console.log(id);
     const credentials = this.auth.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -126,6 +125,9 @@ export class PatientService {
   }
 
   findByUserName(username: any): Observable<Patient> {
+    console.log('in paitnet svc');
+    console.log(username);
+
     const credentials = this.auth.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({

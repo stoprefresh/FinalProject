@@ -10,11 +10,9 @@ constructor(private userData: UserData) {
   this.checkLoginStatus();
 }
 
-  checkLoginStatus() {
-    return this.userData.isLoggedIn().then(loggedIn => {
-      return this.updateLoggedInStatus(loggedIn);
-    });
-  }
+checkLoginStatus() {
+  return this.updateLoggedInStatus(this.userData.isLoggedIn());
+}
   updateLoggedInStatus(loggedIn: boolean) {
     setTimeout(() => {
       this.loggedIn = loggedIn;
