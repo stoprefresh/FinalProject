@@ -5,22 +5,21 @@ import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Note } from './../../models/note';
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, ActionSheetController } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
 import { Patient } from '../../models/patient';
 
 @Component({
   selector: 'page-note-list',
   templateUrl: 'note-list.html',
-  styleUrls: ['./note-list.scss'],
+  styleUrls: ['./note-list.scss']
 })
 export class NoteListPage implements OnInit {
-
   // FIELDS
   notes: Note[] = [];
   newNote: Note = new Note();
   viewNoteForm = false;
   patient: Patient;
-  meds: Medication [] = [];
+  meds: Medication[] = [];
 
   // CTOR
   constructor(
@@ -39,36 +38,21 @@ export class NoteListPage implements OnInit {
   reload() {
     this.noteSvc.index().subscribe(
       good => {
-        if (good) {
-          this.notes = good;
-        } else {
-          // TODO fix route for error
-          this.router.navigateByUrl('**');
-        }
+        this.notes = good;
       },
       bad => {
         console.error(bad);
-      },
-      // TODO possible implementation for finally
-      () => {}
+      }
     );
     this.medSvc.index().subscribe(
       good => {
-        if (good) {
-          this.meds = good;
-        } else {
-          // TODO fix route for error
-          this.router.navigateByUrl('**');
-        }
+        this.meds = good;
       },
       bad => {
         console.error(bad);
-      },
-      // TODO possible implementation for finally
-      () => {}
+      }
     );
   }
-
 
   showNoteForm() {
     this.viewNoteForm = true;
@@ -81,10 +65,8 @@ export class NoteListPage implements OnInit {
   }
 
   addNote() {
-    // console.log('new note: ' + this.newNote);
     this.noteSvc.create(this.newNote).subscribe(
       good => {
-        // console.log(good);
         this.viewNoteForm = false;
         this.newNote = new Note();
       },
@@ -92,7 +74,6 @@ export class NoteListPage implements OnInit {
         console.error(bad);
       },
       () => {
-        // this.newNote = new Note();
         this.reload();
       }
     );

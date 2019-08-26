@@ -9,107 +9,129 @@
 
 <ion-content>
   <!-- <div class="register-logo">
-    <img src="assets/img/appicon.svg" alt="QRx Logo">
-  </div> -->
-  <form #registerForm="ngForm" novalidate>
-    <ion-list lines="none">
-      <ion-item>
-        <ion-label position="stacked" color="primary">Username</ion-label>
-        <ion-input
-          [(ngModel)]="user.username"
-          name="username"
-          type="text"
-          #username="ngModel"
-          required
-        >
-        </ion-input>
-      </ion-item>
-      <!-- <ion-text color="danger">
-        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
-          Username is required
-        </p>
-      </ion-text> -->
+    <img src="assets/img/appicon.svg" alt="QRx Logo" />
+  </div>
+  <ion-item>
+      <ion-label color="primary">Disclaimer:</ion-label>
+    <p>
+      This product uses publicly available data from the U.S. National Library
+      of Medicine (NLM), National Institutes of Health, Department of Health and
+      Human Services; NLM is not responsible for the product and does not
+      endorse or recommend this or any other product.
+    </p>
+  </ion-item> -->
+  <form name="newUser" autocomplete="off" class="noborder">
+    <ion-input type="hidden" autocomplete="fase"></ion-input>
+    <ion-item>
+      <ion-label>Username:<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required name="name" type="text" [(ngModel)]="user.username">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Password:<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input
+        required
+        name="pass"
+        type="password"
+        [(ngModel)]="user.password"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>First Name <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input
+        required
+        type="text"
+        name="firstName"
+        [(ngModel)]="user.firstName"
+      ></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked" color="primary">Password</ion-label>
-        <ion-input
-          [(ngModel)]="user.password"
-          name="password"
-          type="password"
-          #password="ngModel"
-          required
-        >
-        </ion-input>
-      </ion-item>
-      <!--  <ion-text color="danger">
-        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
-          Password is required
-        </p>
-      </ion-text> -->
-      <ion-item>
-        <ion-label position="stacked"
-          >First Name <ion-text color="danger">*</ion-text></ion-label
-        >
-        <ion-input
-          required
-          type="text"
-          name="firstName"
-          [(ngModel)]="user.firstName"
-        ></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label>Last Name <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input
+        required
+        type="text"
+        name="lastName"
+        [(ngModel)]="user.lastName"
+      ></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked"
-          >Last Name <ion-text color="danger">*</ion-text></ion-label
-        >
-        <ion-input
-          required
-          type="text"
-          name="lastName"
-          [(ngModel)]="user.lastName"
-        ></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label>Street</ion-label>
+      <ion-input
+        type="text"
+        name="street"
+        [(ngModel)]="user.street"
+      ></ion-input> </ion-item
+    ><ion-item>
+      <ion-label>City</ion-label>
+      <ion-input type="text" name="city" [(ngModel)]="user.city"></ion-input
+    ></ion-item>
+    <ion-item
+      ><ion-label>State</ion-label>
+      <ion-input type="text" name="state" [(ngModel)]="user.state"></ion-input
+    ></ion-item>
+    <ion-item>
+      <ion-label>Zip <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="text" name="zip" [(ngModel)]="user.zip"></ion-input>
+      <ion-input
+        *ngIf="!provider"
+        type="hidden"
+        name="role"
+        [(ngModel)]="user.role"
+        value="user"
+      ></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Address</ion-label>
-        <ion-input
-          type="text"
-          name="street"
-          [(ngModel)]="user.street"
-        ></ion-input>
-        <ion-input type="text" name="city" [(ngModel)]="user.city"></ion-input>
-        <ion-input
-          type="text"
-          name="state" placeholder='eg. CO'
-          [(ngModel)]="user.state"
-        ></ion-input>
-        <ion-input type="text" name="zip" [(ngModel)]="user.zip"></ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label>Phone <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input
+        required
+        type="text"
+        name="phone"
+        [(ngModel)]="user.phone"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label
+        >Account for professional use as a medical provider?
+        <ion-text color="danger">*</ion-text></ion-label
+      >
+      <ion-toggle
+        slot="start"
+        name="provider"
+        color="danger"
+        [(ngModel)]="provider"
+      ></ion-toggle>
+    </ion-item>
 
+    <div *ngIf="provider">
       <ion-item>
-        <ion-label position="stacked"
-          >Phone <ion-text color="danger">*</ion-text></ion-label
+        <ion-label>Clinical Title</ion-label>
+        <ion-select
+          placeholder="Select One"
+          [(ngModel)]="user.title"
+          name="title"
         >
-        <ion-input
-          required
-          type="text"
-          name="phone"
-          [(ngModel)]="user.phone"
-        ></ion-input>
+          <ion-select-option *ngFor="let title of titleList" [value]="title">{{
+            title
+          }}</ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label position=""
-          >Account for professional use as a medical provider?
-          <ion-text color="danger">*</ion-text></ion-label
+        <ion-label *ngIf="provider">Provider Role</ion-label>
+        <ion-select
+          placeholder="Select One"
+          [(ngModel)]="user.role"
+          name="role"
         >
-        <ion-toggle
-          slot="start"
-          name="provider"
-          color="danger"
-          [(ngModel)]="provider"
-        ></ion-toggle>
+          <ion-select-option *ngFor="let role of roleList" [value]="role">{{
+            role
+          }}</ion-select-option>
+        </ion-select>
       </ion-item>
-    </ion-list>
+    </div>
     <div class="ion-padding">
       <ion-button (click)="addUser()" type="submit" expand="block"
         >Create</ion-button

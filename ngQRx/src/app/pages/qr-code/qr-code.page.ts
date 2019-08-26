@@ -42,14 +42,11 @@ export class QrCodePage implements OnInit {
       good => {
         if (good) {
           this.user = good;
-          console.log(this.user.username);
         }
       },
       bad => {
         console.error(bad);
-      },
-      // TODO possible implementation for finally
-      () => {}
+      }
     );
   }
 

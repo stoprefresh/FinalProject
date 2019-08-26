@@ -19,24 +19,21 @@ public class DrugController {
 
 	@Autowired
 	private DrugService svc;
-	
-//	@GetMapping() //if this doesn't work, use path with empty quotes
-//	public List<Drug> getAllDrugs(){
-//		return svc.findAllDrugs();
-//	}
 
-	@GetMapping("{did}")
-	public Drug getDrugById(@PathVariable int did){
+	@GetMapping("/id/{did}")
+	public Drug getDrugById(@PathVariable Integer did) {
 		return svc.show(did);
 	}
-	
-	@GetMapping("name/proprietary/{proprietaryName}")
-	public List<Drug> getDrugsByProprietaryName(@PathVariable("proprietaryName") String brand){
-		return svc.searchByProprietaryName(brand);
+
+	@GetMapping("{keyword}")
+	public List<Drug> getDrugsByProprietaryName(@PathVariable("keyword") String keyword) {
+		return svc.search(keyword);
 	}
 	
-	@GetMapping("name/generic/{genericName}")
-	public List<Drug> getDrugsByGenericName(@PathVariable("genericName") String generic){
-		return svc.searchByGenericName(generic);
+	@GetMapping("{kcleareyword}/{strength}")
+	public List<Drug> getDrugsByProprietaryName(@PathVariable("keyword") String keyword,
+			@PathVariable("strength") String strength) {
+		return svc.search(keyword, strength);
 	}
+
 }

@@ -1,0 +1,7 @@
+{
+  "appId": "com.skilldistillery.qrx",
+  "appName": "QRx",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

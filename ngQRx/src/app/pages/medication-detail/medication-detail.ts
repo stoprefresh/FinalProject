@@ -4,6 +4,8 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Medication } from '../../models/medication';
 import { MedicationService } from '../../services/medication.service';
+import { ApprovedProvider } from '../../models/approved-provider';
+import { ApprovedProviderService } from '../../services/ap.service';
 
 @Component({
   selector: 'page-medication-detail',
@@ -14,40 +16,41 @@ export class MedicationDetailPage implements OnInit {
   // Fields
   medication: Medication = null;
   editMedication: Medication = null;
-  prescriberList: string[] = [ 'Kevin Smith MD' ];
-  diagnosisList: Diagnosis[];
+  prescriberList: ApprovedProvider[] = [];
+  diagnosisList: Diagnosis[] = [];
 
   // Constructors
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private medicationService: MedicationService,
-    private dxSvc: DiagnosisService
+    private diagnosisService: DiagnosisService,
+    private approvedProviderService: ApprovedProviderService
   ) {}
 
   // Methods
   ngOnInit(): void {}
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     const medicationId = this.route.snapshot.paramMap.get('medicationId');
     this.medicationService.show(medicationId).subscribe(
       good => {
         this.medication = good;
+        this.editMedication = good;
       },
       bad => {
         console.error(bad);
         this.router.navigateByUrl('**');
-      }
-    );
-    this.dxSvc.index().subscribe(
-      good => {
-        this.diagnosisList = good;
       },
-      bad => {
-        console.error(bad);
-        this.router.navigateByUrl('**');
+      () => {
       }
     );
+    this.diagnosisService.index().subscribe((diagnosisList: Diagnosis[]) => {
+      this.diagnosisList = diagnosisList;
+    });
+    this.approvedProviderService.index().subscribe((prescriberList: ApprovedProvider[]) => {
+      this.prescriberList = prescriberList;
+    });
   }
 
   setEditMedication() {
@@ -64,6 +67,7 @@ export class MedicationDetailPage implements OnInit {
       },
       () => {
         this.editMedication = null;
+        this.router.navigateByUrl('app/tabs/medications');
       }
     );
   }
@@ -79,6 +83,11 @@ export class MedicationDetailPage implements OnInit {
       () => {
       }
     );
+  }
+
+  cancel() {
+    this.editMedication = null;
+    this.router.navigateByUrl('app/tabs/medications');
   }
 
 }

@@ -76,7 +76,7 @@
     slot="fixed"
     *ngIf="!manualIdEntry"
   >
-    <ion-fab-button>
+    <ion-fab-button *ngIf="!currentPatient">
       <ion-icon name="code"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">
@@ -104,7 +104,7 @@
       </ion-item>
       <ion-row>
         <ion-col>
-          <ion-button (click)="findPatient(username)" expand="block"
+          <ion-button (click)="findPatient(username); manualIdEntry = true" expand="block"
             >Find Patient</ion-button
           >
         </ion-col>

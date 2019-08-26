@@ -21,28 +21,26 @@ export class AllergyDetailPage implements OnInit {
   ) {}
 
   // Methods
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   ionViewWillEnter() {
     const allergyId = this.route.snapshot.paramMap.get('allergyId');
     this.allergyService.show(allergyId).subscribe(
       good => {
-        // console.log('Life is Good');
-        // console.log(good);
         this.allergy = good;
       },
       bad => {
-        console.log('Life is Bad');
-        console.error(bad);
         this.router.navigateByUrl('**');
+      },
+      () => {
+        this.editAllergy = this.allergy;
       }
     );
   }
 
   setEditAllergy() {
     this.editAllergy = Object.assign({}, this.allergy);
-    console.log(this.editAllergy);
-    console.log(this.allergy);
   }
 
   saveEdit() {
@@ -56,6 +54,7 @@ export class AllergyDetailPage implements OnInit {
       },
       () => {
         this.editAllergy = null;
+        this.router.navigateByUrl('app/tabs/allergies');
       }
     );
   }
@@ -63,8 +62,6 @@ export class AllergyDetailPage implements OnInit {
   deleteAllergy() {
     this.allergyService.destroy(this.allergy.id).subscribe(
       good => {
-        // console.log('Delete successful');
-        // console.log(good);
         this.router.navigateByUrl('app/tabs/allergies');
       },
       bad => {
@@ -75,4 +72,8 @@ export class AllergyDetailPage implements OnInit {
     );
   }
 
+  cancel() {
+    this.editAllergy = null;
+    this.router.navigateByUrl('app/tabs/allergies');
+  }
 }

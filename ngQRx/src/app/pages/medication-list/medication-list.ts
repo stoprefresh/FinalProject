@@ -1,28 +1,27 @@
-import { ProviderService } from './../../services/provider.service';
-import { Component, OnInit} from '@angular/core';
+import { ApprovedProvider } from './../../models/approved-provider';
+import { OnInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Diagnosis } from '../../models/diagnosis';
 import { Medication } from '../../models/medication';
 import { DiagnosisService } from './../../services/diagnosis.service';
 import { MedicationService } from './../../services/medication.service';
-import { ApprovedProvider } from '../../models/approved-provider';
+import { ApprovedProviderService } from './../../services/ap.service';
+
 
 @Component({
   selector: 'page-medication-list',
   templateUrl: 'medication-list.html',
-  styleUrls: ['./medication-list.scss'],
+  styleUrls: ['./medication-list.scss']
 })
 export class MedicationListPage implements OnInit {
-
   // Fields
   medications: Medication[] = [];
   newMedication: Medication = new Medication();
-  showInactive = false;
   viewMedForm = false;
   diagnosisList: Diagnosis[];
-  prescriberList: string[] = [ 'Kevin Smith MD' ];
+  prescriberList: ApprovedProvider[] = [];
 
   // Constructors
   constructor(
@@ -31,12 +30,15 @@ export class MedicationListPage implements OnInit {
     public router: Router,
     private medicationService: MedicationService,
     private diagnosisService: DiagnosisService,
-    private providerService: ProviderService
-
+    private approvedProviderService: ApprovedProviderService,
+    public modalCtrl: ModalController
   ) {}
 
   // Methods
   ngOnInit(): void {
+  }
+
+  ionViewDidLoad(): void {
     this.reload();
   }
 
@@ -45,18 +47,11 @@ export class MedicationListPage implements OnInit {
   reload() {
     this.medicationService.index().subscribe(
       good => {
-        if (good) {
-          this.medications = good;
-        } else {
-          // TODO fix route for error
-          this.router.navigateByUrl('**');
-        }
+        this.medications = good;
       },
       bad => {
         console.error(bad);
-      },
-      // TODO possible implementation for finally
-      () => {}
+      }
     );
   }
 
@@ -71,14 +66,14 @@ export class MedicationListPage implements OnInit {
     this.diagnosisService.index().subscribe((diagnosisList: Diagnosis[]) => {
       this.diagnosisList = diagnosisList;
     });
-    // console.error(this.diagnosisList.length);
-
+    this.approvedProviderService.index().subscribe((prescriberList: ApprovedProvider[]) => {
+      this.prescriberList = prescriberList;
+    });
   }
 
   addMed() {
     this.medicationService.create(this.newMedication).subscribe(
       good => {
-        console.log(good);
         this.viewMedForm = false;
         this.newMedication = new Medication();
       },
@@ -86,9 +81,9 @@ export class MedicationListPage implements OnInit {
         console.error(bad);
       },
       () => {
-        // this.newMedication = new Medication();
         this.reload();
       }
     );
   }
 }
+

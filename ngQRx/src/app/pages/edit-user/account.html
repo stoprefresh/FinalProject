@@ -8,8 +8,10 @@
 </ion-header>
 
 <ion-content class="outer-content">
+  <div id="wrapper">
   <div *ngIf="user" class="ion-padding-top ion-text-center">
-    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
+    <img *ngIf="user.image" src="{{user.image}}" alt="avatar">
+    <img *ngIf="!user.image" src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
     <h2>{{user.firstName}} {{user.lastName}}</h2>
 
     <!-- <ion-list inset>
@@ -54,4 +56,5 @@
       </div>
     </form>
   </div>
+</div>
 </ion-content>
