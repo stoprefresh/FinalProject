@@ -1,10 +1,10 @@
-<ion-header *ngIf="medication">
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       <ion-back-button defaultHref="/app/tabs/medications"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{medication.medName}}</ion-title>
+    <ion-title *ngIf="editMedication || medication">{{medication.medName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,7 +15,8 @@
     <h4>Directions: {{medication.directions}}</h4>
     <h4>Active: {{medication.active}}</h4>
     <h4 *ngIf="medication.diagnosis">Diagnosis: {{medication.diagnosis.name}}</h4>
-    <h4 *ngIf="medication.prescriber">Prescribed By: {{medication.prescriber.provider.user.firstName}} {{medication.prescriber.provider.user.lastName}} {{medication.prescriber.provider.user.title}}</h4>
+    <h4 *ngIf="medication.prescriber.provider !== null">Prescribed By: {{medication.prescriber.provider.user.firstName}} {{medication.prescriber.provider.user.lastName}} {{medication.prescriber.provider.user.title}}</h4>
+    <h4 *ngIf="medication.prescriber.provider === null">Prescribed By: {{medication.prescriber.name}}</h4>
     <h4 *ngIf="medication.reasonDiscontinued">Reason Discontinued: {{medication.reasonDiscontinued}}</h4>
   </div>
 
@@ -39,12 +40,12 @@
 
             <ion-item>
               <ion-label position="stacked">Start Date</ion-label>
-              <ion-datetime value="1980-02-19" name='startDate' placeholder="Select Date" [(ngModel)]="editMedication.startDate"></ion-datetime>
+              <ion-datetime name='startDate' placeholder="Select Date" [(ngModel)]="editMedication.startDate"></ion-datetime>
             </ion-item>
 
             <ion-item>
               <ion-label position="stacked">Discontinue Date</ion-label>
-              <ion-datetime value="1980-02-19" name='discontinuedDate' placeholder="Select Date" [(ngModel)]="editMedication.discontinuedDate"></ion-datetime>
+              <ion-datetime name='discontinuedDate' placeholder="Select Date" [(ngModel)]="editMedication.discontinuedDate"></ion-datetime>
             </ion-item>
 
             <ion-item>
@@ -65,11 +66,8 @@
 
           <ion-item>
             <ion-label position="stacked">Prescriber</ion-label>
-            <ion-select *ngIf="medication.prescriber" [placeholder]="medication.prescriber.provider.user.firstName + ' ' + medication.prescriber.provider.user.lastName + ' ' + medication.prescriber.provider.user.title" [(ngModel)]="editMedication.prescriber" name="prescriber">
-              <ion-select-option *ngFor="let prescriber of prescriberList" [value]="prescriber" >{{prescriber.provider.user.firstName}} {{prescriber.provider.user.lastName}} {{prescriber.provider.user.title}}</ion-select-option >
-            </ion-select>
-            <ion-select *ngIf="!medication.prescriber"  placeholder="Associate an Approved Provider" [(ngModel)]="editMedication.prescriber" name="prescriber" >
-              <ion-select-option  *ngFor="let prescriber of prescriberList" [value]="prescriber" >{{prescriber.provider.user.firstName}} {{prescriber.provider.user.lastName}} {{prescriber.provider.user.title}}</ion-select-option  >
+            <ion-select *ngIf="medication.prescriber" [placeholder]="medication.prescriber.name" [(ngModel)]="editMedication.prescriber" name="prescriber">
+              <ion-select-option  *ngFor="let prescriber of prescriberList" [value]="prescriber" >{{ prescriber.name }}</ion-select-option  >
             </ion-select>
           </ion-item>
 
@@ -81,7 +79,7 @@
                 <ion-button (click)="saveEdit()" expand="block" type="submit" class="ion-no-margin">Save</ion-button>
               </ion-col>
               <ion-col>
-                <ion-button (click)="this.editMedication = null" expand="block" type="submit" class="ion-no-margin" color="light" expand="block">Cancel</ion-button>
+                <ion-button (click)="cancel()" expand="block" type="submit" class="ion-no-margin" color="light" expand="block">Cancel</ion-button>
               </ion-col>
             </ion-row>
         </div>

@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding note-detail" *ngIf="contact">
-  <div class="ion-text-center">
+  <!-- <div class="ion-text-center" *ngIf="!editEmergencyContact">
     <br />
     <ion-card-subtitle
       >Emergency Contact: {{ contact.firstName }}
@@ -21,7 +21,7 @@
     <ion-card-subtitle
       >Relationship:{{ contact.relationship }}</ion-card-subtitle
     >
-  </div>
+  </div> -->
 
   <div *ngIf="editEmergencyContact">
     <form>

@@ -36,10 +36,13 @@ export class MedicationDetailPage implements OnInit {
     this.medicationService.show(medicationId).subscribe(
       good => {
         this.medication = good;
+        this.editMedication = good;
       },
       bad => {
         console.error(bad);
         this.router.navigateByUrl('**');
+      },
+      () => {
       }
     );
     this.diagnosisService.index().subscribe((diagnosisList: Diagnosis[]) => {
@@ -64,6 +67,7 @@ export class MedicationDetailPage implements OnInit {
       },
       () => {
         this.editMedication = null;
+        this.router.navigateByUrl('app/tabs/medications');
       }
     );
   }
@@ -79,6 +83,11 @@ export class MedicationDetailPage implements OnInit {
       () => {
       }
     );
+  }
+
+  cancel() {
+    this.editMedication = null;
+    this.router.navigateByUrl('app/tabs/medications');
   }
 
 }

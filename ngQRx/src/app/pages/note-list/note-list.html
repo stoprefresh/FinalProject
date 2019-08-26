@@ -4,6 +4,11 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Notes</ion-title>
+    <ion-buttons slot="end">
+        <ion-button (click)="reload()">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="outer-content">
@@ -25,7 +30,7 @@
             </ion-item>
             <ion-item>
               <ion-card-subtitle >Last Updated: {{note.updateDate | date : 'short' }}<br></ion-card-subtitle>
-              <ion-button fill="outline" slot="end" routerLink="/app/tabs/notes/note-details/{{ note.id }}">Details</ion-button>
+              <ion-button fill="outline" slot="end" routerLink="/app/tabs/notes/note-details/{{ note.id }}">UPDATE</ion-button>
             </ion-item>
           </ion-card>
       </ion-row>

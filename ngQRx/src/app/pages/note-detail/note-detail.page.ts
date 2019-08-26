@@ -35,6 +35,9 @@ export class NoteDetailPage implements OnInit {
       },
       bad => {
         this.router.navigateByUrl('**');
+      },
+      () => {
+        this.editNote = this.note;
       }
     );
     this.medSvc.index().subscribe(
@@ -46,6 +49,7 @@ export class NoteDetailPage implements OnInit {
         this.router.navigateByUrl('**');
       }
     );
+
   }
 
   setEditNote() {
@@ -80,4 +84,8 @@ export class NoteDetailPage implements OnInit {
     );
   }
 
+  cancel () {
+    this.editNote = null;
+    this.router.navigateByUrl('app/tabs/notes');
+  }
 }

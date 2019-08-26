@@ -29,6 +29,7 @@ export class EditContactPage implements OnInit {
     this.contactService.show(contactId).subscribe(
       good => {
         this.contact = good;
+        this.editEmergencyContact = good;
       },
       bad => {
         this.router.navigateByUrl('**');
@@ -51,6 +52,7 @@ export class EditContactPage implements OnInit {
       },
       () => {
         this.editEmergencyContact = null;
+        this.router.navigateByUrl('app/tabs/contacts');
       }
     );
   }
@@ -69,4 +71,9 @@ export class EditContactPage implements OnInit {
     );
   }
 
+  cancel () {
+    this.contact = null;
+    this.editEmergencyContact = null;
+    this.router.navigateByUrl('app/tabs/contacts');
+  }
 }

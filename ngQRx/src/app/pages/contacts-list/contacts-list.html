@@ -4,6 +4,11 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Emergency Contacts</ion-title>
+    <ion-buttons slot="end">
+        <ion-button (click)="reload()">
+          <ion-icon slot="icon-only" name="options"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -15,32 +20,27 @@
         <h4>Add Loading Animations</h4>
       </ion-row>
       <ion-row class="ion-align-items-stretch" *ngIf="contacts">
-        <ion-col size="12" size-md="6" *ngFor="let contact of contacts">
-          <ion-card
-            class="contact-card"
-            routerLink="/app/tabs/contacts/contacts-detail/{{ contact.id }}"
-          >
-            <ion-card-header>
-              <ion-item detail="false" lines="none">
-                <h4>{{ contact.firstName }} {{ contact.lastName }}</h4>
+        <ion-col size-md="6" *ngFor="let contact of contacts">
+          <ion-card class="contact-card" >
+            <ion-item>
+            <ion-card-title>{{ contact.firstName }} {{ contact.lastName }}</ion-card-title>
+            <ion-button fill="outline" slot="end" routerLink="/app/tabs/contacts/contacts-detail/{{ contact.id }}">Update</ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked" *ngIf="contact.relationship"> Relationship: </ion-label>
+            {{ contact.relationship }}
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked" *ngIf="contact.email">
+              Email: </ion-label>{{ contact.email }}
+            </ion-item>
+            <ion-item class="noborder" >
+              <ion-label position="stacked" *ngIf="contact.phone">
+                Phone: </ion-label>
+                {{ contact.phone }}
               </ion-item>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-list>
-                <ion-item>
-                  <h3>Relationship: {{ contact.relationship }}<br /></h3>
-                  <br /> </ion-item
-                ><ion-item>
-                  <h3>Email: {{ contact.email }}</h3>
-                  <br /> </ion-item
-                ><ion-item>
-                  <label>Phone: </label>
-                  <h3>{{ contact.phone }}</h3>
-                  <br />
-                </ion-item>
-              </ion-list>
-            </ion-card-content>
-          </ion-card>
+              <br />
+            </ion-card>
         </ion-col>
       </ion-row>
     </ion-grid>

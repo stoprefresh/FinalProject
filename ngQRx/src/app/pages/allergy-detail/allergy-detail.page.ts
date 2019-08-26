@@ -21,7 +21,8 @@ export class AllergyDetailPage implements OnInit {
   ) {}
 
   // Methods
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   ionViewWillEnter() {
     const allergyId = this.route.snapshot.paramMap.get('allergyId');
@@ -31,6 +32,9 @@ export class AllergyDetailPage implements OnInit {
       },
       bad => {
         this.router.navigateByUrl('**');
+      },
+      () => {
+        this.editAllergy = this.allergy;
       }
     );
   }
@@ -50,6 +54,7 @@ export class AllergyDetailPage implements OnInit {
       },
       () => {
         this.editAllergy = null;
+        this.router.navigateByUrl('app/tabs/allergies');
       }
     );
   }
@@ -67,4 +72,8 @@ export class AllergyDetailPage implements OnInit {
     );
   }
 
+  cancel() {
+    this.editAllergy = null;
+    this.router.navigateByUrl('app/tabs/allergies');
+  }
 }

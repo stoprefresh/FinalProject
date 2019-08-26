@@ -1,12 +1,112 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Providers</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>My Providers</ion-title>
+      <ion-buttons slot="end">
+          <ion-button (click)="reload()">
+            <ion-icon slot="icon-only" name="options"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content class="outer-content">
-  <div id="wrapper"></div>
-</ion-content>
+  <ion-content class="outer-content center text-center">
+    <div id="wrapper">
+    <ion-list *ngIf="!viewNewProviderForm">
+      <ion-grid fixed>
+        <ion-row center *ngIf="!providers">
+          <h4>Add Loading Animations</h4>
+        </ion-row>
+        <ion-row center class="ion-align-items-stretch" *ngIf="providers">
+          <ion-col center size-md="6" *ngFor="let provider of providers">
+            <ion-card class="provider-card" >
+              <ion-item class="noborder">
+              <ion-card-subtitle position="stacked">Provider ID {{ provider.id }} </ion-card-subtitle>
+              <ion-card-title slot='end'> {{ provider.name }} </ion-card-title>
+              <br />
+            </ion-item>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <div *ngIf="viewNewProviderForm">
+      <form>
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+          <ion-item>
+            <ion-label position="stacked"
+              >Name <ion-text color="danger">*</ion-text></ion-label
+            >
+            <ion-input
+              required
+              type="text"
+              name="name"
+              [(ngModel)]="newApprovedProvider.name"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked"
+              >Phone <ion-text color="danger">*</ion-text></ion-label
+            >
+            <ion-input
+              required
+              type="text"
+              name="phone"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked"
+              >Email <ion-text color="danger">*</ion-text></ion-label
+            >
+            <ion-input
+              required
+              type="text"
+              name="email"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked"
+              >Relationship <ion-text color="danger">*</ion-text></ion-label
+            >
+            <ion-input
+              required
+              type="text"
+              name="relationship"
+            ></ion-input>
+          </ion-item>
+        </ion-list>
+        <div class="ion-padding">
+          <ion-row>
+            <ion-col>
+              <ion-button
+                (click)="addProvider()"
+                expand="block"
+                type="submit"
+                class="ion-no-margin"
+                >Save</ion-button
+              >
+            </ion-col>
+            <ion-col>
+              <ion-button
+                (click)="this.viewNewProviderForm = false"
+                expand="block"
+                color="light"
+                class="ion-no-margin"
+                expand="block"
+                >Cancel</ion-button
+              >
+            </ion-col>
+          </ion-row>
+        </div>
+      </form>
+    </div>
+  </div>
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="showProviderForm()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
