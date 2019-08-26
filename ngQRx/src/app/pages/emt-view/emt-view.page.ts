@@ -29,7 +29,8 @@ export class EmtViewPage implements OnInit {
     this.patientService.findByUserName(username).subscribe(
       good => {
         this.currentPatient = good;
-        username = null;
+        console.log(good);
+        console.log(username);
       },
       bad => {
         console.error(bad);
