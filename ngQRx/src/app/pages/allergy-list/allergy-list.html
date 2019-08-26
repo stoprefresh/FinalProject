@@ -6,33 +6,23 @@
     <ion-title>Allergies</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="outer-content">
+    <div id = "wrapper">
   <ion-list *ngIf="!viewAllergyForm">
     <ion-grid fixed>
       <ion-row class="ion-align-items-stretch" *ngIf="allergies">
-        <ion-col size="12" size-md="6" *ngFor="let allergy of allergies">
-          <ion-card
-            class="allergy-card"
-            routerLink="/app/tabs/allergies/allergy-detail/{{ allergy.id }}"
-          >
-            <ion-card-header>
-              <ion-item detail="false" lines="none">
-                <h4>Allergen - {{ allergy.allergen }}</h4>
+        <ion-col size-md="6" *ngFor="let allergy of allergies">
+          <ion-card class="allergy-card">
+             <ion-item>
+                <ion-icon name="warning" slot="start"></ion-icon>
+                <ion-card-title>{{ allergy.allergen }}</ion-card-title>
               </ion-item>
-            </ion-card-header>
-
-            <ion-card-content>
-              <ion-list>
-                <ion-item>
-                  <h3>Reaction - {{ allergy.reaction }}</h3>
-                </ion-item>
-                <ion-item>
-                  <h3>Active - {{ allergy.active }}</h3>
-                </ion-item>
-              </ion-list>
-            </ion-card-content>
-          </ion-card>
+              <ion-item>
+              <ion-label *ngIf="allergy.reaction !== null">Reaction: </ion-label>
+              <ion-card-content *ngIf="allergy.reaction !== null"> {{ allergy.reaction }} </ion-card-content>
+              <ion-button fill="outline" slot="end" routerLink="/app/tabs/allergies/allergy-detail/{{ allergy.id }}">Details</ion-button>
+              </ion-item>
+            </ion-card>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -101,6 +91,7 @@
         </ion-row>
       </div>
     </form>
+  </div>
   </div>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="showAllergyForm()">

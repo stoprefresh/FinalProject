@@ -34,3 +34,18 @@
  */
 
 @import "./app/app.scss";
+
+.split-pane-visible >.split-pane-side {
+  min-width: 300px!important;
+  max-width: 300px!important;
+}
+
+#wrapper {
+  height: 100%;
+  min-height: 100%;
+  background-color: white;
+}
+
+ion-item:last-child {
+  --inner-border-width: 0;
+}

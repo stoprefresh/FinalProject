@@ -1,6 +1,7 @@
 <ion-header *ngIf="contact">
   <ion-toolbar>
     <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
       <ion-back-button defaultHref="/app/tabs/contacts"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ contact.firstName }} {{ contact.lastName }}</ion-title>

@@ -7,15 +7,25 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="outer-content">
+  <div id="wrapper">
   <ion-item *ngIf="!viewMedForm">
     <ion-grid fixed>
       <ion-row class="ion-align-items-stretch" *ngIf="medications">
-          <ion-col size="12" size-md="6" *ngFor="let medication of medications">
+          <ion-col size-md="4" *ngFor="let medication of medications">
               <ion-card class="medication-card">
+                <ion-item *ngIf="!medication.drug">
+                    <ion-avatar slot="start">
+                      <span>
+                          <img src="../assets/img/tablet.png" alt="Medication Picture" />
+                        </span>
+                    </ion-avatar>
+                    <ion-card-title>{{ medication.medName }}</ion-card-title>
+                    <ion-button slot="end" fill="outline" routerLink="/app/tabs/medications/medication-details/{{ medication.id }}">Details</ion-button>
+                </ion-item>
                 <ion-item *ngIf="medication.drug">
                     <ion-avatar slot="start" *ngIf="!medication.drug.imgUrl">
                         <span *ngIf="medication.drug.dosageForm.toLowerCase().includes('tablet') && !medication.drug.dosageForm.toLowerCase().includes('capsule') ">
-                          <img src="../assets/img/tablet.png" alt="Medication Picture" />
+                          <img src="../assets/img/medication.png" alt="Medication Picture" />
                         </span>
                         <span *ngIf="medication.drug.dosageForm.toLowerCase().includes('capsule')">
                           <img src="../assets/img/pill.png" alt="capsule" />
@@ -29,52 +39,49 @@
                         <span *ngIf="medication.drug.dosageForm.toLowerCase().includes('aerosol')">
                           <img src="../assets/img/inahler.png" alt="Medication Picture" />
                         </span>
-                    </ion-avatar>
-                      <ion-label>{{ medication.drug.proprietaryName }} {{ medication.drug.propNameSuffix }} {{ medication.drug.strength }}{{ medication.drug.unit }}</ion-label>
-                      <ion-button fill="outline" slot="end" routerLink="/app/tabs/medications/medication-details/{{ medication.id }}">View</ion-button>
+                      </ion-avatar>
+                      <ion-card-title>{{ medication.drug.proprietaryName }} {{ medication.drug.propNameSuffix }} {{ medication.drug.strength }}{{ medication.drug.unit }}</ion-card-title>
+                      <ion-button fill="outline" slot="end" routerLink="/app/tabs/medications/medication-details/{{ medication.id }}">Details</ion-button>
+
                     </ion-item>
-                    <ion-item *ngIf="medication.drug === null">
-                       <ion-label>{{ medication.medName }}</ion-label>
-                       <ion-button fill="outline" slot="end" routerLink="/app/tabs/medications/medication-details/{{ medication.id }}">View</ion-button>
-                    </ion-item>
-                <ion-item *ngIf="medication.drug !== null && medication.drug.productTypeName === 'HUMAN PRESCRIPTION DRUG'">
-                    <!-- <ion-icon name="warning" slot="start"></ion-icon> -->
+                    <!-- <ion-item *ngIf="medication.drug !== null && medication.drug.productTypeName === 'HUMAN PRESCRIPTION DRUG'">
+                     <ion-icon name="warning" slot="start"></ion-icon>
                   <ion-label>Type: </ion-label>
                   <ion-card-content>Precription</ion-card-content>
                 </ion-item>
 
                 <ion-item *ngIf="medication.drug !== null && medication.drug.productTypeName === 'HUMAN OTC DRUG'">
-                    <!-- <ion-icon name="warning" slot="start"></ion-icon> -->
+                     <ion-icon name="warning" slot="start"></ion-icon>
                     <ion-label>Type: </ion-label>
                     <ion-card-content>OTC</ion-card-content>
-                </ion-item>
-               <ion-item>
+                </ion-item> -->
+               <ion-item *ngIf="medication.directions !== null">
                     <!-- <ion-icon name="warning" slot="start"></ion-icon> -->
-                  <ion-label>Directions: </ion-label>
-                  <ion-card-content *ngIf="medication.directions !== null"> {{ medication.directions }} </ion-card-content>
+                  <ion-label position="stacked" >Directions: </ion-label>
+                  <ion-card-content> {{ medication.directions }} </ion-card-content>
                 </ion-item>
 
                 <ion-item *ngIf="medication.drug !== null && medication.drug.productTypeName === 'HUMAN PRESCRIPTION DRUG' && medication.prescriber !== null">
                   <!-- <ion-icon name="walk" slot="start"></ion-icon> -->
-                  <ion-label>Prescriber: </ion-label>
+                  <ion-label position="stacked">Prescriber: </ion-label>
                   <ion-card-content> {{ medication.prescriber.provider.user.firstName }} {{ medication.prescriber.provider.user.lastName }} {{ medication.prescriber.provider.user.title }} </ion-card-content>
                 </ion-item>
 
                 <ion-item *ngIf="medication.drug === null && medication.prescriber !== null">
                   <!-- <ion-icon name="walk" slot="start"></ion-icon> -->
-                  <ion-label>Prescriber: </ion-label>
+                  <ion-label position="stacked">Prescriber: </ion-label>
                   <ion-card-content> {{ medication.prescriber.provider.user.firstName }} {{ medication.prescriber.provider.user.lastName }} {{ medication.prescriber.provider.user.title }} </ion-card-content>
                 </ion-item>
 
-                <ion-item *ngIf="medication.prescriber !== null && medication.diagnosis !== null">
+                <ion-item  class="last" *ngIf="medication.prescriber !== null && medication.diagnosis !== null">
                     <!-- <ion-icon name="walk" slot="start"></ion-icon> -->
-                  <ion-label>Taking for:</ion-label>
-                  <ion-card-content> {{ medication.diagnosis.name }}</ion-card-content>
+                  <ion-label no-lines position="stacked">Prescribed for:</ion-label>
+                  <ion-card-content class="last"> {{ medication.diagnosis.name }}</ion-card-content>
                 </ion-item>
-                <ion-item *ngIf="medication.prescriber === null && medication.diagnosis !== null">
+                <ion-item  class="last" *ngIf="medication.prescriber === null && medication.diagnosis !== null">
                     <!-- <ion-icon name="walk" slot="start"></ion-icon> -->
-                  <ion-label>Taking for:</ion-label>
-                  <ion-card-content> {{ medication.diagnosis.name }}</ion-card-content>
+                  <ion-label  class="last" position="stacked">Taking for:</ion-label>
+                  <ion-card-content  class="last"> {{ medication.diagnosis.name }}</ion-card-content>
                 </ion-item>
               </ion-card>
           <!--
@@ -202,7 +209,7 @@
       </div>
     </form>
   </ion-item>
-  <!-- fab placed to the (vertical) center and end -->
+</div>
   <ion-fab
     vertical="bottom"
     horizontal="center"

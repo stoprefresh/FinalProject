@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content class="outer-content">
+  <div id="wrapper">
   <ion-list *ngIf="!viewNewContactForm">
     <ion-grid fixed>
       <ion-row *ngIf="!contacts">
@@ -129,6 +130,7 @@
       </div>
     </form>
   </div>
+</div>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="showContactForm()">
       <ion-icon name="add"></ion-icon>

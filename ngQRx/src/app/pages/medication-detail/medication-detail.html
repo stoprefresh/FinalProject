@@ -1,6 +1,7 @@
 <ion-header *ngIf="medication">
   <ion-toolbar>
     <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
       <ion-back-button defaultHref="/app/tabs/medications"></ion-back-button>
     </ion-buttons>
     <ion-title>{{medication.medName}}</ion-title>
@@ -60,10 +61,10 @@
           <ion-item>
             <ion-label position="stacked">Prescriber</ion-label>
             <ion-select *ngIf="medication.prescriber" [placeholder]="medication.prescriber.provider.user.firstName + ' ' + medication.prescriber.provider.user.lastName + ' ' + medication.prescriber.provider.user.title" [(ngModel)]="editMedication.prescriber" name="prescriber">
-              <ion-select-option *ngFor="let prescriber of prescriberList" >{{prescriber.provider.user.firstName}} {{prescriber.provider.user.lastName}} {{prescriber.provider.user.title}}</ion-select-option >
+              <ion-select-option *ngFor="let prescriber of prescriberList" [value]="prescriber" >{{prescriber.provider.user.firstName}} {{prescriber.provider.user.lastName}} {{prescriber.provider.user.title}}</ion-select-option >
             </ion-select>
             <ion-select *ngIf="!medication.prescriber"  placeholder="Associate an Approved Provider" [(ngModel)]="editMedication.prescriber" name="prescriber" >
-              <ion-select-option  *ngFor="let prescriber of prescriberList" >{{prescriber.provider.user.firstName}} {{prescriber.provider.user.lastName}} {{prescriber.provider.user.title}}</ion-select-option  >
+              <ion-select-option  *ngFor="let prescriber of prescriberList" [value]="prescriber" >{{prescriber.provider.user.firstName}} {{prescriber.provider.user.lastName}} {{prescriber.provider.user.title}}</ion-select-option  >
             </ion-select>
           </ion-item>
 

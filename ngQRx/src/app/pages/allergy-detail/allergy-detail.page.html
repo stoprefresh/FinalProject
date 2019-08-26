@@ -1,6 +1,7 @@
 <ion-header *ngIf="allergy">
   <ion-toolbar>
     <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
       <ion-back-button defaultHref="/app/tabs/allergies"></ion-back-button>
     </ion-buttons>
     <ion-title>{{allergy.allergen}}</ion-title>
@@ -8,6 +9,7 @@
 </ion-header>
 
 <ion-content class="ion-padding allergy-detail">
+    <div id = "wrapper">
   <div class="ion-text-center" *ngIf="allergy && !editAllergy">
     <!-- <img [src]="allergy.drug.imgUrl" [alt]="allergy.drug.proprietaryName"> -->
     <br>
@@ -48,6 +50,7 @@
           </ion-col>
         </ion-row>
       </form>
+    </div>
     </div>
     <ion-fab vertical="bottom" horizontal="center" slot="fixed">
         <ion-fab-button>
