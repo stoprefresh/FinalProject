@@ -83,5 +83,5 @@ export class MedicationListPage implements OnInit {
       }
     );
   }
-
 }
+

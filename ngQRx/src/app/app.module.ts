@@ -23,6 +23,8 @@ import { NoteService } from './services/note.service';
 import { DiagnosisService } from './services/diagnosis.service';
 import { UserData } from './services/user-data';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
+import { IonicSelectableModule } from 'ionic-selectable';
+
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import { AutoCompleteModule } from 'ionic4-auto-complete';
     AppRoutingModule,
     AutoCompleteModule,
     HttpClientModule,
+    IonicSelectableModule,
     IonicModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production
