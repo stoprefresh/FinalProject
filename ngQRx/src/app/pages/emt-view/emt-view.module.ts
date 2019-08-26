@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { EmtViewPage } from './emt-view.page';
 
+
+
 const routes: Routes = [
   {
     path: '',

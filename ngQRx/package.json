@@ -29,6 +29,8 @@
     "@angular/router": "8.2.3",
     "@angular/service-worker": "~8.2.3",
     "@capacitor/core": "1.1.1",
+    "@ionic-native/barcode-scanner": "^5.12.0",
+    "@ionic-native/camera": "^5.12.0",
     "@ionic-native/core": "^5.12.0",
     "@ionic-native/in-app-browser": "^5.12.0",
     "@ionic/angular": "^4.7.0",
@@ -71,5 +73,11 @@
     "ts-node": "8.2.0",
     "tslint": "^5.17.0",
     "typescript": "~3.5.3"
+  },
+  "cordova": {
+    "plugins": {
+      "phonegap-plugin-barcodescanner": {},
+      "cordova-plugin-camera": {}
+    }
   }
 }

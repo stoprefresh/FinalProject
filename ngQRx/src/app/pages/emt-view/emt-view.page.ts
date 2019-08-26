@@ -1,6 +1,11 @@
 import { PatientService } from './../../services/patient.service';
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../../models/patient';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import {
+  BarcodeScannerOptions,
+  BarcodeScanner
+} from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'emt-view',
@@ -18,12 +23,27 @@ export class EmtViewPage implements OnInit {
 
   // Contructors
   constructor(
-    // private camera: Camera,
+
     private patientService: PatientService,
+    private camera: Camera,
+    private barcodeScanner: BarcodeScanner
   ) {}
 
   // Methods
   ngOnInit() {}
+
+  scanCode() {
+    this.barcodeScanner
+      .scan()
+      .then(barcodeData => {
+        alert('Barcode data ' + JSON.stringify(barcodeData));
+        this.findPatient(barcodeData);
+        this.scannedData = barcodeData;
+      })
+      .catch(err => {
+        console.log('Error', err);
+      });
+  }
 
   findPatient(username: any) {
     this.patientService.findByUserName(username).subscribe(
@@ -38,7 +58,5 @@ export class EmtViewPage implements OnInit {
     );
   }
 
-  scanCode() {
 
-  }
 }

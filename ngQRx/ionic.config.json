@@ -2,6 +2,7 @@
   "name": "ionic-qrx-app",
   "type": "angular",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   }
 }
