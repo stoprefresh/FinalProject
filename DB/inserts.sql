@@ -34,7 +34,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `qrxdb`;
-INSERT INTO `patient` (`id`, `user_id`, `qrcode_url`, `has_dnr`, `birth_date`, `anatomical_sex`, `height_inches`, `weight_lbs`, `blood_type_id`) VALUES (1, 2, '/api/qrx/patient/1', 0, '1960-07-15', 'Female', 63.7, 170.6, 4);
+INSERT INTO `patient` (`id`, `user_id`, `qrcode_url`, `has_dnr`, `birth_date`, `anatomical_sex`, `height_inches`, `weight_lbs`, `blood_type_id`) VALUES (1, 2, '/api/qrx/username/jldoe', 0, '1960-07-15', 'Female', 63.7, 170.6, 4);
 
 COMMIT;
 

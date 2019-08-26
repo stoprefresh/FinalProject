@@ -4,14 +4,14 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Medications</ion-title>
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
         <ion-button (click)="reload()">
           <ion-icon slot="icon-only" name="options"></ion-icon>
         </ion-button>
-      </ion-buttons>
+      </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
-<ion-content class="outer-content">
+<ion-content class="outer-content" fullscreen="true" >
   <div id="otherwrapper">
     <ion-grid fixed>
     <ion-item *ngIf="!viewMedForm">
@@ -174,10 +174,9 @@
           </ion-col>
         </ion-row>
     </ion-item>
-    <ion-item *ngIf="viewMedForm">
-      <ion-row class="ion-align-items-stretch">
+      <ion-row class="ion-align-items-stretch" fullscreen *ngIf="viewMedForm">
+          <ion-col size-md="12">
       <form>
-        <ion-list lines="full" class="ion-no-margin ion-no-padding">
           <ion-item>
             <ion-label position="stacked"
               >Medication Name <ion-text color="danger">*</ion-text></ion-label
@@ -260,7 +259,6 @@
               >
             </ion-select>
           </ion-item>
-        </ion-list>
 
         <div class="ion-padding">
           <ion-row>
@@ -287,8 +285,8 @@
           </ion-row>
         </div>
       </form>
-    </ion-row>
-    </ion-item>
+         </ion-col>
+      </ion-row>
   </ion-grid>
 </div>
     <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="!viewMedForm">

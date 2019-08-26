@@ -30,7 +30,7 @@ public class DrugController {
 		return svc.search(keyword);
 	}
 	
-	@GetMapping("{keyword}/{strength}")
+	@GetMapping("{kcleareyword}/{strength}")
 	public List<Drug> getDrugsByProprietaryName(@PathVariable("keyword") String keyword,
 			@PathVariable("strength") String strength) {
 		return svc.search(keyword, strength);
