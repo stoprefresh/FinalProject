@@ -1,5 +1,4 @@
 import { DrugService } from './../../services/drug.service';
-import { AutoCompleteComponent } from './../../components/auto-complete/auto-complete.component';
 import { Component, OnInit } from '@angular/core';
 import { Drug } from '../../models/drug';
 import { ActionSheetController } from '@ionic/angular';
