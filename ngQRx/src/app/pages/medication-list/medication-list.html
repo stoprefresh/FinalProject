@@ -17,7 +17,9 @@
     <ion-item *ngIf="!viewMedForm">
         <ion-row class="ion-align-items-stretch" *ngIf="medications">
           <ion-col size-md="4" *ngFor="let medication of medications">
-            <ion-card class="medication-card">
+            <ion-card class="medication-card" routerLink="/app/tabs/medications/medication-details/{{
+              medication.id
+            }}">
               <ion-item *ngIf="!medication.drug">
                 <ion-avatar slot="start">
                   <span>
@@ -161,14 +163,7 @@
                   >Date Discontinued:
                   {{ medication.discontinuedDate | date: "mediumDate" }}<br
                 /></ion-card-subtitle>
-                <ion-button
-                  fill="outline"
-                  slot="end"
-                  routerLink="/app/tabs/medications/medication-details/{{
-                    medication.id
-                  }}"
-                  >Update</ion-button
-                >
+
               </ion-item>
             </ion-card>
           </ion-col>

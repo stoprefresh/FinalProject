@@ -21,10 +21,9 @@
       </ion-row>
       <ion-row class="ion-align-items-stretch" *ngIf="contacts">
         <ion-col size-md="6" *ngFor="let contact of contacts">
-          <ion-card class="contact-card" >
+          <ion-card class="contact-card" routerLink="/app/tabs/contacts/contacts-detail/{{ contact.id }}" >
             <ion-item>
             <ion-card-title>{{ contact.firstName }} {{ contact.lastName }}</ion-card-title>
-            <ion-button fill="outline" slot="end" routerLink="/app/tabs/contacts/contacts-detail/{{ contact.id }}">Update</ion-button>
           </ion-item>
           <ion-item>
             <ion-label position="stacked" *ngIf="contact.relationship"> Relationship: </ion-label>
