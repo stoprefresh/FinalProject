@@ -13,7 +13,6 @@ import { NavParams } from '@ionic/angular';
   styleUrls: ['./rxnav.page.scss']
 })
 export class RxnavPage implements OnInit {
-  drugs: Drug[] = [];
   matches: Drug[] = [];
   keyword = '';
   strength = '';
@@ -28,30 +27,26 @@ export class RxnavPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getResults();
   }
 
-  getResults() {
+  dismiss() {
+    this.modalCtrl.dismiss({
+      'dismissed': true
+    });
+  }
+
+  ionViewDidEnter() {
     this.matches = [];
+    this.loadingMatches = true;
     this.drugSvc.getResults(this.keyword).subscribe(
       good => {
         this.matches = good;
         this.loadingMatches = false;
-        this.keyword = '';
-        this.strength = '';
       },
       err => {
         this.loadingMatches = false;
         console.log('err: ', err);
       }
     );
-  }
-
-  dismiss() {
-    // using the injected ModalController this page
-    // can "dismiss" itself and optionally pass back data
-    this.modalCtrl.dismiss({
-      'dismissed': true
-    });
   }
 }

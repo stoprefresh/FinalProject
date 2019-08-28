@@ -4,11 +4,11 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Allergies</ion-title>
-    <!-- <ion-buttons slot="end">
+    <ion-buttons slot="end">
         <ion-button (click)="reload()">
           <ion-icon slot="icon-only" name="options"></ion-icon>
         </ion-button>
-      </ion-buttons> -->
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="outer-content">
@@ -36,6 +36,16 @@
     </ion-grid>
   </ion-list>
   <div *ngIf="viewAllergyForm">
+      <ion-item>
+          <ion-searchbar
+            mode="md"
+            autocorrect="on"
+            spellcheck="on"
+            placeholder="Search for FDA Approved Prescription Drugs, OTCs, Vaccines, Cosemetics "
+            [(ngModel)]="keyword"
+            (search)="presentModal()"
+          ></ion-searchbar>
+        </ion-item>
     <form>
       <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item>

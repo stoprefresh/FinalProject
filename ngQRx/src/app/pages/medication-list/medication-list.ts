@@ -35,7 +35,6 @@ export class MedicationListPage implements OnInit {
     public actionSheetCtrl: ActionSheetController,
     public inAppBrowser: InAppBrowser,
     public router: Router,
-    private drugSvc: DrugService,
     private medicationService: MedicationService,
     private diagnosisService: DiagnosisService,
     private approvedProviderService: ApprovedProviderService,
