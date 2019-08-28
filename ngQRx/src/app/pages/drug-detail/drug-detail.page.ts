@@ -22,15 +22,6 @@ export class DrugDetailPage implements OnInit {
 
   // Methods
   ngOnInit(): void {
-    // const drugId = this.route.snapshot.paramMap.get('drugId');
-    // this.drugService.show(drugId).subscribe(
-    //   good => {
-    //     this.drug = good;
-    //     console.log(good);
-    //   },
-    //   bad => {
-    //     this.router.navigateByUrl('**');
-    //   });
   }
 
   ionViewDidEnter() {
@@ -38,7 +29,6 @@ export class DrugDetailPage implements OnInit {
     this.drugService.show(drugId).subscribe(
       good => {
         this.drug = good;
-        console.log(good);
       },
       bad => {
         this.router.navigateByUrl('**');

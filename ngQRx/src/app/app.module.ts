@@ -21,6 +21,7 @@ import { DatePipe } from '@angular/common';
 import { NoteService } from './services/note.service';
 import { DiagnosisService } from './services/diagnosis.service';
 import { UserData } from './services/user-data';
+import { RxnavPage } from './pages/rxnav/rxnav.page';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { UserData } from './services/user-data';
     FormsModule
   ],
   declarations: [
-    AppComponent,
+    AppComponent, RxnavPage
   ],
   providers: [
     InAppBrowser,
@@ -52,6 +53,9 @@ import { UserData } from './services/user-data';
     ProviderService,
     QrGeneratorService,
     DrugService,
+  ],
+  entryComponents: [
+    RxnavPage,
   ],
   bootstrap: [AppComponent]
 })

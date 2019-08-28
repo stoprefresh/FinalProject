@@ -29,8 +29,9 @@
                     />
                   </span>
                 </ion-avatar>
-                <ion-card-title>{{ medication.medName }}</ion-card-title>
               </ion-item>
+              <ion-card-subtitle *ngIf="!medication.drug" position="stacked">Medication:</ion-card-subtitle>
+              <ion-card-title *ngIf="!medication.drug" >{{ medication.medName }}</ion-card-title>
               <ion-item *ngIf="medication.drug">
                 <ion-avatar slot="start" *ngIf="!medication.drug.imgUrl">
                   <span
@@ -97,6 +98,7 @@
                     />
                   </span>
                 </ion-avatar>
+                <ion-card-subtitle position="stacked">Drug Name:</ion-card-subtitle>
                 <ion-card-title
                   >{{ medication.drug.proprietaryName }}
                   {{ medication.drug.propNameSuffix }}
@@ -171,6 +173,28 @@
     </ion-item>
       <ion-row class="ion-align-items-stretch" fullscreen *ngIf="viewMedForm">
           <ion-col size-md="12">
+                  <ion-item>
+                    <ion-searchbar
+                      mode="md"
+                      autocorrect="on"
+                      spellcheck="on"
+                      placeholder="Search for Prescription Drugs, Vitamins, Supplements, and OTCs "
+                      [(ngModel)]="keyword"
+                      (search)="presentModal()"
+                    ></ion-searchbar>
+                  </ion-item>
+                    <!-- <div id="drugs" *ngIf="matches">
+                      <ion-list *ngFor="let drug of matches">
+                         <ion-item [style.height]="20" role="button" routerLink="/drug-detail/{{ drug.id }}">{{drug.proprietaryName}} {{drug.propNameSuffix}} {{drug.strength}} {{drug.unit}}</ion-item>
+                        <ion-item
+                          [style.height]="20"
+                          role="button"
+                          routerLink="/drug-detail/{{ drug.id }}"
+                          >{{ drug.proprietaryName }} {{ drug.propNameSuffix }}
+                          {{ drug.strength }} {{ drug.unit }}</ion-item
+                        >
+                      </ion-list>
+                  </div> -->
       <form>
           <ion-item>
             <ion-label position="stacked"

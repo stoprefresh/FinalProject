@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class DrugService {
-  private url = environment.baseUrl + 'api/drugs';
+  private url = environment.baseUrl + 'drugs';
   drugsList: Drug[] = [];
 
   constructor(

@@ -20,11 +20,11 @@ export class AppComponent implements OnInit {
   user: User;
 
   appPages = [
-    {
-      title: 'Drug Search',
-      url: '/rxnav',
-      icon: 'beaker'
-    },
+    // {
+    //   title: 'Drug Search',
+    //   url: '/rxnav',
+    //   icon: 'beaker'
+    // },
     {
       title: 'Medications',
       url: '/app/tabs/medications',

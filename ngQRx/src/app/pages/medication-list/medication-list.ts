@@ -8,7 +8,9 @@ import { Medication } from '../../models/medication';
 import { DiagnosisService } from './../../services/diagnosis.service';
 import { MedicationService } from './../../services/medication.service';
 import { ApprovedProviderService } from './../../services/ap.service';
-
+import { Drug } from '../../models/drug';
+import { DrugService } from '../../services/drug.service';
+import { RxnavPage } from '../rxnav/rxnav.page';
 
 @Component({
   selector: 'page-medication-list',
@@ -22,12 +24,18 @@ export class MedicationListPage implements OnInit {
   viewMedForm = false;
   diagnosisList: Diagnosis[];
   prescriberList: ApprovedProvider[] = [];
+  drugs: Drug[] = [];
+  matches: Drug[] = [];
+  keyword = '';
+  strength = '';
+  loadingMatches = false;
 
   // Constructors
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public inAppBrowser: InAppBrowser,
     public router: Router,
+    private drugSvc: DrugService,
     private medicationService: MedicationService,
     private diagnosisService: DiagnosisService,
     private approvedProviderService: ApprovedProviderService,
@@ -35,8 +43,7 @@ export class MedicationListPage implements OnInit {
   ) {}
 
   // Methods
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ionViewDidLoad(): void {
     this.reload();
@@ -64,9 +71,11 @@ export class MedicationListPage implements OnInit {
     this.diagnosisService.index().subscribe((diagnosisList: Diagnosis[]) => {
       this.diagnosisList = diagnosisList;
     });
-    this.approvedProviderService.index().subscribe((prescriberList: ApprovedProvider[]) => {
-      this.prescriberList = prescriberList;
-    });
+    this.approvedProviderService
+      .index()
+      .subscribe((prescriberList: ApprovedProvider[]) => {
+        this.prescriberList = prescriberList;
+      });
   }
 
   addMed() {
@@ -83,5 +92,15 @@ export class MedicationListPage implements OnInit {
       }
     );
   }
-}
 
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: RxnavPage,
+      componentProps: {
+        'keyword': this.keyword,
+        'strength': this.strength,
+      }
+    });
+    return await modal.present();
+  }
+}
