@@ -8,9 +8,9 @@
 </ion-header>
 
 <ion-content>
-  <!-- <div class="register-logo">
+  <div class="register-logo">
     <img src="assets/img/appicon.svg" alt="QRx Logo" />
-  </div>
+  </div><!--
   <ion-item>
       <ion-label color="primary">Disclaimer:</ion-label>
     <p>
@@ -20,19 +20,18 @@
       endorse or recommend this or any other product.
     </p>
   </ion-item> -->
-  <form name="newUser" autocomplete="off" class="noborder">
-    <ion-input type="hidden" autocomplete="fase"></ion-input>
+  <form name="newUser" class="noborder">
     <ion-item>
       <ion-label>Username:<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input required name="name" type="text" [(ngModel)]="user.username">
+      <ion-input required type="text"  name="username" [(ngModel)]="user.username">
       </ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Password:<ion-text color="danger">*</ion-text></ion-label>
       <ion-input
         required
-        name="pass"
         type="password"
+        name="pass"
         [(ngModel)]="user.password"
       >
       </ion-input>
@@ -75,13 +74,6 @@
     <ion-item>
       <ion-label>Zip <ion-text color="danger">*</ion-text></ion-label>
       <ion-input type="text" name="zip" [(ngModel)]="user.zip"></ion-input>
-      <ion-input
-        *ngIf="!provider"
-        type="hidden"
-        name="role"
-        [(ngModel)]="user.role"
-        value="user"
-      ></ion-input>
     </ion-item>
 
     <ion-item>
@@ -93,7 +85,7 @@
         [(ngModel)]="user.phone"
       ></ion-input>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label
         >Account for professional use as a medical provider?
         <ion-text color="danger">*</ion-text></ion-label
@@ -104,9 +96,9 @@
         color="danger"
         [(ngModel)]="provider"
       ></ion-toggle>
-    </ion-item>
+    </ion-item> -->
 
-    <div *ngIf="provider">
+    <!-- <div *ngIf="provider">
       <ion-item>
         <ion-label>Clinical Title</ion-label>
         <ion-select
@@ -114,7 +106,7 @@
           [(ngModel)]="user.title"
           name="title"
         >
-          <ion-select-option *ngFor="let title of titleList" [value]="title">{{
+          <ion-select-option *ngFor="let title of titleList" name="title" [value]="title">{{
             title
           }}</ion-select-option>
         </ion-select>
@@ -126,16 +118,21 @@
           [(ngModel)]="user.role"
           name="role"
         >
-          <ion-select-option *ngFor="let role of roleList" [value]="role">{{
+          <ion-select-option *ngFor="let role of roleList" name="role" [value]="role">{{
             role
           }}</ion-select-option>
         </ion-select>
       </ion-item>
-    </div>
+    </div> -->
+    <!-- *ngIf="!provider" -->
+    <ion-input
+        type="hidden"
+        name="role"
+        [(ngModel)]="user.role"
+        value="'user'"
+      ></ion-input>
     <div class="ion-padding">
-      <ion-button (click)="addUser()" type="submit" expand="block"
-        >Create</ion-button
-      >
+      <ion-button (click)="addUser()" type="submit" expand="block"  >Create</ion-button>
     </div>
   </form>
 </ion-content>

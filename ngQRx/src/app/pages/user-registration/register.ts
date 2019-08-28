@@ -52,6 +52,7 @@ export class RegisterPage {
             this.auth.login(this.user.username, this.user.password).subscribe(
               next => {
                 this.userData.setLoggedIn();
+                this.router.navigateByUrl('/patient-registration');
               },
               bad => {
                   console.error('error logging in');

@@ -1,27 +1,26 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-title>Search</ion-title>
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+<ion-content class="outer-content">
+  <ion-item>
     <ion-searchbar
-      mode = "md"
-      autocorrect = "on"
-      spellcheck = "on"
+      mode="md"
+      autocorrect="on"
+      spellcheck="on"
       placeholder="Search for Prescription Drugs, Vitamins, Supplements, and OTCs "
       [(ngModel)]="keyword"
       (search)="getResults()"
-      ></ion-searchbar>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-  <ion-content class="outer-content">
-    <div id="wrapper">
-      <div id ="drugs" *ngIf="matches">
+    ></ion-searchbar>
+  </ion-item>
+  <div id="wrapper">
+    <div id="drugs" *ngIf="matches">
       <ion-list *ngFor="let drug of matches">
-          <ion-item [style.height]="20" role="button">{{drug.proprietaryName}} {{drug.propNameSuffix}} {{drug.strength}} {{drug.unit}}</ion-item>
+        <!-- <ion-item [style.height]="20" role="button" routerLink="/drug-detail/{{ drug.id }}">{{drug.proprietaryName}} {{drug.propNameSuffix}} {{drug.strength}} {{drug.unit}}</ion-item> -->
+        <ion-item
+          [style.height]="20"
+          role="button"
+          routerLink="/drug-detail/{{ drug.id }}"
+          >{{ drug.proprietaryName }} {{ drug.propNameSuffix }}
+          {{ drug.strength }} {{ drug.unit }}</ion-item
+        >
       </ion-list>
     </div>
   </div>
-  </ion-content>
 </ion-content>

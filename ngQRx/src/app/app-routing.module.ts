@@ -70,6 +70,7 @@ const routes: Routes = [
   { path: 'provider-detail', loadChildren: './pages/provider-detail/provider-detail.module#ProviderDetailPageModule' },
   { path: 'rxnav', loadChildren: './pages/rxnav/rxnav.module#RxnavPageModule' },
   { path: 'admin-dashboard', loadChildren: './pages/admin-dashboard/admin-dashboard.module#AdminDashboardPageModule' },
+  { path: 'drug-detail/:drugId', loadChildren: './pages/drug-detail/drug-detail.module#DrugDetailPageModule' },
 ];
 
 @NgModule({
