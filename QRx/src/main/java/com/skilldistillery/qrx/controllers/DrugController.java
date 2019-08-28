@@ -13,8 +13,8 @@ import com.skilldistillery.qrx.entities.Drug;
 import com.skilldistillery.qrx.services.DrugService;
 
 @RestController
-@RequestMapping(path = "api/drugs")
-@CrossOrigin({ "*", "http://localhost:4205" })
+@RequestMapping(path = "drugs")
+@CrossOrigin({ "**", "*", "http://localhost:4205" })
 public class DrugController {
 
 	@Autowired
@@ -25,12 +25,12 @@ public class DrugController {
 		return svc.show(did);
 	}
 
-	@GetMapping("{keyword}")
+	@GetMapping("/search/{keyword}")
 	public List<Drug> getDrugsByProprietaryName(@PathVariable("keyword") String keyword) {
 		return svc.search(keyword);
 	}
 	
-	@GetMapping("{kcleareyword}/{strength}")
+	@GetMapping("/search/{keyword}/{strength}")
 	public List<Drug> getDrugsByProprietaryName(@PathVariable("keyword") String keyword,
 			@PathVariable("strength") String strength) {
 		return svc.search(keyword, strength);

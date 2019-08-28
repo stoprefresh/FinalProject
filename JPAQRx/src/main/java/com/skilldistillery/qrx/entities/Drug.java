@@ -1,26 +1,21 @@
 package com.skilldistillery.qrx.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Entity
+@Entity	
 public class Drug {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@OneToMany(mappedBy= "drug")
-	@JsonIgnore
-	private List<Medication> medications;
+//	@OneToMany(mappedBy= "drug")
+//	@JsonIgnore
+//	private List<Medication> medications;
 	
 	@Column(name="product_id")
 	private String productid;

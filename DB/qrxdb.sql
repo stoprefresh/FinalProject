@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `state` CHAR(2) NULL,
   `zip` CHAR(5) NULL,
   `image` VARCHAR(5000) NULL,
+  `update_date` DATETIME NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB;
@@ -71,6 +72,8 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `height_inches` DECIMAL(5,2) NULL,
   `weight_lbs` DECIMAL(5,2) NULL,
   `blood_type_id` INT NULL,
+  `create_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_patient_user1_idx` (`user_id` ASC),
   INDEX `fk_patient_blood_type1_idx` (`blood_type_id` ASC),
@@ -122,6 +125,8 @@ CREATE TABLE IF NOT EXISTS `provider` (
   `user_id` INT NOT NULL,
   `organization` VARCHAR(450) NULL,
   `subunit` VARCHAR(450) NULL,
+  `create_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_provider_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_provider_user1`
@@ -173,6 +178,8 @@ CREATE TABLE IF NOT EXISTS `diagnosis` (
   `date_resolved` VARCHAR(150) NULL,
   `icd_10` VARCHAR(150) NULL,
   `active` TINYINT NULL,
+  `create_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_patient_has_diagnosis_patient1_idx` (`patient_id` ASC),
   CONSTRAINT `fk_patient_has_diagnosis_patient1`
@@ -200,6 +207,8 @@ CREATE TABLE IF NOT EXISTS `medication` (
   `approved_provider_id` INT NULL,
   `diagnosis_id` INT NULL,
   `active` TINYINT NULL,
+  `create_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` DATETIME NULL,
   INDEX `fk_patient_has_drug_patient1_idx` (`patient_id` ASC),
   PRIMARY KEY (`id`),
   INDEX `fk_medication_drug1_idx` (`drug_id` ASC),
@@ -268,6 +277,8 @@ CREATE TABLE IF NOT EXISTS `allergy` (
   `reaction` TEXT NULL,
   `severity` INT NULL,
   `active` TINYINT NULL,
+  `update_date` DATETIME NULL,
+  `create_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `fk_allergy_patient1_idx` (`patient_id` ASC),
   CONSTRAINT `fk_allergy_patient1`
@@ -291,6 +302,9 @@ CREATE TABLE IF NOT EXISTS `emergency_contact` (
   `last_name` VARCHAR(100) NULL,
   `phone` VARCHAR(21) NULL,
   `email` VARCHAR(250) NULL,
+  `create_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` DATETIME NULL,
+  `active` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_EmergencyContact_patient1_idx` (`patient_id` ASC),
   CONSTRAINT `fk_EmergencyContact_patient1`
