@@ -1,0 +1,73 @@
+<ion-header *ngIf="drug">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+          <!-- <ion-menu-button></ion-menu-button> -->
+        <ion-back-button defaultHref="/rxnav"></ion-back-button>
+      </ion-buttons>
+      <ion-title>{{drug.proprietaryName}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding drug-detail">
+      <div id = "wrapper">
+    <div class="ion-text-center" *ngIf="drug">
+
+      <ion-card class="drug-card" routerLink="/drug-detail/{{ drug.id }}" >
+         <ion-card-title *ngIf="drug.proprietaryName && drug.propNameSuffix">{{ drug.proprietaryName }} {{drug.propNameSuffix}} </ion-card-title>
+         <ion-card-title *ngIf="drug.proprietaryName && !drug.propNameSuffix">{{ drug.proprietaryName }} </ion-card-title>
+         <ion-card-title *ngIf="!drug.proprietaryName && drug.genericName">{{ drug.genericName }} </ion-card-title>
+
+         <ion-list>
+        <ion-item *ngIf="drug.productTypeName">
+           <ion-label position="stacked">Type:</ion-label>
+         <ion-card-content>
+            {{drug.productTypeName}}
+        </ion-card-content>
+       </ion-item>
+       <ion-item *ngIf="drug.genericName">
+          <ion-label position="stacked">Nonproprietary Name:</ion-label>
+          <ion-card-content>
+             {{drug.genericName}}
+         </ion-card-content>
+       </ion-item>
+       <ion-item *ngIf="drug.dosageForm">
+          <ion-label position="stacked">Dosage Form:</ion-label>
+          <ion-card-content>
+             {{drug.dosageForm}}
+         </ion-card-content>
+       </ion-item>
+       <ion-item *ngIf="drug.routeName">
+          <ion-label position="stacked">Route:</ion-label>
+          <ion-card-content>
+             {{drug.routeName}}
+         </ion-card-content>
+       </ion-item>
+       <!-- <ion-item *ngIf="drug.productNdc">
+          <ion-label position="stacked">NDC:</ion-label>
+          <ion-card-content>
+             {{drug.productNdc}}
+         </ion-card-content>
+       </ion-item> -->
+       <ion-item *ngIf="drug.pharmClasses">
+          <ion-label position="stacked">PharmClasses:</ion-label>
+          <ion-card-content>
+              {{drug.pharmClasses}}
+          </ion-card-content>
+       </ion-item>
+       <ion-item *ngIf="drug.strength && drug.unit">
+          <ion-label position="stacked">Strength/Unit:</ion-label>
+          <ion-card-content>
+              {{drug.strength}} {{drug.unit}}
+         </ion-card-content>
+       </ion-item>
+       <ion-item *ngIf="drug.strength && !drug.unit" >
+          <ion-label position="stacked">Strength:</ion-label>
+          <ion-card-content>
+              {{drug.strength}}
+         </ion-card-content>
+       </ion-item>
+       </ion-list>
+     </ion-card>
+     </div>
+     </div>
+</ion-content>

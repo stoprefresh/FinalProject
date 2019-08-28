@@ -2,8 +2,9 @@ import { AllergyService } from './../../services/allergy.service';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Allergy } from './../../models/allergy';
+import { RxnavPage } from '../rxnav/rxnav.page';
 
 @Component({
   selector: 'page-allergy-list',
@@ -17,12 +18,16 @@ export class AllergyListPage {
   newAllergy: Allergy = new Allergy();
   showInactive = false;
   viewAllergyForm = false;
+  keyword = '';
+  strength = '';
+  loadingMatches = false;
 
   // Constructors
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public inAppBrowser: InAppBrowser,
     public router: Router,
+    private modalCtrl: ModalController,
     private allergyService: AllergyService,
   ) { }
 
@@ -62,6 +67,17 @@ export class AllergyListPage {
         this.reload();
       }
     );
+  }
+
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: RxnavPage,
+      componentProps: {
+        'keyword': this.keyword,
+        'strength': this.strength,
+      }
+    });
+    return await modal.present();
   }
 
 }

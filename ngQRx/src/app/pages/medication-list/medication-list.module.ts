@@ -13,6 +13,6 @@ import { MedicationListPageRoutingModule } from './medication-list-routing.modul
     MedicationListPageRoutingModule,
     FormsModule
   ],
-  declarations: [MedicationListPage],
+  declarations: [MedicationListPage]
 })
 export class MedicationListModule {}

@@ -1,27 +1,48 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-title>Search</ion-title>
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-searchbar
-      mode = "md"
-      autocorrect = "on"
-      spellcheck = "on"
-      placeholder="Search for Prescription Drugs, Vitamins, Supplements, and OTCs "
-      [(ngModel)]="keyword"
-      (search)="getResults()"
-      ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-item>
+<ion-searchbar
+  mode = "md"
+  autocorrect = "on"
+  spellcheck = "on"
+  placeholder="Search for Prescription Drugs, Vitamins, Supplements, and OTCs "
+  [(ngModel)]="keyword"
+  (search)="getResults()"
+  ></ion-searchbar>
+</ion-item>
   <ion-content class="outer-content">
-    <div id="wrapper">
-      <div id ="drugs" *ngIf="matches">
-      <ion-list *ngFor="let drug of matches">
-          <ion-item [style.height]="20" role="button">{{drug.proprietaryName}} {{drug.propNameSuffix}} {{drug.strength}} {{drug.unit}}</ion-item>
-      </ion-list>
-    </div>
+    <div id="wrapper"> -->
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Search for {{ keyword }}</ion-title>
+    <ion-title *ngIf="strength !== ''">Search for {{ keyword }} strength: {{ strength }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content outer-content>
+    <div *ngIf="loadingMatches">
+        <ion-spinner color="primary" name="lines"></ion-spinner>
+      </div>
+  <div id="drugs" *ngIf="matches">
+    <ion-list *ngFor="let drug of matches">
+      <!-- <ion-item [style.height]="20" role="button" routerLink="/drug-detail/{{ drug.id }}">{{drug.proprietaryName}} {{drug.propNameSuffix}} {{drug.strength}} {{drug.unit}}</ion-item> -->
+      <ion-item
+        [style.height]="20"
+        role="button"
+        routerLink="/drug-detail/{{ drug.id }}"
+        >{{ drug.proprietaryName }} {{ drug.propNameSuffix }}
+        {{ drug.strength }} {{ drug.unit }}</ion-item
+      >
+    </ion-list>
   </div>
-  </ion-content>
 </ion-content>
+<!-- </div>
+</ion-content> -->

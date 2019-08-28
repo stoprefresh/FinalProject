@@ -4,11 +4,11 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Medications</ion-title>
-    <!-- <ion-buttons slot="end">
+    <ion-buttons slot="end">
         <ion-button (click)="reload()">
           <ion-icon slot="icon-only" name="options"></ion-icon>
         </ion-button>
-      </ion-buttons> -->
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="outer-content" fullscreen="true" >
@@ -17,7 +17,9 @@
     <ion-item *ngIf="!viewMedForm">
         <ion-row class="ion-align-items-stretch" *ngIf="medications">
           <ion-col size-md="4" *ngFor="let medication of medications">
-            <ion-card class="medication-card">
+            <ion-card class="medication-card" routerLink="/app/tabs/medications/medication-details/{{
+              medication.id
+            }}">
               <ion-item *ngIf="!medication.drug">
                 <ion-avatar slot="start">
                   <span>
@@ -27,7 +29,8 @@
                     />
                   </span>
                 </ion-avatar>
-                <ion-card-title>{{ medication.medName }}</ion-card-title>
+                <!-- <ion-card-subtitle *ngIf="!medication.drug" position="stacked">Medication:</ion-card-subtitle> -->
+                <ion-card-title *ngIf="!medication.drug" >{{ medication.medName }}</ion-card-title>
               </ion-item>
               <ion-item *ngIf="medication.drug">
                 <ion-avatar slot="start" *ngIf="!medication.drug.imgUrl">
@@ -95,6 +98,7 @@
                     />
                   </span>
                 </ion-avatar>
+                <!-- <ion-card-subtitle position="stacked">Drug: </ion-card-subtitle> -->
                 <ion-card-title
                   >{{ medication.drug.proprietaryName }}
                   {{ medication.drug.propNameSuffix }}
@@ -161,14 +165,7 @@
                   >Date Discontinued:
                   {{ medication.discontinuedDate | date: "mediumDate" }}<br
                 /></ion-card-subtitle>
-                <ion-button
-                  fill="outline"
-                  slot="end"
-                  routerLink="/app/tabs/medications/medication-details/{{
-                    medication.id
-                  }}"
-                  >Update</ion-button
-                >
+
               </ion-item>
             </ion-card>
           </ion-col>
@@ -176,6 +173,16 @@
     </ion-item>
       <ion-row class="ion-align-items-stretch" fullscreen *ngIf="viewMedForm">
           <ion-col size-md="12">
+                  <ion-item>
+                    <ion-searchbar
+                      mode="md"
+                      autocorrect="on"
+                      spellcheck="on"
+                      placeholder="Search for FDA Approved Prescription Drugs, OTCs, Vaccines, Cosemetics "
+                      [(ngModel)]="keyword"
+                      (search)="presentModal()"
+                    ></ion-searchbar>
+                  </ion-item>
       <form>
           <ion-item>
             <ion-label position="stacked"

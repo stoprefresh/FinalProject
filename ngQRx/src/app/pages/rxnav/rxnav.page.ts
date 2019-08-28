@@ -1,9 +1,11 @@
 import { DrugService } from './../../services/drug.service';
 import { Component, OnInit } from '@angular/core';
 import { Drug } from '../../models/drug';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Router } from '@angular/router';
+import { NavParams } from '@ionic/angular';
+
 
 @Component({
   selector: 'rxnav',
@@ -11,12 +13,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./rxnav.page.scss']
 })
 export class RxnavPage implements OnInit {
-  drugs: Drug[] = [];
   matches: Drug[] = [];
   keyword = '';
   strength = '';
-  loadingMatches = false;
+  loadingMatches = true;
   constructor(
+    navParams: NavParams,
+    private modalCtrl: ModalController,
     private drugSvc: DrugService,
     public actionSheetCtrl: ActionSheetController,
     public inAppBrowser: InAppBrowser,
@@ -26,7 +29,13 @@ export class RxnavPage implements OnInit {
   ngOnInit() {
   }
 
-  getResults() {
+  dismiss() {
+    this.modalCtrl.dismiss({
+      'dismissed': true
+    });
+  }
+
+  ionViewDidEnter() {
     this.matches = [];
     this.loadingMatches = true;
     this.drugSvc.getResults(this.keyword).subscribe(

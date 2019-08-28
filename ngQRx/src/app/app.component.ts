@@ -1,11 +1,9 @@
-import { UserService } from './services/user.service';
 import { User } from './models/user';
 import { AuthoService } from './services/autho.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { SwUpdate } from '@angular/service-worker';
 
-import { Events, Platform, ToastController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 
 import { UserData } from './services/user-data';
 
@@ -20,11 +18,6 @@ export class AppComponent implements OnInit {
   user: User;
 
   appPages = [
-    {
-      title: 'Drug Search',
-      url: '/rxnav',
-      icon: 'beaker'
-    },
     {
       title: 'Medications',
       url: '/app/tabs/medications',
@@ -59,14 +52,10 @@ export class AppComponent implements OnInit {
 
   // Contructors
   constructor(
-    private events: Events,
     private platform: Platform,
     private router: Router,
     private userData: UserData,
-    private swUpdate: SwUpdate,
-    private toastCtrl: ToastController,
     private authService: AuthoService,
-    private userService: UserService
   ) {
     this.initializeApp();
   }

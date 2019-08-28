@@ -4,11 +4,11 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Emergency Contacts</ion-title>
-    <!-- <ion-buttons slot="end">
+    <ion-buttons slot="end">
         <ion-button (click)="reload()">
           <ion-icon slot="icon-only" name="options"></ion-icon>
         </ion-button>
-      </ion-buttons> -->
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -21,10 +21,9 @@
       </ion-row>
       <ion-row class="ion-align-items-stretch" *ngIf="contacts">
         <ion-col size-md="6" *ngFor="let contact of contacts">
-          <ion-card class="contact-card" >
+          <ion-card class="contact-card" routerLink="/app/tabs/contacts/contacts-detail/{{ contact.id }}" >
             <ion-item>
             <ion-card-title>{{ contact.firstName }} {{ contact.lastName }}</ion-card-title>
-            <ion-button fill="outline" slot="end" routerLink="/app/tabs/contacts/contacts-detail/{{ contact.id }}">Update</ion-button>
           </ion-item>
           <ion-item>
             <ion-label position="stacked" *ngIf="contact.relationship"> Relationship: </ion-label>

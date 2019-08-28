@@ -8,52 +8,44 @@
 </ion-header>
 
 <ion-content>
-  <!-- <div class="register-logo">
+  <div class="register-logo">
     <img src="assets/img/appicon.svg" alt="QRx Logo" />
   </div>
-  <ion-item>
-      <ion-label color="primary">Disclaimer:</ion-label>
-    <p>
-      This product uses publicly available data from the U.S. National Library
-      of Medicine (NLM), National Institutes of Health, Department of Health and
-      Human Services; NLM is not responsible for the product and does not
-      endorse or recommend this or any other product.
-    </p>
-  </ion-item> -->
-  <form name="newUser" autocomplete="off" class="noborder">
-    <ion-input type="hidden" autocomplete="fase"></ion-input>
+  <form class="noborder">
+      <ion-list lines="none">
     <ion-item>
       <ion-label>Username:<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input required name="name" type="text" [(ngModel)]="user.username">
+      <ion-input
+        type="text"
+        [(ngModel)]="user.username"
+        name="username"
+      >
       </ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Password:<ion-text color="danger">*</ion-text></ion-label>
       <ion-input
-        required
-        name="pass"
         type="password"
         [(ngModel)]="user.password"
+        name="password"
       >
       </ion-input>
     </ion-item>
     <ion-item>
       <ion-label>First Name <ion-text color="danger">*</ion-text></ion-label>
       <ion-input
-        required
         type="text"
-        name="firstName"
         [(ngModel)]="user.firstName"
+        name="firstName"
       ></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Last Name <ion-text color="danger">*</ion-text></ion-label>
       <ion-input
-        required
         type="text"
-        name="lastName"
         [(ngModel)]="user.lastName"
+        name="lastName"
       ></ion-input>
     </ion-item>
 
@@ -61,27 +53,20 @@
       <ion-label>Street</ion-label>
       <ion-input
         type="text"
-        name="street"
         [(ngModel)]="user.street"
+        name="street"
       ></ion-input> </ion-item
     ><ion-item>
       <ion-label>City</ion-label>
-      <ion-input type="text" name="city" [(ngModel)]="user.city"></ion-input
+      <ion-input type="text" [(ngModel)]="user.city" name="city"></ion-input
     ></ion-item>
     <ion-item
       ><ion-label>State</ion-label>
-      <ion-input type="text" name="state" [(ngModel)]="user.state"></ion-input
+      <ion-input type="text" [(ngModel)]="user.state" name="state"></ion-input
     ></ion-item>
     <ion-item>
       <ion-label>Zip <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input type="text" name="zip" [(ngModel)]="user.zip"></ion-input>
-      <ion-input
-        *ngIf="!provider"
-        type="hidden"
-        name="role"
-        [(ngModel)]="user.role"
-        value="user"
-      ></ion-input>
+      <ion-input type="text" [(ngModel)]="user.zip" name="zip"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -106,7 +91,7 @@
       ></ion-toggle>
     </ion-item>
 
-    <div *ngIf="provider">
+     <div *ngIf="provider">
       <ion-item>
         <ion-label>Clinical Title</ion-label>
         <ion-select
@@ -114,7 +99,7 @@
           [(ngModel)]="user.title"
           name="title"
         >
-          <ion-select-option *ngFor="let title of titleList" [value]="title">{{
+          <ion-select-option *ngFor="let title of titleList" name="title" [value]="title">{{
             title
           }}</ion-select-option>
         </ion-select>
@@ -126,16 +111,15 @@
           [(ngModel)]="user.role"
           name="role"
         >
-          <ion-select-option *ngFor="let role of roleList" [value]="role">{{
+          <ion-select-option *ngFor="let role of roleList" name="role" [value]="role">{{
             role
           }}</ion-select-option>
         </ion-select>
       </ion-item>
     </div>
+    </ion-list>
     <div class="ion-padding">
-      <ion-button (click)="addUser()" type="submit" expand="block"
-        >Create</ion-button
-      >
+      <ion-button (click)="addUser()" type="submit" expand="block">Create</ion-button>
     </div>
   </form>
 </ion-content>

@@ -4,11 +4,11 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Notes</ion-title>
-    <!-- <ion-buttons slot="end">
+    <ion-buttons slot="end">
         <ion-button (click)="reload()">
           <ion-icon slot="icon-only" name="options"></ion-icon>
         </ion-button>
-      </ion-buttons> -->
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="outer-content">
@@ -16,7 +16,7 @@
   <div *ngIf="!viewNoteForm">
     <ion-grid fixed *ngIf="notes">
       <ion-row class="ion-align-items-stretch" *ngFor="let note of notes">
-            <ion-card class="note-card">
+            <ion-card class="note-card" routerLink="/app/tabs/notes/note-details/{{ note.id }}">
             <ion-item class="noborder">
             <ion-card-subtitle slot="start">Created: {{note.createDate | date : 'short' }}<br></ion-card-subtitle>
             </ion-item>
@@ -30,7 +30,6 @@
             </ion-item>
             <ion-item>
               <ion-card-subtitle >Last Updated: {{note.updateDate | date : 'short' }}<br></ion-card-subtitle>
-              <ion-button fill="outline" slot="end" routerLink="/app/tabs/notes/note-details/{{ note.id }}">UPDATE</ion-button>
             </ion-item>
           </ion-card>
       </ion-row>

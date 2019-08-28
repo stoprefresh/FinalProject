@@ -4,10 +4,10 @@
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `qrxdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `active`, `role`, `create_date`, `title`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `street`, `city`, `state`, `zip`, `image`) VALUES (1, 'dmaunit23', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'EMS', '2019-08-14 11:27:52', NULL, 'John', 'C', 'Angular', 'jcsmith@dma.org', '303-555-5155', '404 Static Main Rd', 'Denver', 'CO', '80111', '/QRx/assets/img/john.jpg');
-INSERT INTO `user` (`id`, `username`, `password`, `active`, `role`, `create_date`, `title`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `street`, `city`, `state`, `zip`, `image`) VALUES (2, 'jldoe', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'User', '2019-08-15 09:27:52', NULL, 'Jane', 'L', 'Doe', 'jaldoe@doe.com', '303-555-5155', '404 Angular Rd', 'Englewood', 'CO', '80110', '/QRx/assets/img/jane.jpg');
-INSERT INTO `user` (`id`, `username`, `password`, `active`, `role`, `create_date`, `title`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `street`, `city`, `state`, `zip`, `image`) VALUES (3, 'admin', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'Admin', '2019-08-14 05:27:52', NULL, 'QRXAdmin', 'Admin', 'Admin', 'admin@qrx.com', '303-555-5155', '2048 Spring Tool Street', 'Englewood', 'CO', '80110', '/QRx/assets/img/admin.jpg');
-INSERT INTO `user` (`id`, `username`, `password`, `active`, `role`, `create_date`, `title`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `street`, `city`, `state`, `zip`, `image`) VALUES (4, 'ksmith1', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'Physician', '2019-08-14 05:27:52', 'MD', 'Kevin', 'W', 'Smith', 'kws@sdinternalmed.com', '303-555-5155', '256 Bit Dr', 'Denver', 'CO', '80111', '/QRx/assets/img/kevin.jpg');
+INSERT INTO `user` (`id`, `username`, `password`, `active`, `role`, `create_date`, `title`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `street`, `city`, `state`, `zip`, `image`) VALUES (1, 'dmaunit23', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'EMS', '2019-08-14 11:27:52', NULL, 'John', 'C', 'Angular', 'jcsmith@dma.org', '303-555-5155', '404 Static Main Rd', 'Denver', 'CO', '80111', '/assets/img/john.jpg');
+INSERT INTO `user` (`id`, `username`, `password`, `active`, `role`, `create_date`, `title`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `street`, `city`, `state`, `zip`, `image`) VALUES (2, 'jldoe', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'User', '2019-08-15 09:27:52', NULL, 'Jane', 'L', 'Doe', 'jaldoe@doe.com', '303-555-5155', '404 Angular Rd', 'Englewood', 'CO', '80110', '/assets/img/jane.jpg');
+INSERT INTO `user` (`id`, `username`, `password`, `active`, `role`, `create_date`, `title`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `street`, `city`, `state`, `zip`, `image`) VALUES (3, 'admin', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'Admin', '2019-08-14 05:27:52', NULL, 'QRXAdmin', 'Admin', 'Admin', 'admin@qrx.com', '303-555-5155', '2048 Spring Tool Street', 'Englewood', 'CO', '80110', '/assets/img/admin.jpg');
+INSERT INTO `user` (`id`, `username`, `password`, `active`, `role`, `create_date`, `title`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `street`, `city`, `state`, `zip`, `image`) VALUES (4, 'ksmith1', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 1, 'Physician', '2019-08-14 05:27:52', 'MD', 'Kevin', 'W', 'Smith', 'kws@sdinternalmed.com', '303-555-5155', '256 Bit Dr', 'Denver', 'CO', '80111', '/assets/img/kevin.jpg');
 
 COMMIT;
 
@@ -112,8 +112,8 @@ COMMIT;
 START TRANSACTION;
 USE `qrxdb`;
 INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `severity`, `active`) VALUES (1, 1, 'Penicillin', 'anaphylaxis', 5,1);
-INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `severity`, `active`) VALUES (2, 1, 'Dust Mites','cough from postnasal drip', 3, 1);
-INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `severity`, `active`) VALUES (3, 1, 'Cat Danader','nasal congestion', 2, 1);
+INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `severity`, `active`) VALUES (2, 1, 'Dust Mites','cough from postnasal drip', 3, 4);
+INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `severity`, `active`) VALUES (3, 1, 'Cat Dander','nasal congestion', 2, 3);
 
 COMMIT;
 

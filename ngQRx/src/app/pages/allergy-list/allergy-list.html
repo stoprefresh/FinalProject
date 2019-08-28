@@ -4,11 +4,11 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Allergies</ion-title>
-    <!-- <ion-buttons slot="end">
+    <ion-buttons slot="end">
         <ion-button (click)="reload()">
           <ion-icon slot="icon-only" name="options"></ion-icon>
         </ion-button>
-      </ion-buttons> -->
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="outer-content">
@@ -17,7 +17,7 @@
     <ion-grid fixed>
       <ion-row class="ion-align-items-stretch" *ngIf="allergies">
         <ion-col size-md="6" *ngFor="let allergy of allergies">
-          <ion-card class="allergy-card">
+          <ion-card class="allergy-card" routerLink="/app/tabs/allergies/allergy-detail/{{ allergy.id }}" >
              <ion-item *ngIf="allergy.severity !== null">
                 <ion-icon *ngIf="allergy.severity >= 5" name="warning" slot="start" color="danger"></ion-icon>
                 <ion-icon *ngIf="allergy.severity === 4" name="warning" slot="start" color="danger"></ion-icon>
@@ -29,7 +29,6 @@
               <ion-item>
               <ion-label *ngIf="allergy.reaction !== null">Reaction: </ion-label>
               <ion-card-content *ngIf="allergy.reaction !== null"> {{ allergy.reaction }} </ion-card-content>
-              <ion-button fill="outline" slot="end" routerLink="/app/tabs/allergies/allergy-detail/{{ allergy.id }}">Update</ion-button>
               </ion-item>
             </ion-card>
         </ion-col>
@@ -37,6 +36,16 @@
     </ion-grid>
   </ion-list>
   <div *ngIf="viewAllergyForm">
+      <ion-item>
+          <ion-searchbar
+            mode="md"
+            autocorrect="on"
+            spellcheck="on"
+            placeholder="Search for FDA Approved Prescription Drugs, OTCs, Vaccines, Cosemetics "
+            [(ngModel)]="keyword"
+            (search)="presentModal()"
+          ></ion-searchbar>
+        </ion-item>
     <form>
       <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item>

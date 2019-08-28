@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class DrugService {
-  private url = environment.baseUrl + 'api/drugs';
+  private url = environment.baseUrl + 'drugs';
   drugsList: Drug[] = [];
 
   constructor(
@@ -29,7 +29,8 @@ export class DrugService {
       })
     };
     if (this.auth.checkLogin()) {
-      return this.http.get<Drug>(`${this.url}/${id}`, httpOptions).pipe(
+      console.log(id);
+      return this.http.get<Drug>(`${this.url}/id/${id}`, httpOptions).pipe(
         catchError((err: any) => {
           console.log(err);
           return throwError('DrugService.index(): error retrieving');
@@ -51,7 +52,7 @@ export class DrugService {
     let observable: Observable<any>;
     if (this.auth.checkLogin()) {
         return this.http
-          .get<Drug[]>(this.url + '/' + keyword, httpOptions)
+          .get<Drug[]>(this.url + '/search/' + keyword, httpOptions)
           .pipe(
             catchError((err: any) => {
               console.log(err);

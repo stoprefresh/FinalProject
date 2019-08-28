@@ -25,9 +25,10 @@ export class NoteDetailPage implements OnInit {
   ) {}
 
   // Methods
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     const noteId = this.route.snapshot.paramMap.get('noteId');
     this.noteService.show(noteId).subscribe(
       good => {
@@ -60,13 +61,14 @@ export class NoteDetailPage implements OnInit {
     this.noteService.update(this.editNote).subscribe(
       good => {
         this.note = this.editNote;
-        this.ionViewWillEnter();
+        this.ionViewDidEnter();
       },
       bad => {
         console.error(bad);
       },
       () => {
         this.editNote = null;
+        this.router.navigateByUrl('app/tabs/notes');
       }
     );
   }
