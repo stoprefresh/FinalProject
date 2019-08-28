@@ -112,8 +112,8 @@ COMMIT;
 START TRANSACTION;
 USE `qrxdb`;
 INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `severity`, `active`) VALUES (1, 1, 'Penicillin', 'anaphylaxis', 5,1);
-INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `severity`, `active`) VALUES (2, 1, 'Dust Mites','cough from postnasal drip', 3, 1);
-INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `severity`, `active`) VALUES (3, 1, 'Cat Danader','nasal congestion', 2, 1);
+INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `severity`, `active`) VALUES (2, 1, 'Dust Mites','cough from postnasal drip', 3, 4);
+INSERT INTO `allergy` (`id`, `patient_id`, `allergen`, `reaction`, `severity`, `active`) VALUES (3, 1, 'Cat Dander','nasal congestion', 2, 3);
 
 COMMIT;
 

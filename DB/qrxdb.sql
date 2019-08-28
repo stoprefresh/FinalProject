@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(4500) NOT NULL,
   `active` TINYINT NOT NULL DEFAULT 1,
-  `role` VARCHAR(20) NULL,
+  `role` VARCHAR(20) NULL DEFAULT 'User',
   `create_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `title` VARCHAR(45) NULL,
   `first_name` VARCHAR(100) NULL,
@@ -127,6 +127,7 @@ CREATE TABLE IF NOT EXISTS `provider` (
   `subunit` VARCHAR(450) NULL,
   `create_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_date` DATETIME NULL,
+  `special` VARCHAR(450) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_provider_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_provider_user1`
@@ -149,6 +150,7 @@ CREATE TABLE IF NOT EXISTS `approved_provider` (
   `date_approved` DATE NULL,
   `name` VARCHAR(1000) NULL,
   `active` TINYINT NULL DEFAULT 1,
+  `special` VARCHAR(450) NULL,
   INDEX `fk_patient_has_provider_patient2_idx` (`patient_id` ASC),
   INDEX `fk_patient_has_provider_provider2_idx` (`provider_id` ASC),
   PRIMARY KEY (`id`),
@@ -279,8 +281,10 @@ CREATE TABLE IF NOT EXISTS `allergy` (
   `active` TINYINT NULL,
   `update_date` DATETIME NULL,
   `create_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `drug_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_allergy_patient1_idx` (`patient_id` ASC),
+  INDEX `fk_allergy_drug1_idx` (`drug_id` ASC),
   CONSTRAINT `fk_allergy_patient1`
     FOREIGN KEY (`patient_id`)
     REFERENCES `patient` (`id`)

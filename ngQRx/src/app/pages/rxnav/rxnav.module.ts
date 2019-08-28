@@ -21,7 +21,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [RxnavPage],
+  // declarations: [RxnavPage],
   entryComponents: [
     RxnavPage
   ]
