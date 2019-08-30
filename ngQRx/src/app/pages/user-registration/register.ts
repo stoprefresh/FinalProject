@@ -1,3 +1,4 @@
+import { PatientService } from './../../services/patient.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
@@ -6,6 +7,7 @@ import { UserData } from '../../services/user-data';
 import { UserService } from '../../services/user.service';
 import { Provider } from '../../models/provider';
 import { ProviderService } from '../../services/provider.service';
+import { Patient } from '../../models/patient';
 
 @Component({
   selector: 'page-register',
@@ -14,6 +16,7 @@ import { ProviderService } from '../../services/provider.service';
 })
 export class RegisterPage {
   user: User = new User();
+  mangagedUser: User;
   provider = false;
   providerTitle = ' ';
   submitted = false;
@@ -68,6 +71,7 @@ export class RegisterPage {
   ];
   roleList: string[] = ['EMS', 'Physician', 'Pharmacist', 'Direct Care'];
   newProvider = new Provider();
+  newPatient = new Patient();
   organizationList: string[] = [
     'Denver Metro Ambulance',
     'SD Internal Medicine Group',
@@ -79,7 +83,8 @@ export class RegisterPage {
     public userData: UserData,
     private auth: AuthoService,
     private userSvc: UserService,
-    private providerService: ProviderService
+    private providerService: ProviderService,
+    private ptSvc: PatientService
   ) {}
 
   addUser() {
@@ -90,6 +95,7 @@ export class RegisterPage {
     this.userSvc.create(this.user).subscribe(
       good => {
         console.log('user created success');
+        this.mangagedUser = good;
       },
       bad => {
         console.error('RegisterComponent.addUser(): error creating user.');
@@ -119,7 +125,17 @@ export class RegisterPage {
                 }
               );
             }
-            this.router.navigateByUrl('/patient-registration');
+            if (!this.provider) {
+              this.ptSvc.create(this.newPatient).subscribe(
+                good => {
+                  console.log('patient created');
+                },
+                bad => {
+                  console.log('error creating patient');
+                }
+              );
+              this.router.navigateByUrl('/health-info');
+            }
           }
         );
       }

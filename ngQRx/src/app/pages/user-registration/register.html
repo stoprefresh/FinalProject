@@ -12,114 +12,167 @@
     <img src="assets/img/appicon.svg" alt="QRx Logo" />
   </div>
   <form class="noborder">
-      <ion-list lines="none">
-    <ion-item>
-      <ion-label>Username:<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input
-        type="text"
-        [(ngModel)]="user.username"
-        name="username"
-      >
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Password:<ion-text color="danger">*</ion-text></ion-label>
-      <ion-input
-        type="password"
-        [(ngModel)]="user.password"
-        name="password"
-      >
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>First Name <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input
-        type="text"
-        [(ngModel)]="user.firstName"
-        name="firstName"
-      ></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Last Name <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input
-        type="text"
-        [(ngModel)]="user.lastName"
-        name="lastName"
-      ></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Street</ion-label>
-      <ion-input
-        type="text"
-        [(ngModel)]="user.street"
-        name="street"
-      ></ion-input> </ion-item
-    ><ion-item>
-      <ion-label>City</ion-label>
-      <ion-input type="text" [(ngModel)]="user.city" name="city"></ion-input
-    ></ion-item>
-    <ion-item
-      ><ion-label>State</ion-label>
-      <ion-input type="text" [(ngModel)]="user.state" name="state"></ion-input
-    ></ion-item>
-    <ion-item>
-      <ion-label>Zip <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input type="text" [(ngModel)]="user.zip" name="zip"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Phone <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input
-        required
-        type="text"
-        name="phone"
-        [(ngModel)]="user.phone"
-      ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label
-        >Account for professional use as a medical provider?
-        <ion-text color="danger">*</ion-text></ion-label
-      >
-      <ion-toggle
-        slot="start"
-        name="provider"
-        color="danger"
-        [(ngModel)]="provider"
-      ></ion-toggle>
-    </ion-item>
-
-     <div *ngIf="provider">
+    <ion-list lines="none">
       <ion-item>
-        <ion-label>Clinical Title</ion-label>
-        <ion-select
-          placeholder="Select One"
-          [(ngModel)]="user.title"
-          name="title"
-        >
-          <ion-select-option *ngFor="let title of titleList" name="title" [value]="title">{{
-            title
-          }}</ion-select-option>
-        </ion-select>
+        <ion-label>Username:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="text" [(ngModel)]="user.username" name="username">
+        </ion-input>
       </ion-item>
       <ion-item>
-        <ion-label *ngIf="provider">Provider Role</ion-label>
-        <ion-select
-          placeholder="Select One"
-          [(ngModel)]="user.role"
-          name="role"
-        >
-          <ion-select-option *ngFor="let role of roleList" name="role" [value]="role">{{
-            role
-          }}</ion-select-option>
+        <ion-label>Password:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="password" [(ngModel)]="user.password" name="password">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>First Name <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="user.firstName"
+          name="firstName"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Last Name <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="user.lastName"
+          name="lastName"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Street</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="user.street"
+          name="street"
+        ></ion-input> </ion-item
+      ><ion-item>
+        <ion-label>City</ion-label>
+        <ion-input type="text" [(ngModel)]="user.city" name="city"></ion-input
+      ></ion-item>
+      <ion-item
+        ><ion-label>State</ion-label>
+        <ion-select [(ngModel)]="user.state" name="state">
+          <ion-select-option value="AL">Alabama</ion-select-option>
+          <ion-select-option value="AK">Alaska</ion-select-option>
+          <ion-select-option value="AZ">Arizona</ion-select-option>
+          <ion-select-option value="AR">Arkansas</ion-select-option>
+          <ion-select-option value="CA">California</ion-select-option>
+          <ion-select-option value="CO">Colorado</ion-select-option>
+          <ion-select-option value="CT">Connecticut</ion-select-option>
+          <ion-select-option value="DE">Delaware</ion-select-option>
+          <ion-select-option value="DC">District Of Columbia</ion-select-option>
+          <ion-select-option value="FL">Florida</ion-select-option>
+          <ion-select-option value="GA">Georgia</ion-select-option>
+          <ion-select-option value="HI">Hawaii</ion-select-option>
+          <ion-select-option value="ID">Idaho</ion-select-option>
+          <ion-select-option value="IL">Illinois</ion-select-option>
+          <ion-select-option value="IN">Indiana</ion-select-option>
+          <ion-select-option value="IA">Iowa</ion-select-option>
+          <ion-select-option value="KS">Kansas</ion-select-option>
+          <ion-select-option value="KY">Kentucky</ion-select-option>
+          <ion-select-option value="LA">Louisiana</ion-select-option>
+          <ion-select-option value="ME">Maine</ion-select-option>
+          <ion-select-option value="MD">Maryland</ion-select-option>
+          <ion-select-option value="MA">Massachusetts</ion-select-option>
+          <ion-select-option value="MI">Michigan</ion-select-option>
+          <ion-select-option value="MN">Minnesota</ion-select-option>
+          <ion-select-option value="MS">Mississippi</ion-select-option>
+          <ion-select-option value="MO">Missouri</ion-select-option>
+          <ion-select-option value="MT">Montana</ion-select-option>
+          <ion-select-option value="NE">Nebraska</ion-select-option>
+          <ion-select-option value="NV">Nevada</ion-select-option>
+          <ion-select-option value="NH">New Hampshire</ion-select-option>
+          <ion-select-option value="NJ">New Jersey</ion-select-option>
+          <ion-select-option value="NM">New Mexico</ion-select-option>
+          <ion-select-option value="NY">New York</ion-select-option>
+          <ion-select-option value="NC">North Carolina</ion-select-option>
+          <ion-select-option value="ND">North Dakota</ion-select-option>
+          <ion-select-option value="OH">Ohio</ion-select-option>
+          <ion-select-option value="OK">Oklahoma</ion-select-option>
+          <ion-select-option value="OR">Oregon</ion-select-option>
+          <ion-select-option value="PA">Pennsylvania</ion-select-option>
+          <ion-select-option value="RI">Rhode Island</ion-select-option>
+          <ion-select-option value="SC">South Carolina</ion-select-option>
+          <ion-select-option value="SD">South Dakota</ion-select-option>
+          <ion-select-option value="TN">Tennessee</ion-select-option>
+          <ion-select-option value="TX">Texas</ion-select-option>
+          <ion-select-option value="UT">Utah</ion-select-option>
+          <ion-select-option value="VT">Vermont</ion-select-option>
+          <ion-select-option value="VA">Virginia</ion-select-option>
+          <ion-select-option value="WA">Washington</ion-select-option>
+          <ion-select-option value="WV">West Virginia</ion-select-option>
+          <ion-select-option value="WI">Wisconsin</ion-select-option>
+          <ion-select-option value="WY">Wyoming</ion-select-option>
         </ion-select>
       </ion-item>
-    </div>
+
+      <ion-item>
+        <ion-label>Zip <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="text" [(ngModel)]="user.zip" name="zip"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Phone <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input
+          required
+          type="text"
+          name="phone"
+          [(ngModel)]="user.phone"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label
+          >Account for professional use as a medical provider?
+          <ion-text color="danger">*</ion-text></ion-label
+        >
+        <ion-toggle
+          slot="start"
+          name="provider"
+          color="danger"
+          [(ngModel)]="provider"
+        ></ion-toggle>
+      </ion-item>
+
+      <div *ngIf="provider">
+        <ion-item>
+          <ion-label>Clinical Title</ion-label>
+          <ion-select
+            placeholder="Select One"
+            [(ngModel)]="user.title"
+            name="title"
+          >
+            <ion-select-option
+              *ngFor="let title of titleList"
+              name="title"
+              [value]="title"
+              >{{ title }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label *ngIf="provider">Provider Role</ion-label>
+          <ion-select
+            placeholder="Select One"
+            [(ngModel)]="user.role"
+            name="role"
+          >
+            <ion-select-option
+              *ngFor="let role of roleList"
+              name="role"
+              [value]="role"
+              >{{ role }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </div>
     </ion-list>
     <div class="ion-padding">
-      <ion-button (click)="addUser()" type="submit" expand="block">Create</ion-button>
+      <ion-button (click)="addUser()" type="submit" expand="block"
+        >Create</ion-button
+      >
     </div>
   </form>
 </ion-content>

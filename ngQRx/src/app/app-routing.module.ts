@@ -37,13 +37,6 @@ const routes: Routes = [
       )
   },
   {
-    path: 'patient-registration',
-    loadChildren: () =>
-      import('./pages/patient-registration/patient.module').then(
-        m => m.PatientPageModule
-      )
-  },
-  {
     path: 'emt-view',
     loadChildren: () =>
       import('./pages/emt-view/emt-view.module').then(
